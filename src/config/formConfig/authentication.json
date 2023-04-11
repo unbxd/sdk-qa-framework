@@ -1,0 +1,16 @@
+{
+	"moduleName": "Authentication",
+	"moduleKey": null,
+	"moduleDesc": "Sunt incididunt anim sint laboris sint duis proident. Duis tempor ad officia Lorem deserunt pariatur ea labore mollit voluptate eu. Do excepteur esse occaecat deserunt et. Ea sunt occaecat aliquip voluptate ex nostrud cillum duis occaecat sunt qui quis.",
+	"docLink": "https://unbxd.github.io/search-JS-library/docs/configurations/SiteKey.html",
+	"config": [
+		{
+			"name": "siteKey",
+			"dataType": "string"
+		},
+		{
+			"name": "apiKey",
+			"dataType": "string"
+		}
+	]
+}

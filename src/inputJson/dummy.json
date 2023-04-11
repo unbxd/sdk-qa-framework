@@ -1,0 +1,150 @@
+{
+	"loader": {
+		"el": "document.getElementById(\"loader\")",
+		"template": "function() {\n  console.log(\"loader template\")\n}"
+	},
+	"siteKey": "hello",
+	"apiKey": "world",
+	"searchBox": {
+		"searchBoxEl": "document.querySelector(\".formbuilder\")",
+		"searchButtonEl": "document.querySelector(\"#applyBtn\")"
+	},
+	"products": {
+		"productType": "search",
+		"el": "document.getElementById(\"app\")",
+		"gridCount": 5,
+		"productItemClass": "prodItem",
+		"defaultImage": "defaultImage",
+		"tagName": "productTag",
+		"template": "function(){\n  console.log(\"Hello from products template\");\n}",
+		"productAttributes": "[\"price\", \"quantity\", \"name\", \"desc\"]",
+		"attributesMap": "{\n  \"name\": \"title\",\n  \"price\": \"amount\"\n}",
+		"onProductClick": "function() {\n  console.log(\"product clicked\");\n}",
+		"htmlAttributes": "{\n  \"class\": \"htmlAttributes\"\n}"
+	},
+	"facet": {
+		"facetsEl": "document.getElementById(\"facets\")",
+		"facetMultiSelect": "false",
+		"facetClass": "facetClass",
+		"facetAction": "change",
+		"selectedFacetClass": "selectedFacetClass",
+		"selectedFacetsEl": "document.getElementById(\"selectedFacetsEl\")",
+		"clearAllText": "clearAllText",
+		"facetMultilevel": "true",
+		"facetMultilevelName": "facetMultilevelName",
+		"multiLevelFacetSelectorClass": "multiLevelFaceSelectorClass",
+		"facetDepth": 3,
+		"clearFacetsSelectorClass": "clearFacets",
+		"removeFacetsSelectorClass": "removeFacets",
+		"applyMultipleFilters": "true",
+		"applyButtonText": "applyButton",
+		"clearButtonText": "clearButton",
+		"isCollapsible": "true",
+		"defaultOpen": "defaultOpen",
+		"isSearchable": "true",
+		"searchPlaceHolder": "searchPlaceholder",
+		"enableViewMore": "true",
+		"viewMoreLimit": 10,
+		"tagName": "tagName",
+		"facetTemplate": "function() {\n  console.log\"facet template\")\n}",
+		"facetItemTemplate": "function() {\n  console.log(\"facet item template\")\n}",
+		"selectedFacetTemplate": "function() {\n  console.log(\"selectedFacetTemplate\");\n}",
+		"selectedFacetItemTemplate": "function() {\n  console.log(\"selectedFacetItemTemplate\");\n}",
+		"selectedFacetConfig": "{\n  \"facet\": \"some facet\"\n}",
+		"rangeTemplate": "function() {\n  console.log(\"facet rangeTemplate\")\n}",
+		"rangeWidgetConfig": "{\n  \"min\": 20,\n  \"max\": 300\n}",
+		"multiLevelFacetTemplate": "function() {\n  console.log(\"multilevelfacet template\")\n}",
+		"onFacetLoad": "function() {\n  console.log(\"onFacetLoad\")\n}",
+		"viewMoreText": "[\"viewMore\",\"moreProducts\"]",
+		"htmlAttributes": "{\n  \"attribute1\": \"1\",\n  \"attribute2\": \"2\"\n}"
+	},
+	"pagination": {
+		"enabled": "true",
+		"type": "FIXED_PAGINATION",
+		"el": "document.getElementById(\"demo\")",
+		"pageClass": "pageClass",
+		"selectedPageClass": "selectedPageClass",
+		"pageLimit": 30,
+		"infiniteScrollTriggerEl": "document.querySelector(\"#applyBtn\")",
+		"heightDiffToTriggerNextPage": 10,
+		"action": "Change",
+		"tagName": "tagName",
+		"template": "function() {\n  console.log(\"pagination template\")\n}",
+		"onPaginate": "function() {\n  console.log(\"paginate\")\n}",
+		"htmlAttributes": "{\n  \"attribute2\": \"2\"\n}"
+	},
+	"pagesize": {
+		"enabled": "true",
+		"el": "document.getElementById(\"demo3\")",
+		"pageSize": 24,
+		"pageSizeClass": "pageSizeClass",
+		"selectedPageSizeClass": "selectedPageSizeClass",
+		"action": "click",
+		"tagName": "tagName",
+		"options": "[12, 24, 36, 48]",
+		"template": "function() {\n  console.log(\"pageSize template\")\n}",
+		"htmlAttributes": "{\n  \"attribute3\": \"3\"\n}"
+	},
+	"sort": {
+		"enabled": "true",
+		"el": "document.getElementById(\"demo4\")",
+		"sortClass": "sortClass",
+		"selectedSortClass": "selectedSortClass",
+		"action": "change",
+		"tagName": "tagName",
+		"options": "[\"sort by price\", \"sort by name\"]",
+		"template": "function() {\n  console.log(\"sorting template\")\n}",
+		"htmlAttributes": "{\n  \"attribute4\":\"4\"\n}"
+	},
+	"productView": {
+		"enabled": "true",
+		"el": "document.getElementById(\"demo5\")",
+		"defaultViewType": "GRID",
+		"action": "change",
+		"viewTypeClass": "viewTypeClass",
+		"selectedViewTypeClass": "selectedViewTypeClass",
+		"tagName": "tagName",
+		"template": "function() {\n  console.log(\"productView template\")\n}",
+		"htmlAttributes": "{\n  \"attribute6\": \"6\"\n}"
+	},
+	"breadcrumb": {
+		"enabled": "true",
+		"el": "document.getElementById(\"breadcrumbs\")",
+		"selectorClass": "selectorClass",
+		"tagName": "tagName",
+		"template": "function() {\n  console.log(\"breadcrumbs template\")\n}",
+		"htmlAttributes": "{\n  \"attribute7\": \"7\"\n}"
+	},
+	"spellCheck": {
+		"enabled": "true",
+		"el": "document.getElementById(\"spellcheck\")",
+		"selectorClass": "selectorClass",
+		"tagName": "tagName",
+		"template": "function() {\n  console.log(\"spellcheck template\")\n}",
+		"htmlAttributes": "{\n  \"attribute8\": \"8\"\n}"
+	},
+	"banner": {
+		"enabled": "true",
+		"el": "document.getElementById(\"banners\")",
+		"tagname": "true",
+		"template": "function() {\n  console.log(\"banners template\")\n}",
+		"htmlattributes": "{\n  \"attribute9\": \"9\"\n}",
+		"attributes": "[\"value1\", \"value2\"]"
+	},
+	"variants": {
+		"enabled": "true",
+		"count": 1,
+		"groupBy": "price",
+		"attributes": "[\"value1\", \"value2\"]",
+		"mapping": "{\"value1\": \"1\",\n\"value2\": \"2\"}"
+	},
+	"swatches": {
+		"attributesMap": "{\n  \"attribute10\": \"10\"\n}",
+		"enabled": "true",
+		"swatchClass": "swatchClass",
+		"template": "function() {\n  console.log(\"swatch template\")\n}"
+	},
+	"noResults": {
+		"template": "function() {\n  console.log(\"noResults template\")\n}"
+	}
+}

@@ -1,0 +1,101 @@
+{
+	"moduleName": "Pagination",
+	"moduleKey": "pagination",
+	"moduleDesc": "Ex ad eu excepteur deserunt nulla laborum eiusmod laborum aliquip enim. Duis reprehenderit tempor sunt eiusmod proident sint ex ipsum elit aliqua. Adipisicing veniam fugiat duis sit est deserunt velit cillum sunt.",
+	"docLink": "https://unbxd.github.io/search-JS-library/docs/configurations/PaginationConfig.html",
+	"config": [
+		{
+			"name": "enabled",
+			"dataType": "boolean",
+			"options": [
+				{
+					"id": 1,
+					"name": "True",
+					"value": "true"
+				},
+				{
+					"id": 2,
+					"name": "False",
+					"value": "false"
+				}
+			]
+		},
+		{
+			"name": "type",
+			"dataType": "string",
+			"options": [
+				{
+					"id": 1,
+					"name": "CLICK_N_SCROLL",
+					"value": "CLICK_N_SCROLL"
+				},
+				{
+					"id": 2,
+					"name": "FIXED_PAGINATION",
+					"value": "FIXED_PAGINATION"
+				},
+				{
+					"id": 3,
+					"name": "INFINITE_SCROLL",
+					"value": "INFINITE_SCROLL"
+				}
+			]
+		},
+		{
+			"name": "el",
+			"dataType": "element"
+		},
+		{
+			"name": "template",
+			"dataType": "function"
+		},
+		{
+			"name": "pageClass",
+			"dataType": "string"
+		},
+		{
+			"name": "selectedPageClass",
+			"dataType": "string"
+		},
+		{
+			"name": "onPaginate",
+			"dataType": "function"
+		},
+		{
+			"name": "pageLimit",
+			"dataType": "number"
+		},
+		{
+			"name": "infiniteScrollTriggerEl",
+			"dataType": "element"
+		},
+		{
+			"name": "heightDiffToTriggerNextPage",
+			"dataType": "number"
+		},
+		{
+			"name": "action",
+			"dataType": "string",
+			"options": [
+				{
+					"id": 1,
+					"name": "Click",
+					"value": "Click"
+				},
+				{
+					"id": 2,
+					"name": "Change",
+					"value": "Change"
+				}
+			]
+		},
+		{
+			"name": "tagName",
+			"dataType": "string"
+		},
+		{
+			"name": "htmlAttributes",
+			"dataType": "object"
+		}
+	]
+}
