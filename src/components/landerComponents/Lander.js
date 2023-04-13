@@ -33,8 +33,7 @@ const Lander = () => {
 								Welcome to the JS SDK QA Framework!
 							</h1>
 							<h3 className="banner-desc">
-								This builder is a tool to help decrease the time of onboarding
-								and testing.
+								Simplifying new onboardings and testing of Unbxd JS SDK
 							</h3>
 							<button onClick={navigateBuilder}>
 								Start building with the Unbxd SDK
@@ -68,6 +67,14 @@ const Lander = () => {
 				</div> */}
 				<div className="configurations">
 					<div className="options">
+					<Usecases
+							title="Pagination"
+							usecases={paginationConfig["usecases"]}
+						/>
+						<Usecases
+							title="Product View"
+							usecases={productViewConfig["usecases"]}
+						/>
 						<div className="option">
 							<h2>Default Configurations</h2>
 							<div className="configOptions">
@@ -99,14 +106,7 @@ const Lander = () => {
 								{/* </a> */}
 							</div>
 						</div>
-						<Usecases
-							title="Pagination"
-							usecases={paginationConfig["usecases"]}
-						/>
-						<Usecases
-							title="Product View"
-							usecases={productViewConfig["usecases"]}
-						/>
+						
 					</div>
 				</div>
 			</div>
