@@ -55,7 +55,7 @@ export default function Vanilla2(props) {
 					pagination: validatedConfig.pagination,
 					breadcrumb: validatedConfig.breadcrumb,
 					banner: validatedConfig.banner,
-					variants: validatedConfig.variants,
+					// variants: validatedConfig.variants,
 				});
 				console.log("Applied changes");
 

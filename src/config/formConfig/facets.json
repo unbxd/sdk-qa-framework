@@ -225,5 +225,28 @@
 			"name": "htmlAttributes",
 			"dataType": "object"
 		}
+	],
+	"usecases": [
+		{
+			"name": "Range Sliders",
+			"key": "facetsRangeSlider",
+			"icon": "rangeSlider",
+			"desc": "Click to apply configurations of Infinite Scroll.",
+			"configData": "https://libraries.unbxdapi.com/search-sdk/qa-framework/demo-unbxd700181503576558/fb853e3332f2645fac9d71dc63e09ec1.json"
+		},
+		{
+			"name": "Checkable Range Facets",
+			"key": "facetsCheckable",
+			"icon": "checkableFacets",
+			"desc": "Click to apply configurations of Fixed Pagination.",
+			"configData": "https://libraries.unbxdapi.com/search-sdk/qa-framework/demo-unbxd700181503576558/fb853e3332f2645fac9d71dc63e09ec1.json"
+		},
+		{
+			"name": "Facets w/ Color Swatches",
+			"key": "facetsSwathes",
+			"icon": "swatchesFacets",
+			"desc": "Click to apply configurations of Click & Scroll.",
+			"configData": "https://libraries.unbxdapi.com/search-sdk/qa-framework/demo-unbxd700181503576558/fb853e3332f2645fac9d71dc63e09ec1.json"
+		}
 	]
 }

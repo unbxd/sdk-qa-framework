@@ -6,6 +6,7 @@ import "../../../public/styles/components/lander/lander.scss";
 
 import paginationConfig from "../../config/formConfig/pagination.json";
 import productViewConfig from "../../config/formConfig/productView.json";
+import facetsConfig from "../../config/formConfig/facets.json";
 
 const Lander = () => {
 	const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Lander = () => {
 		<div className="lander">
 			<div className="landerHeader">
 				<div className="logo">
-					<a href="/" className="header-logo"></a>
+					<img src="netcore-unbxd-logo.png" className="header-logo" />
 				</div>
 				<div className="userConfigs">
 					<a href="https://unbxd.github.io/search-JS-library/" target="_blank">
@@ -67,7 +68,7 @@ const Lander = () => {
 				</div> */}
 				<div className="configurations">
 					<div className="options">
-					<Usecases
+						<Usecases
 							title="Pagination"
 							usecases={paginationConfig["usecases"]}
 						/>
@@ -75,6 +76,7 @@ const Lander = () => {
 							title="Product View"
 							usecases={productViewConfig["usecases"]}
 						/>
+						<Usecases title="Facets" usecases={facetsConfig["usecases"]} />
 						<div className="option">
 							<h2>Default Configurations</h2>
 							<div className="configOptions">
@@ -106,7 +108,6 @@ const Lander = () => {
 								{/* </a> */}
 							</div>
 						</div>
-						
 					</div>
 				</div>
 			</div>

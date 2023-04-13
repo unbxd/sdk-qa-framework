@@ -28,6 +28,9 @@ const Usecases = ({ usecases = [], title = "" }) => {
 								style={{
 									backgroundColor: "#fff",
 									// backgroundColor: `${colors[count++]}`,
+									// backgroundColor: `${
+									// 	colors[Math.floor(Math.random() * colors.length)]
+									// }`,
 								}}
 							>
 								<div className="optionHeader">

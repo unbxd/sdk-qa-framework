@@ -200,9 +200,11 @@ body {
                     }
 
                     .accordianTitle{
-                        h1 {
-                            display: inline-flex;
-                        }   
+                        display: flex;
+                        align-items: center;
+                        // h1 {
+                        //     display: inline-flex;
+                        // }   
                     }
                 }
 

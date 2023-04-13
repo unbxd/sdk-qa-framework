@@ -54,7 +54,7 @@ const FormBuilder = (props = {}) => {
 		loaderConfig,
 		swatchesConfig,
 		noResultsConfig,
-		variantsConfig,
+		// variantsConfig,
 		paginationConfig,
 		breadcrumbsConfig,
 		bannerConfig,
@@ -265,6 +265,13 @@ const FormBuilder = (props = {}) => {
 								<div className="formWrapper" key={i}>
 									<div className="accordianMeta" onClick={() => showContent(i)}>
 										<div className="accordianTitle">
+											<span
+												className={
+													formConfig.moduleKey
+														? `${formConfig.moduleKey}-icon`
+														: `${formConfig.moduleName}-icon`
+												}
+											></span>
 											<h1 className="moduleName">{formConfig.moduleName}</h1>
 											{/* <p className="moduleDesc">{moduleDesc}</p> */}
 										</div>
