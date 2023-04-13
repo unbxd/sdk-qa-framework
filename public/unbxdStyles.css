@@ -295,6 +295,7 @@ body {
   display: flex;
   justify-content: space-between;
   margin: 12px 0;
+  padding: 0 12px;
 }
 
 .UNX-sale-price {
@@ -428,7 +429,7 @@ body {
   margin-bottom: 20px;
   box-sizing: border-box;
   padding: 0px;
-  width: 182px;
+  /* width: 182px; */
   border: 1px solid #dae1e9;
   border-radius: 4px;
   background-color: #ffffff;
@@ -1265,8 +1266,15 @@ input[id^="likeBtn"]:checked ~ .UNX-favourite {
 
 @media only screen and (max-width: 1440px) {
   .UNX-result-wrapper {
-    grid-template-columns: 30% 30% 30%;
-    grid-column-gap: 3%;
+    grid-template-columns: 24% 24% 24% 24%;
+    grid-column-gap: 1%;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .UNX-result-wrapper {
+    grid-template-columns: 24% 24% 24% 24%;
+    grid-column-gap: 1%;
   }
 }
 
@@ -1522,4 +1530,10 @@ input[id^="likeBtn"]:checked ~ .UNX-favourite {
 .facet-top-box {
   display: flex;
   justify-content: space-between;
+}
+
+
+.UNX-img-block {
+  max-width: 100%;
+  height: auto;
 }
