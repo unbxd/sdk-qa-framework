@@ -10,6 +10,9 @@ import facetsConfig from "../../config/formConfig/facets.json";
 
 const Lander = () => {
 	const navigate = useNavigate();
+	const navigateHome = () => {
+		navigate("/");
+	};
 	const navigateBuilder = () => {
 		navigate("/builder");
 	};
@@ -18,7 +21,11 @@ const Lander = () => {
 		<div className="lander">
 			<div className="landerHeader">
 				<div className="logo">
-					<img src="netcore-unbxd-logo.png" className="header-logo" />
+					<img
+						src="netcore-unbxd-logo.png"
+						className="header-logo"
+						onClick={navigateHome}
+					/>
 				</div>
 				<div className="userConfigs">
 					<a href="https://unbxd.github.io/search-JS-library/" target="_blank">
