@@ -14,13 +14,23 @@ const DashboardHeader = (props) => {
 							<span className="UNX-square"></span>
 						</a>
 					</div>
-					<nav className="UNX-nav">
-						<a href="javascript:void(0)">Home</a>
-						<a href="javascript:void(0)">Clothing</a>
-						<a href="javascript:void(0)">Electronics</a>
-						<a href="javascript:void(0)">Health & Beauty</a>
-						<a href="javascript:void(0)">Watches</a>
-					</nav>
+					{/* <nav className="UNX-nav">
+						<a href="" className="disabled">
+							Home
+						</a>
+						<a href="" className="disabled">
+							Clothing
+						</a>
+						<a href="" className="disabled">
+							Electronics
+						</a>
+						<a href="" className="disabled">
+							Health & Beauty
+						</a>
+						<a href="" className="disabled">
+							Watches
+						</a>
+					</nav> */}
 					<div className="UNX-right-header">
 						<div id="autoSuggestInput" className="UNX-input-wrapper">
 							<input

@@ -46,7 +46,7 @@ body {
 }
 
 .UNX-header-logo {
-  background: url("/styles/components/icons/sprite.svg") -511px -959px;
+  background: url("./styles/components/icons/sprite.svg") -511px -959px;
   width: 128px;
   height: 33px;
   display: inline-block;
@@ -76,6 +76,11 @@ body {
   text-decoration: none;
 }
 
+.UNX-nav a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
 .UNX-logo {
   margin-right: 0px;
 }
@@ -88,10 +93,8 @@ body {
 }
 
 .UNX-input-wrapper {
-  width: 750px;
+  width: 1000px;
   padding-left: 5px;
-  margin-right: 100px;
-  margin-left: 50px;
 }
 
 
@@ -639,7 +642,7 @@ body {
 }
 
 .UNX-icons {
-  background-image: url("/styles/components/icons/icons.svg");
+  background-image: url("./styles/components/icons/icons.svg");
   background-size: auto;
 }
 
@@ -674,7 +677,7 @@ body {
 }
 
 .UNX-grid-btn {
-  background-image: url("/styles/components/icons/icons.svg");
+  background-image: url("./styles/components/icons/icons.svg");
   height: 50px;
   width: 40px;
   background-position: -56px -202px;
@@ -685,7 +688,7 @@ body {
 }
 
 .UNX-list-btn {
-  background-image: url("/styles/components/icons/icons.svg");
+  background-image: url("./styles/components/icons/icons.svg");
   height: 50px;
   width: 40px;
   background-position: -4px -202px;
@@ -695,7 +698,7 @@ body {
 }
 
 .UNX-list-btn.UNX-selected-product-view {
-  background-image: url("/styles/components/icons/sprite.svg");
+  background-image: url("./styles/components/icons/sprite.svg");
   background-position: -615px -664px;
   font-size: 0;
   margin-top: 25px;
@@ -704,7 +707,7 @@ body {
 }
 
 .UNX-grid-btn.UNX-selected-product-view {
-  background-image: url("/styles/components/icons/sprite.svg");
+  background-image: url("./styles/components/icons/sprite.svg");
   background-position: -615px -614px;
   font-size: 0;
   margin-top: 25px;
@@ -724,7 +727,7 @@ body {
 }
 
 .UNX-search-btn {
-  background-image: url("/styles/components/icons/icons.svg");
+  background-image: url("./styles/components/icons/icons.svg");
   background-size: auto;
   height: 40px;
   width: 50px;
@@ -737,7 +740,7 @@ body {
 }
 
 .UNX-pagination-block .UNX-prev-btn[disabled] {
-  background-image: url("/styles/components/icons/icons.svg");
+  background-image: url("./styles/components/icons/icons.svg");
   background-size: auto;
   height: 50px;
   width: 50px;
@@ -745,7 +748,7 @@ body {
 }
 
 .UNX-pagination-block .UNX-prev-btn[disabled] {
-  background-image: url("/styles/components/icons/icons.svg");
+  background-image: url("./styles/components/icons/icons.svg");
   background-size: auto;
   height: 50px;
   width: 50px;
@@ -755,7 +758,7 @@ body {
 }
 
 .UNX-pagination-block .UNX-next-btn {
-  background-image: url("/styles/components/icons/sprite.svg");
+  background-image: url("./styles/components/icons/sprite.svg");
   background-size: auto;
   width: 6px;
   height: 12px;
@@ -765,7 +768,7 @@ body {
 }
 
 .UNX-pagination-block .UNX-prev-btn {
-  background-image: url("/styles/components/icons/sprite.svg");
+  background-image: url("./styles/components/icons/sprite.svg");
   background-size: auto;
   width: 6px;
   height: 12px;
@@ -775,7 +778,7 @@ body {
 }
 
 .UNX-pagination-block .UNX-prev-btn[disabled] {
-  background-image: url("/styles/components/icons/icons.svg");
+  background-image: url("./styles/components/icons/icons.svg");
   background-size: auto;
   height: 32px;
   width: 32px;
@@ -784,7 +787,7 @@ body {
 }
 
 .UNX-pagination-block .UNX-next-btn[disabled] {
-  background-image: url("/styles/components/icons/icons.svg");
+  background-image: url("./styles/components/icons/icons.svg");
   background-size: auto;
   height: 32px;
   width: 32px;
@@ -990,7 +993,7 @@ input[id^="likeBtn"]:checked ~ .UNX-favourite {
   height: 18px;
   width: 18px;
   display: inline-block;
-  background-image: url("/styles/components/icons/icons.svg");
+  background-image: url("./styles/components/icons/icons.svg");
   background-size: auto;
   background-position: -70px -367px;
 }
@@ -1004,6 +1007,7 @@ input[id^="likeBtn"]:checked ~ .UNX-favourite {
 }
 
 .UNX-right-header {
+  width: 40%;
   display: flex;
   align-items: center;
 }
@@ -1041,14 +1045,14 @@ input[id^="likeBtn"]:checked ~ .UNX-favourite {
 .UNX-selected-facets-inner .UNX-delete-facet {
   opacity: 1;
   color: transparent;
-  background-image: url("/styles/components/icons/icons.svg");
+  background-image: url("./styles/components/icons/icons.svg");
   background-position: -120px -60px;
   background-size: auto;
 }
 
 .UNX-facet-close:after {
   color: transparent;
-  background-image: url("/styles/components/icons/icons.svg");
+  background-image: url("./styles/components/icons/icons.svg");
   background-position: -165px 86px;
   background-size: auto;
   width: 20px;
@@ -1056,7 +1060,7 @@ input[id^="likeBtn"]:checked ~ .UNX-favourite {
 
 .UNX-facet-open:after {
   color: transparent;
-  background-image: url("/styles/components/icons/icons.svg");
+  background-image: url("./styles/components/icons/icons.svg");
   background-position: -116px 86px;
   background-size: auto;
   width: 20px;
@@ -1403,7 +1407,7 @@ input[id^="likeBtn"]:checked ~ .UNX-favourite {
 }
 
 .pin-icon {
-  background-image: url("/styles/components/icons/sprite.svg");
+  background-image: url("./styles/components/icons/sprite.svg");
   background-position: -219px -1370px;
   width: 10px;
   height: 14px;
@@ -1437,40 +1441,40 @@ input[id^="likeBtn"]:checked ~ .UNX-favourite {
 }
 
 .slot-icon {
-  background-image: url("/styles/components/icons/sprite.svg");
+  background-image: url("./styles/components/icons/sprite.svg");
   background-position: -669px -717px;
   width: 12px;
   height: 14px;
 }
 
 .UNX-google-play {
-  background: url("/styles/components/icons/icons.svg") -14px -406px;
+  background: url("./styles/components/icons/icons.svg") -14px -406px;
   width: 124px;
   height: 38px;
   padding-left: 20px;
 }
 
 .UNX-app-store {
-  background: url("/styles/components/icons/icons.svg") -15px -456px;
+  background: url("./styles/components/icons/icons.svg") -15px -456px;
   width: 124px;
   height: 38px;
 }
 
 .UNX-arrow-icon {
-  background-image: url("/styles/components/icons/sprite.svg");
+  background-image: url("./styles/components/icons/sprite.svg");
   background-position: -456px -1354px;
   width: 40px;
   height: 40px;
 }
 
 .collapse-arrow {
-  background-image: url("/styles/components/icons/sprite.svg");
+  background-image: url("./styles/components/icons/sprite.svg");
   background-position: -669px -570px;
   width: 12px;
   height: 12px;
 }
 .collapse-arrow-down {
-  background-image: url("/styles/components/icons/sprite.svg");
+  background-image: url("./styles/components/icons/sprite.svg");
   background-position: -669px -570px;
   width: 12px;
   height: 12px;
@@ -1492,7 +1496,7 @@ input[id^="likeBtn"]:checked ~ .UNX-favourite {
   justify-content: flex-start;
 }
 .collapse-right-arrow {
-  background-image: url("/styles/components/icons/sprite.svg");
+  background-image: url("./styles/components/icons/sprite.svg");
   background-position: -620px -570px;
   width: 12px;
   height: 12px;

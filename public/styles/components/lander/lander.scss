@@ -1,0 +1,292 @@
+@import "../form/form.scss";
+
+.lander{
+    display: block;
+}
+
+.landerHeader {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0 0 6px 3px rgba(145, 150, 162, 0.14);
+    background: #fff;
+    position: fixed;
+
+    .logo {
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        height: 50px;
+        width: fit-content;
+        margin-left: 20px;
+
+        .header-logo {
+            display: flex;
+            @include fashion-logo;
+        }
+    }
+}
+
+.userConfigs {
+    margin-right: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px;
+
+    a {
+        text-decoration: none;
+        font-weight: 400;
+        color: cornflowerblue;
+
+        &:hover {
+            color: rgb(157, 86, 224);
+        }
+    }
+}
+
+.description {
+    width: 100%;
+    display: flex;
+}
+
+.landerBody {
+    display: block;
+    // background-image: url("https://unbxd.com/static/a064be72bd8a257220917c13296ec8bc/homeBanner.svg");
+    // background-size: 100% 100%;
+    // background-position: 0 -19px;
+    // width: 705px;
+    // height: 548px;
+    // width: 100%;
+    // height: 100%;
+    
+
+    .descriptionText {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        width: 100%;
+        height: 300px;
+
+        .text {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            width: 50%;
+            flex-wrap: wrap;
+            // align-content: center;
+            margin-top: 200px;
+
+            .banner-title {
+                font-size: 3.125rem;
+                max-width: 454px;
+                line-height: 3.8rem;
+                font-weight: 400;
+                margin-bottom: 1.2rem;
+                white-space: pre-line;
+            }
+
+            .banner-desc {
+                color: #3f5767;
+                    font-size: 17.6px;
+                    letter-spacing: .5px;
+                    margin-bottom: 24px;
+                    white-space: pre-line;
+            }
+
+
+            button {
+                appearance: none;
+                background-color: #ec839e;
+                border: 1px solid #ec839e;
+                color: #fff;
+                min-height: 50px;
+                border-radius: 30px;
+                font-size: 14px;
+                font-weight: 600;
+                height: auto;
+                padding: 18px 40px;
+                text-transform: uppercase;
+
+                &:hover{
+                    cursor: pointer;
+                    background-color: rgb(174, 67, 93);
+                }
+            }
+        }
+    }
+    
+    .descriptionBanner {
+        display: flex;
+        width: 50%;
+
+        .banner{
+            margin-top: 10px;
+            background-image: url("https://unbxd.com/static/a064be72bd8a257220917c13296ec8bc/homeBanner.svg");
+            background-position: 0 -19px;
+            width: 705px;
+            height: 548px;;
+        }
+    }
+}
+
+.options {
+    display: block;
+    width: 97%;
+
+    .option {
+
+        h2 {
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+    }
+}
+
+.searchOptions {
+    width: 90%;
+    display: flex;
+
+    .searchConfig {
+        width: 30%;
+    }
+
+    .dropdownConfig {
+        width: 20%;
+    }
+}
+
+.configurations {
+    margin-top: 160px;
+    margin-left: 20px;
+}
+
+.configOptions {
+    display: flex;
+    // flex-direction: column;
+    margin-left: 20px;
+    width: 100%;
+}
+
+.configOption {
+    width: 300px;
+    height: 200px;
+    border: 1px solid #CCC;
+    border-radius: 10px;
+    box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
+    margin-right: 20px;
+}
+
+.optionHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-left: 5px;
+    height: 80px;
+    width: 90%;
+
+    h4 {
+        width: 60%;
+        height: 80px;
+        text-align: right;
+        font-size: 16px;
+    }
+}
+
+.optionDesc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50%;
+
+    p {
+        display: flex;
+        align-items: center;
+        margin-left: 15px;
+        width: 55%;
+        font-size: 13px;
+        font-weight: 400;
+    }
+
+    .buttonSection {
+        width: 30%;
+        height: 100%;
+        margin-right: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        Button {
+            width: 80px;
+            margin: 5px 0;
+        }
+    }
+}
+
+.landerFooter {
+    display: flex;
+    width: 100%;
+    height: 100px;
+    background-color: #cbced6;
+    color: #000;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    font-weight: 400;
+}
+
+.defaultConfig {
+    // @include plus-black;
+    margin-left: 10px;
+    background-image: url("https://static.thenounproject.com/png/230269-200.png");
+    background-size: 100% 100%;
+    width: 30%;
+    height: 70px;
+}
+
+.infiniteScroll {
+    margin-left: 10px;
+    background-image: url("https://static.thenounproject.com/png/5478560-200.png");
+    background-size: 100% 100%;
+    width: 30%;
+    height: 70px;
+}
+
+.fixedPagination {
+    margin-left: 10px;
+    background-image: url("https://static.thenounproject.com/png/4199144-200.png");
+    background-size: 100% 100%;
+    width: 30%;
+    height: 70px;
+}
+
+.clickScroll {
+    margin-left: 10px;
+    background-image: url("https://static.thenounproject.com/png/135684-200.png");
+    background-size: 100% 100%;
+    width: 30%;
+    height: 70px;
+}
+
+.listProductView {
+    margin-left: 10px;
+    background-image: url("https://static.thenounproject.com/png/3015933-200.png");
+    background-size: 100% 100%;
+    width: 30%;
+    height: 70px;
+}
+
+.gridProductView {
+    margin-left: 10px;
+    background-image: url("https://static.thenounproject.com/png/307609-200.png");
+    background-size: 100% 100%;
+    width: 30%;
+    height: 70px;
+}

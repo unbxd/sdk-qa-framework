@@ -97,5 +97,28 @@
 			"name": "htmlAttributes",
 			"dataType": "object"
 		}
+	],
+	"usecases": [
+		{
+			"name": "Infinite Scroll",
+			"key": "paginationInfinite",
+			"icon": "infiniteScroll",
+			"desc": "Click to apply configurations of Infinite Scroll.",
+			"configData": "https://libraries.unbxdapi.com/search-sdk/qa-framework/demo-unbxd700181503576558/fb853e3332f2645fac9d71dc63e09ec1.json"
+		},
+		{
+			"name": "Fixed Pagination",
+			"key": "paginationFixed",
+			"icon": "fixedPagination",
+			"desc": "Click to apply configurations of Fixed Pagination.",
+			"configData": "https://libraries.unbxdapi.com/search-sdk/qa-framework/demo-unbxd700181503576558/fb853e3332f2645fac9d71dc63e09ec1.json"
+		},
+		{
+			"name": "Click & Scroll",
+			"key": "paginationClick",
+			"icon": "clickScroll",
+			"desc": "Click to apply configurations of Click & Scroll.",
+			"configData": "https://libraries.unbxdapi.com/search-sdk/qa-framework/demo-unbxd700181503576558/fb853e3332f2645fac9d71dc63e09ec1.json"
+		}
 	]
 }

@@ -54,10 +54,10 @@ const FormBuilder = (props = {}) => {
 		loaderConfig,
 		swatchesConfig,
 		noResultsConfig,
-		// variantsConfig,
+		variantsConfig,
 		paginationConfig,
-		// breadcrumbsConfig,
-		// bannerConfig,
+		breadcrumbsConfig,
+		bannerConfig,
 	];
 
 	// const formConfigs = getAllConfig();

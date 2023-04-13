@@ -67,6 +67,7 @@
     height: 15px;
 }
 
+
 @mixin arrow-blue-right {
     @extend .sprite;
     background-position: -126px -1219px;
@@ -86,6 +87,55 @@
     background-position: -620px -570px;
     width: 12px;
     height: 12px;
+}
+
+@mixin fashion-logo {
+    @extend .sprite;
+    background-position: -511px -959px;
+    width: 128px;
+    height: 33px;
+}
+
+@mixin plus-black {
+    background-image: url("https://static.thenounproject.com/png/230269-200.png");
+    // background-position: -115px -21px;
+    // width: 703px;
+    // height: 705px;
+}
+
+@mixin infiniteScroll-icon {
+    background-image: url("../icons/infiniteScroll.svg");
+    background-position: -273px -37px;
+    width: 387px;
+    height: 673px;
+}
+
+@mixin fixedPagination-icon {
+    background-image: url("../icons/fixedPagination.svg");
+    background-position: -151px -295px;
+    width: 630px;
+    height: 157px;
+}
+
+@mixin clickScroll-icon {
+    background-image: url("../icons/clickScroll.svg");
+    background-position: -175px 0;
+    width: 590px;
+    height: 747px;
+}
+
+@mixin listView-icon {
+    background-image: url("../icons/listView.svg");
+    background-position: -100px -65px;
+    width: 733px;
+    height: 617px;
+}
+
+@mixin gridView-icon {
+    background-image: url("../icons/gridView.svg");
+    background-position: -130px -37px;
+    width: 673px;
+    height: 673px;
 }
 
 .down-arrow-dark {

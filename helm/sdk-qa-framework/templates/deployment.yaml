@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "ai-demo-ui.fullname" . }}
+  name: {{ include "sdk-qa-framework.fullname" . }}
   labels:
-    {{- include "ai-demo-ui.labels" . | nindent 4 }}
+    {{- include "sdk-qa-framework.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "ai-demo-ui.selectorLabels" . | nindent 6 }}
+      {{- include "sdk-qa-framework.selectorLabels" . | nindent 6 }}
   template:
     metadata:
     {{- with .Values.podAnnotations }}
@@ -16,7 +16,7 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       labels:
-        {{- include "ai-demo-ui.selectorLabels" . | nindent 8 }}
+        {{- include "sdk-qa-framework.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -39,4 +39,4 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
-            {{- include "ai-demo-ui.envVars" . | trim | nindent 12 }}
+            {{- include "sdk-qa-framework.envVars" . | trim | nindent 12 }}

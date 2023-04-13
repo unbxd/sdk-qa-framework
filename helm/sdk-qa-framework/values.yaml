@@ -1,11 +1,11 @@
-# Default values for ai-demo-ui.
+# Default values for sdk-qa-framework.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: 012629307706.dkr.ecr.us-east-1.amazonaws.com/ai-demo
+  repository: 012629307706.dkr.ecr.us-east-1.amazonaws.com/sdk-qa-framework
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v1.0.1"
@@ -15,7 +15,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 selectorLabels:
-  app: ai-demo-ui
+  app: sdk-qa-framework
   env: ssdev
   region: us-east-1
   

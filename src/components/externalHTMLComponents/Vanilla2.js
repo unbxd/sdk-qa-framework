@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-// import "../public/unbxdStyles.css";
+import { useParams } from "react-router-dom";
+// import "../../../public/styles/components/unbxdStyles.css";
 // import UnbxdSearch from  '@unbxd-ui/vanilla-search-library';
-// import UnbxdSearch from "../../../../../search-JS-library/src/index";
 import UnbxdSearch from "../../../../search-JS-library/src/index";
+// import UnbxdSearch from "../../../../../search-JS-library/src/index";
 import useDeepCompareEffect from "use-deep-compare-effect";
 
 export default function Vanilla2(props) {
-	let { validatedConfig, filename } = props;
+	let { validatedConfig, filename, reloadWarning } = props;
+
+	const { id } = useParams();
+
 	useEffect(() => {
 		// window.unbxdSearch.resetAll();
 		// window.unbxdSearch = null;
@@ -17,14 +21,29 @@ export default function Vanilla2(props) {
 					apiKey: validatedConfig.apiKey,
 					hashMode: false,
 					updateUrls: true,
+					onEvent: function (instance, type, state) {
+						if (type === "AFTER_RENDER") {
+							if (
+								localStorage.getItem("unx_product_clicked") &&
+								document.getElementById(
+									localStorage.getItem("unx_product_clicked")
+								)
+							) {
+								document
+									.getElementById(localStorage.getItem("unx_product_clicked"))
+									.scrollIntoView();
+								localStorage.removeItem("unx_product_clicked");
+							}
+						}
+					},
 					searchBoxEl: validatedConfig.searchBoxEl,
 					searchTrigger: "click",
 					searchButtonEl: validatedConfig.searchButtonEl,
-					// products: {
-					// 	el: document.getElementById("searchResultsWrapper"),
-					// 	productType: "SEARCH",
-					// },
-					products: validatedConfig.products,
+					products: {
+						el: document.getElementById("searchResultsWrapper"),
+						productType: "SEARCH",
+					},
+					// products: validatedConfig.products,
 					facet: validatedConfig.facet,
 					pagesize: validatedConfig.pagesize,
 					sort: validatedConfig.sort,
@@ -32,12 +51,25 @@ export default function Vanilla2(props) {
 					spellCheck: validatedConfig.spellCheck,
 					loader: validatedConfig.loader,
 					swatches: validatedConfig.swatches,
-					noResults: validatedConfig.noResults,
+					// noResults: validatedConfig.noResults,
 					pagination: validatedConfig.pagination,
-					// breadcrumb: validatedConfig.breadcrumb,
-					// banner: validatedConfig.banner,
+					breadcrumb: validatedConfig.breadcrumb,
+					banner: validatedConfig.banner,
+					variants: validatedConfig.variants,
 				});
 				console.log("Applied changes");
+
+				// if (reloadWarning) {
+				// 	window.addEventListener("beforeunload", (event) => {
+				// 		event.preventDefault();
+				// 		event.returnValue = "";
+				// 		return "";
+				// 	});
+				// }
+				// return () => window.removeEventListener("beforeunload", unloadCallback);
+				// window.onbeforeunload = function () {
+				// 	return "Data will be lost if you leave the page, are you sure?";
+				// };
 			}
 		} else {
 			if (UnbxdSearch) {
@@ -46,6 +78,21 @@ export default function Vanilla2(props) {
 					apiKey: "fb853e3332f2645fac9d71dc63e09ec1",
 					hashMode: false,
 					updateUrls: true,
+					onEvent: function (instance, type, state) {
+						if (type === "AFTER_RENDER") {
+							if (
+								localStorage.getItem("unx_product_clicked") &&
+								document.getElementById(
+									localStorage.getItem("unx_product_clicked")
+								)
+							) {
+								document
+									.getElementById(localStorage.getItem("unx_product_clicked"))
+									.scrollIntoView();
+								localStorage.removeItem("unx_product_clicked");
+							}
+						}
+					},
 					// searchTrigger: "click",
 					// products: {
 					// 	productType: "SEARCH",
@@ -113,113 +160,23 @@ export default function Vanilla2(props) {
 						},
 					},
 				});
+				window.unbxdSearch.getResults("*");
 
-				// window.unbxdSearch.updateConfig({
-				// 	searchBoxEl: document.getElementById("unbxdInput"),
-				// 	searchTrigger: "click",
-				// 	searchButtonEl: document.getElementById("searchBtn"),
-				// 	products: {
-				// 		el: document.getElementById("searchResultsWrapper"),
-				// 		productType: "SEARCH",
-				// 	},
-				// 	spellCheck: {
-				// 		enabled: true,
-				// 		el: document.getElementById("didYouMeanWrapper"),
-				// 	},
-				// 	noResults: {
-				// 		el: document.getElementById("noResultWrapper"),
-				// 	},
-				// 	facet: {
-				// 		facetsEl: document.getElementById("facetsWrapper"),
-				// 		selectedFacetsEl: document.getElementById("selectedFacetWrapper"),
-				// 	},
-				// 	pagination: {
-				// 		el: document.querySelectorAll(".unxPagination"),
-				// 		type: "FIXED_PAGINATION",
-				// 		pageLimit: 4,
-				// 	},
-				// 	breadcrumb: {
-				// 		el: document.getElementById("breadcrumpContainer"),
-				// 	},
-				// 	pagesize: {
-				// 		el: document.getElementById("changeNoOfProducts"),
-				// 	},
-
-				// 	sort: {
-				// 		el: document.getElementById("sortWrapper"),
-				// 		options: [
-				// 			{
-				// 				value: "sortPrice desc",
-				// 				text: "Price High to Low",
-				// 			},
-				// 			{
-				// 				value: "sortPrice asc",
-				// 				text: " Price Low to High",
-				// 			},
-				// 		],
-				// 	},
-				// 	loader: {
-				// 		el: document.getElementById("loaderEl"),
-				// 	},
-				// 	productView: {
-				// 		el: document.getElementById("productViewTypeContainer"),
-				// 		viewTypes: "GRID",
-				// 	},
-				// 	banner: {
-				// 		el: document.getElementById("bannerContainer"),
-				// 		count: 1,
-				// 	},
-				// 	swatches: {
-				// 		enabled: true,
-				// 		attributesMap: {
-				// 			swatchList: "color",
-				// 			swatchImgs: "unbxd_color_mapping",
-				// 			swatchColors: "color",
-				// 		},
-				// 	},
-				// });
+				// if (reloadWarning) {
+				// 	window.addEventListener("beforeunload", (event) => {
+				// 		event.preventDefault();
+				// 		event.returnValue = "";
+				// 		return "";
+				// 	});
+				// }
+				// return () => window.removeEventListener("beforeunload", unloadCallback);
+				// window.onbeforeunload = function () {
+				// 	return "Data will be lost if you leave the page, are you sure?";
+				// };
 			}
 		}
 	});
-	// useDeepCompareEffect(() => {
-	// 	// window.unbxdSearch.resetAll();
-	// 	// window.unbxdSearch = null;
-	// 	if (Object.keys(validatedConfig).length) {
-	// 		if (window.UnbxdSearch) {
-	// 			window.unbxdSearch = new window.UnbxdSearch({
-	// 				siteKey: validatedConfig.siteKey,
-	// 				apiKey: validatedConfig.apiKey,
-	// 				hashMode: false,
-	// 				updateUrls: true,
-	// 				extraParams: {
-	// 					stats: "price",
-	// 				},
-	// 				// searchTrigger: "click",
-	// 				products: {
-	// 					productType: "SEARCH",
-	// 				},
-	// 				searchBoxEl: validatedConfig.searchBoxEl,
-	// 				searchButtonEl: validatedConfig.searchButtonEl,
-	// 				// products: validatedConfig.products,
-	// 				spellCheck: validatedConfig.spellCheck,
-	// 				noResults: validatedConfig.noResults,
-	// 				facet: validatedConfig.facet,
-	// 				pagination: validatedConfig.pagination,
-	// 				breadcrumb: validatedConfig.breadcrumb,
-	// 				pagesize: validatedConfig.pagesize,
-	// 				sort: validatedConfig.sort,
-	// 				loader: validatedConfig.loader,
-	// 				productView: validatedConfig.productView,
-	// 				banner: validatedConfig.banner,
-	// 				swatches: validatedConfig.swatches,
-	// 			});
-	// 			console.log("Applied changes");
-	// 		}
-	// 	}
-	// }, [validatedConfig]);
 	useEffect(() => {
-		// window.unbxdSearch = null;
-
 		if (window.UnbxdSearch) {
 			window.unbxdSearch = new window.UnbxdSearch({
 				siteKey: "demo-unbxd700181503576558",
@@ -299,6 +256,19 @@ export default function Vanilla2(props) {
 				},
 			});
 		}
+
+		// if (reloadWarning) {
+		// 	window.addEventListener("beforeunload", (event) => {
+		// 		event.preventDefault();
+		// 		event.returnValue = "";
+		// 		return "";
+		// 	});
+		// }
+		// return () => window.removeEventListener("beforeunload", unloadCallback);
+
+		// window.onbeforeunload = function () {
+		// 	return "Data will be lost if you leave the page, are you sure?";
+		// };
 	}, []);
 
 	const [htmlContent, setHtmlContent] = useState("");

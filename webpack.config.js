@@ -7,6 +7,7 @@ module.exports = {
 	output: {
 		path: path.join(__dirname, "/dist"), // the bundle output path
 		filename: "bundle.js", // the name of the bundle
+		publicPath: "/",
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
@@ -44,5 +45,14 @@ module.exports = {
 		alias: {
 			react: path.resolve("./node_modules/react"),
 		},
+		fallback: {
+			url: require.resolve("url/"),
+			fs: false,
+			http: false,
+			crypto: false,
+		},
+	},
+	experiments: {
+		topLevelAwait: true,
 	},
 };

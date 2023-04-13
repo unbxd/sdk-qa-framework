@@ -3,7 +3,7 @@ import Vanilla2 from "../externalHTMLComponents/Vanilla2";
 import FormBuilder from "../formComponents/FormBuilder";
 
 const DashboardContent = (props) => {
-	const { viewConfigOption } = props;
+	const { viewConfigOption, reloadWarning = true } = props;
 
 	const [validatedConfig, setValidatedConfig] = useState({});
 	const [viewConfigTab, setViewConfigTab] = useState(true);
@@ -34,7 +34,10 @@ const DashboardContent = (props) => {
 						: { width: "100%" }
 				}
 			>
-				<Vanilla2 validatedConfig={validatedConfig} />
+				<Vanilla2
+					validatedConfig={validatedConfig}
+					reloadWarning={reloadWarning}
+				/>
 				{/* <Vanilla2 validatedConfig={validatedConfig} filename="Vanilla2.html" /> */}
 				{viewConfigOption && (
 					<div

@@ -1,2 +1,3 @@
-# sdk-qa-framework
-Vanilla JS SDK QA and builder framework 
+# custom-components
+
+Create custom components using components from unbxd package

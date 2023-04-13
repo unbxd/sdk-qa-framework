@@ -32,24 +32,47 @@ const masterConfig = {
 	[loaderConfig["moduleKey"]]: loaderConfig["config"],
 };
 
+const masterData = {
+	[authConfig["moduleName"]]: authConfig,
+	[searchBoxConfig["moduleName"]]: searchBoxConfig,
+	[productsConfig["moduleName"]]: productsConfig,
+	[facetsConfig["moduleName"]]: facetsConfig,
+	[paginationConfig["moduleName"]]: paginationConfig,
+	[pageSizeConfig["moduleName"]]: pageSizeConfig,
+	[sortingConfig["moduleName"]]: sortingConfig,
+	[productViewConfig["moduleName"]]: productViewConfig,
+	[breadcrumbsConfig["moduleName"]]: breadcrumbsConfig,
+	[spellCheckConfig["moduleName"]]: spellCheckConfig,
+	[bannerConfig["moduleName"]]: bannerConfig,
+	[variantsConfig["moduleName"]]: variantsConfig,
+	[swatchesConfig["moduleName"]]: swatchesConfig,
+	[noResultsConfig["moduleName"]]: noResultsConfig,
+	[loaderConfig["moduleName"]]: loaderConfig,
+};
+
 const getConfig = (moduleKey, key) => {
+	console.log(masterData);
 	if (key) {
 		const moduleConfig = masterConfig[moduleKey];
-		// for (let eleConfig of moduleConfig) {
-		// 	if (eleConfig.name === key) {
-		// 		return eleConfig;
-		// 	}
-		// }
-		// return key;
 		return moduleConfig.find((c) => c.name === key);
 	}
 	return masterConfig[moduleKey];
+};
 
-	// return masterConfig.moduleKey[element];
+const getUseCases = () => {
+	let usecases = {};
+	for (let key of Object.keys(masterData)) {
+		if (masterData[key]["usecases"] != undefined) {
+			usecases[key] = masterData[key]["usecases"];
+			// let usecase = masterData[key]["usecases"];
+			// usecases.push({ ["key"]: key, ["usecases"]: { ...usecase } });
+		}
+	}
+	return usecases;
 };
 
 const getAllConfig = () => {
 	return masterConfig;
 };
 
-export { getConfig, getAllConfig };
+export { getConfig, getAllConfig, getUseCases };

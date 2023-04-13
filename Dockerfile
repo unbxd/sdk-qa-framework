@@ -2,7 +2,7 @@
 FROM node:14.15.0
 
 # Create env variables
-ENV BASEDIR /opt/unbxd/ai-demo
+ENV BASEDIR /opt/unbxd/sdk-qa-framework
 
 ARG ASSETS_AWS_KEY_ID
 ARG ASSETS_AWS_SECRET_KEY
