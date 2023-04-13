@@ -29,7 +29,9 @@ const Lander = () => {
 				<div className="description">
 					<div className="descriptionText">
 						<div className="text">
-							<h1 className="banner-title">Welcome to the JS SDK Framework!</h1>
+							<h1 className="banner-title">
+								Welcome to the JS SDK QA Framework!
+							</h1>
 							<h3 className="banner-desc">
 								This builder is a tool to help decrease the time of onboarding
 								and testing.
