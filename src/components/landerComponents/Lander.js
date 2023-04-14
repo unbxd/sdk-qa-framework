@@ -21,7 +21,7 @@ const Lander = () => {
 					<div className="descriptionText">
 						<div className="text">
 							<h1 className="banner-title">
-								Welcome to the JS SDK QA Framework!
+								Welcome to the Unbxd JS SDK Framework!
 							</h1>
 							<h3 className="banner-desc">
 								Simplifying new onboardings and testing of Unbxd JS SDK
