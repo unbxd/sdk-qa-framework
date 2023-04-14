@@ -51,7 +51,7 @@ export default function Vanilla2(props) {
 					spellCheck: validatedConfig.spellCheck,
 					loader: validatedConfig.loader,
 					swatches: validatedConfig.swatches,
-					// noResults: validatedConfig.noResults,
+					noResults: validatedConfig.noResults,
 					pagination: validatedConfig.pagination,
 					breadcrumb: validatedConfig.breadcrumb,
 					banner: validatedConfig.banner,

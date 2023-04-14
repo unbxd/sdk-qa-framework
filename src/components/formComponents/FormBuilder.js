@@ -27,7 +27,7 @@ import { javascript } from "@codemirror/lang-javascript";
 // import defaultConfig from "../../inputJson/dummy.json";
 // import defaultConfig from "../../inputJson/dummyMadrasLink.json";
 import defaultConfig from "../../inputJson/dummyMadrasLinkOld.json";
-import { Button, Modal } from "unbxd-react-components";
+import { Button, Modal, Input } from "unbxd-react-components";
 // import defaultConfig from "../inputJson/empty.json";
 
 const FormBuilder = (props = {}) => {
@@ -47,17 +47,17 @@ const FormBuilder = (props = {}) => {
 		searchBoxConfig,
 		productsConfig,
 		facetsConfig,
+		paginationConfig,
 		pageSizeConfig,
 		sortingConfig,
 		productViewConfig,
+		breadcrumbsConfig,
 		spellCheckConfig,
-		loaderConfig,
+		bannerConfig,
+		// variantsConfig,
 		swatchesConfig,
 		noResultsConfig,
-		// variantsConfig,
-		paginationConfig,
-		breadcrumbsConfig,
-		bannerConfig,
+		loaderConfig,
 	];
 
 	// const formConfigs = getAllConfig();
@@ -229,6 +229,19 @@ const FormBuilder = (props = {}) => {
 	const handlePublish = () => {
 		setPublishPopUp(true);
 		setTimeout(handlePublisStatus, 2000);
+	};
+
+	const copyPublishedLink = (inputID, copyIconID) => {
+		const copyIcon = document.getElementById(copyIconID);
+		copyIcon.style.backgroundImage =
+			"url('https://png.pngtree.com/png-clipart/20190516/original/pngtree-check-mark-icon-design-template-vector-isolated-png-image_4085369.jpg')";
+		copyIcon.style.pointerEvents = "none";
+
+		const inputEl = document.getElementById(inputID);
+		inputEl.select();
+		navigator.clipboard.writeText(inputEl.value);
+
+		console.log("Copied text:", inputEl.value);
 	};
 
 	return (
@@ -417,7 +430,21 @@ const FormBuilder = (props = {}) => {
 							<div>
 								<div className="confirm-modal-body">
 									Your configurations have been published to the below link:
-									<input readOnly value="www.google.com" />
+									<div className="link">
+										<Input
+											id="cdn-link"
+											name="cdn-link"
+											readOnly
+											defaultValue="http://js-sdk.unbxd.com/builder/456787654334567"
+										/>
+										<div
+											id="copyIcon"
+											className="copyIcon"
+											onClick={() => {
+												copyPublishedLink("cdn-link", "copyIcon");
+											}}
+										></div>
+									</div>
 								</div>
 								<div className="modal-footer">
 									<Button

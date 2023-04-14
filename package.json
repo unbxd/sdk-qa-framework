@@ -18,7 +18,7 @@
 		"@uiw/codemirror-theme-darcula": "^4.19.16",
 		"@uiw/codemirror-theme-dracula": "^4.19.9",
 		"@uiw/react-codemirror": "^4.19.16",
-		"@unbxd-ui/vanilla-search-library": "^2.0.31",
+		"@unbxd-ui/vanilla-search-library": "2.0.30",
 		"axios": "^1.3.5",
 		"cors": "^2.8.5",
 		"express": "^4.18.2",

@@ -10,6 +10,7 @@ import "../public/styles/components/general.scss";
 
 import DashboardWrapper from "./components/dashboardComponents/DashboardWrapper";
 import Lander from "./components/landerComponents/Lander";
+import LanderUseCases from "./components/landerComponents/LanderUseCases";
 
 const App = (props) => {
 	// axios
@@ -57,6 +58,7 @@ const App = (props) => {
 					}
 				/>
 				<Route exact path="" element={<Lander />} />
+				<Route path="/usecases" element={<LanderUseCases />} />
 				{/* <Route exact path="/" Component={Lander} /> */}
 			</Routes>
 		</BrowserRouter>

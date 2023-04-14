@@ -53,7 +53,7 @@ const DashboardHeader = (props) => {
 									href="https://unbxd.github.io/search-JS-library/"
 									target="_blank"
 								>
-									View Documentation
+									Documentation
 								</a>
 							</div>
 						)}

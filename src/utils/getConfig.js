@@ -51,7 +51,6 @@ const masterData = {
 };
 
 const getConfig = (moduleKey, key) => {
-	console.log(masterData);
 	if (key) {
 		const moduleConfig = masterConfig[moduleKey];
 		return moduleConfig.find((c) => c.name === key);

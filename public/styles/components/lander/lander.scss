@@ -1,324 +1,404 @@
 @import "../form/form.scss";
 
-.lander{
-    display: block;
+.lander {
+	display: block;
 }
 
 .landerHeader {
-    width: 100%;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #ccc;
-    box-shadow: 0 0 6px 3px rgba(145, 150, 162, 0.14);
-    background: #fff;
-    position: fixed;
+	width: 100%;
+	height: 70px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 1px solid #ccc;
+	box-shadow: 0 0 6px 3px rgba(145, 150, 162, 0.14);
+	background: #fff;
+	margin-top: -70px;
+	// background-color: transparent;
+	position: fixed;
 
-    .logo {
-        display: flex;
-        align-items: center;
-        padding: 0 20px;
-        height: 50px;
-        width: fit-content;
-        margin-left: 20px;
+	.logo {
+		display: flex;
+		align-items: center;
+		padding: 0 20px;
+		height: 50px;
+		width: fit-content;
+		margin-left: 20px;
 
-        .header-logo {
-            width: 200px;
-            height: auto;
+		.header-logo {
+			width: 200px;
+			height: auto;
 
-            &:hover {
-                cursor: pointer;
-            }
-        }
-    }
+			&:hover {
+				cursor: pointer;
+			}
+		}
+	}
 }
 
 .userConfigs {
-    margin-right: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px;
+	margin-right: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 14px;
+	width: 35%;
 
-    a {
-        text-decoration: none;
-        font-weight: 400;
-        color: cornflowerblue;
+	a {
+		text-decoration: none;
+		font-weight: 400;
+		color: cornflowerblue;
+		display: flex;
+		align-items: center;
 
-        &:hover {
-            color: rgb(157, 86, 224);
-        }
-    }
+		// &:hover {
+		//     color: rgb(157, 86, 224);
+		// }
+	}
 }
 
 .description {
-    width: 100%;
-    display: flex;
+	width: 100%;
+	display: flex;
+	margin-top: 70px;
 }
 
 .landerBody {
-    display: block;
-    background: url(https://pim.unbxd.io/images/floting_layer-edited.png);
-    // background-image: url("https://unbxd.com/static/a064be72bd8a257220917c13296ec8bc/homeBanner.svg");
-    // background-size: 100% 100%;
-    // background-position: 0 -19px;
-    // width: 705px;
-    // height: 548px;
-    // width: 100%;
-    // height: 100%;
-    
+	display: block;
+	background: url(https://pim.unbxd.io/images/floting_layer-edited.png);
+	// background-image: url("https://unbxd.com/static/a064be72bd8a257220917c13296ec8bc/homeBanner.svg");
+	// background-size: 100% 100%;
+	// background-position: 0 -19px;
+	// width: 705px;
+	// height: 548px;
+	// width: 100%;
+	// height: 100%;
 
-    .descriptionText {
-        display: flex;
-        align-items: center;
-        text-align: center;
-        justify-content: center;
-        width: 100%;
-        height: 300px;
+	.descriptionText {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		justify-content: center;
+		width: 100%;
 
-        .text {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            width: 50%;
-            flex-wrap: wrap;
-            // align-content: center;
-            margin-top: 200px;
+		.text {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: center;
+			width: 50%;
+			flex-wrap: wrap;
+			// align-content: center;
 
-            .banner-title {
-                font-size: 3.125rem;
-                // max-width: 454px;
-                line-height: 3.8rem;
-                font-weight: 400;
-                margin-bottom: 1.2rem;
-                white-space: pre-line;
-            }
+			.banner-title {
+				font-size: 50px;
+				// max-width: 454px;
+				line-height: 60.8px;
+				font-weight: 400;
+				margin-bottom: 19.2px;
+				white-space: pre-line;
+			}
 
-            .banner-desc {
-                color: #3f5767;
-                    font-size: 17.6px;
-                    letter-spacing: .5px;
-                    margin-bottom: 24px;
-                    white-space: pre-line;
-                    font-weight: 400;
-            }
+			.banner-desc {
+				color: #3f5767;
+				font-size: 17.6px;
+				letter-spacing: 0.5px;
+				margin-bottom: 24px;
+				white-space: pre-line;
+				font-weight: 400;
+			}
 
+			button {
+				appearance: none;
+				background-color: cornflowerblue;
+				border: 1px solid cornflowerblue;
+				color: #fff;
+				min-height: 50px;
+				border-radius: 30px;
+				font-size: 14px;
+				font-weight: 600;
+				height: auto;
+				padding: 18px 40px;
+				text-transform: uppercase;
 
-            button {
-                appearance: none;
-                background-color: #ec839e;
-                border: 1px solid #ec839e;
-                color: #fff;
-                min-height: 50px;
-                border-radius: 30px;
-                font-size: 14px;
-                font-weight: 600;
-                height: auto;
-                padding: 18px 40px;
-                text-transform: uppercase;
+				&:hover {
+					cursor: pointer;
+					background-color: rgb(68, 112, 193);
+				}
+			}
+		}
 
-                &:hover{
-                    cursor: pointer;
-                    background-color: rgb(174, 67, 93);
-                }
-            }
-        }
-    }
-    
-    .descriptionBanner {
-        display: flex;
-        width: 50%;
+		&::after {
+			background: linear-gradient(90deg, #739bf4, #93cbff);
+			content: "";
+			display: flex;
+			height: 4px;
+			margin: 40px auto 8px auto;
+			width: 100px;
+		}
+	}
 
-        .banner{
-            margin-top: 10px;
-            background-image: url("https://unbxd.com/static/a064be72bd8a257220917c13296ec8bc/homeBanner.svg");
-            background-position: 0 -19px;
-            width: 705px;
-            height: 548px;;
-        }
-    }
+	.descriptionBanner {
+		display: flex;
+		width: 50%;
+
+		.banner {
+			margin-top: 10px;
+			background-image: url("https://unbxd.com/static/a064be72bd8a257220917c13296ec8bc/homeBanner.svg");
+			background-position: 0 -19px;
+			width: 705px;
+			height: 548px;
+		}
+	}
 }
 
 .options {
-    display: block;
-    width: 97%;
+	display: block;
+	width: 97%;
 
-    .option {
-
-        h2 {
-            padding-left: 20px;
-            margin: 40px 0 20px 0;
-            font-weight: 400;
-        }
-    }
+	.option {
+		h2 {
+			padding-left: 20px;
+			margin: 40px 0 20px 0;
+			font-weight: 400;
+		}
+	}
 }
 
 .searchOptions {
-    width: 90%;
-    display: flex;
+	width: 90%;
+	display: flex;
 
-    .searchConfig {
-        width: 30%;
-    }
+	.searchConfig {
+		width: 30%;
+	}
 
-    .dropdownConfig {
-        width: 20%;
-    }
+	.dropdownConfig {
+		width: 20%;
+	}
 }
 
 .configurations {
-    margin-top: 160px;
-    margin-left: 20px;
+	margin-top: 30px;
+	margin-left: 20px;
 }
 
 .configOptions {
-    display: flex;
-    // flex-direction: column;
-    margin-left: 20px;
-    width: 100%;
+	display: flex;
+	// flex-direction: column;
+	margin-left: 20px;
+	width: 100%;
 }
 
 .configOption {
-    width: 350px;
-    height: 200px;
-    border: 1px solid #CCC;
-    border-radius: 10px;
-    box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
-    margin-right: 30px;
-    background: #fff;
+	width: 350px;
+	height: 200px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
+	margin-right: 30px;
+	background: #fff;
+
+	&:hover {
+		box-shadow: 0 0 5px -1px rgba(115, 155, 244, 0.2);
+		border: 1px solid rgba(115, 155, 244);
+	}
 }
 
-.optionHeader{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 10px;
-    margin-left: 5px;
-    height: 80px;
-    width: 93%;
+.optionHeader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 10px;
+	margin-left: 5px;
+	height: 80px;
+	width: 93%;
 
-    h4 {
-        width: 60%;
-        height: 80px;
-        text-align: right;
-        font-size: 16px;
-    }
+	h4 {
+		width: 60%;
+		height: 80px;
+		text-align: right;
+		font-size: 16px;
+	}
 }
 
 .optionDesc {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 50%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 50%;
 
-    p {
-        display: flex;
-        align-items: center;
-        margin-left: 15px;
-        width: 55%;
-        font-size: 13px;
-        font-weight: 400;
-    }
+	p {
+		display: flex;
+		align-items: center;
+		margin-left: 15px;
+		width: 55%;
+		font-size: 13px;
+		font-weight: 400;
+	}
 
-    .buttonSection {
-        width: 30%;
-        height: 100%;
-        margin-right: 10px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+	.buttonSection {
+		width: 30%;
+		height: 100%;
+		margin-right: 10px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 
-        Button {
-            width: 80px;
-            margin: 5px 0;
-        }
-    }
+		Button {
+			width: 80px;
+			margin: 5px 0;
+		}
+	}
 }
 
 .landerFooter {
-    display: flex;
-    width: 100%;
-    height: 100px;
-    background-color: #d9e4fb;
-    color: #000;
-    align-items: center;
-    justify-content: center;
-    margin-top: 30px;
-    font-weight: 400;
+	display: flex;
+	width: 100%;
+	height: 100px;
+	background-color: #d9e4fb;
+	color: #000;
+	align-items: center;
+	justify-content: center;
+	margin-top: 30px;
+	font-weight: 400;
 }
 
 .defaultConfig {
-    // @include plus-black;
-    margin-left: 10px;
-    background-image: url("https://static.thenounproject.com/png/230269-200.png");
-    background-size: 100% 100%;
-    width: 70px;
-    height: 70px;
+	// @include plus-black;
+	margin-left: 10px;
+	background-image: url("https://static.thenounproject.com/png/230269-200.png");
+	background-size: 100% 100%;
+	width: 70px;
+	height: 70px;
 }
 
 .infiniteScroll {
-    margin-left: 10px;
-    background-image: url("https://static.thenounproject.com/png/5478560-200.png");
-    background-size: 100% 100%;
-    width: 70px;
-    height: 70px;
+	margin-left: 10px;
+	background-image: url("https://static.thenounproject.com/png/5478560-200.png");
+	background-size: 100% 100%;
+	width: 70px;
+	height: 70px;
 }
 
 .fixedPagination {
-    margin-left: 10px;
-    background-image: url("https://static.thenounproject.com/png/4199144-200.png");
-    background-size: 100% 100%;
-    width: 70px;
-    height: 70px;
+	margin-left: 10px;
+	background-image: url("https://static.thenounproject.com/png/4199144-200.png");
+	background-size: 100% 100%;
+	width: 70px;
+	height: 70px;
 }
 
 .clickScroll {
-    margin-left: 10px;
-    background-image: url("https://static.thenounproject.com/png/135684-200.png");
-    background-size: 100% 100%;
-    width: 70px;
-    height: 70px;
+	margin-left: 10px;
+	background-image: url("https://static.thenounproject.com/png/135684-200.png");
+	background-size: 100% 100%;
+	width: 70px;
+	height: 70px;
 }
 
 .listProductView {
-    margin-left: 10px;
-    background-image: url("https://static.thenounproject.com/png/3015933-200.png");
-    background-size: 100% 100%;
-    width: 70px;
-    height: 70px;
+	margin-left: 10px;
+	background-image: url("https://static.thenounproject.com/png/3015933-200.png");
+	background-size: 100% 100%;
+	width: 70px;
+	height: 70px;
 }
 
 .gridProductView {
-    margin-left: 10px;
-    background-image: url("https://static.thenounproject.com/png/307609-200.png");
-    background-size: 100% 100%;
-    width: 70px;
-    height: 70px;
+	margin-left: 10px;
+	background-image: url("https://static.thenounproject.com/png/307609-200.png");
+	background-size: 100% 100%;
+	width: 70px;
+	height: 70px;
 }
 
 .rangeSlider {
-    margin-left: 10px;
-    background-image: url("https://static.thenounproject.com/png/2916874-200.png");
-    background-size: 100% 100%;
-    width: 30%;
-    height: 70px;
+	margin-left: 10px;
+	background-image: url("https://static.thenounproject.com/png/2916874-200.png");
+	background-size: 100% 100%;
+	width: 30%;
+	height: 70px;
 }
 
 .checkableFacets {
-    margin-left: 10px;
-    background-image: url("https://static.thenounproject.com/png/194115-200.png");
-    background-size: 100% 100%;
-    width: 30%;
-    height: 70px;
+	margin-left: 10px;
+	background-image: url("https://static.thenounproject.com/png/194115-200.png");
+	background-size: 100% 100%;
+	width: 30%;
+	height: 70px;
 }
 
 .swatchesFacets {
-    margin-left: 10px;
-    background-image: url("https://static.thenounproject.com/png/4015784-200.png");
-    background-size: 100% 100%;
-    width: 30%;
-    height: 70px;
+	margin-left: 10px;
+	background-image: url("https://static.thenounproject.com/png/4015784-200.png");
+	background-size: 100% 100%;
+	width: 30%;
+	height: 70px;
+}
+
+.usecasesLogo {
+	background-image: url("https://static.thenounproject.com/png/1649127-200.png");
+	background-size: 100% 100%;
+	width: 70px;
+	height: 70px;
+}
+
+.builderLogo {
+	background-image: url("https://static.thenounproject.com/png/1463919-200.png");
+	background-size: 100% 100%;
+	width: 70px;
+	height: 70px;
+}
+
+.qaLogo {
+	background-image: url("https://static.thenounproject.com/png/2965882-200.png");
+	background-size: 100% 100%;
+	width: 70px;
+	height: 70px;
+}
+
+.landerRoutes {
+	width: 100%;
+	margin-top: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	a {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-decoration: none;
+		color: #000;
+
+		.route {
+			width: 350px;
+			height: 200px;
+			border: 1px solid #ccc;
+			border-radius: 10px;
+			box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
+			margin-right: 30px;
+			background: #fff;
+
+			div,
+			h3,
+			p {
+				margin: 10px auto 0 auto;
+			}
+
+			h3,
+			p {
+				text-align: center;
+				width: 90%;
+			}
+
+			&:hover {
+				box-shadow: 0 0 5px -1px rgba(115, 155, 244, 0.2);
+				border: 1px solid rgba(115, 155, 244);
+			}
+		}
+	}
 }
