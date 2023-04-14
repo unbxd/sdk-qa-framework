@@ -136,6 +136,7 @@ body {
 		.formDescriptionHeader {
 			display: flex;
 			width: 95%;
+			align-items: center;
 			justify-content: space-between;
 			padding: 0 15px;
 
@@ -146,6 +147,35 @@ body {
 				align-items: center;
 				justify-content: center;
 				font-weight: 400;
+			}
+			.formJSONOptions {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+
+				.copyJSON {
+					margin: 0 5px;
+					background-image: url("https://static.thenounproject.com/png/2012819-200.png");
+					background-size: 100% 100%;
+					width: 40px;
+					height: 40px;
+
+					&:hover {
+						cursor: pointer;
+					}
+				}
+
+				.viewJSON {
+					margin: 0 5px;
+					background-image: url("https://static.thenounproject.com/png/70816-200.png");
+					background-size: 100% 100%;
+					width: 30px;
+					height: 30px;
+
+					&:hover {
+						cursor: pointer;
+					}
+				}
 			}
 		}
 	}

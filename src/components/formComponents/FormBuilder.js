@@ -231,6 +231,12 @@ const FormBuilder = (props = {}) => {
 		setTimeout(handlePublisStatus, 2000);
 	};
 
+	const copyJSON = () => {
+		navigator.clipboard.writeText(JSON.stringify(formData));
+
+		console.log("Copied JSON!");
+	};
+
 	const copyPublishedLink = (inputID, copyIconID) => {
 		const copyIcon = document.getElementById(copyIconID);
 		copyIcon.style.backgroundImage =
@@ -258,10 +264,15 @@ const FormBuilder = (props = {}) => {
 					Hide Configuration Tab
 				</div>
 				<div className="formDescriptionHeader">
-					<h1>SDK Configuration</h1>{" "}
-					<Button appearance="link" onClick={() => toggleConfig()}>
+					<h1>SDK Configuration</h1>
+					<div className="formJSONOptions">
+						<div className="copyJSON" onClick={() => copyJSON()}></div>
+						<div className="viewJSON" onClick={() => toggleConfig()}></div>
+					</div>
+
+					{/* <Button appearance="link" onClick={() => toggleConfig()}>
 						View JSON
-					</Button>
+					</Button> */}
 				</div>
 				{/* <p>
 						Use the below form to configure the Unbxd SDK features and click on
@@ -353,6 +364,7 @@ const FormBuilder = (props = {}) => {
 			</div>
 			<div className="formjson hidden" id="formjson">
 				<CodeMirror
+					id="jsonCode"
 					className="jsonCode"
 					value={JSON.stringify(formData, null, 4)}
 					theme={darculaInit({
