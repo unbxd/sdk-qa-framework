@@ -89,7 +89,6 @@ body {
 
 .UNX-input {
   outline: none;
-  padding-left: 37px;
   height: 40px;
   width: 100%;
 }
@@ -103,8 +102,11 @@ body {
 .UNX-search-btn {
   background-color: transparent;
   color: rgb(185, 185, 185);
-  left: 0px;
+  right: 0px;
   border-color: transparent;
+}
+.UNX-search-btn:hover{
+  cursor: pointer;
 }
 
 .UNX-no-result {

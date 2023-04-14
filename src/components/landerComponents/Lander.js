@@ -68,9 +68,9 @@ const Lander = () => {
 					</a>
 				</div>
 			</div>
-			<div className="landerFooter">
+			{/* <div className="landerFooter">
 				<p>Unbxd Software Pvt. Ltd. Copyrights 2023</p>
-			</div>
+			</div> */}
 		</div>
 	);
 };

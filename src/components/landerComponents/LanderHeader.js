@@ -15,7 +15,7 @@ const LanderHeader = () => {
 					onClick={navigateHome}
 				/>
 			</div>
-			<div className="userConfigs">
+			<div className="userConfigsLander">
 				<a href="/">Home</a>
 				<a href="/usecases">Use Cases</a>
 				<a href="/builder">Builder</a>
