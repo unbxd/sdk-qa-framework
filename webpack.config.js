@@ -11,7 +11,7 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: "src/index.html", // to import index.html file inside index.js
+			template: "./public/index.html", // to import index.html file inside index.js
 		}),
 	],
 	devServer: {
@@ -32,11 +32,15 @@ module.exports = {
 			},
 			{
 				test: /\.(sa|sc|c)ss$/, // styles files
-				use: ["style-loader", "css-loader", "sass-loader"],
+				use: [
+					{ loader: "style-loader" },
+					{ loader: "css-loader", options: { url: false } },
+					{ loader: "sass-loader" },
+				],
 			},
 			{
 				test: /\.(png|woff|woff2|eot|ttf|svg)$/, // to import images and fonts
-				loader: "url-loader",
+				loader: "file-loader",
 				options: { limit: false },
 			},
 		],
@@ -46,7 +50,7 @@ module.exports = {
 			react: path.resolve("./node_modules/react"),
 		},
 		fallback: {
-			url: require.resolve("url/"),
+			url: false,
 			fs: false,
 			http: false,
 			crypto: false,

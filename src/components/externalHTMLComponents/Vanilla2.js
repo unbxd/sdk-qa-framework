@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-// import "../../../public/styles/components/unbxdStyles.css";
+// import "../../../public/unbxdStyle.css";
+
 // import UnbxdSearch from  '@unbxd-ui/vanilla-search-library';
 import UnbxdSearch from "../../../../search-JS-library/src/index";
 // import UnbxdSearch from "../../../../../search-JS-library/src/index";
@@ -298,7 +299,7 @@ export default function Vanilla2(props) {
 				"<!-- End dependency library stylesheets -->" +
 				"<!-- Custom stylesheet for Unbxd default theme, update this if you want to change the look & feel -->" +
 				"<link rel='stylesheet' href='https://libraries.unbxdapi.com/search-sdk/v2.0.5/vanillaSearch.min.css'/>" +
-				"<link rel='stylesheet' type='text/css' href='unbxdStyles.css' />" +
+				"<link rel='stylesheet' type='text/css' href='unbxdStyle.css' />" +
 				"</head>" +
 				"<body class='{{langCSS}}'>" +
 				"<div class='search-preview'>" +

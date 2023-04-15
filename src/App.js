@@ -30,16 +30,18 @@ const App = (props) => {
 	return (
 		<BrowserRouter>
 			<Routes>
+				<Route exact path="" element={<Lander />} />
+				<Route path="/usecases" element={<LanderUseCases />} />
 				<Route
-					exact
-					path="builder/:id"
+					path="builder"
+					// Component={DashboardWrapper}
 					element={
 						<DashboardWrapper viewConfigOption={true} reloadWarning={true} />
 					}
 				/>
 				<Route
-					path="builder"
-					// Component={DashboardWrapper}
+					exact
+					path="builder/:id"
 					element={
 						<DashboardWrapper viewConfigOption={true} reloadWarning={true} />
 					}
@@ -57,8 +59,6 @@ const App = (props) => {
 						<DashboardWrapper viewConfigOption={false} reloadWarning={false} />
 					}
 				/>
-				<Route exact path="" element={<Lander />} />
-				<Route path="/usecases" element={<LanderUseCases />} />
 				{/* <Route exact path="/" Component={Lander} /> */}
 			</Routes>
 		</BrowserRouter>

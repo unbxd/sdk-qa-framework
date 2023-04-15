@@ -36,11 +36,18 @@ const FormBuilder = (props = {}) => {
 	let masterConfig = {};
 	let validatedData = {};
 	const [formData, setFormData] = useState(defaultConfig);
+	const [jsonData, setJsonData] = useState(defaultConfig);
 	const [selectedAcc, setSelectedAcc] = useState(null);
+
 	const confirmModalRef = useRef();
+	const viewJSONModalRef = useRef();
 
 	let [publishPopUp, setPublishPopUp] = useState(false);
 	let [publishStatus, setPublishStatus] = useState(false);
+	// let [viewJSON, setviewJSON] = useState(false);
+
+	// console.log("formData initial:", typeof formData, formData);
+	// console.log("JsonData", jsonData);
 
 	const formConfigs = [
 		authConfig,
@@ -75,6 +82,10 @@ const FormBuilder = (props = {}) => {
 	updateMasterConfig(formConfigs);
 
 	const updateFormData = (data = {}, moduleKey = null) => {
+		const copyIcon = document.getElementById("copyJSON");
+		copyIcon.style.backgroundImage =
+			"url('https://static.thenounproject.com/png/2012819-200.png')";
+
 		if (moduleKey) {
 			setFormData({
 				...formData,
@@ -215,10 +226,7 @@ const FormBuilder = (props = {}) => {
 	};
 
 	let toggleConfig = () => {
-		let formComponent = document.getElementById("formComponents");
-		let formConfig = document.getElementById("formjson");
-		formComponent.classList.toggle("hidden");
-		formConfig.classList.toggle("hidden");
+		viewJSONModalRef.current.showModal();
 	};
 
 	const handlePublisStatus = () => {
@@ -234,6 +242,14 @@ const FormBuilder = (props = {}) => {
 	const copyJSON = () => {
 		navigator.clipboard.writeText(JSON.stringify(formData));
 
+		const copyIcon = document.getElementById("copyJSON");
+		copyIcon.style.backgroundImage =
+			"url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Eo_circle_green_checkmark.svg/800px-Eo_circle_green_checkmark.svg.png')";
+		copyIcon.style.backgroundSize = "100% 100%";
+		copyIcon.style.width = "20px";
+		copyIcon.style.height = "20px";
+		copyIcon.style.padding = "10px";
+
 		console.log("Copied JSON!");
 	};
 
@@ -248,6 +264,16 @@ const FormBuilder = (props = {}) => {
 		navigator.clipboard.writeText(inputEl.value);
 
 		console.log("Copied text:", inputEl.value);
+	};
+
+	const downloadJSON = () => {
+		const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
+			JSON.stringify(formData)
+		)}`;
+		const link = document.createElement("a");
+		link.href = jsonString;
+		link.download = "configurations.json";
+		link.click();
 	};
 
 	return (
@@ -266,13 +292,20 @@ const FormBuilder = (props = {}) => {
 				<div className="formDescriptionHeader">
 					<h1>SDK Configuration</h1>
 					<div className="formJSONOptions">
-						<div className="copyJSON" onClick={() => copyJSON()}></div>
+						<div
+							id="downloadJSON"
+							className="downloadJSON"
+							onClick={() => {
+								downloadJSON();
+							}}
+						></div>
+						<div
+							id="copyJSON"
+							className="copyJSON"
+							onClick={() => copyJSON()}
+						></div>
 						<div className="viewJSON" onClick={() => toggleConfig()}></div>
 					</div>
-
-					{/* <Button appearance="link" onClick={() => toggleConfig()}>
-						View JSON
-					</Button> */}
 				</div>
 				{/* <p>
 						Use the below form to configure the Unbxd SDK features and click on
@@ -304,11 +337,6 @@ const FormBuilder = (props = {}) => {
 												selectedAcc == i ? "up" : "down"
 											}`}
 										></span>
-										{/* // {selectedAcc == i ? (
-										// 	<span className="accordianDrop up"></span>
-										// ) : (
-										// 	<span className="accordianDrop down"></span>
-										// )} */}
 									</div>
 									{selectedAcc == i && (
 										<div className={"accordianContent"}>
@@ -362,43 +390,8 @@ const FormBuilder = (props = {}) => {
 					Publish
 				</button>
 			</div>
-			<div className="formjson hidden" id="formjson">
-				<CodeMirror
-					id="jsonCode"
-					className="jsonCode"
-					value={JSON.stringify(formData, null, 4)}
-					theme={darculaInit({
-						settings: {
-							caret: "#c6c6c6",
-							fontFamily: "monospace",
-						},
-						styles: [{ tag: t.comment, color: "#6272a4" }],
-					})}
-					placeholder="Insert code here..."
-					height="490px"
-					width="500px"
-					extensions={[javascript({ json: true })]}
-				/>
-			</div>
 			<div className="confirm-modal">
-				<Modal
-					// title={
-					// 	<div className="modal-title">
-					// 		<h3>Confirm</h3>
-					// 		<div
-					// 			className="cancel"
-					// 			onClick={() => {
-					// 				setPublishPopUp(false);
-					// 				setPublishStatus(false);
-					// 				confirmModalRef.current.hideModal();
-					// 			}}
-					// 		></div>
-					// 	</div>
-					// }
-					title="Confirm"
-					ref={confirmModalRef}
-					showClose={true}
-				>
+				<Modal title="Confirm" ref={confirmModalRef} showClose={true}>
 					{!publishPopUp && !publishStatus && (
 						<div>
 							<div className="confirm-modal-body">
@@ -473,6 +466,63 @@ const FormBuilder = (props = {}) => {
 							</div>
 						</div>
 					)}
+				</Modal>
+				<Modal title="JSON Code" ref={viewJSONModalRef} showClose={true}>
+					{/* {viewJSON && ( */}
+					<div>
+						<div className="confirm-modal-body">
+							<div className="formjson hidden" id="formjson">
+								<CodeMirror
+									id="jsonCode"
+									className="jsonCode"
+									value={JSON.stringify(formData, null, 4)}
+									theme={darculaInit({
+										settings: {
+											caret: "#c6c6c6",
+											fontFamily: "monospace",
+										},
+										styles: [{ tag: t.comment, color: "#6272a4" }],
+									})}
+									placeholder="Insert code here..."
+									height="300px"
+									width="500px"
+									extensions={[javascript({ json: true })]}
+									onChange={(code) => {
+										setJsonData(eval("(" + code + ")"));
+										console.log("code:", typeof code, code);
+									}}
+								/>
+							</div>
+						</div>
+						<div className="modal-footer">
+							<Button
+								appearance="link"
+								className="cancel"
+								onClick={() => {
+									viewJSONModalRef.current.hideModal();
+								}}
+							>
+								Cancel
+							</Button>
+							<Button
+								appearance="primary"
+								className="publish-configs"
+								onClick={() => {
+									console.log(
+										"jsonData on update:",
+										typeof jsonData,
+										typeof JSON.stringify(jsonData, null, 4),
+										JSON.stringify(jsonData, null, 4)
+									);
+									setFormData(jsonData);
+									viewJSONModalRef.current.hideModal();
+								}}
+							>
+								Update
+							</Button>
+						</div>
+					</div>
+					{/* )} */}
 				</Modal>
 			</div>
 		</div>

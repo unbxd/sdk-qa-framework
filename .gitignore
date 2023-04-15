@@ -2,4 +2,5 @@ node_modules
 .DS_Store
 demo.js
 demo.json
+demo.txt
 /src/inputJson/dummyMadrasLink2.json

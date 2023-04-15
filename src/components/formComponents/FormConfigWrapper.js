@@ -67,7 +67,6 @@ const FormConfigWrapper = (props = {}) => {
 					/>
 				</div>
 			);
-
 		case "boolean": {
 			let defaultVal;
 			try {
