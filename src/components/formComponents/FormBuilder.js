@@ -39,12 +39,16 @@ const FormBuilder = (props = {}) => {
 	const [jsonData, setJsonData] = useState(defaultConfig);
 	const [selectedAcc, setSelectedAcc] = useState(null);
 
+	console.log("JSON data:", jsonData, typeof jsonData);
+
 	const confirmModalRef = useRef();
 	const viewJSONModalRef = useRef();
 
 	let [publishPopUp, setPublishPopUp] = useState(false);
 	let [publishStatus, setPublishStatus] = useState(false);
-	// let [viewJSON, setviewJSON] = useState(false);
+
+	// const [jsonFile, setJSONFile] = useState([]);
+	const inputJSONFile = useRef(null);
 
 	// console.log("formData initial:", typeof formData, formData);
 	// console.log("JsonData", jsonData);
@@ -244,11 +248,11 @@ const FormBuilder = (props = {}) => {
 
 		const copyIcon = document.getElementById("copyJSON");
 		copyIcon.style.backgroundImage =
-			"url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Eo_circle_green_checkmark.svg/800px-Eo_circle_green_checkmark.svg.png')";
+			"url('https://assets.stickpng.com/images/5aa78e207603fc558cffbf19.png')";
 		copyIcon.style.backgroundSize = "100% 100%";
-		copyIcon.style.width = "20px";
-		copyIcon.style.height = "20px";
-		copyIcon.style.padding = "10px";
+		copyIcon.style.width = "25px";
+		copyIcon.style.height = "25px";
+		copyIcon.style.margin = "7.5px";
 
 		console.log("Copied JSON!");
 	};
@@ -276,6 +280,31 @@ const FormBuilder = (props = {}) => {
 		link.click();
 	};
 
+	const inputFileChange = (e) => {
+		// setJSONFile(e.target.files[0]);
+		const jsonFile = e.target.files[0];
+		let encodedData;
+		// console.log(jsonFile);
+		let fileReader = new FileReader();
+		fileReader.readAsDataURL(jsonFile);
+		fileReader.onload = (e) => {
+			encodedData = e.target.result.replace(
+				"data:application/json;base64,",
+				""
+			);
+
+			console.warn("JSON file data:", encodedData);
+			console.log("Decoded code:", window.atob(encodedData));
+			console.log(
+				typeof JSON.parse(window.atob(encodedData)),
+				JSON.parse(window.atob(encodedData))
+			);
+			console.log(typeof formData, formData);
+			setFormData(JSON.parse(window.atob(encodedData)));
+			setJsonData(JSON.parse(window.atob(encodedData)));
+		};
+	};
+
 	return (
 		<div
 			className="formBuilder"
@@ -293,16 +322,16 @@ const FormBuilder = (props = {}) => {
 					<h1>SDK Configuration</h1>
 					<div className="formJSONOptions">
 						<div
+							id="copyJSON"
+							className="copyJSON"
+							onClick={() => copyJSON()}
+						></div>
+						<div
 							id="downloadJSON"
 							className="downloadJSON"
 							onClick={() => {
 								downloadJSON();
 							}}
-						></div>
-						<div
-							id="copyJSON"
-							className="copyJSON"
-							onClick={() => copyJSON()}
 						></div>
 						<div className="viewJSON" onClick={() => toggleConfig()}></div>
 					</div>
@@ -471,7 +500,7 @@ const FormBuilder = (props = {}) => {
 					{/* {viewJSON && ( */}
 					<div>
 						<div className="confirm-modal-body">
-							<div className="formjson hidden" id="formjson">
+							<div className="formjson" id="formjson">
 								<CodeMirror
 									id="jsonCode"
 									className="jsonCode"
@@ -488,8 +517,8 @@ const FormBuilder = (props = {}) => {
 									width="500px"
 									extensions={[javascript({ json: true })]}
 									onChange={(code) => {
+										console.log("onCodeChange:", typeof code, code);
 										setJsonData(eval("(" + code + ")"));
-										console.log("code:", typeof code, code);
 									}}
 								/>
 							</div>
@@ -505,8 +534,21 @@ const FormBuilder = (props = {}) => {
 								Cancel
 							</Button>
 							<Button
+								appearance="secondary"
+								className="upload"
+								onClick={() => inputJSONFile.current.click()}
+							>
+								<div className="jsonUpload">Upload</div>
+							</Button>
+							<input
+								type="file"
+								onChange={inputFileChange}
+								ref={inputJSONFile}
+								style={{ display: "none" }}
+							/>
+							<Button
 								appearance="primary"
-								className="publish-configs"
+								className="update-json"
 								onClick={() => {
 									console.log(
 										"jsonData on update:",

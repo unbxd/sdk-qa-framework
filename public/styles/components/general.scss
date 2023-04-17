@@ -167,7 +167,7 @@ body {
 				}
 
 				.copyJSON {
-					margin: 0 5px;
+					// margin: 0 5px;
 					background-image: url("https://static.thenounproject.com/png/2012819-200.png");
 					background-size: 100% 100%;
 					width: 40px;
@@ -508,6 +508,10 @@ body {
 }
 
 .modal-footer {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	// width: 100%;
 	padding: 13px 24px;
 	margin: 20px -30px -20px;
 	border: 1px solid #d2dde4;
@@ -615,4 +619,17 @@ body {
 			cursor: pointer;
 		}
 	}
+}
+
+.upload {
+	display: flex;
+	width: 89.9375px;
+	justify-content: center;
+	align-items: center;
+	// .jsonUpload {
+	// 	background-image: url("https://static.thenounproject.com/png/52989-200.png");
+	// 	background-size: 100% 100%;
+	// 	width: 20px;
+	// 	height: 20px;
+	// }
 }
