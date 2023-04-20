@@ -8,8 +8,4 @@ const el = document.getElementById("app");
 const root = ReactDOM.createRoot(el);
 
 // root.render(<App />);
-root.render(
-	<div>
-		<App />
-	</div>
-);
+root.render(<App />);

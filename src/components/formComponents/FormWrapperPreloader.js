@@ -9,13 +9,11 @@ const FormWrapperPreloader = (props = {}) => {
 				<span className="datatype">{dataType}</span>
 				{required && <span className="required">required</span>}
 			</div>
-			<div className="link">
-				<a
-					className="doclink"
-					href={docLink + "#" + name.toLowerCase()}
-					target="_blank"
-				></a>
-			</div>
+			<a
+				className="doclink"
+				href={docLink + "#" + name.toLowerCase()}
+				target="_blank"
+			></a>
 		</div>
 	);
 };

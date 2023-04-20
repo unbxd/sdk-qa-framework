@@ -16,6 +16,8 @@ const FormWrapper = (props = {}) => {
 		} = {},
 		updateFormData,
 		formData = {},
+		setFSCodeEditorData,
+		fsCodeEditorData,
 	} = props;
 
 	const debounce = (callback, wait) => {
@@ -41,7 +43,7 @@ const FormWrapper = (props = {}) => {
 							selectedVal = objData[name].value;
 						} else if (dataType === "boolean") {
 							for (let option of options) {
-								if (option.id === parseInt(objData[name])) {
+								if (option.value === objData[name]) {
 									selectedVal = option.value;
 								}
 							}
@@ -80,12 +82,15 @@ const FormWrapper = (props = {}) => {
 			{config.map((conf, index) => {
 				return (
 					<FormConfigWrapper
+						fsCodeEditorData={fsCodeEditorData}
+						setFSCodeEditorData={setFSCodeEditorData}
 						moduleKey={moduleKey}
 						formData={formData}
 						key={index}
 						docLink={docLink}
 						attrConfig={conf}
-						onChange={delayChange}
+						delayChange={delayChange}
+						// onChange={delayChange}
 						onCodeChange={delayChange}
 					/>
 				);

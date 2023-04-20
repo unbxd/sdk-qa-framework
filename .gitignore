@@ -1,6 +1,5 @@
 node_modules
 .DS_Store
-demo.js
-demo.json
-demo.txt
+demo.*
+
 /src/inputJson/dummyMadrasLink2.json

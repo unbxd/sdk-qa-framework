@@ -10,6 +10,8 @@ const DashboardContent = (props) => {
 
 	const hideConfigTab = () => {
 		setViewConfigTab(false);
+		// document.querySelector(".formBuilder").style.display = "none";
+		// document.querySelector(".demoSite").style.width = "100%";
 	};
 	const showConfigTab = () => {
 		setViewConfigTab(true);
@@ -25,7 +27,7 @@ const DashboardContent = (props) => {
 				/>
 			)}
 			<div
-				className="vanilla2"
+				className="demoSite"
 				style={
 					viewConfigOption
 						? viewConfigTab

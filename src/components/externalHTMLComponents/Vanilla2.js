@@ -10,6 +10,14 @@ import useDeepCompareEffect from "use-deep-compare-effect";
 export default function Vanilla2(props) {
 	let { validatedConfig, filename, reloadWarning } = props;
 
+	// const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
+	// 	JSON.stringify(validatedConfig)
+	// )}`;
+	// const link = document.createElement("a");
+	// link.href = jsonString;
+	// link.download = "validatedConfig.json";
+	// link.click();
+
 	const { id } = useParams();
 
 	useEffect(() => {
@@ -301,50 +309,81 @@ export default function Vanilla2(props) {
 				"<link rel='stylesheet' href='https://libraries.unbxdapi.com/search-sdk/v2.0.5/vanillaSearch.min.css'/>" +
 				"<link rel='stylesheet' type='text/css' href='unbxdStyle.css' />" +
 				"</head>" +
-				"<body class='{{langCSS}}'>" +
-				"<div class='search-preview'>" +
-				"<div class='UNX-results-container'>" +
-				"<div class='UNX-head-wrapper'>" +
-				"<div class='UNX-selected-actions'>" +
-				"<div class='UNX-bread-wrapper' id='breadcrumpContainer'></div>" +
-				"<div class='UNX-selected-facet-wrapper' id='selectedFacetWrapper'></div>" +
-				"</div>" +
-				"</div>" +
-				"<div class='UNX-product-results'>" +
-				"<div class='UNX-facet-wrapper'>" +
-				"<h2 class='UNX-filter-header'>Filter By</h2>" +
-				"<div class='UNX-fxd-facet'>" +
-				"<div class='UNX-selected-facet-wrapper UNX-selected-f-m' id='selectedMFacetWrapper'></div>" +
-				"<div class='UNX-text-facet-block' id='facetsWrapper'></div>" +
-				"<div class='UNX-m-facet-row'>" +
-				"<button data-action='applyFacets' class='UNX-primary-btn UNX-facet-trigger'>Apply</button>" +
-				"<button data-action='clearFacets' class='UNX-default-btn UNX-facet-trigger'>Clear</button>" +
-				"</div>" +
-				"</div>" +
-				"<div class='UNX-m-facet-row'>" +
-				"<button class='UNX-m-facet-btn UNX-facet-trigger fa fa-filter'></button>" +
-				"</div>" +
-				"</div>" +
-				"<div class='UNX-product-list'>" +
-				"<div id='didYouMeanWrapper'></div>" +
-				"<div class='UNX-result-header'>" +
-				"<div class='UNX-sort-wrapper' id='sortWrapper'></div>" +
-				"<div class='UNX-result-right'>" +
-				"<div class='UNX-change-products' id='changeNoOfProducts'></div>" +
-				"<div id='' class='UNX-change-pagination-wrap unxPagination'></div>" +
-				"<div class='UNX-product-type-block' id='productViewTypeContainer'></div>" +
-				"</div>" +
-				"</div>" +
-				"<div id='bannerContainer'></div>" +
-				"<div class='UNX-product-wrapper' id='searchResultsWrapper'></div>" +
-				"<div id='' class='UNX-change-pagination-wrap UNX-m-page unxPagination'></div>" +
-				"</div>" +
-				"</div>" +
-				"<div class='UNX-loader-container' id='loaderEl'></div>" +
-				"<div id='noResultWrapper'></div>" +
-				"<div id='clickScrollContainer'>" +
-				"</div>" +
-				"</div>" +
+				"  <body>" +
+				"    <div class='UNX-header'>" +
+				"      <div class='UNX-header-inner'>" +
+				"        <div class='UNX-logo'>" +
+				"        </div>" +
+				"        <div class='UNX-input-wrapper'>" +
+				"          <input id='unbxdInput' class='UNX-input' autocomplete='off'/>" +
+				"          <button id='searchBtn' class='fa fa-search UNX-search-btn'></button>" +
+				"        </div>" +
+				"      </div>" +
+				"    </div>" +
+				"    <div class='UNX-results-container'>" +
+				"      <div class='UNX-head-wrapper'>" +
+				"        <div class='UNX-selected-actions'>" +
+				"          <div class='UNX-bread-wrapper' id='breadcrumpContainer'></div>" +
+				"          <div" +
+				"            class='UNX-selected-facet-wrapper'" +
+				"            id='selectedFacetWrapper'" +
+				"          ></div>" +
+				"        </div>" +
+				// "        <div class='UNX-product-type-block' id='productViewTypeContainer'></div>" +
+				"      </div>" +
+				"      <div class='UNX-product-results'>" +
+				"        <div class='UNX-facet-wrapper'>" +
+				"          <h2 class='UNX-filter-header'>Filter By</h2>" +
+				"          <div class='UNX-fxd-facet'>" +
+				"            <div" +
+				"              class='UNX-selected-facet-wrapper UNX-selected-f-m'" +
+				"              id='selectedMFacetWrapper'" +
+				"            ></div>" +
+				"            <div class='UNX-multilevel-block' id='bucketedFacetWrapper'></div>" +
+				"            <div class='UNX-text-facet-block' id='facetsWrapper'></div>" +
+				"            <div class='UNX-range-block' id='rangeFacetWrapper'></div>" +
+				"            <div class='UNX-m-facet-row'>" +
+				"              <button" +
+				"                data-action='applyFacets'" +
+				"                class='UNX-primary-btn UNX-facet-trigger'" +
+				"              >" +
+				"                Apply" +
+				"              </button>" +
+				"              <button" +
+				"                data-action='clearFacets'" +
+				"                class='UNX-default-btn UNX-facet-trigger'" +
+				"              >" +
+				"                Clear" +
+				"              </button>" +
+				"            </div>" +
+				"          </div>" +
+				"          <div class='UNX-m-facet-row'>" +
+				"            <button" +
+				"              class='UNX-m-facet-btn UNX-facet-trigger fa fa-filter'" +
+				"            ></button>" +
+				"          </div>" +
+				"        </div>" +
+				"        <div class='UNX-product-list'>" +
+				"          <div class='UNX-result-header'>" +
+				"            <div id='didYouMeanWrapper'></div>" +
+				"            <div class='UNX-result-right'>" +
+				"              <div class='UNX-change-products' id='changeNoOfProducts'></div>" +
+				"              <div class='UNX-sort-wrapper' id='sortWrapper'></div>" +
+				"              <div id='' class='UNX-change-pagination-wrap unxPagination'></div>" +
+				"        <div class='UNX-product-type-block' id='productViewTypeContainer'></div>" +
+				"            </div>" +
+				"          </div>" +
+				"          <div id='bannerContainer'></div>" +
+				"          <div class='UNX-product-wrapper' id='searchResultsWrapper'></div>" +
+				"          <div" +
+				"            id=''" +
+				"            class='UNX-change-pagination-wrap UNX-m-page unxPagination'" +
+				"          ></div>" +
+				"        </div>" +
+				"      </div>" +
+				"      <div class='UNX-loader-container' id='loaderEl'></div>" +
+				"      <div id='noResultWrapper'></div>" +
+				"      <div id='clickScrollContainer'></div>" +
 				"<div class='UNX-footer-main'>" +
 				"<div class='UNX-footer-container'>" +
 				"<div class='UNX-footer-features'>" +
@@ -422,13 +461,8 @@ export default function Vanilla2(props) {
 				"<p>In case of any concern, <a class='UNX-contact-link' href='#'>Contact Us</a></p>" +
 				"</div>" +
 				"</div>" +
-				"</div>" +
-				"<script>" +
-				"var date = new Date();" +
-				"var year = date.getFullYear();" +
-				"document.getElementsByClassName('year')[0].innerHTML = year;" +
-				"</script>" +
-				"</body>" +
+				"    </div>" +
+				"  </body>" +
 				"<!-- Unbxd SDK dependency libraries: jQuery, jQuery UI & Handlebars -->" +
 				"<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>" +
 				"<script type='text/javascript' src='https://libraries.unbxdapi.com/sdk-assets/jquery.ui.widget.js'></script>" +
@@ -447,7 +481,7 @@ export default function Vanilla2(props) {
 	};
 
 	return (
-		<div>
+		<div className="vanilla2">
 			<div dangerouslySetInnerHTML={createMarkup()}></div>
 		</div>
 	);

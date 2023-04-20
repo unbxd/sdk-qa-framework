@@ -24,12 +24,12 @@
 				{
 					"id": 1,
 					"name": "True",
-					"value": "true"
+					"value": true
 				},
 				{
 					"id": 2,
 					"name": "False",
-					"value": "false"
+					"value": false
 				}
 			]
 		},
@@ -92,12 +92,12 @@
 				{
 					"id": 1,
 					"name": "True",
-					"value": "true"
+					"value": true
 				},
 				{
 					"id": 2,
 					"name": "False",
-					"value": "false"
+					"value": false
 				}
 			]
 		},
@@ -136,12 +136,12 @@
 				{
 					"id": 1,
 					"name": "True",
-					"value": "true"
+					"value": true
 				},
 				{
 					"id": 2,
 					"name": "False",
-					"value": "false"
+					"value": false
 				}
 			]
 		},
@@ -160,12 +160,12 @@
 				{
 					"id": 1,
 					"name": "True",
-					"value": "true"
+					"value": true
 				},
 				{
 					"id": 2,
 					"name": "False",
-					"value": "false"
+					"value": false
 				}
 			]
 		},
@@ -180,12 +180,12 @@
 				{
 					"id": 1,
 					"name": "True",
-					"value": "true"
+					"value": true
 				},
 				{
 					"id": 2,
 					"name": "False",
-					"value": "false"
+					"value": false
 				}
 			]
 		},
@@ -200,12 +200,12 @@
 				{
 					"id": 1,
 					"name": "True",
-					"value": "true"
+					"value": true
 				},
 				{
 					"id": 2,
 					"name": "False",
-					"value": "false"
+					"value": false
 				}
 			]
 		},

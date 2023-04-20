@@ -9,13 +9,13 @@
 			"options": [
 				{
 					"id": 1,
-					"name": "true",
-					"value": "true"
+					"name": "True",
+					"value": true
 				},
 				{
 					"id": 2,
-					"name": "false",
-					"value": "false"
+					"name": "False",
+					"value": false
 				}
 			]
 		},
@@ -25,13 +25,13 @@
 			"options": [
 				{
 					"id": 1,
-					"name": "true",
-					"value": "true"
+					"name": "True",
+					"value": true
 				},
 				{
 					"id": 2,
-					"name": "false",
-					"value": "false"
+					"name": "False",
+					"value": false
 				}
 			]
 		},
@@ -41,13 +41,13 @@
 			"options": [
 				{
 					"id": 1,
-					"name": "true",
-					"value": "true"
+					"name": "True",
+					"value": true
 				},
 				{
 					"id": 2,
-					"name": "false",
-					"value": "false"
+					"name": "False",
+					"value": false
 				}
 			]
 		},
@@ -65,13 +65,13 @@
 			"options": [
 				{
 					"id": 1,
-					"name": "true",
-					"value": "true"
+					"name": "True",
+					"value": true
 				},
 				{
 					"id": 2,
-					"name": "false",
-					"value": "false"
+					"name": "False",
+					"value": false
 				}
 			]
 		},

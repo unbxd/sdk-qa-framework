@@ -4,7 +4,8 @@ import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import "unbxd-react-components/components/theme.css";
 import "unbxd-react-components/components/core.css";
 import "../public/styles/components/form/form.scss";
-import "../public/styles/components/vanilla2/vanilla2.scss";
+// import "../public/styles/components/vanilla2/vanilla2.scss";
+// import "../public/styles/components/dashboard/header.scss";
 import "../public/styles/components/general.scss";
 // import "../public/styles/components/vanilla2.scss";
 
