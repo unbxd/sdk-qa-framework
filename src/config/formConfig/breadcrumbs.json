@@ -30,7 +30,7 @@
 		},
 		{
 			"name": "selectorClass",
-			"dataType": "strng"
+			"dataType": "string"
 		},
 		{
 			"name": "tagName",

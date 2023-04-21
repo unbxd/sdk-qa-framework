@@ -45,6 +45,7 @@ export default function Vanilla2(props) {
 							}
 						}
 					},
+					onError: function (err) {},
 					searchBoxEl: validatedConfig.searchBoxEl,
 					searchTrigger: "click",
 					searchButtonEl: validatedConfig.searchButtonEl,

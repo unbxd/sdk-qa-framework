@@ -376,7 +376,7 @@ body {
 
 	.moreOptionsDropdown {
 		position: absolute;
-		z-index: 1;
+		z-index: 3;
 		background-color: #fff;
 		bottom: -15px;
 		left: 40px;
@@ -777,8 +777,13 @@ body {
 	align-items: center;
 }
 
+.confirmModal {
+	z-index: 4;
+}
+
 .configModal,
 .editorModal {
+	z-index: 4;
 	.RCB-modal-body {
 		width: 80%;
 	}

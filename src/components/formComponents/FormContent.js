@@ -6,7 +6,7 @@ import { darculaInit } from "@uiw/codemirror-theme-darcula";
 import { tags as t } from "@lezer/highlight";
 import { javascript } from "@codemirror/lang-javascript";
 
-import { getModuleConfigs } from "../../utils/configUtils";
+import { getEleDataType, getModuleConfigs } from "../../utils/configUtils";
 import defaultConfig from "../../inputJson/dummyMadrasLinkOld.json";
 import { Button, Modal, Input } from "unbxd-react-components";
 import CustomDrop from "./formElements/CustomDrop";
@@ -88,7 +88,43 @@ const FormContent = (props = {}) => {
 		}
 	};
 
-	let newValidator = () => {
+	const evalEleArr = (value, moduleKey, element) => {
+		try {
+			return eval(value);
+		} catch (error) {
+			console.warn("element:", moduleKey, element, error);
+			return null;
+		}
+	};
+
+	const evalFunc = (value, moduleKey, element) => {
+		try {
+			return eval("(" + value + ")");
+		} catch (error) {
+			console.warn("function:", `${moduleKey} > ${element}`, error);
+			return null;
+		}
+	};
+
+	const evalNum = (value, moduleKey, element) => {
+		try {
+			return parseInt(value);
+		} catch (error) {
+			console.warn("number:", moduleKey, element, error);
+			return null;
+		}
+	};
+
+	const evalObj = (value, moduleKey, element) => {
+		try {
+			return JSON.parse(value);
+		} catch (error) {
+			console.warn("object:", moduleKey, element, error);
+			return null;
+		}
+	};
+
+	let validator = () => {
 		JSON.stringify(
 			{ ...formData },
 			function (index, value) {
@@ -97,151 +133,204 @@ const FormContent = (props = {}) => {
 					let moduleConfig = getModuleConfigs(moduleKey);
 					let formConfig = formData[moduleKey];
 					// console.log(`${moduleKey}:`, moduleConfig);
-					// console.log(validatedData);
 
 					if (!moduleConfig) {
-						console.log(moduleKey, "has no config.");
-						try {
-							let evaluatedVal = eval(formConfig);
-							validatedData[moduleKey] = evaluatedVal;
-						} catch (err) {
-							validatedData[moduleKey] = formConfig;
+						if (formConfig.length) {
+							// console.log(moduleKey, "has no config.");
+							try {
+								let evaluatedVal = eval(formConfig);
+								validatedData[moduleKey] = evaluatedVal;
+							} catch (err) {
+								validatedData[moduleKey] = formConfig;
+							}
 						}
 					} else {
 						// console.log(moduleKey, ":", moduleConfig);
-						console.log(formConfig);
+						// console.log(formConfig);
+						validatedData[moduleKey] = {};
 						for (let element in formConfig) {
-							console.log(moduleKey, element);
-						}
-					}
-				}
-			},
-			4
-		);
-	};
-
-	let validator = () => {
-		return JSON.stringify(
-			{ ...formData },
-			function (idx, value) {
-				for (let moduleKey in value) {
-					let moduleConfig = masterConfig[moduleKey];
-					let formConfig = formData[moduleKey];
-
-					if (!moduleConfig) {
-						try {
-							let evaluatedVal = eval(formConfig);
-							validatedData = {
-								...validatedData,
-								[moduleKey]: evaluatedVal,
-							};
-						} catch (err) {
-							validatedData = {
-								...validatedData,
-								[moduleKey]: formConfig,
-							};
-						}
-					} else {
-						// validatedData = {
-						// 	...validatedData,
-						// 	[moduleKey]: { ...formConfig },
-						// };
-						validatedData[moduleKey] = { ...formConfig }; // need not mutate - check
-
-						for (let element in formConfig) {
-							for (let index in moduleConfig) {
-								const eleConfig = moduleConfig[index];
-
-								if (eleConfig["name"] === element) {
-									const eleDataType = eleConfig["dataType"];
-
-									// based on dataType do the required
-									if (eleDataType === "element" || eleDataType === "array") {
-										try {
-											const eleVal = formConfig[element];
-											if (eleVal) {
-												let valModuleConfig = {
-													...validatedData[moduleKey],
-													[element]: eval(eleVal),
-												};
-												validatedData = {
-													...validatedData,
-													[moduleKey]: { ...valModuleConfig },
-												};
-											}
-										} catch (error) {
-											console.log("element:", moduleKey, element, error);
-										}
-									} else if (eleDataType === "boolean") {
-										try {
-											const eleVal = formConfig[element];
-											if (eleVal) {
-												let valModuleConfig = {
-													...validatedData[moduleKey],
-													[element]: eval(eleVal),
-												};
-												validatedData = {
-													...validatedData,
-													[moduleKey]: { ...valModuleConfig },
-												};
-											}
-										} catch (error) {
-											console.log("boolean:", moduleKey, element, error);
-										}
-									} else if (eleDataType === "number") {
-										const eleVal = formConfig[element];
-										if (eleVal) {
-											let valModuleConfig = {
-												...validatedData[moduleKey],
-												[element]: parseInt(eleVal),
-											};
-											validatedData = {
-												...validatedData,
-												[moduleKey]: { ...valModuleConfig },
-											};
-										}
-									} else if (eleDataType === "object") {
-										try {
-											const eleVal = formConfig[element];
-											if (eleVal) {
-												let valModuleConfig = {
-													...validatedData[moduleKey],
-													[element]: JSON.parse(eleVal),
-												};
-												validatedData = {
-													...validatedData,
-													[moduleKey]: { ...valModuleConfig },
-												};
-											}
-										} catch (error) {
-											console.log("object:", moduleKey, element, error);
-										}
-									} else if (eleDataType === "function") {
-										try {
-											let evaluatedVal = eval("(" + formConfig[element] + ")");
-											let valModuleConfig = {
-												...validatedData[moduleKey],
-												[element]: evaluatedVal,
-											};
-											validatedData = {
-												...validatedData,
-												[moduleKey]: { ...valModuleConfig },
-											};
-										} catch (error) {
-											console.log("function:", moduleKey, element, error);
-										}
-									}
+							if (formConfig[element].length) {
+								const dataType = getEleDataType(moduleKey, element);
+								switch (dataType) {
+									case "element":
+										// console.log("The element is of type(element).");
+										validatedData[moduleKey][element] = eval(
+											formConfig[element]
+										);
+										break;
+									case "function":
+										// console.log("The element is of type(function).");
+										validatedData[moduleKey][element] = eval(
+											"(" + formConfig[element] + ")"
+										);
+										// validatedData[moduleKey][element] = evalFunc(
+										// 	formConfig[element],
+										// 	moduleKey,
+										// 	element
+										// );
+										break;
+									case "number":
+										// console.log("The element is of type(number).");
+										validatedData[moduleKey][element] = parseInt(
+											formConfig[element]
+										);
+										break;
+									case "object":
+										// console.log("The element is of type(object).");
+										validatedData[moduleKey][element] = JSON.parse(
+											formConfig[element]
+										);
+										break;
+									case "array":
+										// console.log("The element is of type(array).");
+										validatedData[moduleKey][element] = eval(
+											formConfig[element]
+										);
+										break;
+									case "boolean":
+										// console.log("The element is of type(boolean).");
+										validatedData[moduleKey][element] = eval(
+											formConfig[element]
+										);
+										break;
+									default:
+										// console.log("The element is of type(string).");
+										validatedData[moduleKey][element] = formConfig[element];
+										break;
 								}
+								// console.log(moduleKey, element, formConfig[element], dataType);
 							}
 						}
 					}
 				}
-				setValidatedConfig({ ...validatedData });
-				console.log("validatedData:", validatedData);
+				setValidatedConfig(validatedData);
 			},
 			4
 		);
 	};
+
+	// let validator = () => {
+	// 	return JSON.stringify(
+	// 		{ ...formData },
+	// 		function (idx, value) {
+	// 			for (let moduleKey in value) {
+	// 				let moduleConfig = masterConfig[moduleKey];
+	// 				let formConfig = formData[moduleKey];
+
+	// 				if (!moduleConfig) {
+	// 					try {
+	// 						let evaluatedVal = eval(formConfig);
+	// 						validatedData = {
+	// 							...validatedData,
+	// 							[moduleKey]: evaluatedVal,
+	// 						};
+	// 					} catch (err) {
+	// 						validatedData = {
+	// 							...validatedData,
+	// 							[moduleKey]: formConfig,
+	// 						};
+	// 					}
+	// 				} else {
+	// 					// validatedData = {
+	// 					// 	...validatedData,
+	// 					// 	[moduleKey]: { ...formConfig },
+	// 					// };
+	// 					validatedData[moduleKey] = { ...formConfig }; // need not mutate - check
+
+	// 					for (let element in formConfig) {
+	// 						for (let index in moduleConfig) {
+	// 							const eleConfig = moduleConfig[index];
+
+	// 							if (eleConfig["name"] === element) {
+	// 								const eleDataType = eleConfig["dataType"];
+
+	// 								// based on dataType do the required
+	// 								if (eleDataType === "element" || eleDataType === "array") {
+	// 									try {
+	// 										const eleVal = formConfig[element];
+	// 										if (eleVal) {
+	// 											let valModuleConfig = {
+	// 												...validatedData[moduleKey],
+	// 												[element]: eval(eleVal),
+	// 											};
+	// 											validatedData = {
+	// 												...validatedData,
+	// 												[moduleKey]: { ...valModuleConfig },
+	// 											};
+	// 										}
+	// 									} catch (error) {
+	// 										console.log("element:", moduleKey, element, error);
+	// 									}
+	// 								} else if (eleDataType === "boolean") {
+	// 									try {
+	// 										const eleVal = formConfig[element];
+	// 										if (eleVal) {
+	// 											let valModuleConfig = {
+	// 												...validatedData[moduleKey],
+	// 												[element]: eval(eleVal),
+	// 											};
+	// 											validatedData = {
+	// 												...validatedData,
+	// 												[moduleKey]: { ...valModuleConfig },
+	// 											};
+	// 										}
+	// 									} catch (error) {
+	// 										console.log("boolean:", moduleKey, element, error);
+	// 									}
+	// 								} else if (eleDataType === "number") {
+	// 									const eleVal = formConfig[element];
+	// 									if (eleVal) {
+	// 										let valModuleConfig = {
+	// 											...validatedData[moduleKey],
+	// 											[element]: parseInt(eleVal),
+	// 										};
+	// 										validatedData = {
+	// 											...validatedData,
+	// 											[moduleKey]: { ...valModuleConfig },
+	// 										};
+	// 									}
+	// 								} else if (eleDataType === "object") {
+	// 									try {
+	// 										const eleVal = formConfig[element];
+	// 										if (eleVal) {
+	// 											let valModuleConfig = {
+	// 												...validatedData[moduleKey],
+	// 												[element]: JSON.parse(eleVal),
+	// 											};
+	// 											validatedData = {
+	// 												...validatedData,
+	// 												[moduleKey]: { ...valModuleConfig },
+	// 											};
+	// 										}
+	// 									} catch (error) {
+	// 										console.log("object:", moduleKey, element, error);
+	// 									}
+	// 								} else if (eleDataType === "function") {
+	// 									try {
+	// 										let evaluatedVal = eval("(" + formConfig[element] + ")");
+	// 										let valModuleConfig = {
+	// 											...validatedData[moduleKey],
+	// 											[element]: evaluatedVal,
+	// 										};
+	// 										validatedData = {
+	// 											...validatedData,
+	// 											[moduleKey]: { ...valModuleConfig },
+	// 										};
+	// 									} catch (error) {
+	// 										console.log("function:", moduleKey, element, error);
+	// 									}
+	// 								}
+	// 							}
+	// 						}
+	// 					}
+	// 				}
+	// 			}
+	// 			setValidatedConfig({ ...validatedData });
+	// 			console.log("validatedData:", validatedData);
+	// 		},
+	// 		4
+	// 	);
+	// };
 
 	let showContent = (i) => {
 		if (selectedAcc == i) {
@@ -548,9 +637,9 @@ const FormContent = (props = {}) => {
 							id="jsonCode"
 							className="jsonCode"
 							// value={JSON.stringify(jsonData, null, 4)}
-							// value={jsonData}
+							value={jsonData}
 							// value={jsonData.replace(/\\t|\\n/gim, "").replace(/\\"/gim, "'")}
-							value={jsonData.replace(/\\t|\\n/gim, "").replace(/\\"/gim, "'")}
+							// value={jsonData.replace(/\\t|\\n/gim, "").replace(/\\"/gim, "'")}
 							// theme={darculaInit({
 							// 	settings: {
 							// 		caret: "#c6c6c6",

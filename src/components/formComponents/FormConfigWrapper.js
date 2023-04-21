@@ -66,7 +66,7 @@ const FormConfigWrapper = (props = {}) => {
 						docLink={docLink}
 					/> */}
 					<Modal
-						title={`Edit Code for: ${moduleKey}.${name}`}
+						title={`${moduleKey} > ${name}`}
 						ref={viewCodeEditorRef}
 						showClose={true}
 						className="editorModal"

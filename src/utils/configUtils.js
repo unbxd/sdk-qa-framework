@@ -79,7 +79,7 @@ export const getEleDataType = (moduleName, eleName) => {
 	const moduleConfigs = getModuleConfigs(moduleName);
 	for (let key of moduleConfigs) {
 		if (key.name === eleName) {
-			console.log("getDataType:", moduleName, eleName, key.dataType);
+			// console.log("getDataType:", moduleName, eleName, key.dataType);
 			return key.dataType;
 		}
 	}
