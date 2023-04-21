@@ -16,6 +16,7 @@ const DashboardHeader = (props) => {
 			{viewConfigOption && (
 				<div className="userConfigs">
 					<a
+						className="version"
 						href="https://unbxd.github.io/search-JS-library/docs/CHANGELOG.html#v2030"
 						target="_blank"
 					>

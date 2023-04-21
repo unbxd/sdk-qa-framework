@@ -4,7 +4,7 @@ import { darculaInit } from "@uiw/codemirror-theme-darcula";
 import { tags as t } from "@lezer/highlight";
 import { javascript } from "@codemirror/lang-javascript";
 
-import { getConfig } from "../../utils/getConfig";
+import { getConfig } from "../../utils/configUtils";
 import CustomDrop from "./formElements/CustomDrop";
 import CustomInput from "./formElements/CustomInput";
 import CustomRadio from "./formElements/CustomRadio";

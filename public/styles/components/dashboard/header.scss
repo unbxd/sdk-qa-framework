@@ -48,8 +48,21 @@
 	.userConfigs {
 		display: flex;
 		justify-content: flex-end;
+		align-items: center;
 		width: 40%;
 		margin-right: 20px;
+
+		.version {
+			color: #000;
+			background-color: #fff;
+			border: 1px solid cornflowerblue;
+			padding: 5px 10px;
+			border-radius: 20px;
+
+			&:hover {
+				color: #000;
+			}
+		}
 
 		a {
 			margin-left: 20px;

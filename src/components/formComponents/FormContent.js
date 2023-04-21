@@ -5,6 +5,8 @@ import CodeMirror from "@uiw/react-codemirror";
 import { darculaInit } from "@uiw/codemirror-theme-darcula";
 import { tags as t } from "@lezer/highlight";
 import { javascript } from "@codemirror/lang-javascript";
+
+import { getModuleConfigs } from "../../utils/configUtils";
 import defaultConfig from "../../inputJson/dummyMadrasLinkOld.json";
 import { Button, Modal, Input } from "unbxd-react-components";
 import CustomDrop from "./formElements/CustomDrop";
@@ -84,6 +86,38 @@ const FormContent = (props = {}) => {
 			setFormData({ ...formData, ...data });
 			setJsonData(JSON.stringify({ ...formData, ...data }), null, 4);
 		}
+	};
+
+	let newValidator = () => {
+		JSON.stringify(
+			{ ...formData },
+			function (index, value) {
+				let validatedData = {};
+				for (let moduleKey in value) {
+					let moduleConfig = getModuleConfigs(moduleKey);
+					let formConfig = formData[moduleKey];
+					// console.log(`${moduleKey}:`, moduleConfig);
+					// console.log(validatedData);
+
+					if (!moduleConfig) {
+						console.log(moduleKey, "has no config.");
+						try {
+							let evaluatedVal = eval(formConfig);
+							validatedData[moduleKey] = evaluatedVal;
+						} catch (err) {
+							validatedData[moduleKey] = formConfig;
+						}
+					} else {
+						// console.log(moduleKey, ":", moduleConfig);
+						console.log(formConfig);
+						for (let element in formConfig) {
+							console.log(moduleKey, element);
+						}
+					}
+				}
+			},
+			4
+		);
 	};
 
 	let validator = () => {
@@ -411,7 +445,10 @@ const FormContent = (props = {}) => {
 					</button>
 					<button
 						id="applyBtn"
-						onClick={() => validator()}
+						onClick={() => {
+							// newValidator();
+							validator();
+						}}
 						className="RCB-btn-primary"
 						// disabled={true}
 					>
@@ -511,7 +548,9 @@ const FormContent = (props = {}) => {
 							id="jsonCode"
 							className="jsonCode"
 							// value={JSON.stringify(jsonData, null, 4)}
-							value={jsonData}
+							// value={jsonData}
+							// value={jsonData.replace(/\\t|\\n/gim, "").replace(/\\"/gim, "'")}
+							value={jsonData.replace(/\\t|\\n/gim, "").replace(/\\"/gim, "'")}
 							// theme={darculaInit({
 							// 	settings: {
 							// 		caret: "#c6c6c6",
@@ -525,6 +564,7 @@ const FormContent = (props = {}) => {
 							extensions={[javascript({ json: true })]}
 							onChange={(code) => {
 								try {
+									console.log(code);
 									setJsonData(code);
 									// setJsonData(eval("(" + code + ")"));
 								} catch (err) {

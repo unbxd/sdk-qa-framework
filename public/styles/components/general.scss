@@ -365,6 +365,7 @@ body {
 				width: 100%;
 
 				.doclink {
+					z-index: 1;
 					display: flex;
 					text-decoration: none;
 					@include info-icon-grayscale;
@@ -471,7 +472,7 @@ body {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		z-index: 0;
+		z-index: 2;
 
 		.moreOptionsIcon {
 			background-image: url("https://static.thenounproject.com/png/2854151-200.png");

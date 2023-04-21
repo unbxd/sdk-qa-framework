@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form } from "unbxd-react-components";
 import FormConfigWrapper from "./FormConfigWrapper";
-import { getConfig } from "../../utils/getConfig";
+import { getConfig } from "../../utils/configUtils";
 
 const FormWrapper = (props = {}) => {
 	const DEBOUNCE_DELAY = 400;
@@ -31,6 +31,7 @@ const FormWrapper = (props = {}) => {
 	};
 
 	const onChange = (obj = {}) => {
+		// console.log("data:", obj.data);
 		let objData = obj.data || {};
 		try {
 			for (let key in objData) {
