@@ -1275,15 +1275,19 @@ input[id^="likeBtn"]:checked ~ .UNX-favourite {
 
 @media only screen and (max-width: 1440px) {
   .UNX-result-wrapper {
-    grid-template-columns: 24% 24% 24% 24%;
-    grid-column-gap: 1%;
+    grid-template-columns: 30% 30% 30%;
+    grid-column-gap: 3%;
+    /* grid-template-columns: 24% 24% 24% 24%;
+    grid-column-gap: 1%; */
   }
 }
 
 @media only screen and (max-width: 1440px) {
   .UNX-result-wrapper {
-    grid-template-columns: 24% 24% 24% 24%;
-    grid-column-gap: 1%;
+    grid-template-columns: 30% 30% 30%;
+    grid-column-gap: 3%;
+    /* grid-template-columns: 24% 24% 24% 24%;
+    grid-column-gap: 1%; */
   }
 }
 

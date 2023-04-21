@@ -66,7 +66,7 @@ const FormConfigWrapper = (props = {}) => {
 						docLink={docLink}
 					/> */}
 					<Modal
-						title="Edit Code"
+						title={`Edit Code for: ${moduleKey}.${name}`}
 						ref={viewCodeEditorRef}
 						showClose={true}
 						className="editorModal"
@@ -104,7 +104,7 @@ const FormConfigWrapper = (props = {}) => {
 									viewCodeEditorRef.current.hideModal();
 								}}
 							>
-								Close
+								Update
 							</Button>
 						</div>
 					</Modal>

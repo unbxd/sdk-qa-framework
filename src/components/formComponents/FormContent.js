@@ -14,18 +14,16 @@ const FormContent = (props = {}) => {
 		viewConfigTab,
 		setValidatedConfig,
 		hideConfigTab,
-		showConfigTab,
 		selectedAcc,
 		setSelectedAcc,
 		formConfigs,
 	} = props;
+
 	let masterConfig = {};
 	let validatedData = {};
 	const [formData, setFormData] = useState(defaultConfig);
-	const [jsonData, setJsonData] = useState(formData);
+	const [jsonData, setJsonData] = useState(JSON.stringify(formData, null, 4));
 	const [fsCodeEditorData, setFSCodeEditorData] = useState(null);
-
-	// console.log("formData:", formData);
 
 	const confirmModalRef = useRef();
 	const viewJSONModalRef = useRef();
@@ -45,7 +43,7 @@ const FormContent = (props = {}) => {
 			}
 		});
 	};
-	updateMasterConfig(formConfigs);
+	updateMasterConfig(formConfigs); // this should be inside a hooks
 
 	document.onclick = myClickHandler;
 
@@ -72,8 +70,19 @@ const FormContent = (props = {}) => {
 				...formData,
 				[moduleKey]: { ...formData[moduleKey], ...data },
 			});
+			setJsonData(
+				JSON.stringify(
+					{
+						...formData,
+						[moduleKey]: { ...formData[moduleKey], ...data },
+					},
+					null,
+					4
+				)
+			);
 		} else {
 			setFormData({ ...formData, ...data });
+			setJsonData(JSON.stringify({ ...formData, ...data }), null, 4);
 		}
 	};
 
@@ -99,10 +108,11 @@ const FormContent = (props = {}) => {
 							};
 						}
 					} else {
-						validatedData = {
-							...validatedData,
-							[moduleKey]: { ...formConfig },
-						};
+						// validatedData = {
+						// 	...validatedData,
+						// 	[moduleKey]: { ...formConfig },
+						// };
+						validatedData[moduleKey] = { ...formConfig }; // need not mutate - check
 
 						for (let element in formConfig) {
 							for (let index in moduleConfig) {
@@ -282,27 +292,16 @@ const FormContent = (props = {}) => {
 		let encodedData;
 		let fileReader = new FileReader();
 		fileReader.readAsDataURL(jsonFile);
-		if (e.target.className == "byModal") {
-			console.log("className is byModal");
-			fileReader.onload = (e) => {
-				encodedData = e.target.result.replace(
-					"data:application/json;base64,",
-					""
-				);
-				setJsonData(JSON.parse(window.atob(encodedData)));
-				setSelectedAcc(null);
-			};
-		} else {
-			fileReader.onload = (e) => {
-				encodedData = e.target.result.replace(
-					"data:application/json;base64,",
-					""
-				);
-				setJsonData(JSON.parse(window.atob(encodedData)));
-				setFormData(JSON.parse(window.atob(encodedData)));
-				setSelectedAcc(null);
-			};
-		}
+		fileReader.onload = (e) => {
+			encodedData = e.target.result.replace(
+				"data:application/json;base64,",
+				""
+			);
+			setJsonData(window.atob(encodedData));
+			// setJsonData(JSON.parse(window.atob(encodedData)));
+			setFormData(JSON.parse(window.atob(encodedData)));
+			setSelectedAcc(null);
+		};
 	};
 
 	return (
@@ -356,6 +355,7 @@ const FormContent = (props = {}) => {
 					<div
 						className="viewCode"
 						onClick={() => {
+							setSelectedAcc(null);
 							viewJSONModalRef.current.showModal();
 						}}
 					>
@@ -437,7 +437,8 @@ const FormContent = (props = {}) => {
 								className="cancel"
 								onClick={() => {
 									setPublishPopUp(false);
-									setJsonData(formData);
+									setJsonData(JSON.stringify(formData, null, 4));
+									// setJsonData(formData);
 									confirmModalRef.current.hideModal();
 								}}
 							>
@@ -499,7 +500,7 @@ const FormContent = (props = {}) => {
 				)}
 			</Modal>
 			<Modal
-				title="JSON Code"
+				title="Configurations Code"
 				ref={viewJSONModalRef}
 				showClose={true}
 				className="configModal"
@@ -509,7 +510,8 @@ const FormContent = (props = {}) => {
 						<CodeMirror
 							id="jsonCode"
 							className="jsonCode"
-							value={JSON.stringify(jsonData, null, 4)}
+							// value={JSON.stringify(jsonData, null, 4)}
+							value={jsonData}
 							// theme={darculaInit({
 							// 	settings: {
 							// 		caret: "#c6c6c6",
@@ -522,9 +524,9 @@ const FormContent = (props = {}) => {
 							width="100%"
 							extensions={[javascript({ json: true })]}
 							onChange={(code) => {
-								console.log("onCodeChange");
 								try {
-									setJsonData(eval("(" + code + ")"));
+									setJsonData(code);
+									// setJsonData(eval("(" + code + ")"));
 								} catch (err) {
 									console.log("onCodeChange:", err);
 								}
@@ -537,12 +539,13 @@ const FormContent = (props = {}) => {
 						appearance="link"
 						className="cancel"
 						onClick={() => {
+							setJsonData(JSON.stringify(formData, null, 4));
 							viewJSONModalRef.current.hideModal();
 						}}
 					>
 						Cancel
 					</Button>
-					<Button
+					{/* <Button
 						appearance="primary"
 						className="upload"
 						onClick={() => inputJSONFile.current.click()}
@@ -556,16 +559,16 @@ const FormContent = (props = {}) => {
 							ref={inputJSONFile}
 							style={{ display: "none" }}
 						/>
-					</Button>
+					</Button> */}
 					<Button
-						appearance="primary"
+						appearance="secondary"
 						className="download"
 						onClick={() => downloadJSON()}
 					>
 						Download
 					</Button>
 					<Button
-						appearance="primary"
+						appearance="secondary"
 						className="copy"
 						onClick={() => copyJSON()}
 					>
@@ -575,15 +578,15 @@ const FormContent = (props = {}) => {
 						appearance="primary"
 						className="update-json"
 						onClick={() => {
-							// console.log(
-							// 	"jsonData on update:",
-							// 	typeof jsonData,
-							// 	typeof JSON.stringify(jsonData, null, 4),
-							// 	JSON.stringify(jsonData, null, 4)
-							// );
-							setSelectedAcc(null);
-							setFormData(jsonData);
-							viewJSONModalRef.current.hideModal();
+							try {
+								setSelectedAcc(null);
+								setFormData(JSON.parse(jsonData));
+								viewJSONModalRef.current.hideModal();
+							} catch (err) {
+								alert(
+									"Seems like the format of the input configurations is not correct."
+								);
+							}
 						}}
 					>
 						Update

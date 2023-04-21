@@ -39,6 +39,13 @@
 	height: 17px;
 }
 
+@mixin info-icon-grayscale {
+	@extend .sprite;
+	background-position: -467px -167px;
+	width: 17px;
+	height: 17px;
+}
+
 @mixin info-icon-blue {
 	@extend .sprite;
 	background-position: -366px -365px;
