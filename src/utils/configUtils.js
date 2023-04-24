@@ -33,8 +33,8 @@ const masterConfig = {
 };
 
 const masterData = {
-	[authConfig["moduleKey"]]: authConfig,
-	[searchBoxConfig["moduleKey"]]: searchBoxConfig,
+	[authConfig["moduleName"]]: authConfig,
+	[searchBoxConfig["moduleName"]]: searchBoxConfig,
 	[productsConfig["moduleKey"]]: productsConfig,
 	[facetsConfig["moduleKey"]]: facetsConfig,
 	[paginationConfig["moduleKey"]]: paginationConfig,
@@ -50,7 +50,7 @@ const masterData = {
 	[loaderConfig["moduleKey"]]: loaderConfig,
 };
 
-console.log("masterData:", masterData);
+// console.log("masterData:", masterData);
 
 export const getAllConfigs = () => {
 	let allConfigs = {};
@@ -61,6 +61,15 @@ export const getAllConfigs = () => {
 	console.log("getAllConfigs:", allConfigs);
 	return allConfigs;
 };
+
+export const getAllConfigsList = () => {
+	let allConfigs = [];
+	for (let key in masterData) {
+		allConfigs.push(masterData[key]);
+	}
+	return allConfigs;
+};
+// getAllConfigsList();
 
 export const getModuleConfigs = (moduleKey) => {
 	try {

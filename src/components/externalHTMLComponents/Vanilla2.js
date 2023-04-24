@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-// import "../../../public/unbxdStyle.css";
 
 // import UnbxdSearch from  '@unbxd-ui/vanilla-search-library';
 import UnbxdSearch from "../../../../search-JS-library/src/index";
@@ -26,8 +25,6 @@ export default function Vanilla2(props) {
 		if (Object.keys(validatedConfig).length) {
 			if (UnbxdSearch) {
 				window.unbxdSearch = new UnbxdSearch({
-					siteKey: validatedConfig.siteKey,
-					apiKey: validatedConfig.apiKey,
 					hashMode: false,
 					updateUrls: true,
 					onEvent: function (instance, type, state) {
@@ -45,26 +42,31 @@ export default function Vanilla2(props) {
 							}
 						}
 					},
-					onError: function (err) {},
-					searchBoxEl: validatedConfig.searchBoxEl,
+					onError: function (err) {
+						console.log(err);
+					},
 					searchTrigger: "click",
-					searchButtonEl: validatedConfig.searchButtonEl,
+					...validatedConfig,
 					products: {
 						el: document.getElementById("searchResultsWrapper"),
 						productType: "SEARCH",
 					},
+					// siteKey: validatedConfig.siteKey,
+					// apiKey: validatedConfig.apiKey,
+					// searchBoxEl: validatedConfig.searchBoxEl,
+					// searchButtonEl: validatedConfig.searchButtonEl,
 					// products: validatedConfig.products,
-					facet: validatedConfig.facet,
-					pagesize: validatedConfig.pagesize,
-					sort: validatedConfig.sort,
-					productView: validatedConfig.productView,
-					spellCheck: validatedConfig.spellCheck,
-					loader: validatedConfig.loader,
-					swatches: validatedConfig.swatches,
-					noResults: validatedConfig.noResults,
-					pagination: validatedConfig.pagination,
-					breadcrumb: validatedConfig.breadcrumb,
-					banner: validatedConfig.banner,
+					// facet: validatedConfig.facet,
+					// pagesize: validatedConfig.pagesize,
+					// sort: validatedConfig.sort,
+					// productView: validatedConfig.productView,
+					// spellCheck: validatedConfig.spellCheck,
+					// loader: validatedConfig.loader,
+					// swatches: validatedConfig.swatches,
+					// noResults: validatedConfig.noResults,
+					// pagination: validatedConfig.pagination,
+					// breadcrumb: validatedConfig.breadcrumb,
+					// banner: validatedConfig.banner,
 					// variants: validatedConfig.variants,
 				});
 				console.log("Applied changes");

@@ -1,15 +1,11 @@
 import React, { useRef } from "react";
 import CodeMirror from "@uiw/react-codemirror";
-import { darculaInit } from "@uiw/codemirror-theme-darcula";
-import { tags as t } from "@lezer/highlight";
 import { javascript } from "@codemirror/lang-javascript";
 
 import { getConfig } from "../../utils/configUtils";
 import CustomDrop from "./formElements/CustomDrop";
 import CustomInput from "./formElements/CustomInput";
-import CustomRadio from "./formElements/CustomRadio";
 import CustomCheck from "./formElements/CustomCheck";
-import FormWrapperPreloader from "./FormWrapperPreloader";
 import { Modal, Button } from "unbxd-react-components";
 
 const FormConfigWrapper = (props = {}) => {
@@ -30,12 +26,6 @@ const FormConfigWrapper = (props = {}) => {
 		case "number": //text type(number)
 			return (
 				<div className="config">
-					{/* <FormWrapperPreloader
-						name={name}
-						dataType={dataType}
-						required={required}
-						docLink={docLink}
-					/> */}
 					<div className="doclinkWrapper">
 						<a
 							className="doclink"
@@ -59,12 +49,6 @@ const FormConfigWrapper = (props = {}) => {
 		case "array": //code
 			return (
 				<div className="config">
-					{/* <FormWrapperPreloader
-						name={name}
-						dataType={dataType}
-						required={required}
-						docLink={docLink}
-					/> */}
 					<Modal
 						title={`${moduleKey} > ${name}`}
 						ref={viewCodeEditorRef}
@@ -76,22 +60,13 @@ const FormConfigWrapper = (props = {}) => {
 								id="fsCodeEditor"
 								className="fsCodeEditor"
 								value={fsCodeEditorData}
-								// theme={darculaInit({
-								// 	settings: {
-								// 		caret: "#c6c6c6",
-								// 		fontFamily: "monospace",
-								// 	},
-								// 	styles: [{ tag: t.comment, color: "#6272a4" }],
-								// })}
 								placeholder="Insert code here..."
 								height="300px"
 								width="100%"
 								extensions={[javascript({ json: true })]}
 								onChange={(code) => {
 									console.log("onCodeChange");
-									// onCodeChange(name, code);
 									delayChange(name, code);
-									// setJsonData(eval("(" + code + ")"));
 								}}
 							/>
 						</div>
@@ -148,33 +123,8 @@ const FormConfigWrapper = (props = {}) => {
 				</div>
 			);
 		case "boolean": {
-			// let defaultVal;
-			// try {
-			// 	const config = getConfig(moduleKey, name);
-			// 	let options = config.options;
-			// 	for (let option of options) {
-			// 		if (option.value === formData[name]) {
-			// 			defaultVal = option;
-			// 			break;
-			// 		}
-			// 	}
-			// } catch (err) {}
-
 			return (
 				<div className="config">
-					{/* <FormWrapperPreloader
-						name={name}
-						dataType={dataType}
-						required={required}
-						docLink={docLink}
-					/> */}
-					{/* <CustomRadio
-						label={name}
-						name={name}
-						appearance="block"
-						defaultValue={defaultVal ? defaultVal.id : null}
-						options={options}
-					/> */}
 					<div className="doclinkWrapper">
 						<a
 							className="doclink"
@@ -198,12 +148,6 @@ const FormConfigWrapper = (props = {}) => {
 			if (options === undefined) {
 				return (
 					<div className="config">
-						{/* <FormWrapperPreloader
-							name={name}
-							dataType={dataType}
-							required={required}
-							docLink={docLink}
-						/> */}
 						<div className="doclinkWrapper">
 							<a
 								className="doclink"
@@ -231,12 +175,6 @@ const FormConfigWrapper = (props = {}) => {
 				}
 				return (
 					<div className="config">
-						{/* <FormWrapperPreloader
-							name={name}
-							dataType={dataType}
-							required={required}
-							docLink={docLink}
-						/> */}
 						<div className="doclinkWrapper">
 							<a
 								className="doclink"
