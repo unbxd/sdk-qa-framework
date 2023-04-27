@@ -22,7 +22,7 @@ const FormContent = (props = {}) => {
 	} = props;
 
 	let masterConfig = {};
-	let validatedData = {};
+	// let validatedData = {};
 	const [formData, setFormData] = useState(defaultConfig);
 	const [jsonData, setJsonData] = useState(JSON.stringify(formData, null, 4));
 	const [fsCodeEditorData, setFSCodeEditorData] = useState(null);
@@ -88,207 +88,223 @@ const FormContent = (props = {}) => {
 		}
 	};
 
-	// let validator = () => {
-	// 	JSON.stringify(
-	// 		{ ...formData },
-	// 		function (index, value) {
-	// 			let validatedData = {};
-	// 			for (let moduleKey in value) {
-	// 				let moduleConfig = getModuleConfigs(moduleKey);
-	// 				let formConfig = formData[moduleKey];
-	// 				// console.log(`${moduleKey}:`, moduleConfig);
-
-	// 				if (!moduleConfig) {
-	// 					if (formConfig.length) {
-	// 						// console.log(moduleKey, "has no config.");
-	// 						try {
-	// 							let evaluatedVal = eval(formConfig);
-	// 							validatedData[moduleKey] = evaluatedVal;
-	// 						} catch (err) {
-	// 							validatedData[moduleKey] = formConfig;
-	// 						}
-	// 					}
-	// 				} else {
-	// 					// console.log(moduleKey, ":", moduleConfig);
-	// 					// console.log(formConfig);
-	// 					validatedData[moduleKey] = {};
-	// 					for (let element in formConfig) {
-	// 						if (formConfig[element].length) {
-	// 							const dataType = getEleDataType(moduleKey, element);
-	// 							switch (dataType) {
-	// 								case "element":
-	// 									// console.log("The element is of type(element).");
-	// 									validatedData[moduleKey][element] = eval(
-	// 										formConfig[element]
-	// 									);
-	// 									break;
-	// 								case "function":
-	// 									// console.log("The element is of type(function).");
-	// 									validatedData[moduleKey][element] = eval(
-	// 										"(" + formConfig[element] + ")"
-	// 									);
-	// 									break;
-	// 								case "number":
-	// 									// console.log("The element is of type(number).");
-	// 									validatedData[moduleKey][element] = parseInt(
-	// 										formConfig[element]
-	// 									);
-	// 									break;
-	// 								case "object":
-	// 									// console.log("The element is of type(object).");
-	// 									validatedData[moduleKey][element] = JSON.parse(
-	// 										formConfig[element]
-	// 									);
-	// 									break;
-	// 								case "array":
-	// 									// console.log("The element is of type(array).");
-	// 									validatedData[moduleKey][element] = eval(
-	// 										formConfig[element]
-	// 									);
-	// 									break;
-	// 								case "boolean":
-	// 									// console.log("The element is of type(boolean).");
-	// 									validatedData[moduleKey][element] = eval(
-	// 										formConfig[element]
-	// 									);
-	// 									break;
-	// 								default:
-	// 									// console.log("The element is of type(string).");
-	// 									validatedData[moduleKey][element] = formConfig[element];
-	// 									break;
-	// 							}
-	// 						}
-	// 					}
-	// 				}
-	// 			}
-	// 			setValidatedConfig(validatedData);
-	// 		},
-	// 		4
-	// 	);
-	// };
-
 	let validator = () => {
-		return JSON.stringify(
+		JSON.stringify(
 			{ ...formData },
-			function (idx, value) {
+			function (index, value) {
+				console.log("value in validator:", value);
+				let validatedData = {};
 				for (let moduleKey in value) {
-					let moduleConfig = masterConfig[moduleKey];
+					let moduleConfig = getModuleConfigs(moduleKey);
 					let formConfig = formData[moduleKey];
+					// console.log(`${moduleKey}:`, moduleConfig);
 
 					if (!moduleConfig) {
-						try {
-							let evaluatedVal = eval(formConfig);
-							validatedData = {
-								...validatedData,
-								[moduleKey]: evaluatedVal,
-							};
-						} catch (err) {
-							validatedData = {
-								...validatedData,
-								[moduleKey]: formConfig,
-							};
+						if (formConfig.length) {
+							// console.log(moduleKey, "has no config.");
+							try {
+								let evaluatedVal = eval(formConfig);
+								validatedData[moduleKey] = evaluatedVal;
+							} catch (err) {
+								validatedData[moduleKey] = formConfig;
+							}
 						}
 					} else {
-						// validatedData = {
-						// 	...validatedData,
-						// 	[moduleKey]: { ...formConfig },
-						// };
-						validatedData[moduleKey] = { ...formConfig }; // need not mutate - check
-
+						// console.log(moduleKey, ":", moduleConfig);
+						// console.log(formConfig);
+						validatedData[moduleKey] = {};
 						for (let element in formConfig) {
-							for (let index in moduleConfig) {
-								const eleConfig = moduleConfig[index];
-
-								if (eleConfig["name"] === element) {
-									const eleDataType = eleConfig["dataType"];
-
-									// based on dataType do the required
-									if (eleDataType === "element" || eleDataType === "array") {
-										try {
-											const eleVal = formConfig[element];
-											if (eleVal) {
-												let valModuleConfig = {
-													...validatedData[moduleKey],
-													[element]: eval(eleVal),
-												};
-												validatedData = {
-													...validatedData,
-													[moduleKey]: { ...valModuleConfig },
-												};
-											}
-										} catch (error) {
-											console.log("element:", moduleKey, element, error);
-										}
-									} else if (eleDataType === "boolean") {
-										try {
-											const eleVal = formConfig[element];
-											if (eleVal) {
-												let valModuleConfig = {
-													...validatedData[moduleKey],
-													[element]: eval(eleVal),
-												};
-												validatedData = {
-													...validatedData,
-													[moduleKey]: { ...valModuleConfig },
-												};
-											}
-										} catch (error) {
-											console.log("boolean:", moduleKey, element, error);
-										}
-									} else if (eleDataType === "number") {
-										const eleVal = formConfig[element];
-										if (eleVal) {
-											let valModuleConfig = {
-												...validatedData[moduleKey],
-												[element]: parseInt(eleVal),
-											};
-											validatedData = {
-												...validatedData,
-												[moduleKey]: { ...valModuleConfig },
-											};
-										}
-									} else if (eleDataType === "object") {
-										try {
-											const eleVal = formConfig[element];
-											if (eleVal) {
-												let valModuleConfig = {
-													...validatedData[moduleKey],
-													[element]: JSON.parse(eleVal),
-												};
-												validatedData = {
-													...validatedData,
-													[moduleKey]: { ...valModuleConfig },
-												};
-											}
-										} catch (error) {
-											console.log("object:", moduleKey, element, error);
-										}
-									} else if (eleDataType === "function") {
-										try {
-											let evaluatedVal = eval("(" + formConfig[element] + ")");
-											let valModuleConfig = {
-												...validatedData[moduleKey],
-												[element]: evaluatedVal,
-											};
-											validatedData = {
-												...validatedData,
-												[moduleKey]: { ...valModuleConfig },
-											};
-										} catch (error) {
-											console.log("function:", moduleKey, element, error);
-										}
-									}
+							if (formConfig[element].toString().length) {
+								const dataType = getEleDataType(moduleKey, element);
+								if (moduleKey === "facet") {
+									// console.log(
+									// 	moduleKey,
+									// 	element,
+									// 	dataType,
+									// 	formConfig[element]
+									// );
+								}
+								switch (dataType) {
+									case "element":
+										// console.log("The element is of type(element).");
+										validatedData[moduleKey][element] = eval(
+											formConfig[element]
+										);
+										break;
+									case "function":
+										// console.log("The element is of type(function).");
+										validatedData[moduleKey][element] = eval(
+											"(" + formConfig[element] + ")"
+										);
+										break;
+									case "number":
+										// console.log("The element is of type(number).");
+										validatedData[moduleKey][element] = parseInt(
+											formConfig[element]
+										);
+										break;
+									case "object":
+										// console.log("The element is of type(object).");
+										validatedData[moduleKey][element] = JSON.parse(
+											formConfig[element]
+										);
+										break;
+									case "array":
+										// console.log("The element is of type(array).");
+										validatedData[moduleKey][element] = eval(
+											formConfig[element]
+										);
+										break;
+									case "boolean":
+										// console.log("The element is of type(boolean).");
+										validatedData[moduleKey][element] = eval(
+											formConfig[element]
+										);
+										// console.log(
+										// 	moduleKey,
+										// 	element,
+										// 	eval(formConfig[element]),
+										// 	validatedData
+										// );
+										break;
+									default:
+										// console.log("The element is of type(string).");
+										validatedData[moduleKey][element] = formConfig[element];
+										break;
 								}
 							}
 						}
 					}
 				}
-				setValidatedConfig({ ...validatedData });
-				console.log("validatedData:", validatedData);
+				console.log("validatedData after validation:", validatedData);
+				setValidatedConfig(validatedData);
 			},
 			4
 		);
 	};
+
+	// let validator = () => {
+	// 	return JSON.stringify(
+	// 		{ ...formData },
+	// 		function (idx, value) {
+	// 			for (let moduleKey in value) {
+	// 				let moduleConfig = masterConfig[moduleKey];
+	// 				let formConfig = formData[moduleKey];
+
+	// 				if (!moduleConfig) {
+	// 					try {
+	// 						let evaluatedVal = eval(formConfig);
+	// 						validatedData = {
+	// 							...validatedData,
+	// 							[moduleKey]: evaluatedVal,
+	// 						};
+	// 					} catch (err) {
+	// 						validatedData = {
+	// 							...validatedData,
+	// 							[moduleKey]: formConfig,
+	// 						};
+	// 					}
+	// 				} else {
+	// 					// validatedData = {
+	// 					// 	...validatedData,
+	// 					// 	[moduleKey]: { ...formConfig },
+	// 					// };
+	// 					validatedData[moduleKey] = { ...formConfig }; // need not mutate - check
+
+	// 					for (let element in formConfig) {
+	// 						for (let index in moduleConfig) {
+	// 							const eleConfig = moduleConfig[index];
+
+	// 							if (eleConfig["name"] === element) {
+	// 								const eleDataType = eleConfig["dataType"];
+
+	// 								// based on dataType do the required
+	// 								if (eleDataType === "element" || eleDataType === "array") {
+	// 									try {
+	// 										const eleVal = formConfig[element];
+	// 										if (eleVal) {
+	// 											let valModuleConfig = {
+	// 												...validatedData[moduleKey],
+	// 												[element]: eval(eleVal),
+	// 											};
+	// 											validatedData = {
+	// 												...validatedData,
+	// 												[moduleKey]: { ...valModuleConfig },
+	// 											};
+	// 										}
+	// 									} catch (error) {
+	// 										console.log("element:", moduleKey, element, error);
+	// 									}
+	// 								} else if (eleDataType === "boolean") {
+	// 									try {
+	// 										const eleVal = formConfig[element];
+	// 										if (eleVal) {
+	// 											let valModuleConfig = {
+	// 												...validatedData[moduleKey],
+	// 												[element]: eval(eleVal),
+	// 											};
+	// 											validatedData = {
+	// 												...validatedData,
+	// 												[moduleKey]: { ...valModuleConfig },
+	// 											};
+	// 										}
+	// 									} catch (error) {
+	// 										console.log("boolean:", moduleKey, element, error);
+	// 									}
+	// 								} else if (eleDataType === "number") {
+	// 									const eleVal = formConfig[element];
+	// 									if (eleVal) {
+	// 										let valModuleConfig = {
+	// 											...validatedData[moduleKey],
+	// 											[element]: parseInt(eleVal),
+	// 										};
+	// 										validatedData = {
+	// 											...validatedData,
+	// 											[moduleKey]: { ...valModuleConfig },
+	// 										};
+	// 									}
+	// 								} else if (eleDataType === "object") {
+	// 									try {
+	// 										const eleVal = formConfig[element];
+	// 										if (eleVal) {
+	// 											let valModuleConfig = {
+	// 												...validatedData[moduleKey],
+	// 												[element]: JSON.parse(eleVal),
+	// 											};
+	// 											validatedData = {
+	// 												...validatedData,
+	// 												[moduleKey]: { ...valModuleConfig },
+	// 											};
+	// 										}
+	// 									} catch (error) {
+	// 										console.log("object:", moduleKey, element, error);
+	// 									}
+	// 								} else if (eleDataType === "function") {
+	// 									try {
+	// 										let evaluatedVal = eval("(" + formConfig[element] + ")");
+	// 										let valModuleConfig = {
+	// 											...validatedData[moduleKey],
+	// 											[element]: evaluatedVal,
+	// 										};
+	// 										validatedData = {
+	// 											...validatedData,
+	// 											[moduleKey]: { ...valModuleConfig },
+	// 										};
+	// 									} catch (error) {
+	// 										console.log("function:", moduleKey, element, error);
+	// 									}
+	// 								}
+	// 							}
+	// 						}
+	// 					}
+	// 				}
+	// 			}
+	// 			setValidatedConfig({ ...validatedData });
+	// 			console.log("validatedData:", validatedData);
+	// 		},
+	// 		4
+	// 	);
+	// };
 
 	let showContent = (i) => {
 		if (selectedAcc == i) {
@@ -596,6 +612,7 @@ const FormContent = (props = {}) => {
 									console.log("onCodeChange:", err);
 								}
 							}}
+							// readOnly={true}
 						/>
 					</div>
 				</div>

@@ -17,6 +17,8 @@ export default function Vanilla2(props) {
 	// link.download = "validatedConfig.json";
 	// link.click();
 
+	console.log("validatedConfig:", validatedConfig);
+
 	const { id } = useParams();
 
 	useEffect(() => {

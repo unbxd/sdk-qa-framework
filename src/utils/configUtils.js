@@ -88,7 +88,15 @@ export const getEleDataType = (moduleName, eleName) => {
 	const moduleConfigs = getModuleConfigs(moduleName);
 	for (let key of moduleConfigs) {
 		if (key.name === eleName) {
-			// console.log("getDataType:", moduleName, eleName, key.dataType);
+			// if (moduleName == "facet") {
+			// 	console.log(
+			// 		"getDataType:",
+			// 		moduleName,
+			// 		eleName,
+			// 		key.name,
+			// 		key.dataType
+			// 	);
+			// }
 			return key.dataType;
 		}
 	}

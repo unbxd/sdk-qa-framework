@@ -6,19 +6,7 @@
 	"config": [
 		{
 			"name": "enabled",
-			"dataType": "boolean",
-			"options": [
-				{
-					"id": 1,
-					"name": "true",
-					"value": true
-				},
-				{
-					"id": 2,
-					"name": "false",
-					"value": false
-				}
-			]
+			"dataType": "boolean"
 		},
 		{
 			"name": "el",

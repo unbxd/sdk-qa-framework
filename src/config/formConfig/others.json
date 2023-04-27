@@ -5,51 +5,15 @@
 	"config": [
 		{
 			"name": "unbxdAnalytics",
-			"dataType": "boolean",
-			"options": [
-				{
-					"id": 1,
-					"name": "True",
-					"value": true
-				},
-				{
-					"id": 2,
-					"name": "False",
-					"value": false
-				}
-			]
+			"dataType": "boolean"
 		},
 		{
 			"name": "hashMode",
-			"dataType": "boolean",
-			"options": [
-				{
-					"id": 1,
-					"name": "True",
-					"value": true
-				},
-				{
-					"id": 2,
-					"name": "False",
-					"value": false
-				}
-			]
+			"dataType": "boolean"
 		},
 		{
 			"name": "updateUrls",
-			"dataType": "boolean",
-			"options": [
-				{
-					"id": 1,
-					"name": "True",
-					"value": true
-				},
-				{
-					"id": 2,
-					"name": "False",
-					"value": false
-				}
-			]
+			"dataType": "boolean"
 		},
 		{
 			"name": "actionBtnClass",
@@ -61,19 +25,7 @@
 		},
 		{
 			"name": "allowExternalUrlParams",
-			"dataType": "boolean",
-			"options": [
-				{
-					"id": 1,
-					"name": "True",
-					"value": true
-				},
-				{
-					"id": 2,
-					"name": "False",
-					"value": false
-				}
-			]
+			"dataType": "boolean"
 		},
 		{
 			"name": "extraParams",

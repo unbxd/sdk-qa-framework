@@ -6,19 +6,7 @@
 	"config": [
 		{
 			"name": "enabled",
-			"dataType": "boolean",
-			"options": [
-				{
-					"id": 1,
-					"name": "True",
-					"value": true
-				},
-				{
-					"id": 2,
-					"name": "False",
-					"value": false
-				}
-			]
+			"dataType": "boolean"
 		},
 		{
 			"name": "count",

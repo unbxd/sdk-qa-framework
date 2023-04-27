@@ -19,19 +19,7 @@
 		},
 		{
 			"name": "facetMultiSelect",
-			"dataType": "boolean",
-			"options": [
-				{
-					"id": 1,
-					"name": "True",
-					"value": true
-				},
-				{
-					"id": 2,
-					"name": "False",
-					"value": false
-				}
-			]
+			"dataType": "boolean"
 		},
 		{
 			"name": "facetClass",
@@ -87,19 +75,7 @@
 		},
 		{
 			"name": "facetMultilevel",
-			"dataType": "boolean",
-			"options": [
-				{
-					"id": 1,
-					"name": "True",
-					"value": true
-				},
-				{
-					"id": 2,
-					"name": "False",
-					"value": false
-				}
-			]
+			"dataType": "boolean"
 		},
 		{
 			"name": "facetMultilevelName",
@@ -131,19 +107,7 @@
 		},
 		{
 			"name": "applyMultipleFilters",
-			"dataType": "boolean",
-			"options": [
-				{
-					"id": 1,
-					"name": "True",
-					"value": true
-				},
-				{
-					"id": 2,
-					"name": "False",
-					"value": false
-				}
-			]
+			"dataType": "boolean"
 		},
 		{
 			"name": "applyButtonText",
@@ -155,19 +119,7 @@
 		},
 		{
 			"name": "isCollapsible",
-			"dataType": "boolean",
-			"options": [
-				{
-					"id": 1,
-					"name": "True",
-					"value": true
-				},
-				{
-					"id": 2,
-					"name": "False",
-					"value": false
-				}
-			]
+			"dataType": "boolean"
 		},
 		{
 			"name": "defaultOpen",
@@ -175,19 +127,7 @@
 		},
 		{
 			"name": "isSearchable",
-			"dataType": "boolean",
-			"options": [
-				{
-					"id": 1,
-					"name": "True",
-					"value": true
-				},
-				{
-					"id": 2,
-					"name": "False",
-					"value": false
-				}
-			]
+			"dataType": "boolean"
 		},
 		{
 			"name": "searchPlaceHolder",
@@ -195,19 +135,7 @@
 		},
 		{
 			"name": "enableViewMore",
-			"dataType": "boolean",
-			"options": [
-				{
-					"id": 1,
-					"name": "True",
-					"value": true
-				},
-				{
-					"id": 2,
-					"name": "False",
-					"value": false
-				}
-			]
+			"dataType": "boolean"
 		},
 		{
 			"name": "viewMoreText",
