@@ -6,6 +6,7 @@
 	"config": [
 		{
 			"name": "enabled",
+			"label": "Enable Banners",
 			"dataType": "boolean"
 		},
 		{
@@ -23,6 +24,11 @@
 		{
 			"name": "htmlattributes",
 			"dataType": "object"
+		},
+		{
+			"name": "openNewTab",
+			"dataType": "boolean",
+			"label": "Open In New Tab"
 		}
 	]
 }

@@ -3,8 +3,9 @@
 
 body {
 	margin: 0;
-	font-family: "Poppins", system-ui, -apple-system, blinkmacsystemfont,
+	font-family: "Nunito Sans", system-ui, -apple-system, blinkmacsystemfont,
 		"Segoe UI", roboto, "Helvetica Neue", arial, sans-serif;
+	background: #eaeaea;
 }
 
 .defaultRoutes {
@@ -46,7 +47,7 @@ body {
 	// width: 70%;
 	// min-width: 1005px;
 	// max-width: 1005px;
-	height: 700px;
+	height: calc(100vh - 95px);
 	overflow: scroll;
 	display: inline-block;
 	background-color: #eaeaea;
@@ -60,7 +61,7 @@ body {
 
 .viewConfigTab {
 	position: absolute;
-	top: 246px;
+	top: 46px;
 	left: 0;
 	display: flex;
 	align-items: center;
@@ -86,7 +87,7 @@ body {
 .hideConfigTab {
 	z-index: 1;
 	position: absolute;
-	top: 246px;
+	top: 46px;
 	right: -31px;
 
 	.showArrowLeft {
@@ -94,12 +95,12 @@ body {
 		align-items: center;
 		justify-content: center;
 		margin: 0 10px 0 5px;
-		background-color: rgb(255, 255, 255);
+		background-color: rgb(247 247 249);
 		width: 20px;
 		height: 70px;
 		border-radius: 0 5px 5px 0;
 		border: 1px solid #ccc;
-		box-shadow: 1px 0px 4px 0px #ccc;
+		box-shadow: 3px 3px 4px 0px #ccc;
 		border-left: none;
 
 		&:hover {
@@ -120,30 +121,36 @@ body {
 	align-items: flex-start;
 
 	.formBuilder {
-		height: calc(100vh - 100px);
+		display: none;
+		height: calc(100vh - 50px);
 		width: 30%;
 		min-width: 400px;
 		border-right: 1px solid #ccc;
-		background: white;
 		box-shadow: 0px 0px 4px 0px #ccc;
-		display: flex;
 		flex-direction: row;
+		background: #f7f7f9;
 	}
 }
 
 .formIcons {
-	display: block;
+	display: flex;
+	flex-direction: column;
 	overflow: scroll;
-	width: 80px;
-	box-shadow: 0px 0px 4px 0px #ccc;
+	background: #fafbfc;
+	width: 60px;
+	align-items: center;
+	box-shadow: 0px 5px 12px rgba(23, 23, 58, 0.07);
 	// height: calc(100vh - 110px);
 
 	.icon {
-		padding-top: 10px;
-		display: block;
-		border-bottom: 1px solid #ccc;
-		width: 100%;
-		height: fit-content;
+		width: 44px;
+		height: 44px;
+		background: #fafbfc;
+		border-radius: 6px;
+		margin-top: 5px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 
 		&:hover {
 			cursor: pointer;
@@ -153,15 +160,136 @@ body {
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			margin: 0 auto;
+			padding: 12px;
 			width: 20px;
 			height: 20px;
+			background: #fafbfc;
+
+			&-selected {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 12px;
+				width: 20px;
+				height: 20px;
+				background: #eef1fa;
+				border-radius: 6px;
+
+				.Auth-icon {
+					background-image: url("https://static.thenounproject.com/png/3883374-200.png");
+					background-size: 100% 100%;
+					width: inherit;
+					height: inherit;
+				}
+
+				.SearchBox-icon {
+					background-image: url("https://static.thenounproject.com/png/3134345-200.png");
+					background-size: 100% 100%;
+					width: inherit;
+					height: inherit;
+				}
+
+				.products-icon {
+					background-image: url("https://static.thenounproject.com/png/4245250-200.png");
+					background-size: 100% 100%;
+					width: inherit;
+					height: inherit;
+				}
+
+				.facet-icon {
+					background-image: url("https://static.thenounproject.com/png/1701541-200.png");
+					background-size: 100% 100%;
+					width: inherit;
+					height: inherit;
+				}
+
+				.pagesize-icon {
+					background-image: url("https://static.thenounproject.com/png/1630367-200.png");
+					background-size: 100% 100%;
+					width: inherit;
+					height: inherit;
+				}
+
+				.sort-icon {
+					background-image: url("https://static.thenounproject.com/png/22384-200.png");
+					background-size: 100% 100%;
+					width: inherit;
+					height: inherit;
+				}
+
+				.productView-icon {
+					background-image: url("https://static.thenounproject.com/png/307609-200.png");
+					background-size: 100% 100%;
+					width: inherit;
+					height: inherit;
+				}
+
+				.spellCheck-icon {
+					background-image: url("https://static.thenounproject.com/png/68409-200.png");
+					background-size: 100% 100%;
+					width: inherit;
+					height: inherit;
+				}
+
+				.loader-icon {
+					background-image: url("https://static.thenounproject.com/png/355585-200.png");
+					background-size: 100% 100%;
+					width: inherit;
+					height: inherit;
+				}
+
+				.swatches-icon {
+					background-image: url("https://static.thenounproject.com/png/4180462-200.png");
+					background-size: 100% 100%;
+					width: inherit;
+					height: inherit;
+				}
+
+				.noResults-icon {
+					background-image: url("https://static.thenounproject.com/png/385147-200.png");
+					background-size: 100% 100%;
+					width: inherit;
+					height: inherit;
+				}
+
+				.pagination-icon {
+					background-image: url("https://static.thenounproject.com/png/1496881-200.png");
+					background-size: 100% 100%;
+					width: inherit;
+					height: inherit;
+				}
+
+				.breadcrumb-icon {
+					background-image: url("https://static.thenounproject.com/png/1947728-200.png");
+					background-size: 100% 100%;
+					width: inherit;
+					height: inherit;
+				}
+
+				.banner-icon {
+					background-image: url("https://static.thenounproject.com/png/1482722-200.png");
+					background-size: 100% 100%;
+					width: inherit;
+					height: inherit;
+				}
+
+				.others-icon {
+					background-image: url("https://static.thenounproject.com/png/2821203-200.png");
+					background-size: 100%;
+					width: inherit;
+					height: inherit;
+				}
+			}
 
 			.Auth-icon {
 				background-image: url("https://static.thenounproject.com/png/3883374-200.png");
 				background-size: 100% 100%;
 				width: inherit;
 				height: inherit;
+				// background-image: url(./icons/authentication.svg);
+				// background-position: -190px -18px;
+				// width: 554px;
+				// height: 710px;
 			}
 
 			.SearchBox-icon {
@@ -254,23 +382,31 @@ body {
 				width: inherit;
 				height: inherit;
 			}
+
+			.others-icon {
+				background-image: url("https://static.thenounproject.com/png/2821203-200.png");
+				background-size: 100%;
+				width: inherit;
+				height: inherit;
+			}
 		}
 
-		.moduleName {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			font-size: 10px;
-			font-weight: 400;
-			text-transform: uppercase;
-		}
+		// .moduleName {
+		// 	display: flex;
+		// 	align-items: center;
+		// 	justify-content: center;
+		// 	font-size: 10px;
+		// 	font-weight: 400;
+		// 	text-transform: uppercase;
+		// }
 	}
 }
 
 .formContent {
 	position: relative;
-	width: calc(100% - 75px);
-	max-width: 320px; //this has to be removed later on
+	// width: calc(100% - 75px);
+	width: 341px;
+	// max-width: 341px; //this has to be removed later on
 	border-left: 1px solid #ccc;
 
 	.formDescription {
@@ -331,30 +467,55 @@ body {
 
 		.component {
 			position: relative;
+
 			.header {
 				display: block;
 				align-items: center;
-				background-color: #fff;
-				position: fixed;
-				font-weight: 400;
-				font-size: 24px;
-				top: 50px;
-				padding: 10px 15px;
-				width: 291px;
-				border-bottom: 1px solid #ccc;
+				position: sticky;
+				top: 0;
+				/* height: 100px; */
+				padding: 10px 15px 10px 15px;
+				width: 311px;
+				background: #f7f7f9;
 				z-index: 2;
+				border-bottom: 1px solid #dde2ee;
 
 				.name {
-					font-weight: 400;
-					margin: 0;
-					padding: 10px 5px;
-					width: 275px;
-					height: 52px;
+					font-style: normal;
+					font-weight: 600;
+					font-size: 18px;
+					line-height: 24px;
+					letter-spacing: 0.42px;
+					color: #3f5767;
 				}
+
+				.desc {
+					font-weight: 400;
+					font-size: 12px;
+					line-height: 16px;
+					letter-spacing: 0.42px;
+					/* max-height: 50px; */
+					color: #6f6f8d;
+					overflow: scroll;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					display: -webkit-box;
+					-webkit-line-clamp: 2;
+					-webkit-box-orient: vertical;
+				}
+
+				// &::after {
+				// 	background: #dde2ee;
+				// 	content: "";
+				// 	display: flex;
+				// 	height: 4px;
+				// 	margin: 10px auto 0 auto;
+				// 	width: 100%;
+				// }
 			}
 
 			Form {
-				margin-top: 70px;
+				margin: 20px 0 60px 0;
 				padding: 10px;
 			}
 		}
@@ -463,14 +624,14 @@ body {
 	}
 
 	.btnSection {
-		position: fixed;
+		position: absolute;
 		bottom: 0;
-		left: 0;
-		width: 402px;
+		// left: 0;
+		width: 100%;
 		max-width: 402px;
 		border-top: 1px solid #ccc;
 		border-right: 1px solid #ccc;
-		background: white;
+		background: #f7f7f9;
 		display: flex;
 		justify-content: center;
 		align-items: center;

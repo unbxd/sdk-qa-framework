@@ -18,6 +18,7 @@ import variantsConfig from "../../config/formConfig/variants.json";
 import swatchesConfig from "../../config/formConfig/swatches.json";
 import noResultsConfig from "../../config/formConfig/noResults.json";
 import loaderConfig from "../../config/formConfig/loader.json";
+import othersConfig from "../../config/formConfig/others.json";
 
 const FormBuilder = (props) => {
 	const { viewConfigTab, setValidatedConfig, hideConfigTab } = props;
@@ -38,6 +39,7 @@ const FormBuilder = (props) => {
 		swatchesConfig,
 		noResultsConfig,
 		loaderConfig,
+		othersConfig,
 	];
 
 	let showContent = (i) => {

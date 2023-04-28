@@ -6,7 +6,8 @@
 	"config": [
 		{
 			"name": "enabled",
-			"dataType": "boolean"
+			"dataType": "boolean",
+			"label": "Enable Swatches"
 		},
 		{
 			"name": "attributesMap",

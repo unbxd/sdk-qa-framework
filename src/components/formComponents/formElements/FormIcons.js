@@ -15,13 +15,17 @@ const FormIcons = (props) => {
 						// 		? { border: "1px solid cornflowerblue" }
 						// 		: { borderRight: "#1px solid #ccc" }
 						// }
-						style={
-							selectedAcc == i
-								? { backgroundColor: "#c0d7ff" }
-								: { backgroundColor: "#fff" }
-						}
+						// style={
+						// 	selectedAcc == i
+						// 		? { backgroundColor: "#c0d7ff" }
+						// 		: { backgroundColor: "#fff" }
+						// }
 					>
-						<div className="moduleLogo">
+						<div
+							className={
+								selectedAcc == i ? "moduleLogo-selected" : "moduleLogo"
+							}
+						>
 							<span
 								className={
 									formConfig.moduleKey
@@ -29,8 +33,14 @@ const FormIcons = (props) => {
 										: `${formConfig.moduleName}-icon`
 								}
 							></span>
+							{/* <i
+								className={formConfig.moduleIconClass}
+								style={
+									selectedAcc == i ? { color: "#4777ED" } : { color: "#000" }
+								}
+							></i> */}
 						</div>
-						<p className="moduleName">{formConfig.moduleName}</p>
+						{/* <p className="moduleName">{formConfig.moduleName}</p> */}
 					</div>
 				);
 			})}

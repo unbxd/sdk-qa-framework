@@ -19,7 +19,8 @@
 		},
 		{
 			"name": "facetMultiSelect",
-			"dataType": "boolean"
+			"dataType": "boolean",
+			"label": "Select Multiple Facets"
 		},
 		{
 			"name": "facetClass",
@@ -75,7 +76,8 @@
 		},
 		{
 			"name": "facetMultilevel",
-			"dataType": "boolean"
+			"dataType": "boolean",
+			"label": "Enable Multi Level Facets"
 		},
 		{
 			"name": "facetMultilevelName",
@@ -107,7 +109,8 @@
 		},
 		{
 			"name": "applyMultipleFilters",
-			"dataType": "boolean"
+			"dataType": "boolean",
+			"label": "Apply Multiple Filters"
 		},
 		{
 			"name": "applyButtonText",
@@ -119,7 +122,8 @@
 		},
 		{
 			"name": "isCollapsible",
-			"dataType": "boolean"
+			"dataType": "boolean",
+			"label": "Make Facet Collapsible"
 		},
 		{
 			"name": "defaultOpen",
@@ -127,7 +131,8 @@
 		},
 		{
 			"name": "isSearchable",
-			"dataType": "boolean"
+			"dataType": "boolean",
+			"label": "Make Facet Searchable"
 		},
 		{
 			"name": "searchPlaceHolder",
@@ -135,7 +140,8 @@
 		},
 		{
 			"name": "enableViewMore",
-			"dataType": "boolean"
+			"dataType": "boolean",
+			"label": "Enable View More"
 		},
 		{
 			"name": "viewMoreText",

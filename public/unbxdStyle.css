@@ -1,6 +1,6 @@
 *,
 body {
-  font-family: "Poppins", "Nunito Sans", "Barlow", "Helvetica Neue", "Helvetica", "Roboto",
+  font-family: "Nunito Sans", "Barlow", "Helvetica Neue", "Helvetica", "Roboto",
     "sans-serif";
 }
 
@@ -151,7 +151,7 @@ body {
 
 .UNX-facet-header {
   color: #0a0b0c;
-  font-family: "Poppins", "Nunito Sans";
+  font-family: "Nunito Sans";
   font-size: 16px;
   letter-spacing: 0;
   line-height: 22px;
@@ -160,7 +160,7 @@ body {
 
 .UNX-filter-header {
   color: #666666;
-  font-family: "Poppins", "Nunito Sans";
+  font-family: "Nunito Sans";
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 0;
@@ -292,7 +292,7 @@ body {
   
   width: 100%;
   color: #273251;
-  font-family: "Poppins", "Nunito Sans";
+  font-family: "Nunito Sans";
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0;
@@ -1364,7 +1364,7 @@ input[id^="likeBtn"]:checked ~ .UNX-favourite {
 
 .clickstream-title {
   color: #4b5975;
-  font-family: "Poppins","Nunito Sans";
+  font-family: "Nunito Sans";
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0;
@@ -1380,7 +1380,7 @@ input[id^="likeBtn"]:checked ~ .UNX-favourite {
 
 .count {
   color: #577ede;
-  font-family: "Poppins","Nunito Sans";
+  font-family: "Nunito Sans";
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0;
@@ -1389,7 +1389,7 @@ input[id^="likeBtn"]:checked ~ .UNX-favourite {
 
 .title {
   color: #4b5975;
-  font-family: "Poppins","Nunito Sans";
+  font-family: "Nunito Sans";
   font-size: 11px;
   letter-spacing: 0;
   line-height: 15px;

@@ -5,15 +5,18 @@
 	"config": [
 		{
 			"name": "unbxdAnalytics",
-			"dataType": "boolean"
+			"dataType": "boolean",
+			"label": "Enable Unbxd Analytics"
 		},
 		{
 			"name": "hashMode",
-			"dataType": "boolean"
+			"dataType": "boolean",
+			"label": "Enable Hash Mode"
 		},
 		{
 			"name": "updateUrls",
-			"dataType": "boolean"
+			"dataType": "boolean",
+			"label": "Enable Update URLs"
 		},
 		{
 			"name": "actionBtnClass",
@@ -25,7 +28,8 @@
 		},
 		{
 			"name": "allowExternalUrlParams",
-			"dataType": "boolean"
+			"dataType": "boolean",
+			"label": "Allow External URL Params"
 		},
 		{
 			"name": "extraParams",
@@ -41,6 +45,10 @@
 		},
 		{
 			"name": "browseQueryParam",
+			"dataType": "string"
+		},
+		{
+			"name": "searchQueryParam",
 			"dataType": "string"
 		}
 	]

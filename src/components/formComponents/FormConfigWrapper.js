@@ -10,7 +10,13 @@ import { Modal, Button } from "unbxd-react-components";
 
 const FormConfigWrapper = (props = {}) => {
 	const {
-		attrConfig: { dataType = "", required = false, name = "", options } = {},
+		attrConfig: {
+			dataType = "",
+			required = false,
+			name = "",
+			options,
+			label,
+		} = {},
 		delayChange,
 		onCodeChange,
 		docLink,
@@ -133,7 +139,7 @@ const FormConfigWrapper = (props = {}) => {
 						></a>
 					</div>
 					<CustomCheck
-						label={name}
+						label={label}
 						appearance="inline"
 						name={name}
 						defaultValue={eval(formData[name])}

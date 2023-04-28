@@ -413,7 +413,10 @@ const FormContent = (props = {}) => {
 						<>
 							{selectedAcc === i && (
 								<div className="component" key={i}>
-									<div className="header">{formConfig.moduleName}</div>
+									<div className="header">
+										<div className="name">{formConfig.moduleName}</div>
+										<div className="desc">{formConfig.moduleDesc}</div>
+									</div>
 
 									<FormWrapper
 										fsCodeEditorData={fsCodeEditorData}
