@@ -541,8 +541,8 @@ body {
 		position: absolute;
 		z-index: 3;
 		background-color: #fff;
-		bottom: -15px;
-		left: 40px;
+		bottom: 25px;
+		left: 70px;
 		flex-direction: column;
 		border: 1px solid #ccc;
 		border-radius: 2px;
@@ -684,12 +684,12 @@ body {
 	}
 
 	.enableFullScreen {
-		background-image: url("https://static.thenounproject.com/png/1916312-200.png");
+		background-image: url(https://static.thenounproject.com/png/1916312-200.png);
 		background-size: 100% 100%;
-		width: 20px;
-		height: 20px;
-		margin-left: 278px;
-		margin-bottom: -22px;
+		width: 30px;
+		height: 30px;
+		margin-left: 289px;
+		margin-bottom: -32px;
 		z-index: 1;
 		background-color: #fff;
 		border-left: 1px solid #ccc;

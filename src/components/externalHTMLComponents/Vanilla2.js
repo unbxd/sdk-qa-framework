@@ -49,10 +49,10 @@ export default function Vanilla2(props) {
 					},
 					searchTrigger: "click",
 					...validatedConfig,
-					products: {
-						el: document.getElementById("searchResultsWrapper"),
-						productType: "SEARCH",
-					},
+					// products: {
+					// 	el: document.getElementById("searchResultsWrapper"),
+					// 	productType: "SEARCH",
+					// },
 					// siteKey: validatedConfig.siteKey,
 					// apiKey: validatedConfig.apiKey,
 					// searchBoxEl: validatedConfig.searchBoxEl,

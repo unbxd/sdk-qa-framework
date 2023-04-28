@@ -116,50 +116,108 @@ const FormContent = (props = {}) => {
 						for (let element in formConfig) {
 							if (formConfig[element].toString().length) {
 								const dataType = getEleDataType(moduleKey, element);
-								if (moduleKey === "facet") {
-									// console.log(
-									// 	moduleKey,
-									// 	element,
-									// 	dataType,
-									// 	formConfig[element]
-									// );
-								}
 								switch (dataType) {
 									case "element":
 										// console.log("The element is of type(element).");
-										validatedData[moduleKey][element] = eval(
-											formConfig[element]
-										);
+										try {
+											validatedData[moduleKey][element] = eval(
+												formConfig[element]
+											);
+										} catch (err) {
+											console.error(
+												moduleKey,
+												">",
+												element,
+												"producted this error. \n",
+												err
+											);
+											return;
+										}
 										break;
 									case "function":
 										// console.log("The element is of type(function).");
-										validatedData[moduleKey][element] = eval(
-											"(" + formConfig[element] + ")"
-										);
+										try {
+											validatedData[moduleKey][element] = eval(
+												"(" + formConfig[element] + ")"
+											);
+										} catch (err) {
+											console.error(
+												moduleKey,
+												">",
+												element,
+												"producted this error. \n",
+												err
+											);
+											return;
+										}
 										break;
 									case "number":
 										// console.log("The element is of type(number).");
-										validatedData[moduleKey][element] = parseInt(
-											formConfig[element]
-										);
+										try {
+											validatedData[moduleKey][element] = parseInt(
+												formConfig[element]
+											);
+										} catch (err) {
+											console.error(
+												moduleKey,
+												">",
+												element,
+												"producted this error. \n",
+												err
+											);
+											return;
+										}
 										break;
 									case "object":
 										// console.log("The element is of type(object).");
-										validatedData[moduleKey][element] = JSON.parse(
-											formConfig[element]
-										);
+										try {
+											validatedData[moduleKey][element] = JSON.parse(
+												formConfig[element]
+											);
+										} catch (err) {
+											console.error(
+												moduleKey,
+												">",
+												element,
+												"producted this error. \n",
+												err
+											);
+											return;
+										}
 										break;
 									case "array":
 										// console.log("The element is of type(array).");
-										validatedData[moduleKey][element] = eval(
-											formConfig[element]
-										);
+										try {
+											validatedData[moduleKey][element] = eval(
+												formConfig[element]
+											);
+										} catch (err) {
+											console.error(
+												moduleKey,
+												">",
+												element,
+												"producted this error.\n",
+												err
+											);
+											return;
+										}
 										break;
 									case "boolean":
 										// console.log("The element is of type(boolean).");
-										validatedData[moduleKey][element] = eval(
-											formConfig[element]
-										);
+										try {
+											validatedData[moduleKey][element] = eval(
+												formConfig[element]
+											);
+										} catch (err) {
+											console.error(
+												moduleKey,
+												">",
+												element,
+												"producted this error. \n",
+												err
+											);
+											return;
+										}
 										// console.log(
 										// 	moduleKey,
 										// 	element,
