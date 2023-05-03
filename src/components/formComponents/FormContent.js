@@ -1,5 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import FormWrapper from "./FormWrapper";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 import CodeMirror from "@uiw/react-codemirror";
 import { darculaInit } from "@uiw/codemirror-theme-darcula";
@@ -8,6 +10,7 @@ import { javascript } from "@codemirror/lang-javascript";
 
 import { getEleDataType, getModuleConfigs } from "../../utils/configUtils";
 import defaultConfig from "../../inputJson/dummyMadrasLinkOld.json";
+// import defaultConfig from "../../inputJson/dummy.json";
 import { Button, Modal, Input } from "unbxd-react-components";
 import CustomDrop from "./formElements/CustomDrop";
 
@@ -114,7 +117,10 @@ const FormContent = (props = {}) => {
 						// console.log(formConfig);
 						validatedData[moduleKey] = {};
 						for (let element in formConfig) {
-							if (formConfig[element].toString().length) {
+							if (
+								formConfig[element] !== undefined &&
+								formConfig[element].toString().length
+							) {
 								const dataType = getEleDataType(moduleKey, element);
 								switch (dataType) {
 									case "element":

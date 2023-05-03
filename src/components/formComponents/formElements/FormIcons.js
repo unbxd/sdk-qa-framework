@@ -7,7 +7,7 @@ const FormIcons = (props) => {
 			{formConfigs.map((formConfig = {}, i) => {
 				return (
 					<div
-						className="icon"
+						className={selectedAcc == i ? "icon-selected" : "icon"}
 						key={i}
 						onClick={() => showContent(i)}
 						// style={
@@ -22,9 +22,10 @@ const FormIcons = (props) => {
 						// }
 					>
 						<div
-							className={
-								selectedAcc == i ? "moduleLogo-selected" : "moduleLogo"
-							}
+							// className={
+							// 	selectedAcc == i ? "moduleLogo-selected" : "moduleLogo"
+							// }
+							className="moduleLogo"
 						>
 							<span
 								className={
@@ -39,6 +40,11 @@ const FormIcons = (props) => {
 									selectedAcc == i ? { color: "#4777ED" } : { color: "#000" }
 								}
 							></i> */}
+						</div>
+						<div className="moduleName">
+							{formConfig.moduleKey
+								? `${formConfig.moduleKey}`
+								: `${formConfig.moduleName}`}
 						</div>
 						{/* <p className="moduleName">{formConfig.moduleName}</p> */}
 					</div>

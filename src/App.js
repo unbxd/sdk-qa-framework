@@ -14,13 +14,6 @@ import Lander from "./components/landerComponents/Lander";
 import LanderUseCases from "./components/landerComponents/LanderUseCases";
 
 const App = (props) => {
-	// axios
-	// 	.get(
-	// 		"https://libraries.unbxdapi.com/search-sdk/qa-framework/demo-unbxd700181503576558/fb853e3332f2645fac9d71dc63e09ec1.json"
-	// 	)
-	// 	.then((res) => {
-	// 		console.log(res.data);
-	// 	});
 	// axios.get("http://localhost:5000/upload").then((res) => {
 	// 	console.log("default upload data:", res.data);
 	// });

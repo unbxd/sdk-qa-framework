@@ -1,12 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Vanilla2 from "../externalHTMLComponents/Vanilla2";
 import FormBuilder from "../formComponents/FormBuilder";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const DashboardContent = (props) => {
 	const { viewConfigOption, reloadWarning = true } = props;
 
 	const [validatedConfig, setValidatedConfig] = useState({});
 	const [viewConfigTab, setViewConfigTab] = useState(true);
+
+	const { id } = useParams();
+
+	// useEffect(() => {
+	// 	if (id !== undefined) {
+
+	// 		setValidatedConfig(data);
+	// 	// 	axios
+	// 	// 		.get(
+	// 	// 			"https://libraries.unbxdapi.com/search-sdk/qa-framework/demo-unbxd700181503576558/fb853e3332f2645fac9d71dc63e09ec1.json"
+	// 	// 		)
+	// 	// 		.then((res) => {
+	// 	// 			console.log("res.data:", res.data);
+	// 	// 			// validatedConfig = res.data;
+	// 	// 			const data = res.data;
+	// 	// 			setValidatedConfig(data);
+	// 	// 		});
+	// 	// }
+	// }, []);
 
 	const hideConfigTab = () => {
 		setViewConfigTab(false);

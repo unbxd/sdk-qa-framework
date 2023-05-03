@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 
 // import UnbxdSearch from  '@unbxd-ui/vanilla-search-library';
 import UnbxdSearch from "../../../../search-JS-library/src/index";
@@ -19,35 +18,33 @@ export default function Vanilla2(props) {
 
 	console.log("validatedConfig:", validatedConfig);
 
-	const { id } = useParams();
-
 	useEffect(() => {
 		// window.unbxdSearch.resetAll();
 		// window.unbxdSearch = null;
 		if (Object.keys(validatedConfig).length) {
 			if (UnbxdSearch) {
 				window.unbxdSearch = new UnbxdSearch({
-					hashMode: false,
-					updateUrls: true,
-					onEvent: function (instance, type, state) {
-						if (type === "AFTER_RENDER") {
-							if (
-								localStorage.getItem("unx_product_clicked") &&
-								document.getElementById(
-									localStorage.getItem("unx_product_clicked")
-								)
-							) {
-								document
-									.getElementById(localStorage.getItem("unx_product_clicked"))
-									.scrollIntoView();
-								localStorage.removeItem("unx_product_clicked");
-							}
-						}
-					},
-					onError: function (err) {
-						console.log(err);
-					},
-					searchTrigger: "click",
+					// hashMode: false,
+					// updateUrls: true,
+					// onEvent: function (instance, type, state) {
+					// 	if (type === "AFTER_RENDER") {
+					// 		if (
+					// 			localStorage.getItem("unx_product_clicked") &&
+					// 			document.getElementById(
+					// 				localStorage.getItem("unx_product_clicked")
+					// 			)
+					// 		) {
+					// 			document
+					// 				.getElementById(localStorage.getItem("unx_product_clicked"))
+					// 				.scrollIntoView();
+					// 			localStorage.removeItem("unx_product_clicked");
+					// 		}
+					// 	}
+					// },
+					// onError: function (err) {
+					// 	console.log(err);
+					// },
+					// searchTrigger: "click",
 					...validatedConfig,
 					// products: {
 					// 	el: document.getElementById("searchResultsWrapper"),
@@ -190,109 +187,109 @@ export default function Vanilla2(props) {
 			}
 		}
 	});
-	useEffect(() => {
-		if (window.UnbxdSearch) {
-			window.unbxdSearch = new window.UnbxdSearch({
-				siteKey: "demo-unbxd700181503576558",
-				apiKey: "fb853e3332f2645fac9d71dc63e09ec1",
-				// siteKey: "ss-unbxd-betta-pre-prod35741675334517",
-				// apiKey: "b1b5f033416fbf18f301aee3dab41934",
-				hashMode: false,
-				updateUrls: true,
-				extraParams: {
-					stats: "price",
-				},
-				// searchTrigger: "click",
-				products: {
-					productType: "SEARCH",
-				},
-				searchBoxEl: document.getElementById("unbxdInput"),
-				searchTrigger: "click",
-				searchButtonEl: document.getElementById("searchBtn"),
-				products: {
-					el: document.getElementById("searchResultsWrapper"),
-					productType: "SEARCH",
-				},
-				spellCheck: {
-					enabled: true,
-					el: document.getElementById("didYouMeanWrapper"),
-				},
-				noResults: {
-					el: document.getElementById("noResultWrapper"),
-				},
-				facet: {
-					facetsEl: document.getElementById("facetsWrapper"),
-					selectedFacetsEl: document.getElementById("selectedFacetWrapper"),
-				},
-				pagination: {
-					el: document.querySelectorAll(".unxPagination"),
-					type: "FIXED_PAGINATION",
-					pageLimit: 4,
-				},
-				breadcrumb: {
-					el: document.getElementById("breadcrumpContainer"),
-				},
-				pagesize: {
-					el: document.getElementById("changeNoOfProducts"),
-				},
+	// useEffect(() => {
+	// 	if (window.UnbxdSearch) {
+	// 		window.unbxdSearch = new window.UnbxdSearch({
+	// 			siteKey: "demo-unbxd700181503576558",
+	// 			apiKey: "fb853e3332f2645fac9d71dc63e09ec1",
+	// 			// siteKey: "ss-unbxd-betta-pre-prod35741675334517",
+	// 			// apiKey: "b1b5f033416fbf18f301aee3dab41934",
+	// 			hashMode: false,
+	// 			updateUrls: true,
+	// 			extraParams: {
+	// 				stats: "price",
+	// 			},
+	// 			// searchTrigger: "click",
+	// 			products: {
+	// 				productType: "SEARCH",
+	// 			},
+	// 			searchBoxEl: document.getElementById("unbxdInput"),
+	// 			searchTrigger: "click",
+	// 			searchButtonEl: document.getElementById("searchBtn"),
+	// 			products: {
+	// 				el: document.getElementById("searchResultsWrapper"),
+	// 				productType: "SEARCH",
+	// 			},
+	// 			spellCheck: {
+	// 				enabled: true,
+	// 				el: document.getElementById("didYouMeanWrapper"),
+	// 			},
+	// 			noResults: {
+	// 				el: document.getElementById("noResultWrapper"),
+	// 			},
+	// 			facet: {
+	// 				facetsEl: document.getElementById("facetsWrapper"),
+	// 				selectedFacetsEl: document.getElementById("selectedFacetWrapper"),
+	// 			},
+	// 			pagination: {
+	// 				el: document.querySelectorAll(".unxPagination"),
+	// 				type: "FIXED_PAGINATION",
+	// 				pageLimit: 4,
+	// 			},
+	// 			breadcrumb: {
+	// 				el: document.getElementById("breadcrumpContainer"),
+	// 			},
+	// 			pagesize: {
+	// 				el: document.getElementById("changeNoOfProducts"),
+	// 			},
 
-				sort: {
-					el: document.getElementById("sortWrapper"),
-					options: [
-						{
-							value: "sortPrice desc",
-							text: "Price High to Low",
-						},
-						{
-							value: "sortPrice asc",
-							text: " Price Low to High",
-						},
-					],
-				},
-				loader: {
-					el: document.getElementById("loaderEl"),
-				},
-				productView: {
-					el: document.getElementById("productViewTypeContainer"),
-					viewTypes: "GRID",
-				},
-				banner: {
-					el: document.getElementById("bannerContainer"),
-					count: 1,
-				},
-				swatches: {
-					enabled: true,
-					attributesMap: {
-						swatchList: "color",
-						swatchImgs: "unbxd_color_mapping",
-						swatchColors: "color",
-					},
-				},
-			});
-		}
+	// 			sort: {
+	// 				el: document.getElementById("sortWrapper"),
+	// 				options: [
+	// 					{
+	// 						value: "sortPrice desc",
+	// 						text: "Price High to Low",
+	// 					},
+	// 					{
+	// 						value: "sortPrice asc",
+	// 						text: " Price Low to High",
+	// 					},
+	// 				],
+	// 			},
+	// 			loader: {
+	// 				el: document.getElementById("loaderEl"),
+	// 			},
+	// 			productView: {
+	// 				el: document.getElementById("productViewTypeContainer"),
+	// 				viewTypes: "GRID",
+	// 			},
+	// 			banner: {
+	// 				el: document.getElementById("bannerContainer"),
+	// 				count: 1,
+	// 			},
+	// 			swatches: {
+	// 				enabled: true,
+	// 				attributesMap: {
+	// 					swatchList: "color",
+	// 					swatchImgs: "unbxd_color_mapping",
+	// 					swatchColors: "color",
+	// 				},
+	// 			},
+	// 		});
+	// 	}
 
-		// if (reloadWarning) {
-		// 	window.addEventListener("beforeunload", (event) => {
-		// 		event.preventDefault();
-		// 		event.returnValue = "";
-		// 		return "";
-		// 	});
-		// }
-		// return () => window.removeEventListener("beforeunload", unloadCallback);
+	// 	// if (reloadWarning) {
+	// 	// 	window.addEventListener("beforeunload", (event) => {
+	// 	// 		event.preventDefault();
+	// 	// 		event.returnValue = "";
+	// 	// 		return "";
+	// 	// 	});
+	// 	// }
+	// 	// return () => window.removeEventListener("beforeunload", unloadCallback);
 
-		// window.onbeforeunload = function () {
-		// 	return "Data will be lost if you leave the page, are you sure?";
-		// };
-	}, []);
+	// 	// window.onbeforeunload = function () {
+	// 	// 	return "Data will be lost if you leave the page, are you sure?";
+	// 	// };
+	// }, []);
 
-	const [htmlContent, setHtmlContent] = useState("");
+	// const [htmlContent, setHtmlContent] = useState("");
 
-	useEffect(() => {
-		fetch(`/path/to/external/${filename}`)
-			.then((response) => response.text())
-			.then((html) => setHtmlContent(html))
-			.catch((error) => console.log(error));
-	}, []);
+	// useEffect(() => {
+	// 	fetch(`/path/to/external/${filename}`)
+	// 		.then((response) => response.text())
+	// 		.then((html) => setHtmlContent(html))
+	// 		.catch((error) => console.log(error));
+	// }, []);
 
 	const createMarkup = function () {
 		return {
