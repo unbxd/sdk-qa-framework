@@ -179,6 +179,8 @@ body {
 			}
 
 			&-selected {
+				width: 182px;
+				margin-left: 8px;
 				.moduleName {
 					display: flex;
 					text-transform: capitalize;
@@ -206,7 +208,9 @@ body {
 		}
 
 		&-selected {
-			width: 44px;
+			// width: 44px;
+			margin-left: 8px;
+			width: 100%;
 			// margin: 0 auto;
 			height: 44px;
 			background: #fafbfc;

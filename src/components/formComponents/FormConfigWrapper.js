@@ -174,7 +174,7 @@ const FormConfigWrapper = (props = {}) => {
 				const config = getConfig(moduleKey, name);
 				let defaultVal;
 				for (let option of config.options) {
-					if (option.value === formData[name]) {
+					if (option.name === formData[name]) {
 						defaultVal = option;
 						break;
 					}

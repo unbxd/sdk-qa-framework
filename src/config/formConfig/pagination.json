@@ -69,12 +69,12 @@
 				{
 					"id": 1,
 					"name": "Click",
-					"value": "Click"
+					"value": "click"
 				},
 				{
 					"id": 2,
 					"name": "Change",
-					"value": "Change"
+					"value": "change"
 				}
 			]
 		},

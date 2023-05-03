@@ -41,7 +41,7 @@ const FormWrapper = (props = {}) => {
 						let { options, dataType, name } = config;
 						let selectedVal = "";
 						if (dataType === "string") {
-							selectedVal = objData[name].value;
+							selectedVal = objData[name];
 						} else if (dataType === "boolean") {
 							console.log("key:", key, objData[name]);
 							selectedVal = objData[name];
