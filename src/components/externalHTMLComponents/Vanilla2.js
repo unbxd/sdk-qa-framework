@@ -24,32 +24,33 @@ export default function Vanilla2(props) {
 		if (Object.keys(validatedConfig).length) {
 			if (UnbxdSearch) {
 				window.unbxdSearch = new UnbxdSearch({
-					// hashMode: false,
-					// updateUrls: true,
-					// onEvent: function (instance, type, state) {
-					// 	if (type === "AFTER_RENDER") {
-					// 		if (
-					// 			localStorage.getItem("unx_product_clicked") &&
-					// 			document.getElementById(
-					// 				localStorage.getItem("unx_product_clicked")
-					// 			)
-					// 		) {
-					// 			document
-					// 				.getElementById(localStorage.getItem("unx_product_clicked"))
-					// 				.scrollIntoView();
-					// 			localStorage.removeItem("unx_product_clicked");
-					// 		}
-					// 	}
-					// },
-					// onError: function (err) {
-					// 	console.log(err);
-					// },
-					// searchTrigger: "click",
+					hashMode: false,
+					updateUrls: true,
+					onEvent: function (instance, type, state) {
+						if (type === "AFTER_RENDER") {
+							if (
+								localStorage.getItem("unx_product_clicked") &&
+								document.getElementById(
+									localStorage.getItem("unx_product_clicked")
+								)
+							) {
+								document
+									.getElementById(localStorage.getItem("unx_product_clicked"))
+									.scrollIntoView();
+								localStorage.removeItem("unx_product_clicked");
+							}
+						}
+					},
+					onError: function (err) {
+						console.log(err);
+					},
+					searchTrigger: "click",
 					...validatedConfig,
 					// products: {
 					// 	el: document.getElementById("searchResultsWrapper"),
 					// 	productType: "SEARCH",
 					// },
+					pageSize: validatedConfig.pagesize.pageSize,
 					// siteKey: validatedConfig.siteKey,
 					// apiKey: validatedConfig.apiKey,
 					// searchBoxEl: validatedConfig.searchBoxEl,
@@ -60,9 +61,16 @@ export default function Vanilla2(props) {
 					// sort: validatedConfig.sort,
 					// productView: validatedConfig.productView,
 					// spellCheck: validatedConfig.spellCheck,
+					// // spellCheck: {
+					// // 	enabled: true,
+					// // 	el: document.getElementById("didYouMeanWrapper"),
+					// // },
 					// loader: validatedConfig.loader,
 					// swatches: validatedConfig.swatches,
 					// noResults: validatedConfig.noResults,
+					// // noResults: {
+					// // 	el: document.getElementById("noResultWrapper"),
+					// // },
 					// pagination: validatedConfig.pagination,
 					// breadcrumb: validatedConfig.breadcrumb,
 					// banner: validatedConfig.banner,
