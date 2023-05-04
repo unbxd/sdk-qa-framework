@@ -52,6 +52,7 @@ body {
 	display: inline-block;
 	background-color: #eaeaea;
 	padding: 15px;
+	width: 100%;
 
 	.vanilla2 {
 		background-color: #fff;
@@ -118,7 +119,8 @@ body {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
-	align-items: flex-start;
+	width: 100%;
+	// align-items: flex-start;
 
 	.formBuilder {
 		display: none;
