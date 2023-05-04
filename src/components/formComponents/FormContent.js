@@ -12,7 +12,6 @@ import { Button, Modal, Input } from "unbxd-react-components";
 
 const FormContent = (props = {}) => {
 	const {
-		viewConfigTab,
 		setValidatedConfig,
 		hideConfigTab,
 		selectedAcc,
@@ -352,10 +351,7 @@ const FormContent = (props = {}) => {
 	};
 
 	return (
-		<div
-			className="formContent"
-			style={viewConfigTab ? { display: "flex" } : { display: "none" }}
-		>
+		<div className="formContent">
 			<div className="hideConfigTab">
 				<div className="showArrowLeft" onClick={() => hideConfigTab()}>
 					<span></span>

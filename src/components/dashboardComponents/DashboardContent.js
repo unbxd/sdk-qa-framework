@@ -9,35 +9,39 @@ const DashboardContent = (props) => {
 	const { viewConfigOption, reloadWarning = true } = props;
 
 	const [validatedConfig, setValidatedConfig] = useState({});
-	const [viewConfigTab, setViewConfigTab] = useState(true);
 
 	const hideConfigTab = () => {
-		setViewConfigTab(false);
-		// document.querySelector(".formBuilder").style.display = "none";
-		// document.querySelector(".demoSite").style.width = "100%";
+		// setViewConfigTab(false);
+		document.querySelector(".hideConfigTab").style.display = "none";
+		document.querySelector(".viewConfigTab").style.display = "flex";
+		document.querySelector(".formBuilder").style.display = "none";
+		document.querySelector(".demoSite").style.width = "100%";
 	};
 	const showConfigTab = () => {
-		setViewConfigTab(true);
+		// setViewConfigTab(true);
+		document.querySelector(".viewConfigTab").style.display = "none";
+		document.querySelector(".hideConfigTab").style.display = "flex";
+		document.querySelector(".formBuilder").style.display = "flex";
+		document.querySelector(".demoSite").style.width = "70%";
 	};
 
 	return (
 		<div className="formMaster">
 			{viewConfigOption && (
 				<FormBuilder
-					viewConfigTab={viewConfigTab}
 					setValidatedConfig={setValidatedConfig}
 					hideConfigTab={hideConfigTab}
 				/>
 			)}
 			<div
 				className="demoSite"
-				style={
-					viewConfigOption
-						? viewConfigTab
-							? { width: "75%" }
-							: { width: "100%" }
-						: { width: "100%" }
-				}
+				// style={
+				// 	viewConfigOption
+				// 		? viewConfigTab
+				// 			? { width: "75%" }
+				// 			: { width: "100%" }
+				// 		: { width: "100%" }
+				// }
 			>
 				<Vanilla2
 					validatedConfig={validatedConfig}
@@ -47,7 +51,7 @@ const DashboardContent = (props) => {
 				{viewConfigOption && (
 					<div
 						className="viewConfigTab"
-						style={viewConfigTab ? { display: "none" } : { display: "flex" }}
+						// style={viewConfigTab ? { display: "none" } : { display: "flex" }}
 						onClick={() => {
 							showConfigTab();
 						}}

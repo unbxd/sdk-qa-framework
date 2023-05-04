@@ -54,7 +54,6 @@ body {
 	padding: 15px;
 
 	.vanilla2 {
-		min-width: 1006.43px;
 		background-color: #fff;
 		box-shadow: 0px 0px 4px 0px #ccc;
 	}
@@ -492,8 +491,10 @@ body {
 .formContent {
 	position: relative;
 	// width: calc(100% - 75px);
-	width: 341px;
+	// width: calc(100% - 60px);
+	width: 361.703px;
 	margin-left: 61px;
+	display: flex;
 	// max-width: 341px; //this has to be removed later on
 
 	.formDescription {
@@ -781,7 +782,7 @@ body {
 		background-size: 100% 100%;
 		width: 30px;
 		height: 30px;
-		margin-left: 289px;
+		margin-left: 309px;
 		margin-bottom: -32px;
 		z-index: 1;
 		background-color: #fff;
