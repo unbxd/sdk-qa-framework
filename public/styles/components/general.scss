@@ -3,8 +3,8 @@
 
 body {
 	margin: 0;
-	font-family: "Nunito Sans", system-ui, -apple-system, blinkmacsystemfont,
-		"Segoe UI", roboto, "Helvetica Neue", arial, sans-serif;
+	font-family: "Poppins", "Nunito Sans", system-ui, -apple-system,
+		blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, sans-serif;
 	background: #eaeaea;
 }
 
@@ -122,6 +122,7 @@ body {
 
 	.formBuilder {
 		display: none;
+		font-family: "Nunito Sans";
 		height: calc(100vh - 50px);
 		width: 30%;
 		min-width: 400px;
@@ -139,18 +140,11 @@ body {
 	background: #fafbfc;
 	width: 60px;
 	height: calc(100% - 50px);
-	// height: auto;
 	align-items: center;
 	box-shadow: 0px 5px 12px rgba(23, 23, 58, 0.07);
-	// transition: all 0.1s;
-	// -webkit-transition: all 0.1s;
 	z-index: 0;
-	// overflow: hidden;
-	// position: relative;
 	position: absolute;
-
 	border-right: 1px solid #ccc;
-	// height: calc(100vh - 110px);
 
 	&:hover {
 		display: block;
@@ -159,7 +153,6 @@ body {
 		height: calc(100% - 50px);
 		overflow: scroll;
 		z-index: 3;
-
 		transition: all 0.1s;
 		-webkit-transition: all 0.1s;
 
@@ -181,6 +174,12 @@ body {
 			&-selected {
 				width: 182px;
 				margin-left: 8px;
+				margin-bottom: 5px;
+
+				&:last-child {
+					margin-bottom: 10px;
+				}
+
 				.moduleName {
 					display: flex;
 					text-transform: capitalize;
@@ -200,8 +199,14 @@ body {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		// position: absolute;
-		// margin-left: 8px;
+
+		&:first-child {
+			margin-top: 5px;
+		}
+
+		&:last-child {
+			margin-bottom: 10px;
+		}
 
 		&:hover {
 			cursor: pointer;
@@ -209,8 +214,8 @@ body {
 
 		&-selected {
 			// width: 44px;
-			margin-left: 8px;
-			width: 100%;
+			// margin-left: 8px;
+			width: 44px;
 			// margin: 0 auto;
 			height: 44px;
 			background: #fafbfc;
@@ -219,11 +224,13 @@ body {
 			display: flex;
 			align-items: center;
 			background: #eef1fa;
+			cursor: pointer;
 
 			.moduleName {
 				text-transform: capitalize;
 				opacity: 0;
 				width: 0;
+				color: #4777ed;
 			}
 
 			.moduleLogo {
@@ -233,12 +240,16 @@ body {
 				padding: 12px;
 				width: 20px;
 				height: 20px;
+				filter: invert(55%) sepia(53%) saturate(6105%) hue-rotate(208deg)
+					brightness(94%) contrast(98%);
 
-				.Auth-icon {
+				.Authentication-icon {
 					background-image: url("https://static.thenounproject.com/png/3883374-200.png");
 					background-size: 100% 100%;
 					width: inherit;
 					height: inherit;
+					// filter: invert(55%) sepia(53%) saturate(6105%) hue-rotate(208deg)
+					// 	brightness(94%) contrast(98%);
 				}
 
 				.SearchBox-icon {
@@ -361,7 +372,7 @@ body {
 			// 	border-radius: 6px;
 			// }
 
-			.Auth-icon {
+			.Authentication-icon {
 				background-image: url("https://static.thenounproject.com/png/3883374-200.png");
 				background-size: 100% 100%;
 				width: inherit;

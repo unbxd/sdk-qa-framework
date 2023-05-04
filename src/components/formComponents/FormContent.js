@@ -4,15 +4,11 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 import CodeMirror from "@uiw/react-codemirror";
-import { darculaInit } from "@uiw/codemirror-theme-darcula";
-import { tags as t } from "@lezer/highlight";
 import { javascript } from "@codemirror/lang-javascript";
 
 import { getEleDataType, getModuleConfigs } from "../../utils/configUtils";
 import defaultConfig from "../../inputJson/dummyMadrasLinkOld.json";
-// import defaultConfig from "../../inputJson/dummy.json";
 import { Button, Modal, Input } from "unbxd-react-components";
-import CustomDrop from "./formElements/CustomDrop";
 
 const FormContent = (props = {}) => {
 	const {
@@ -37,6 +33,8 @@ const FormContent = (props = {}) => {
 	let [publishStatus, setPublishStatus] = useState(false);
 
 	const inputJSONFile = useRef(null);
+
+	const { id } = useParams();
 
 	const updateMasterConfig = (formConfigs) => {
 		formConfigs.map((formConfig = {}, i) => {
@@ -91,11 +89,11 @@ const FormContent = (props = {}) => {
 		}
 	};
 
-	let validator = () => {
+	let validator = (formData) => {
 		JSON.stringify(
 			{ ...formData },
 			function (index, value) {
-				console.log("value in validator:", value);
+				// console.log("value in validator:", value);
 				let validatedData = {};
 				for (let moduleKey in value) {
 					let moduleConfig = getModuleConfigs(moduleKey);
@@ -118,7 +116,7 @@ const FormContent = (props = {}) => {
 						validatedData[moduleKey] = {};
 						for (let element in formConfig) {
 							if (
-								formConfig[element] !== undefined &&
+								formConfig[element] !== undefined ||
 								formConfig[element].toString().length
 							) {
 								const dataType = getEleDataType(moduleKey, element);
@@ -240,135 +238,30 @@ const FormContent = (props = {}) => {
 						}
 					}
 				}
-				console.log("validatedData after validation:", validatedData);
+				// console.log("validatedData after validation:", validatedData);
 				setValidatedConfig(validatedData);
 			},
 			4
 		);
 	};
 
-	// let validator = () => {
-	// 	return JSON.stringify(
-	// 		{ ...formData },
-	// 		function (idx, value) {
-	// 			for (let moduleKey in value) {
-	// 				let moduleConfig = masterConfig[moduleKey];
-	// 				let formConfig = formData[moduleKey];
-
-	// 				if (!moduleConfig) {
-	// 					try {
-	// 						let evaluatedVal = eval(formConfig);
-	// 						validatedData = {
-	// 							...validatedData,
-	// 							[moduleKey]: evaluatedVal,
-	// 						};
-	// 					} catch (err) {
-	// 						validatedData = {
-	// 							...validatedData,
-	// 							[moduleKey]: formConfig,
-	// 						};
-	// 					}
-	// 				} else {
-	// 					// validatedData = {
-	// 					// 	...validatedData,
-	// 					// 	[moduleKey]: { ...formConfig },
-	// 					// };
-	// 					validatedData[moduleKey] = { ...formConfig }; // need not mutate - check
-
-	// 					for (let element in formConfig) {
-	// 						for (let index in moduleConfig) {
-	// 							const eleConfig = moduleConfig[index];
-
-	// 							if (eleConfig["name"] === element) {
-	// 								const eleDataType = eleConfig["dataType"];
-
-	// 								// based on dataType do the required
-	// 								if (eleDataType === "element" || eleDataType === "array") {
-	// 									try {
-	// 										const eleVal = formConfig[element];
-	// 										if (eleVal) {
-	// 											let valModuleConfig = {
-	// 												...validatedData[moduleKey],
-	// 												[element]: eval(eleVal),
-	// 											};
-	// 											validatedData = {
-	// 												...validatedData,
-	// 												[moduleKey]: { ...valModuleConfig },
-	// 											};
-	// 										}
-	// 									} catch (error) {
-	// 										console.log("element:", moduleKey, element, error);
-	// 									}
-	// 								} else if (eleDataType === "boolean") {
-	// 									try {
-	// 										const eleVal = formConfig[element];
-	// 										if (eleVal) {
-	// 											let valModuleConfig = {
-	// 												...validatedData[moduleKey],
-	// 												[element]: eval(eleVal),
-	// 											};
-	// 											validatedData = {
-	// 												...validatedData,
-	// 												[moduleKey]: { ...valModuleConfig },
-	// 											};
-	// 										}
-	// 									} catch (error) {
-	// 										console.log("boolean:", moduleKey, element, error);
-	// 									}
-	// 								} else if (eleDataType === "number") {
-	// 									const eleVal = formConfig[element];
-	// 									if (eleVal) {
-	// 										let valModuleConfig = {
-	// 											...validatedData[moduleKey],
-	// 											[element]: parseInt(eleVal),
-	// 										};
-	// 										validatedData = {
-	// 											...validatedData,
-	// 											[moduleKey]: { ...valModuleConfig },
-	// 										};
-	// 									}
-	// 								} else if (eleDataType === "object") {
-	// 									try {
-	// 										const eleVal = formConfig[element];
-	// 										if (eleVal) {
-	// 											let valModuleConfig = {
-	// 												...validatedData[moduleKey],
-	// 												[element]: JSON.parse(eleVal),
-	// 											};
-	// 											validatedData = {
-	// 												...validatedData,
-	// 												[moduleKey]: { ...valModuleConfig },
-	// 											};
-	// 										}
-	// 									} catch (error) {
-	// 										console.log("object:", moduleKey, element, error);
-	// 									}
-	// 								} else if (eleDataType === "function") {
-	// 									try {
-	// 										let evaluatedVal = eval("(" + formConfig[element] + ")");
-	// 										let valModuleConfig = {
-	// 											...validatedData[moduleKey],
-	// 											[element]: evaluatedVal,
-	// 										};
-	// 										validatedData = {
-	// 											...validatedData,
-	// 											[moduleKey]: { ...valModuleConfig },
-	// 										};
-	// 									} catch (error) {
-	// 										console.log("function:", moduleKey, element, error);
-	// 									}
-	// 								}
-	// 							}
-	// 						}
-	// 					}
-	// 				}
-	// 			}
-	// 			setValidatedConfig({ ...validatedData });
-	// 			console.log("validatedData:", validatedData);
-	// 		},
-	// 		4
-	// 	);
-	// };
+	useEffect(() => {
+		if (id !== undefined) {
+			// console.log("id:", id);
+			axios
+				.get(
+					"https://libraries.unbxdapi.com/search-sdk/qa-framework/demo-unbxd700181503576558/fb853e3332f2645fac9d71dc63e09ec1.json"
+				)
+				.then((res) => {
+					console.log("res.data:", res.data);
+					const data = res.data;
+					setFormData(data);
+					validator(data);
+				});
+			// setFormData(inputConfig);
+			// validator(inputConfig);
+		}
+	}, []);
 
 	let showContent = (i) => {
 		if (selectedAcc == i) {
@@ -564,7 +457,7 @@ const FormContent = (props = {}) => {
 						id="applyBtn"
 						onClick={() => {
 							// newValidator();
-							validator();
+							validator(formData);
 						}}
 						className="RCB-btn-primary"
 						// disabled={true}

@@ -1,5 +1,5 @@
 {
-	"moduleName": "Auth",
+	"moduleName": "Authentication",
 	"moduleKey": null,
 	"moduleDesc": "Authenticate the Unbxd library using your Unbxd account keys (also known as Authentication Keys).",
 	"docLink": "https://unbxd.github.io/search-JS-library/docs/configurations/SiteKey.html",

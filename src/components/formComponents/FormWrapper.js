@@ -20,6 +20,8 @@ const FormWrapper = (props = {}) => {
 		fsCodeEditorData,
 	} = props;
 
+	// console.log(moduleKey, config);
+
 	const debounce = (callback, wait) => {
 		let timeoutId = null;
 		return (...args) => {
@@ -41,7 +43,8 @@ const FormWrapper = (props = {}) => {
 						let { options, dataType, name } = config;
 						let selectedVal = "";
 						if (dataType === "string") {
-							selectedVal = objData[name];
+							console.log(moduleKey, name, objData[name]);
+							selectedVal = objData[name].value;
 						} else if (dataType === "boolean") {
 							console.log("key:", key, objData[name]);
 							selectedVal = objData[name];
