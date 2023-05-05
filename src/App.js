@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import "unbxd-react-components/components/theme.css";
 import "unbxd-react-components/components/core.css";
@@ -14,13 +13,6 @@ import Lander from "./components/landerComponents/Lander";
 import LanderUseCases from "./components/landerComponents/LanderUseCases";
 
 const App = (props) => {
-	// axios.get("http://localhost:5000/upload").then((res) => {
-	// 	console.log("default upload data:", res.data);
-	// });
-
-	// axios.get("http://localhost:5000/upload/123").then((res) => {
-	// 	console.log("custom upload data:", res.data);
-	// });
 	return (
 		<BrowserRouter>
 			<Routes>
@@ -35,20 +27,20 @@ const App = (props) => {
 				/>
 				<Route
 					exact
-					path="builder/:id"
+					path="builder/:siteKey/:configKey"
 					element={
 						<DashboardWrapper viewConfigOption={true} reloadWarning={true} />
 					}
 				/>
 				<Route
-					path="qa"
+					path="preview"
 					element={
 						<DashboardWrapper viewConfigOption={false} reloadWarning={false} />
 					}
 				/>
 				<Route
 					exact
-					path="qa/:id"
+					path="preview/:siteKey/:configKey"
 					element={
 						<DashboardWrapper viewConfigOption={false} reloadWarning={false} />
 					}

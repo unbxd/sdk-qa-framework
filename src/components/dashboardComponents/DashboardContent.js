@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Vanilla2 from "../externalHTMLComponents/Vanilla2";
 import FormBuilder from "../formComponents/FormBuilder";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import defaultConfig from "../../inputJson/dummy.json";
 
 const DashboardContent = (props) => {
 	const { viewConfigOption, reloadWarning = true } = props;

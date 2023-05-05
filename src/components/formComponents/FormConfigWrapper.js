@@ -71,7 +71,6 @@ const FormConfigWrapper = (props = {}) => {
 								width="100%"
 								extensions={[javascript({ json: true })]}
 								onChange={(code) => {
-									console.log("onCodeChange");
 									delayChange(name, code);
 								}}
 							/>

@@ -24,6 +24,7 @@ const FormContent = (props = {}) => {
 	const [formData, setFormData] = useState(defaultConfig);
 	const [jsonData, setJsonData] = useState(JSON.stringify(formData, null, 4));
 	const [fsCodeEditorData, setFSCodeEditorData] = useState(null);
+	const [publishedLink, setPublishedLink] = useState("");
 
 	const confirmModalRef = useRef();
 	const viewJSONModalRef = useRef();
@@ -33,7 +34,7 @@ const FormContent = (props = {}) => {
 
 	const inputJSONFile = useRef(null);
 
-	const { id } = useParams();
+	const { siteKey, configKey } = useParams();
 
 	const updateMasterConfig = (formConfigs) => {
 		formConfigs.map((formConfig = {}, i) => {
@@ -250,20 +251,20 @@ const FormContent = (props = {}) => {
 	};
 
 	useEffect(() => {
-		if (id !== undefined) {
-			// console.log("id:", id);
+		if (siteKey !== undefined && configKey !== undefined) {
 			axios
-				.get(
-					"https://libraries.unbxdapi.com/search-sdk/qa-framework/demo-unbxd700181503576558/fb853e3332f2645fac9d71dc63e09ec1.json"
-				)
-				.then((res) => {
-					console.log("res.data:", res.data);
-					const data = res.data;
-					setFormData(data);
-					validator(data);
+				.get("http://localhost:5000/retrieve", {
+					params: { siteKey: siteKey, configKey: configKey },
+				})
+				.then((response) => {
+					// handle success
+					setFormData(response.data.config);
+					validator(response.data.config);
+				})
+				.catch((error) => {
+					// handle error
+					console.log(error);
 				});
-			// setFormData(inputConfig);
-			// validator(inputConfig);
 		}
 	}, []);
 
@@ -285,6 +286,61 @@ const FormContent = (props = {}) => {
 
 	const handlePublish = () => {
 		setPublishPopUp(true);
+		if (siteKey !== undefined && configKey !== undefined) {
+			const customConfig = {
+				headers: {
+					"Content-Type": "application/json",
+				},
+			};
+			axios
+				.post(
+					"http://localhost:5000/upload",
+					JSON.stringify({
+						data: "Hello backend defined",
+						config: formData,
+						siteKey: siteKey,
+						configKey: configKey,
+					}),
+					customConfig
+				)
+				.then((res) => {
+					console.log(res.data);
+					setPublishedLink(
+						`http://localhost:3030/builder/${siteKey}/${configKey}`
+					);
+				})
+				.catch((err) => {
+					console.error("Error:", err.message);
+				});
+		} else {
+			let { siteKey } = formData;
+			let configKey = Date.now().toString();
+			const customConfig = {
+				headers: {
+					"Content-Type": "application/json",
+				},
+			};
+			axios
+				.post(
+					"http://localhost:5000/upload",
+					JSON.stringify({
+						data: "Hello backend undefined",
+						config: formData,
+						siteKey: siteKey,
+						configKey: configKey,
+					}),
+					customConfig
+				)
+				.then((res) => {
+					console.log(res.data);
+					setPublishedLink(
+						`http://localhost:3030/builder/${siteKey}/${configKey}`
+					);
+				})
+				.catch((err) => {
+					console.error("Error:", err.message);
+				});
+		}
 		setTimeout(handlePublisStatus, 2000);
 	};
 
@@ -507,21 +563,25 @@ const FormContent = (props = {}) => {
 				{publishPopUp && (
 					<div className="confirm-modal-body">
 						Publishing...
-						<div>
-							<img src="loading.gif" alt="Loading"></img>
+						<div className="loading">
+							<img
+								src="https://i.pinimg.com/originals/49/23/29/492329d446c422b0483677d0318ab4fa.gif"
+								alt="Loading"
+							></img>
 						</div>
 					</div>
 				)}
 				{publishStatus && (
 					<div>
 						<div className="confirm-modal-body">
-							Your configurations have been published to the below link:
+							The demo site with these configurations can now be visited at:
 							<div className="link">
 								<Input
 									id="cdn-link"
 									name="cdn-link"
 									readOnly
-									defaultValue="http://js-sdk.unbxd.com/builder/456787654334567"
+									// defaultValue="http://js-sdk.unbxd.com/builder/456787654334567"
+									defaultValue={publishedLink}
 								/>
 								<div
 									id="copyIcon"

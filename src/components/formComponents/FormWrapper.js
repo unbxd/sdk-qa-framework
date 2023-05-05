@@ -43,10 +43,8 @@ const FormWrapper = (props = {}) => {
 						let { options, dataType, name } = config;
 						let selectedVal = "";
 						if (dataType === "string") {
-							console.log(moduleKey, name, objData[name]);
 							selectedVal = objData[name].value;
 						} else if (dataType === "boolean") {
-							console.log("key:", key, objData[name]);
 							selectedVal = objData[name];
 							// for (let option of options) {
 							// 	if (option.value === objData[name]) {
@@ -86,20 +84,27 @@ const FormWrapper = (props = {}) => {
 	return (
 		<Form onChange={delayChange}>
 			{config.map((conf, index) => {
-				return (
-					<FormConfigWrapper
-						fsCodeEditorData={fsCodeEditorData}
-						setFSCodeEditorData={setFSCodeEditorData}
-						moduleKey={moduleKey}
-						formData={formData}
-						key={index}
-						docLink={docLink}
-						attrConfig={conf}
-						delayChange={delayChange}
-						// onChange={delayChange}
-						onCodeChange={delayChange}
-					/>
-				);
+				let display = true;
+				if (conf["displayIf"] && typeof conf["displayIf"] === "function") {
+					display = conf["displayIf"](formData);
+					console.log(display);
+				}
+				if (display) {
+					return (
+						<FormConfigWrapper
+							fsCodeEditorData={fsCodeEditorData}
+							setFSCodeEditorData={setFSCodeEditorData}
+							moduleKey={moduleKey}
+							formData={formData}
+							key={index}
+							docLink={docLink}
+							attrConfig={conf}
+							delayChange={delayChange}
+							// onChange={delayChange}
+							onCodeChange={delayChange}
+						/>
+					);
+				}
 			})}
 		</Form>
 	);

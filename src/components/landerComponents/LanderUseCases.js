@@ -3,9 +3,9 @@ import LanderHeader from "./LanderHeader";
 import Usecases from "./Usecases";
 
 import { Input, Button, Dropdown } from "unbxd-react-components";
-import paginationConfig from "../../config/formConfig/pagination.json";
-import productViewConfig from "../../config/formConfig/productView.json";
-import facetsConfig from "../../config/formConfig/facets.json";
+import paginationConfig from "../../config/formConfig/pagination";
+import productViewConfig from "../../config/formConfig/productView";
+import facetsConfig from "../../config/formConfig/facets";
 
 const LanderUseCases = () => {
 	return (

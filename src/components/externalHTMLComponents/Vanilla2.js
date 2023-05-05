@@ -6,7 +6,7 @@ import UnbxdSearch from "../../../../search-JS-library/src/index";
 import useDeepCompareEffect from "use-deep-compare-effect";
 
 export default function Vanilla2(props) {
-	let { validatedConfig, filename, reloadWarning } = props;
+	let { validatedConfig = {}, filename, reloadWarning } = props;
 
 	// const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
 	// 	JSON.stringify(validatedConfig)
@@ -16,12 +16,18 @@ export default function Vanilla2(props) {
 	// link.download = "validatedConfig.json";
 	// link.click();
 
-	console.log("validatedConfig:", validatedConfig);
-
 	useEffect(() => {
 		// window.unbxdSearch.resetAll();
 		// window.unbxdSearch = null;
 		if (Object.keys(validatedConfig).length) {
+			if (validatedConfig.pagesize.pageSize !== undefined) {
+				validatedConfig = {
+					...validatedConfig,
+					pageSize: validatedConfig.pagesize.pageSize,
+				};
+			}
+			console.log("validatedConfig:", validatedConfig);
+
 			if (UnbxdSearch) {
 				window.unbxdSearch = new UnbxdSearch({
 					hashMode: false,
