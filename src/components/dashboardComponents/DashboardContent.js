@@ -24,14 +24,19 @@ const DashboardContent = (props) => {
 
 	return (
 		<div className="formMaster">
-			{viewConfigOption && (
+			{/* {viewConfigOption && (
 				<FormBuilder
 					setValidatedConfig={setValidatedConfig}
 					hideConfigTab={hideConfigTab}
 				/>
-			)}
+			)} */}
+			<FormBuilder
+				viewConfigOption={viewConfigOption}
+				setValidatedConfig={setValidatedConfig}
+				hideConfigTab={hideConfigTab}
+			/>
 			<div
-				className="demoSite"
+				className={viewConfigOption ? "demoSite" : "demoSite preview"}
 				// style={
 				// 	viewConfigOption
 				// 		? viewConfigTab
@@ -41,6 +46,7 @@ const DashboardContent = (props) => {
 				// }
 			>
 				<Vanilla2
+					// key={new Date().getTime()}
 					validatedConfig={validatedConfig}
 					reloadWarning={reloadWarning}
 				/>
@@ -53,6 +59,7 @@ const DashboardContent = (props) => {
 							showConfigTab();
 						}}
 					>
+						<div className="showArrowRight"></div>
 						<div className="showArrowRight"></div>
 					</div>
 				)}

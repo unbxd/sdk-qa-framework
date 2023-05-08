@@ -52,7 +52,15 @@ body {
 	display: inline-block;
 	background-color: #eaeaea;
 	padding: 15px;
-	width: 100%;
+	width: 70%;
+
+	&.preview {
+		position: absolute;
+		padding: 0;
+		margin: -50px 0 0 0;
+		height: 100%;
+		width: 100%;
+	}
 
 	.vanilla2 {
 		background-color: #fff;
@@ -62,16 +70,16 @@ body {
 
 .viewConfigTab {
 	position: absolute;
-	top: 46px;
+	top: 60px;
 	left: 0;
-	display: flex;
+	display: none;
 	align-items: center;
 	justify-content: center;
 	margin: 0 10px 0 0;
 	background-color: rgb(255, 255, 255);
-	width: 20px;
-	height: 70px;
-	border-radius: 0 5px 5px 0;
+	width: 30px;
+	height: 50px;
+	border-radius: 0 35px 35px 0;
 	border: 1px solid #ccc;
 	box-shadow: 1px 0px 4px 0px #ccc;
 	border-left: none;
@@ -81,35 +89,39 @@ body {
 	}
 
 	.showArrowRight {
-		@include double-arrow-grey-right;
+		@include arrow-blue-right;
+		// @include double-arrow-grey-right;
 	}
 }
 
 .hideConfigTab {
 	z-index: 1;
 	position: absolute;
-	top: 46px;
+	top: 60px;
 	right: -31px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	background-color: rgb(247 247 249);
+	width: 30px;
+	height: 50px;
+	border-radius: 0 35px 35px 0;
+	border: 1px solid #ccc;
+	box-shadow: 3px 3px 4px 0px #ccc;
+	border-left: none;
+
+	&:hover {
+		cursor: pointer;
+	}
 
 	.showArrowLeft {
 		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin: 0 10px 0 5px;
-		background-color: rgb(247 247 249);
-		width: 20px;
-		height: 70px;
-		border-radius: 0 5px 5px 0;
-		border: 1px solid #ccc;
-		box-shadow: 3px 3px 4px 0px #ccc;
-		border-left: none;
-
-		&:hover {
-			cursor: pointer;
-		}
+		margin-right: 5px;
 
 		span {
-			@include double-arrow-grey-right;
+			// @include double-arrow-grey-right;
+			@include arrow-blue-right;
 			transform: rotate(180deg);
 		}
 	}
@@ -123,7 +135,7 @@ body {
 	// align-items: flex-start;
 
 	.formBuilder {
-		display: none;
+		display: flex;
 		font-family: "Nunito Sans";
 		height: calc(100vh - 50px);
 		width: 30%;
@@ -132,6 +144,10 @@ body {
 		box-shadow: 0px 0px 4px 0px #ccc;
 		flex-direction: row;
 		background: #f7f7f9;
+
+		&.preview {
+			display: none;
+		}
 	}
 }
 
@@ -156,11 +172,12 @@ body {
 		overflow: scroll;
 		z-index: 3;
 		transition: all 0.1s;
+		box-shadow: 0px 0px 4px 0px #ccc;
 		-webkit-transition: all 0.1s;
 
 		.icon {
 			flex-direction: row;
-			width: fit-content;
+			width: 90%;
 			margin-left: 8px;
 			justify-content: flex-start;
 			border-radius: 6px;
@@ -212,6 +229,7 @@ body {
 
 		&:hover {
 			cursor: pointer;
+			background: #eef1fa;
 		}
 
 		&-selected {
@@ -246,7 +264,7 @@ body {
 					brightness(94%) contrast(98%);
 
 				.Authentication-icon {
-					background-image: url("https://static.thenounproject.com/png/3883374-200.png");
+					background-image: url("https://static.thenounproject.com/png/30188-200.png");
 					background-size: 100% 100%;
 					width: inherit;
 					height: inherit;
@@ -269,21 +287,21 @@ body {
 				}
 
 				.facet-icon {
-					background-image: url("https://static.thenounproject.com/png/1701541-200.png");
+					background-image: url("https://static.thenounproject.com/png/1051169-200.png");
 					background-size: 100% 100%;
 					width: inherit;
 					height: inherit;
 				}
 
 				.pagesize-icon {
-					background-image: url("https://static.thenounproject.com/png/1630367-200.png");
+					background-image: url("https://static.thenounproject.com/png/4525852-200.png");
 					background-size: 100% 100%;
 					width: inherit;
 					height: inherit;
 				}
 
 				.sort-icon {
-					background-image: url("https://static.thenounproject.com/png/22384-200.png");
+					background-image: url("https://static.thenounproject.com/png/3699490-200.png");
 					background-size: 100% 100%;
 					width: inherit;
 					height: inherit;
@@ -297,7 +315,7 @@ body {
 				}
 
 				.spellCheck-icon {
-					background-image: url("https://static.thenounproject.com/png/68409-200.png");
+					background-image: url("https://static.thenounproject.com/png/5035766-200.png");
 					background-size: 100% 100%;
 					width: inherit;
 					height: inherit;
@@ -325,14 +343,14 @@ body {
 				}
 
 				.pagination-icon {
-					background-image: url("https://static.thenounproject.com/png/1496881-200.png");
+					background-image: url("https://static.thenounproject.com/png/1496891-200.png");
 					background-size: 100% 100%;
 					width: inherit;
 					height: inherit;
 				}
 
 				.breadcrumb-icon {
-					background-image: url("https://static.thenounproject.com/png/1947728-200.png");
+					background-image: url("https://static.thenounproject.com/png/4304271-200.png");
 					background-size: 100% 100%;
 					width: inherit;
 					height: inherit;
@@ -361,7 +379,7 @@ body {
 			padding: 12px;
 			width: 20px;
 			height: 20px;
-			background: #fafbfc;
+			// background: #fafbfc;
 
 			// &-selected {
 			// 	display: flex;
@@ -375,14 +393,10 @@ body {
 			// }
 
 			.Authentication-icon {
-				background-image: url("https://static.thenounproject.com/png/3883374-200.png");
+				background-image: url("https://static.thenounproject.com/png/30188-200.png");
 				background-size: 100% 100%;
 				width: inherit;
 				height: inherit;
-				// background-image: url(./icons/authentication.svg);
-				// background-position: -190px -18px;
-				// width: 554px;
-				// height: 710px;
 			}
 
 			.SearchBox-icon {
@@ -400,21 +414,21 @@ body {
 			}
 
 			.facet-icon {
-				background-image: url("https://static.thenounproject.com/png/1701541-200.png");
+				background-image: url("https://static.thenounproject.com/png/1051169-200.png");
 				background-size: 100% 100%;
 				width: inherit;
 				height: inherit;
 			}
 
 			.pagesize-icon {
-				background-image: url("https://static.thenounproject.com/png/1630367-200.png");
+				background-image: url("https://static.thenounproject.com/png/4525852-200.png");
 				background-size: 100% 100%;
 				width: inherit;
 				height: inherit;
 			}
 
 			.sort-icon {
-				background-image: url("https://static.thenounproject.com/png/22384-200.png");
+				background-image: url("https://static.thenounproject.com/png/3699490-200.png");
 				background-size: 100% 100%;
 				width: inherit;
 				height: inherit;
@@ -428,7 +442,7 @@ body {
 			}
 
 			.spellCheck-icon {
-				background-image: url("https://static.thenounproject.com/png/68409-200.png");
+				background-image: url("https://static.thenounproject.com/png/5035766-200.png");
 				background-size: 100% 100%;
 				width: inherit;
 				height: inherit;
@@ -456,14 +470,14 @@ body {
 			}
 
 			.pagination-icon {
-				background-image: url("https://static.thenounproject.com/png/1496881-200.png");
+				background-image: url("https://static.thenounproject.com/png/1496891-200.png");
 				background-size: 100% 100%;
 				width: inherit;
 				height: inherit;
 			}
 
 			.breadcrumb-icon {
-				background-image: url("https://static.thenounproject.com/png/1947728-200.png");
+				background-image: url("https://static.thenounproject.com/png/4304271-200.png");
 				background-size: 100% 100%;
 				width: inherit;
 				height: inherit;
@@ -577,6 +591,7 @@ body {
 					line-height: 24px;
 					letter-spacing: 0.42px;
 					color: #3f5767;
+					text-transform: capitalize;
 				}
 
 				.desc {
@@ -623,11 +638,16 @@ body {
 				position: relative;
 
 				.doclink {
-					display: flex;
 					text-decoration: none;
 					position: absolute;
-					top: -19px;
-					@include info-icon-grayscale;
+					top: -22px;
+					// @include info-icon-grayscale;
+					background-image: url("https://static.thenounproject.com/png/93986-200.png");
+					background-size: 100% 100%;
+					width: 20px;
+					height: 20px;
+					filter: invert(75%) sepia(10%) saturate(119%) hue-rotate(185deg)
+						brightness(83%) contrast(90%);
 				}
 			}
 		}
@@ -757,6 +777,7 @@ body {
 	display: flex;
 	margin: 0 auto;
 	width: 100%;
+	height: 100%;
 	// padding-bottom: 10px;
 	overflow: scroll;
 	border: 1px solid #ccc;
@@ -971,9 +992,11 @@ body {
 .confirm-modal-body {
 	display: block;
 	width: 100%;
+	height: 75%;
 
 	.fsCodeEditor {
 		border: 1px solid #ccc;
+		height: 100%;
 	}
 
 	.loading {
@@ -984,25 +1007,42 @@ body {
 			height: 80px;
 		}
 	}
-	.link {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-
-		Input {
+	.links {
+		display: block;
+		margin: 10px 0;
+		.builder,
+		.preview {
+			padding: 10px 0;
+			height: 50px;
 			display: flex;
-			width: 80%;
-		}
+			flex-direction: row;
+			align-items: center;
 
-		.copyIcon {
-			background-image: url("https://static.thenounproject.com/png/2012819-200.png");
-			background-size: 100% 100%;
-			margin-left: -60px;
-			width: 40px;
-			height: 40px;
+			Input {
+				display: flex;
+				width: 80%;
+			}
+			.copyIcon {
+				display: flex;
+				background-image: url("https://static.thenounproject.com/png/2012819-200.png");
+				background-size: 100% 100%;
+				margin-left: -60px;
+				width: 40px;
+				height: 40px;
+				margin-top: 20px;
 
-			&:hover {
-				cursor: pointer;
+				&:hover {
+					cursor: pointer;
+				}
+			}
+
+			.openNewTab {
+				background-image: url("https://static.thenounproject.com/png/1598671-200.png");
+				background-size: 100% 100%;
+				width: 20px;
+				height: 20px;
+				margin-left: 5px;
+				margin-top: 20px;
 			}
 		}
 	}
@@ -1040,7 +1080,8 @@ body {
 	align-items: center;
 }
 
-.confirmModal {
+.confirmModal,
+.publishSuccess {
 	z-index: 4;
 }
 
@@ -1049,5 +1090,6 @@ body {
 	z-index: 4;
 	.RCB-modal-body {
 		width: 80%;
+		height: 90%;
 	}
 }

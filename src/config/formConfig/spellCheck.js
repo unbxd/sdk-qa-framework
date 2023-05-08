@@ -2,7 +2,7 @@ const spellCheckConfig = {
 	moduleName: "Spell Check",
 	moduleKey: "spellCheck",
 	moduleDesc:
-		"Consequat magna laborum deserunt exercitation esse est. Duis anim et et ut velit consectetur Lorem reprehenderit ad aliquip ea exercitation. Enim mollit excepteur qui cillum aliqua aliquip ipsum deserunt aute nisi labore id aute magna. Pariatur exercitation proident veniam exercitation aute ipsum cillum.",
+		"Provides spelling suggestions or spell-checks for misspelled search queries.",
 	docLink:
 		"https://unbxd.github.io/search-JS-library/docs/configurations/SpellCheckConfig.html",
 	config: [

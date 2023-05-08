@@ -2,7 +2,7 @@ const searchBoxConfig = {
 	moduleName: "SearchBox",
 	moduleKey: null,
 	moduleDesc:
-		"Sunt sint exercitation magna magna magna. Eu proident in laborum in ipsum incididunt commodo reprehenderit laborum in adipisicing. Anim Lorem non ea ea do fugiat sit labore in consequat.",
+		"Bind keyboard and mouse events to the search input field and search button on your website.",
 	docLink:
 		"https://unbxd.github.io/search-JS-library/docs/configurations/SearchBar.html",
 	config: [

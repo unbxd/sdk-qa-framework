@@ -2,7 +2,7 @@ const paginationConfig = {
 	moduleName: "Pagination",
 	moduleKey: "pagination",
 	moduleDesc:
-		"Ex ad eu excepteur deserunt nulla laborum eiusmod laborum aliquip enim. Duis reprehenderit tempor sunt eiusmod proident sint ex ipsum elit aliqua. Adipisicing veniam fugiat duis sit est deserunt velit cillum sunt.",
+		"Control the number of products displayed on the page and the type of pagination to display.",
 	docLink:
 		"https://unbxd.github.io/search-JS-library/docs/configurations/PaginationConfig.html",
 	config: [
@@ -36,7 +36,6 @@ const paginationConfig = {
 			name: "el",
 			dataType: "element",
 			displayIf: function (pagination) {
-				console.log("pagination:", pagination.type);
 				return pagination.type !== "INFINITE_SCROLL";
 			},
 		},

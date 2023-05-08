@@ -55,20 +55,18 @@ app.get("/retrieve", (req, res) => {
 			.then((response) => {
 				let config = {};
 				config = { ...response.data };
-				// console.log(config);
 				res.send({
 					status: "success",
 					config: config,
 				});
 			})
-			.catch((err) =>
+			.catch((err) => {
 				res.send({
 					status: "error",
 					error: err.message,
-				})
-			);
+				});
+			});
 	}
-	console.log(config);
 });
 
 const uploadToCDN = async (siteKey, configKey, config) => {

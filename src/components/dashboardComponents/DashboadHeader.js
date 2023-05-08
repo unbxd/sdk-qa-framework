@@ -5,7 +5,7 @@ import "../../../public/styles/components/dashboard/header.scss";
 
 const DashboardHeader = (props) => {
 	const { viewConfigOption } = props;
-	return viewConfigOption ? (
+	return (
 		<div className="dashHead">
 			<div className="desc">
 				<a className="logoWrapper" href="/">
@@ -30,8 +30,6 @@ const DashboardHeader = (props) => {
 				</a>
 			</div>
 		</div>
-	) : (
-		""
 	);
 };
 

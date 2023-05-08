@@ -2,7 +2,7 @@ const productsConfig = {
 	moduleName: "Products",
 	moduleKey: "products",
 	moduleDesc:
-		"Ea laboris deserunt laborum pariatur tempor Lorem reprehenderit proident. Cupidatat minim adipisicing enim voluptate minim proident. Ut aliqua ea nulla amet nostrud pariatur voluptate laborum. Deserunt culpa adipisicing qui exercitation tempor velit tempor laboris exercitation.",
+		"This is the place where products from the search results will be rendered. ",
 	docLink:
 		"https://unbxd.github.io/search-JS-library/docs/configurations/ProductsConfig.html",
 	config: [

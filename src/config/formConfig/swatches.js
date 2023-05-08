@@ -2,7 +2,7 @@ const swatchesConfig = {
 	moduleName: "Swatches",
 	moduleKey: "swatches",
 	moduleDesc:
-		"Laborum qui officia fugiat reprehenderit aliqua ut consectetur aliqua veniam laborum voluptate anim ipsum nostrud. Ex occaecat dolore ex dolore anim fugiat veniam eu aliqua cupidatat proident magna sint. Culpa laboris dolor voluptate ex sit. Sunt id ea et proident velit consectetur id qui reprehenderit elit cupidatat Lorem. Ad ea deserunt consectetur exercitation consectetur incididunt nostrud. Aute amet aute sunt consequat proident est fugiat ad.",
+		"Indicate the available options for a certain variant of a product.",
 	docLink:
 		"https://unbxd.github.io/search-JS-library/docs/configurations/SwatchesConfig.html",
 	config: [

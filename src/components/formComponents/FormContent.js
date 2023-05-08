@@ -24,10 +24,12 @@ const FormContent = (props = {}) => {
 	const [formData, setFormData] = useState(defaultConfig);
 	const [jsonData, setJsonData] = useState(JSON.stringify(formData, null, 4));
 	const [fsCodeEditorData, setFSCodeEditorData] = useState(null);
-	const [publishedLink, setPublishedLink] = useState("");
+	const [publishedBuilderLink, setPublishedBuilderLink] = useState("");
+	const [publishedPreviewLink, setPublishedPreviewLink] = useState("");
 
 	const confirmModalRef = useRef();
 	const viewJSONModalRef = useRef();
+	const publishSuccessModalRef = useRef();
 
 	let [publishPopUp, setPublishPopUp] = useState(false);
 	let [publishStatus, setPublishStatus] = useState(false);
@@ -85,7 +87,7 @@ const FormContent = (props = {}) => {
 			);
 		} else {
 			setFormData({ ...formData, ...data });
-			setJsonData(JSON.stringify({ ...formData, ...data }), null, 4);
+			setJsonData(JSON.stringify({ ...formData, ...data }, null, 4));
 		}
 	};
 
@@ -101,13 +103,15 @@ const FormContent = (props = {}) => {
 					// console.log(`${moduleKey}:`, moduleConfig);
 
 					if (!moduleConfig) {
-						if (formConfig.length) {
-							// console.log(moduleKey, "has no config.");
-							try {
-								let evaluatedVal = eval(formConfig);
-								validatedData[moduleKey] = evaluatedVal;
-							} catch (err) {
-								validatedData[moduleKey] = formConfig;
+						// console.log(moduleKey, "has no config.");
+						if (formConfig !== undefined) {
+							if (formConfig.length) {
+								try {
+									let evaluatedVal = eval(formConfig);
+									validatedData[moduleKey] = evaluatedVal;
+								} catch (err) {
+									validatedData[moduleKey] = formConfig;
+								}
 							}
 						}
 					} else {
@@ -240,10 +244,6 @@ const FormContent = (props = {}) => {
 				// console.log("validatedData after validation:", validatedData);
 				if (Object.keys(validatedData).length > 0) {
 					setValidatedConfig(validatedData);
-				} else {
-					console.error(
-						"Form data was empty. Nothing to validate! \nPrevious config is still applied since there is no change."
-					);
 				}
 			},
 			4
@@ -251,6 +251,7 @@ const FormContent = (props = {}) => {
 	};
 
 	useEffect(() => {
+		console.log("siteKey:", siteKey, "configKey:", configKey);
 		if (siteKey !== undefined && configKey !== undefined) {
 			axios
 				.get("http://localhost:5000/retrieve", {
@@ -258,6 +259,11 @@ const FormContent = (props = {}) => {
 				})
 				.then((response) => {
 					// handle success
+					if (response.data.status === "error") {
+						console.log("No saved configurations found.");
+						return;
+					}
+					console.log("No error, continuing.");
 					setFormData(response.data.config);
 					validator(response.data.config);
 				})
@@ -268,20 +274,15 @@ const FormContent = (props = {}) => {
 		}
 	}, []);
 
-	let showContent = (i) => {
-		if (selectedAcc == i) {
-			return setSelectedAcc(null);
-		}
-		setSelectedAcc(i);
-	};
-
 	let toggleConfig = () => {
 		viewJSONModalRef.current.showModal();
 	};
 
-	const handlePublisStatus = () => {
+	const handlePublishStatus = () => {
 		setPublishPopUp(false);
 		setPublishStatus(true);
+		confirmModalRef.current.hideModal();
+		publishSuccessModalRef.current.showModal();
 	};
 
 	const handlePublish = () => {
@@ -304,9 +305,11 @@ const FormContent = (props = {}) => {
 					customConfig
 				)
 				.then((res) => {
-					console.log(res.data);
-					setPublishedLink(
+					setPublishedBuilderLink(
 						`http://localhost:3030/builder/${siteKey}/${configKey}`
+					);
+					setPublishedPreviewLink(
+						`http://localhost:3030/preview/${siteKey}/${configKey}`
 					);
 				})
 				.catch((err) => {
@@ -333,15 +336,18 @@ const FormContent = (props = {}) => {
 				)
 				.then((res) => {
 					console.log(res.data);
-					setPublishedLink(
+					setPublishedBuilderLink(
 						`http://localhost:3030/builder/${siteKey}/${configKey}`
+					);
+					setPublishedPreviewLink(
+						`http://localhost:3030/preview/${siteKey}/${configKey}`
 					);
 				})
 				.catch((err) => {
 					console.error("Error:", err.message);
 				});
 		}
-		setTimeout(handlePublisStatus, 2000);
+		setTimeout(handlePublishStatus, 2000);
 	};
 
 	const copyJSON = () => {
@@ -408,8 +414,9 @@ const FormContent = (props = {}) => {
 
 	return (
 		<div className="formContent">
-			<div className="hideConfigTab">
-				<div className="showArrowLeft" onClick={() => hideConfigTab()}>
+			<div className="hideConfigTab" onClick={() => hideConfigTab()}>
+				<div className="showArrowLeft">
+					<span></span>
 					<span></span>
 				</div>
 			</div>
@@ -427,11 +434,15 @@ const FormContent = (props = {}) => {
 						<>
 							{selectedAcc === i && (
 								<div className="component" key={i}>
+									{/* {console.log(
+										formConfig.moduleKey
+											? formData[formConfig.moduleKey]
+											: formData
+									)} */}
 									<div className="header">
 										<div className="name">{formConfig.moduleName}</div>
 										<div className="desc">{formConfig.moduleDesc}</div>
 									</div>
-
 									<FormWrapper
 										fsCodeEditorData={fsCodeEditorData}
 										setFSCodeEditorData={setFSCodeEditorData}
@@ -529,6 +540,11 @@ const FormContent = (props = {}) => {
 				ref={confirmModalRef}
 				showClose={true}
 				className="confirmModal"
+				onClose={() => {
+					console.log("confirmModalRef closed");
+					// setPublishPopUp(false);
+					// confirmModalRef.current.hideModal();
+				}}
 			>
 				{!publishPopUp && !publishStatus && (
 					<div>
@@ -571,25 +587,69 @@ const FormContent = (props = {}) => {
 						</div>
 					</div>
 				)}
+			</Modal>
+			<Modal
+				title="Publish Successful"
+				ref={publishSuccessModalRef}
+				showClose={true}
+				className="publishSuccess"
+				onClose={() => {
+					console.log("publishSuccessModalRef closed");
+					// publishSuccessModalRef.current.hideModal();
+					setPublishStatus(false);
+				}}
+			>
 				{publishStatus && (
 					<div>
 						<div className="confirm-modal-body">
 							The demo site with these configurations can now be visited at:
-							<div className="link">
-								<Input
-									id="cdn-link"
-									name="cdn-link"
-									readOnly
-									// defaultValue="http://js-sdk.unbxd.com/builder/456787654334567"
-									defaultValue={publishedLink}
-								/>
-								<div
-									id="copyIcon"
-									className="copyIcon"
-									onClick={() => {
-										copyPublishedLink("cdn-link", "copyIcon");
-									}}
-								></div>
+							<div className="links">
+								<div className="builder">
+									<Input
+										id="builder-cdn-link"
+										name="builder-cdn-link"
+										readOnly
+										label="Builder Link:"
+										// defaultValue="http://js-sdk.unbxd.com/builder/456787654334567"
+										defaultValue={publishedBuilderLink}
+									/>
+									<div
+										id="copyIcon-builder"
+										className="copyIcon"
+										onClick={() => {
+											copyPublishedLink("builder-cdn-link", "copyIcon-builder");
+										}}
+									></div>
+									<a
+										id="openNewTab"
+										className="openNewTab"
+										href={publishedBuilderLink}
+										target="_blank"
+									></a>
+								</div>
+								<div className="preview">
+									<Input
+										id="preview-cdn-link"
+										name="preview-cdn-link"
+										readOnly
+										// defaultValue="http://js-sdk.unbxd.com/builder/456787654334567"
+										label="Preview Link:"
+										defaultValue={publishedPreviewLink}
+									/>
+									<div
+										id="copyIcon-preview"
+										className="copyIcon"
+										onClick={() => {
+											copyPublishedLink("preview-cdn-link", "copyIcon-preview");
+										}}
+									></div>
+									<a
+										id="openNewTab"
+										className="openNewTab"
+										href={publishedPreviewLink}
+										target="_blank"
+									></a>
+								</div>
 							</div>
 						</div>
 						<div className="modal-footer">
@@ -598,7 +658,7 @@ const FormContent = (props = {}) => {
 								className="cancel"
 								onClick={() => {
 									setPublishStatus(false);
-									confirmModalRef.current.hideModal();
+									publishSuccessModalRef.current.hideModal();
 								}}
 							>
 								Close
@@ -612,6 +672,10 @@ const FormContent = (props = {}) => {
 				ref={viewJSONModalRef}
 				showClose={true}
 				className="configModal"
+				onClose={() => {
+					console.log("viewJSONModalRef closed");
+					// viewJSONModalRef.current.hideModal()
+				}}
 			>
 				<div className="confirm-modal-body">
 					<div className="formjson" id="formjson">
@@ -623,7 +687,7 @@ const FormContent = (props = {}) => {
 							// value={jsonData.replace(/\\t|\\n/gim, "")}
 							// value={jsonData.replace(/\\t|\\n/gim, "").replace(/\\"/gim, "'")}
 							placeholder="Insert code here..."
-							height="300px"
+							height="100%"
 							width="100%"
 							extensions={[javascript({ json: true })]}
 							onChange={(code) => {

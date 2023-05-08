@@ -60,6 +60,10 @@ const FormConfigWrapper = (props = {}) => {
 						ref={viewCodeEditorRef}
 						showClose={true}
 						className="editorModal"
+						onClose={() => {
+							console.log("viewCodeEditorRef closed");
+							// viewCodeEditorRef.current.hideModal()
+						}}
 					>
 						<div className="confirm-modal-body">
 							<CodeMirror
@@ -67,7 +71,7 @@ const FormConfigWrapper = (props = {}) => {
 								className="fsCodeEditor"
 								value={fsCodeEditorData}
 								placeholder="Insert code here..."
-								height="300px"
+								height="100%"
 								width="100%"
 								extensions={[javascript({ json: true })]}
 								onChange={(code) => {

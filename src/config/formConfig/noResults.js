@@ -1,8 +1,7 @@
 const noResultsConfig = {
 	moduleName: "No Results",
 	moduleKey: "noResults",
-	moduleDesc:
-		"Consectetur enim sint ea consequat culpa adipisicing irure cupidatat labore ipsum consequat. Irure ea exercitation eu occaecat sit minim irure nisi amet fugiat esse. Fugiat irure amet minim sint officia sunt ex. Deserunt officia incididunt ipsum tempor minim deserunt magna anim nostrud occaecat consectetur quis eiusmod. Cillum cupidatat est incididunt elit enim laboris anim occaecat nostrud velit aliquip duis. Labore aliquip ut incididunt ea excepteur officia in id culpa officia. Labore amet culpa commodo occaecat.",
+	moduleDesc: "Display to be rendered when there are no results.",
 	docLink:
 		"https://unbxd.github.io/search-JS-library/docs/configurations/NoResultsConfig.html",
 	config: [

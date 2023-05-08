@@ -21,7 +21,7 @@ import loaderConfig from "../../config/formConfig/loader";
 import othersConfig from "../../config/formConfig/others";
 
 const FormBuilder = (props) => {
-	const { setValidatedConfig, hideConfigTab } = props;
+	const { setValidatedConfig, hideConfigTab, viewConfigOption } = props;
 	const [selectedAcc, setSelectedAcc] = useState(null);
 	const formConfigs = [
 		authConfig,
@@ -50,7 +50,7 @@ const FormBuilder = (props) => {
 	};
 	return (
 		<div
-			className="formBuilder"
+			className={viewConfigOption ? "formBuilder" : "formBuilder preview"}
 			// style={viewConfigTab ? { display: "flex" } : { display: "none" }}
 		>
 			<FormIcons

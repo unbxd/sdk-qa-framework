@@ -2,7 +2,7 @@ const productViewConfig = {
 	moduleName: "Product View",
 	moduleKey: "productView",
 	moduleDesc:
-		"Proident sint mollit veniam velit. Cillum esse eu sint culpa et enim tempor culpa laborum magna reprehenderit aliquip cillum incididunt. In cupidatat incididunt officia aute ut dolore exercitation. Ex sint est consectetur eu non duis esse est aliquip. Lorem excepteur nostrud enim ut.",
+		"Configure the way in which the products have to be displayed (List or Grid).",
 	docLink:
 		"https://unbxd.github.io/search-JS-library/docs/configurations/ProductViewConfig.html",
 	config: [

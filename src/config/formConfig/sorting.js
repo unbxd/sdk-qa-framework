@@ -2,7 +2,7 @@ const sortingConfig = {
 	moduleName: "Sorting",
 	moduleKey: "sort",
 	moduleDesc:
-		"Occaecat aute consectetur culpa consectetur adipisicing reprehenderit esse. Enim ut esse incididunt quis eiusmod eiusmod. Dolore consectetur cupidatat ut aliquip cillum sunt duis Lorem aute amet aliqua laborum amet incididunt. Cillum nostrud sunt consectetur nostrud non laboris consectetur adipisicing.",
+		"Rearrange the search results based on certain fields in a particular order.",
 	docLink:
 		"https://unbxd.github.io/search-JS-library/docs/configurations/SortConfig.html",
 	config: [

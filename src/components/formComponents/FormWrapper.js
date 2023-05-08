@@ -20,7 +20,7 @@ const FormWrapper = (props = {}) => {
 		fsCodeEditorData,
 	} = props;
 
-	// console.log(moduleKey, config);
+	// console.log("formData:", JSON.stringify(formData, null, 4));
 
 	const debounce = (callback, wait) => {
 		let timeoutId = null;
@@ -37,7 +37,12 @@ const FormWrapper = (props = {}) => {
 		let objData = obj.data || {};
 		try {
 			for (let key in objData) {
-				if (objData[key] !== formData[key]) {
+				if (
+					objData[key] !== formData[key] &&
+					objData[key] !== undefined &&
+					formData[key] !== undefined
+				) {
+					// console.log(objData[key], formData[key]);
 					const config = getConfig(moduleKey, key);
 					if (config !== -1 && config.options) {
 						let { options, dataType, name } = config;
@@ -62,6 +67,7 @@ const FormWrapper = (props = {}) => {
 
 		// handle obj.errors later on
 		if (objData) {
+			// console.log("objData:", objData);
 			updateFormData(objData, moduleKey);
 		}
 		// if (obj.data) {
@@ -87,7 +93,6 @@ const FormWrapper = (props = {}) => {
 				let display = true;
 				if (conf["displayIf"] && typeof conf["displayIf"] === "function") {
 					display = conf["displayIf"](formData);
-					console.log(display);
 				}
 				if (display) {
 					return (

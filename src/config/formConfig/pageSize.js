@@ -1,8 +1,7 @@
 const pageSizeConfig = {
 	moduleName: "Page Size",
 	moduleKey: "pagesize",
-	moduleDesc:
-		"Do excepteur voluptate consequat sit veniam labore sunt sit. Labore dolor anim consectetur irure deserunt commodo enim. Nulla veniam nostrud sunt occaecat cupidatat do nostrud cupidatat dolore proident. Consequat voluptate est deserunt dolor mollit tempor dolor sunt consectetur. Eiusmod duis cillum minim est labore adipisicing. Dolore consectetur proident dolor minim ex amet id enim adipisicing voluptate eiusmod.",
+	moduleDesc: "Configure the number of products shown on each page.",
 	docLink:
 		"https://unbxd.github.io/search-JS-library/docs/configurations/PageSizeConfig.html",
 	config: [

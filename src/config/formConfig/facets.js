@@ -2,7 +2,7 @@ const facetsConfig = {
 	moduleName: "Facets",
 	moduleKey: "facet",
 	moduleDesc:
-		"Duis sint amet sit in. Cillum deserunt incididunt magna et. Sit occaecat sit exercitation aute reprehenderit pariatur. Velit minim pariatur est nostrud in ex eiusmod laborum consequat commodo Lorem proident est ut.",
+		"Product filters provided on your webpage which allows customers to narrow down the search result set.",
 	docLink:
 		"https://unbxd.github.io/search-JS-library/docs/configurations/FacetsConfig.html",
 	config: [

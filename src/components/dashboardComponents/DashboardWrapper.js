@@ -7,7 +7,9 @@ const DashboardWrapper = (props) => {
 
 	return (
 		<div className="dashboardWrapper">
-			<DashboardHeader viewConfigOption={viewConfigOption} />
+			{viewConfigOption && (
+				<DashboardHeader viewConfigOption={viewConfigOption} />
+			)}
 			<DashboardContent
 				viewConfigOption={viewConfigOption}
 				reloadWarning={reloadWarning}
