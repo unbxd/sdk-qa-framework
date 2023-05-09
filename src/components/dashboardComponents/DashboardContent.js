@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Vanilla2 from "../externalHTMLComponents/Vanilla2";
 import FormBuilder from "../formComponents/FormBuilder";
+import useDeepCompareEffect from "use-deep-compare-effect";
 
 const DashboardContent = (props) => {
 	const { viewConfigOption, reloadWarning = true } = props;
 
 	const [validatedConfig, setValidatedConfig] = useState({});
+	let [refreshCount, setRefreshCount] = useState(0);
 
 	const hideConfigTab = () => {
 		// setViewConfigTab(false);
@@ -21,6 +23,10 @@ const DashboardContent = (props) => {
 		document.querySelector(".formBuilder").style.display = "flex";
 		document.querySelector(".demoSite").style.width = "70%";
 	};
+
+	useDeepCompareEffect(() => {
+		setRefreshCount(++refreshCount);
+	}, [validatedConfig]);
 
 	return (
 		<div className="formMaster">
@@ -46,7 +52,7 @@ const DashboardContent = (props) => {
 				// }
 			>
 				<Vanilla2
-					// key={new Date().getTime()}
+					// key={refreshCount}
 					validatedConfig={validatedConfig}
 					reloadWarning={reloadWarning}
 				/>

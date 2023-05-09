@@ -112,6 +112,8 @@ const uploadToCDN = async (siteKey, configKey, config) => {
 };
 app.post("/upload", (req, res) => {
 	const { config, siteKey, configKey } = req.body;
+
+	console.log(config);
 	// console.log(`*****\n/qa-framework/${siteKey}/${configKey}.json\n****`);
 	const uploadLink = uploadToCDN(siteKey, configKey, config);
 	// res.send({ message: "Upload Successful" });

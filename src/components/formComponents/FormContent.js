@@ -8,7 +8,15 @@ import { javascript } from "@codemirror/lang-javascript";
 
 import { getEleDataType, getModuleConfigs } from "../../utils/configUtils";
 import defaultConfig from "../../inputJson/dummyMadrasLinkOld.json";
-import { Button, Modal, Input } from "unbxd-react-components";
+import {
+	Button,
+	Modal,
+	Input,
+	InlineModal,
+	InlineModalActivator,
+	InlineModalBody,
+	List,
+} from "unbxd-react-components";
 
 const FormContent = (props = {}) => {
 	const {
@@ -49,26 +57,6 @@ const FormContent = (props = {}) => {
 		});
 	};
 	updateMasterConfig(formConfigs); // this should be inside a hooks
-
-	document.onclick = myClickHandler;
-
-	function myClickHandler(e) {
-		const moreOptionsDropdown = document.getElementById("moreOptionsDropdown");
-		const classNames = [
-			"downloadJSON",
-			"uploadJSON",
-			"copyJSON",
-			"uploadToCDN",
-			"resetJSON",
-		];
-		if (
-			e.target.id != "viewMoreOption" &&
-			!classNames.includes(e.target.className)
-		) {
-			moreOptionsDropdown.style.display = "none";
-		}
-	}
-
 	const updateFormData = (data = {}, moduleKey = null) => {
 		if (moduleKey) {
 			setFormData({
@@ -105,12 +93,15 @@ const FormContent = (props = {}) => {
 					if (!moduleConfig) {
 						// console.log(moduleKey, "has no config.");
 						if (formConfig !== undefined) {
-							if (formConfig.length) {
-								try {
-									let evaluatedVal = eval(formConfig);
-									validatedData[moduleKey] = evaluatedVal;
-								} catch (err) {
-									validatedData[moduleKey] = formConfig;
+							// console.log(moduleKey, formConfig, typeof formConfig);
+							if (formConfig !== undefined) {
+								if (formConfig.length) {
+									try {
+										let evaluatedVal = eval(formConfig);
+										validatedData[moduleKey] = evaluatedVal;
+									} catch (err) {
+										validatedData[moduleKey] = formConfig;
+									}
 								}
 							}
 						}
@@ -211,6 +202,7 @@ const FormContent = (props = {}) => {
 										case "boolean":
 											// console.log("The element is of type(boolean).");
 											try {
+												// console.log(moduleKey, element, formConfig[element]);
 												validatedData[moduleKey][element] = eval(
 													formConfig[element]
 												);
@@ -264,12 +256,16 @@ const FormContent = (props = {}) => {
 						return;
 					}
 					console.log("No error, continuing.");
+					console.log("config:", response.data.config);
 					setFormData(response.data.config);
 					validator(response.data.config);
 				})
 				.catch((error) => {
 					// handle error
-					console.log(error);
+					console.error(
+						"Could not retrieve the configurations as server is down."
+					);
+					// console.log(error);
 				});
 		}
 	}, []);
@@ -280,7 +276,7 @@ const FormContent = (props = {}) => {
 
 	const handlePublishStatus = () => {
 		setPublishPopUp(false);
-		setPublishStatus(true);
+		// setPublishStatus(true);
 		confirmModalRef.current.hideModal();
 		publishSuccessModalRef.current.showModal();
 	};
@@ -293,6 +289,13 @@ const FormContent = (props = {}) => {
 					"Content-Type": "application/json",
 				},
 			};
+			const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
+				JSON.stringify(formData)
+			)}`;
+			const link = document.createElement("a");
+			link.href = jsonString;
+			link.download = "configurations.json";
+			link.click();
 			axios
 				.post(
 					"http://localhost:5000/upload",
@@ -305,6 +308,7 @@ const FormContent = (props = {}) => {
 					customConfig
 				)
 				.then((res) => {
+					setPublishStatus(true);
 					setPublishedBuilderLink(
 						`http://localhost:3030/builder/${siteKey}/${configKey}`
 					);
@@ -313,6 +317,7 @@ const FormContent = (props = {}) => {
 					);
 				})
 				.catch((err) => {
+					setPublishStatus(false);
 					console.error("Error:", err.message);
 				});
 		} else {
@@ -323,6 +328,13 @@ const FormContent = (props = {}) => {
 					"Content-Type": "application/json",
 				},
 			};
+			const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
+				JSON.stringify(formData)
+			)}`;
+			const link = document.createElement("a");
+			link.href = jsonString;
+			link.download = "configurations.json";
+			link.click();
 			axios
 				.post(
 					"http://localhost:5000/upload",
@@ -335,6 +347,7 @@ const FormContent = (props = {}) => {
 					customConfig
 				)
 				.then((res) => {
+					setPublishStatus(true);
 					console.log(res.data);
 					setPublishedBuilderLink(
 						`http://localhost:3030/builder/${siteKey}/${configKey}`
@@ -344,6 +357,7 @@ const FormContent = (props = {}) => {
 					);
 				})
 				.catch((err) => {
+					setPublishStatus(false);
 					console.error("Error:", err.message);
 				});
 		}
@@ -387,14 +401,14 @@ const FormContent = (props = {}) => {
 		setFormData(defaultConfig);
 	};
 
-	const viewOptionsDropdown = () => {
-		const moreOptionsDropdown = document.querySelector(".moreOptionsDropdown");
-		if (moreOptionsDropdown.style.display == "none") {
-			moreOptionsDropdown.style.display = "flex";
-		} else {
-			moreOptionsDropdown.style.display = "none";
-		}
-	};
+	// const viewOptionsDropdown = () => {
+	// 	const moreOptionsDropdown = document.querySelector(".moreOptionsDropdown");
+	// 	if (moreOptionsDropdown.style.display == "none") {
+	// 		moreOptionsDropdown.style.display = "flex";
+	// 	} else {
+	// 		moreOptionsDropdown.style.display = "none";
+	// 	}
+	// };
 
 	const inputFileChange = (e) => {
 		const jsonFile = e.target.files[0];
@@ -513,14 +527,73 @@ const FormContent = (props = {}) => {
 				</div>
 				<div className="btnSection">
 					{/* <CustomDrop appearance="block" options={[{"id": 1, "name"}]}/> */}
-					<button
+					<InlineModal
+						activatorAction="click"
+						className="viewMoreDropdown"
+						halign="left"
+						isModalOpen={false}
+						onModalStateChange={function noRefCheck() {}}
+					>
+						<InlineModalActivator>
+							<div>More Options</div>
+						</InlineModalActivator>
+						<InlineModalBody>
+							<div
+								className="viewCode"
+								onClick={() => {
+									setSelectedAcc(null);
+									viewJSONModalRef.current.showModal();
+								}}
+							>
+								<span></span>
+								View Code
+							</div>
+							<div className="downloadJSON" onClick={() => downloadJSON()}>
+								<span></span>
+								Download Code
+							</div>
+							<div
+								className="uploadJSON"
+								onClick={() => inputJSONFile.current.click()}
+							>
+								<span></span>
+								Upload File
+							</div>
+							<input
+								type="file"
+								onChange={inputFileChange}
+								ref={inputJSONFile}
+								style={{ display: "none" }}
+							/>
+							<div
+								className="uploadToCDN"
+								onClick={() => {
+									document.getElementById("moreOptionsDropdown").style.display =
+										"none";
+									confirmModalRef.current.showModal();
+								}}
+							>
+								<span></span>
+								Upload to CDN
+							</div>
+							<div className="copyJSON" onClick={() => copyJSON()}>
+								<span></span>
+								Copy Code
+							</div>
+							<div className="resetJSON" onClick={() => resetJSON()}>
+								<span></span>
+								Reset Config
+							</div>
+						</InlineModalBody>
+					</InlineModal>
+					{/* <button
 						id="viewMoreOption"
 						className="RCB-btn-secondary"
 						onClick={() => viewOptionsDropdown()}
 					>
-						{/* <div id="viewMoreOption" className="moreOptionsIcon"></div> */}
+						{/* <div id="viewMoreOption" className="moreOptionsIcon"></div>
 						More Options
-					</button>
+					</button> */}
 					<button
 						id="applyBtn"
 						onClick={() => {
@@ -541,12 +614,12 @@ const FormContent = (props = {}) => {
 				showClose={true}
 				className="confirmModal"
 				onClose={() => {
-					console.log("confirmModalRef closed");
-					// setPublishPopUp(false);
+					// console.log("confirmModalRef closed");
+					setPublishPopUp(false);
 					// confirmModalRef.current.hideModal();
 				}}
 			>
-				{!publishPopUp && !publishStatus && (
+				{!publishPopUp && (
 					<div>
 						<div className="confirm-modal-body">
 							Are you sure you want to publish these configurations?
@@ -589,17 +662,21 @@ const FormContent = (props = {}) => {
 				)}
 			</Modal>
 			<Modal
-				title="Publish Successful"
+				title={
+					publishStatus == "true"
+						? "Publish Successful"
+						: "Publish Unsuccessful"
+				}
 				ref={publishSuccessModalRef}
 				showClose={true}
 				className="publishSuccess"
 				onClose={() => {
-					console.log("publishSuccessModalRef closed");
+					// console.log("publishSuccessModalRef closed");
 					// publishSuccessModalRef.current.hideModal();
 					setPublishStatus(false);
 				}}
 			>
-				{publishStatus && (
+				{publishStatus == true ? (
 					<div>
 						<div className="confirm-modal-body">
 							The demo site with these configurations can now be visited at:
@@ -609,7 +686,7 @@ const FormContent = (props = {}) => {
 										id="builder-cdn-link"
 										name="builder-cdn-link"
 										readOnly
-										label="Builder Link:"
+										label="Link to Builder site:"
 										// defaultValue="http://js-sdk.unbxd.com/builder/456787654334567"
 										defaultValue={publishedBuilderLink}
 									/>
@@ -633,7 +710,7 @@ const FormContent = (props = {}) => {
 										name="preview-cdn-link"
 										readOnly
 										// defaultValue="http://js-sdk.unbxd.com/builder/456787654334567"
-										label="Preview Link:"
+										label="Link to Preview Site:"
 										defaultValue={publishedPreviewLink}
 									/>
 									<div
@@ -651,6 +728,32 @@ const FormContent = (props = {}) => {
 									></a>
 								</div>
 							</div>
+							<div className="info">
+								On closing this modal, the page will be reloaded and the new
+								configurations will be applied onto the demo site. Validation of
+								the configs might take upto 5 minutes in the server. So if the
+								configurations don't seem to be applied, try again after some
+								time.
+							</div>
+						</div>
+						<div className="modal-footer">
+							<Button
+								appearance="link"
+								className="cancel"
+								onClick={() => {
+									setPublishStatus(false);
+									publishSuccessModalRef.current.hideModal();
+									location.reload(true);
+								}}
+							>
+								Close
+							</Button>
+						</div>
+					</div>
+				) : (
+					<div>
+						<div className="confirm-modal-body">
+							Could not publish the configurations. Please try again later.
 						</div>
 						<div className="modal-footer">
 							<Button
@@ -673,8 +776,8 @@ const FormContent = (props = {}) => {
 				showClose={true}
 				className="configModal"
 				onClose={() => {
-					console.log("viewJSONModalRef closed");
-					// viewJSONModalRef.current.hideModal()
+					// console.log("viewJSONModalRef closed");
+					// viewJSONModalRef.current.hideModal();
 				}}
 			>
 				<div className="confirm-modal-body">
@@ -692,6 +795,7 @@ const FormContent = (props = {}) => {
 							extensions={[javascript({ json: true })]}
 							onChange={(code) => {
 								try {
+									console.log(typeof code, code);
 									setJsonData(code);
 								} catch (err) {
 									console.log("onCodeChange:", err);

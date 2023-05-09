@@ -37,27 +37,32 @@ const FormWrapper = (props = {}) => {
 		let objData = obj.data || {};
 		try {
 			for (let key in objData) {
-				if (
-					objData[key] !== formData[key] &&
-					objData[key] !== undefined &&
-					formData[key] !== undefined
-				) {
-					// console.log(objData[key], formData[key]);
-					const config = getConfig(moduleKey, key);
-					if (config !== -1 && config.options) {
-						let { options, dataType, name } = config;
-						let selectedVal = "";
-						if (dataType === "string") {
-							selectedVal = objData[name].value;
-						} else if (dataType === "boolean") {
-							selectedVal = objData[name];
-							// for (let option of options) {
-							// 	if (option.value === objData[name]) {
-							// 		selectedVal = option.value;
-							// 	}
-							// }
+				if (objData[key] !== formData[key]) {
+					if (objData[key] !== undefined || formData[key] !== undefined) {
+						const config = getConfig(moduleKey, key);
+						if (config !== undefined) {
+							let { dataType, name } = config;
+							let selectedVal = "";
+							if (dataType === "string") {
+								selectedVal = objData[name].value;
+							} else if (dataType === "boolean") {
+								selectedVal = objData[name];
+							} else if (dataType === "number") {
+								selectedVal = objData[name].toString();
+							}
+							objData = { ...objData, [name]: selectedVal };
+						} else {
+							objData = { ...objData, [key]: objData[key].toString() };
 						}
-						objData = { ...objData, [name]: selectedVal };
+					} else {
+						console.log(
+							"objData[key]:",
+							key,
+							objData[key],
+							"formData[key]:",
+							key,
+							formData[key]
+						);
 					}
 				}
 			}

@@ -205,7 +205,7 @@ export default function Vanilla2(props) {
 				"<!-- End dependency library stylesheets -->" +
 				"<!-- Custom stylesheet for Unbxd default theme, update this if you want to change the look & feel -->" +
 				"<link rel='stylesheet' href='https://libraries.unbxdapi.com/search-sdk/v2.0.5/vanillaSearch.min.css'/>" +
-				"<link rel='stylesheet' type='text/css' href='unbxdStyle.css' />" +
+				"<link rel='stylesheet' type='text/css' href='../../../public/unbxdStyle.css' />" +
 				"</head>" +
 				"  <body>" +
 				"    <div class='UNX-header'>" +
@@ -360,6 +360,82 @@ export default function Vanilla2(props) {
 				"</div>" +
 				"</div>" +
 				"    </div>" +
+				// `<link
+				// 	href='https://pintoranch.com/cdn/shop/t/65/assets/base-grid.css?v=71268308520810431211676321311'
+				// 	rel='stylesheet'
+				// />
+				// <link
+				// 	href='https://pintoranch.com/cdn/shop/t/65/assets/base.css?v=138345686330947006061676321312'
+				// 	rel='stylesheet'
+				// />
+				// <link
+				// 	href='https://pintoranch.com/cdn/shop/t/65/assets/custom.css?v=106461103553586307951680031911'
+				// 	rel='stylesheet'
+				// />
+				// <link
+				// 	href='https://pintoranch.com/cdn/shop/t/65/assets/component-newsletter.css?v=161725672533910442531676321311'
+				// 	rel='stylesheet'
+				// />
+				// <link
+				// 	href='https://pintoranch.com/cdn/shop/t/65/assets/section-footer.css?v=27985602963307417511676321314'
+				// 	rel='stylesheet'
+				// />
+				// <link
+				// 	href='https://pintoranch.com/cdn/shop/t/65/assets/nine15-section--accordion.css?v=124109217032821631561676321312'
+				// 	rel='stylesheet'
+				// />
+				// <link
+				// 	href='https://pintoranch.com/cdn/shop/t/65/assets/base-custom.css?v=34226551080132056461677087394&enable_css_minification=1'
+				// 	rel='stylesheet'
+				// />
+				// <link
+				// 	href='https://pintoranch.com/cdn/shop/t/65/assets/component-list-menu.css?v=179266631784036741811676321313'
+				// 	rel='stylesheet'
+				// />
+				// <link
+				// 	href='https://pintoranch.com/cdn/shop/t/65/assets/component-search.css?v=92716746666230468691676321311'
+				// 	rel='stylesheet'
+				// />
+				// <link
+				// 	href='https://pintoranch.com/cdn/shop/t/65/assets/component-menu-drawer.css?v=98551097239687612411676321311'
+				// 	rel='stylesheet'
+				// />
+				// <link
+				// 	href='https://pintoranch.com/cdn/shop/t/65/assets/component-cart-notification.css?v=176034334239645848661676321311'
+				// 	rel='stylesheet'
+				// />
+				// <link
+				// 	href='https://pintoranch.com/cdn/shop/t/65/assets/component-cart-items.css?v=48748705938794903491676321314'
+				// 	rel='stylesheet'
+				// />
+				// <link
+				// 	href='https://pintoranch.com/cdn/shop/t/65/assets/component-cart-items.css?v=48748705938794903491676321314'
+				// 	rel='stylesheet'
+				// />
+				// <link
+				// 	href='https://pintoranch.com/cdn/shop/t/65/assets/nine15-section--mega-menu.css?v=170104212833839055861676321312'
+				// 	rel='stylesheet'
+				// />
+				// <link
+				// 	href='https://pintoranch.com/cdn/shop/t/65/assets/component--ajax-cart.css?v=95745722602544677401676321308'
+				// 	rel='stylesheet'
+				// />
+				// <link
+				// 	href='https://staticw2.yotpo.com/i8iVycF1PCLmXqNweqROWphwnoyYsXaMgD9yTKDB/widget.css?widget_version=2022-07-03_07-28-28'
+				// 	rel='stylesheet'
+				// />
+				// <link
+				// 	href='https://fonts.googleapis.com/css?family=Noto+Sans:500%7CNoto+Sans:400regular%7CNoto+Sans:700%7CNoto+Sans:300'
+				// 	rel='stylesheet'
+				// />
+				// <link
+				// 	href='https://app.amped.io/snippet/account_tpssz7f/fonts.css'
+				// 	rel='stylesheet'
+				// />
+				// <link
+				// 	href='https://fonts.googleapis.com/css?family=Open+Sans&display=swap'
+				// 	rel='stylesheet'
+				// />` +
 				"  </body>" +
 				"<!-- Unbxd SDK dependency libraries: jQuery, jQuery UI & Handlebars -->" +
 				"<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>" +

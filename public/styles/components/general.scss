@@ -764,6 +764,115 @@ body {
 			}
 		}
 
+		.viewMoreDropdown {
+			.RCB-inline-modal-btn {
+				// height: 55px;
+				// width: 100px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 13px;
+				color: #61697d;
+				background-color: #ffffff;
+				padding: 9px 15px;
+				border-radius: 6px;
+				border: 1px solid #a1b3c0;
+				margin: 10px;
+
+				div {
+					// font-size: 13px;
+					text-align: center;
+				}
+			}
+			.RCB-inline-modal-body {
+				bottom: 50px;
+				// left: 20px;
+				width: 200px;
+				border: 1px solid #ccc;
+				display: flex;
+				flex-direction: column;
+
+				div {
+					cursor: pointer;
+					// padding: 7px;
+					display: flex;
+					align-items: center;
+
+					color: #273251;
+					font-weight: 500;
+					font-size: 14px;
+					padding: 10px;
+
+					&:hover {
+						background-color: #f7f9fb;
+					}
+				}
+				.viewCode {
+					span {
+						background-image: url("https://static.thenounproject.com/png/1020859-200.png");
+						width: 20px;
+						height: 20px;
+						background-size: 100% 100%;
+						margin-right: 10px;
+					}
+				}
+
+				.downloadJSON {
+					span {
+						background-image: url("https://static.thenounproject.com/png/294431-200.png");
+						width: 20px;
+						height: 20px;
+						background-size: 100% 100%;
+						margin-right: 10px;
+					}
+				}
+
+				.uploadJSON {
+					span {
+						background-image: url("https://static.thenounproject.com/png/1057582-200.png");
+						width: 20px;
+						height: 20px;
+						background-size: 100% 100%;
+						margin-right: 10px;
+					}
+				}
+
+				.uploadToCDN {
+					span {
+						background-image: url("https://static.thenounproject.com/png/23675-200.png");
+						width: 20px;
+						height: 20px;
+						background-size: 100% 100%;
+						margin-right: 10px;
+					}
+				}
+
+				.copyJSON {
+					span {
+						background-image: url("https://static.thenounproject.com/png/1346024-200.png");
+						width: 20px;
+						height: 20px;
+						background-size: 100% 100%;
+						margin-right: 10px;
+					}
+				}
+
+				.resetJSON {
+					color: red;
+					span {
+						background-image: url("https://icon-library.com/images/reset-icon-png/reset-icon-png-15.jpg");
+						// background-image: url("https://static.thenounproject.com/png/3039083-200.png");
+						// transform: rotate(-90deg);
+						width: 15px;
+						height: 15px;
+						margin-left: 5px;
+						background-size: 100% 100%;
+						margin-right: 10px;
+					}
+				}
+			}
+		}
+
 		button {
 			display: flex;
 			width: fit-content;
@@ -1007,9 +1116,24 @@ body {
 			height: 80px;
 		}
 	}
+
+	.info {
+		width: 100%;
+		// margin: 10px 20px;
+		padding: 10px;
+		border: 1px solid cornflowerblue;
+		border-radius: 10px;
+		margin-left: -10px;
+		font-size: 12px;
+		text-align: justify;
+		background-color: rgba(100, 149, 237, 0.9);
+		color: #fff;
+	}
+
 	.links {
 		display: block;
 		margin: 10px 0;
+
 		.builder,
 		.preview {
 			padding: 10px 0;
