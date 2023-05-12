@@ -205,7 +205,7 @@ export default function Vanilla2(props) {
 				"<!-- End dependency library stylesheets -->" +
 				"<!-- Custom stylesheet for Unbxd default theme, update this if you want to change the look & feel -->" +
 				"<link rel='stylesheet' href='https://libraries.unbxdapi.com/search-sdk/v2.0.5/vanillaSearch.min.css'/>" +
-				"<link rel='stylesheet' type='text/css' href='../../../public/unbxdStyle.css' />" +
+				"<link rel='stylesheet' type='text/css' href='unbxdStyle.css' />" +
 				"</head>" +
 				"  <body>" +
 				"    <div class='UNX-header'>" +

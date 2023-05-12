@@ -21,7 +21,12 @@ import loaderConfig from "../../config/formConfig/loader";
 import othersConfig from "../../config/formConfig/others";
 
 const FormBuilder = (props) => {
-	const { setValidatedConfig, hideConfigTab, viewConfigOption } = props;
+	const {
+		setValidatedConfig,
+		hideConfigTab,
+		viewConfigOption,
+		validatedConfig,
+	} = props;
 	const [selectedAcc, setSelectedAcc] = useState(null);
 	const formConfigs = [
 		authConfig,
@@ -64,6 +69,7 @@ const FormBuilder = (props) => {
 				setSelectedAcc={setSelectedAcc}
 				setValidatedConfig={setValidatedConfig}
 				hideConfigTab={hideConfigTab}
+				validatedConfig={validatedConfig}
 			/>
 		</div>
 	);

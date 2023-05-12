@@ -40,6 +40,7 @@ const DashboardContent = (props) => {
 				viewConfigOption={viewConfigOption}
 				setValidatedConfig={setValidatedConfig}
 				hideConfigTab={hideConfigTab}
+				validatedConfig={validatedConfig}
 			/>
 			<div
 				className={viewConfigOption ? "demoSite" : "demoSite preview"}

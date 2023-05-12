@@ -15,17 +15,19 @@ import {
 	InlineModal,
 	InlineModalActivator,
 	InlineModalBody,
-	List,
 } from "unbxd-react-components";
 
 const FormContent = (props = {}) => {
 	const {
 		setValidatedConfig,
+		validatedConfig,
 		hideConfigTab,
 		selectedAcc,
 		setSelectedAcc,
 		formConfigs,
 	} = props;
+
+	// console.log("validatedConfig in content:", validatedConfig);
 
 	let masterConfig = {};
 	// let validatedData = {};
@@ -440,6 +442,25 @@ const FormContent = (props = {}) => {
 						<span className="logo"></span>Select any configuration and edit the
 						values. Click on 'Apply Changes' to update the demo site with the
 						new values.
+						<div className="instructions">
+							Instructions:
+							<ol>
+								<li>Click on any of the icons to view the configurations.</li>
+								<li>
+									To apply custom configurations, change any of the
+									configuration.
+								</li>
+								<li>
+									Click on "Apply Changes" button to apply the configurations to
+									the RHS.
+								</li>
+								<li>
+									To publish the configurations, click on "More Options" >
+									"Upload to CDN", and get two unique URLs - one to the Builder
+									site and one to the Preview site.
+								</li>
+							</ol>
+						</div>
 					</div>
 				)}
 
@@ -623,6 +644,10 @@ const FormContent = (props = {}) => {
 					<div>
 						<div className="confirm-modal-body">
 							Are you sure you want to publish these configurations?
+							<div className="warning">
+								If a file with the same name exists, the content of this file
+								will be overwritten with these configurations.
+							</div>
 						</div>
 						<div className="modal-footer">
 							<Button
@@ -729,11 +754,9 @@ const FormContent = (props = {}) => {
 								</div>
 							</div>
 							<div className="info">
-								On closing this modal, the page will be reloaded and the new
-								configurations will be applied onto the demo site. Validation of
-								the configs might take upto 5 minutes in the server. So if the
-								configurations don't seem to be applied, try again after some
-								time.
+								Validation of the configs might take upto 5 minutes in the
+								server. So if the configurations don't seem to be applied, try
+								again after some time.
 							</div>
 						</div>
 						<div className="modal-footer">
@@ -743,7 +766,6 @@ const FormContent = (props = {}) => {
 								onClick={() => {
 									setPublishStatus(false);
 									publishSuccessModalRef.current.hideModal();
-									location.reload(true);
 								}}
 							>
 								Close
@@ -786,6 +808,11 @@ const FormContent = (props = {}) => {
 							id="jsonCode"
 							className="jsonCode"
 							// value={JSON.stringify(jsonData, null, 4)}
+							// value={
+							// 	Object.keys(validatedConfig).length > 0
+							// 		? JSON.stringify(validatedConfig, null, 4)
+							// 		: jsonData
+							// }
 							value={jsonData}
 							// value={jsonData.replace(/\\t|\\n/gim, "")}
 							// value={jsonData.replace(/\\t|\\n/gim, "").replace(/\\"/gim, "'")}
@@ -821,14 +848,14 @@ const FormContent = (props = {}) => {
 						className="download"
 						onClick={() => downloadJSON()}
 					>
-						Download
+						<span></span>Download
 					</Button>
 					<Button
 						appearance="secondary"
 						className="copy"
 						onClick={() => copyJSON()}
 					>
-						Copy
+						<span></span>Copy
 					</Button>
 					<Button
 						appearance="primary"
