@@ -1,15 +1,25 @@
 const path = require("path");
+var BundleAnalyzerPlugin =
+	require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
 	devtool: "source-map",
 	mode: "development",
+	entry: ["./src", "./public/unbxdStyle.css"],
 	output: {
-		path: path.join(__dirname, "/dist"), // the bundle output path
+		path: path.join(__dirname, "/public/dist"), // the bundle output path
 		filename: "bundle.js", // the name of the bundle
 		publicPath: "/",
 	},
 	plugins: [
+		new MiniCssExtractPlugin({ filename: `[name].css` }),
+		new BundleAnalyzerPlugin({
+			analyzerMode: "server",
+			generateStatsFile: true,
+			statsOptions: { source: false },
+		}),
 		new HtmlWebpackPlugin({
 			template: "public/index.html", // to import index.html file inside index.js
 		}),
@@ -31,14 +41,27 @@ module.exports = {
 				},
 			},
 			{
-				test: /\.(sa|sc|c)ss$/, // styles files
-				use: ["style-loader", "css-loader", "sass-loader"],
+				test: /\.scss$|\.css$/,
+				use: [
+					{
+						loader: MiniCssExtractPlugin.loader,
+					},
+					"css-loader",
+					{
+						loader: "sass-loader",
+						options: {
+							sassOptions: {
+								includePaths: ["public/css"],
+							},
+						},
+					},
+				],
 			},
-			{
-				test: /\.(png|woff|woff2|eot|ttf|svg)$/, // to import images and fonts
-				loader: "url-loader",
-				options: { limit: false },
-			},
+			// {
+			// 	test: /\.(png|woff|woff2|eot|ttf|svg)$/, // to import images and fonts
+			// 	loader: "url-loader",
+			// 	options: { limit: false },
+			// },
 		],
 	},
 	resolve: {

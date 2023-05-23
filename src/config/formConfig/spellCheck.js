@@ -14,22 +14,37 @@ const spellCheckConfig = {
 		{
 			name: "el",
 			dataType: "element",
+			displayIf: function (spellCheck) {
+				return spellCheck.enabled === true;
+			},
 		},
 		{
 			name: "template",
 			dataType: "function",
+			displayIf: function (spellCheck) {
+				return spellCheck.enabled === true;
+			},
 		},
 		{
 			name: "selectorClass",
 			dataType: "string",
+			displayIf: function (spellCheck) {
+				return spellCheck.enabled === true;
+			},
 		},
 		{
 			name: "tagName",
 			dataType: "string",
+			displayIf: function (spellCheck) {
+				return spellCheck.enabled === true;
+			},
 		},
 		{
 			name: "htmlAttributes",
 			dataType: "object",
+			displayIf: function (spellCheck) {
+				return spellCheck.enabled === true;
+			},
 		},
 	],
 };

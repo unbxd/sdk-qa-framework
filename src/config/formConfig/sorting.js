@@ -14,22 +14,37 @@ const sortingConfig = {
 		{
 			name: "el",
 			dataType: "element",
+			displayIf: function (sort) {
+				return sort.enabled === true;
+			},
 		},
 		{
 			name: "options",
 			dataType: "array",
+			displayIf: function (sort) {
+				return sort.enabled === true;
+			},
 		},
 		{
 			name: "sortClass",
 			dataType: "string",
+			displayIf: function (sort) {
+				return sort.enabled === true;
+			},
 		},
 		{
 			name: "selectedSortClass",
 			dataType: "string",
+			displayIf: function (sort) {
+				return sort.enabled === true;
+			},
 		},
 		{
 			name: "template",
 			dataType: "function",
+			displayIf: function (sort) {
+				return sort.enabled === true;
+			},
 		},
 		{
 			name: "action",
@@ -46,14 +61,23 @@ const sortingConfig = {
 					value: "click",
 				},
 			],
+			displayIf: function (sort) {
+				return sort.enabled === true;
+			},
 		},
 		{
 			name: "tagName",
 			dataType: "string",
+			displayIf: function (sort) {
+				return sort.enabled === true;
+			},
 		},
 		{
 			name: "htmlAttributes",
 			dataType: "object",
+			displayIf: function (sort) {
+				return sort.enabled === true;
+			},
 		},
 	],
 };

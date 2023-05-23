@@ -36,7 +36,7 @@ const othersConfig = {
 		},
 		{
 			name: "extraParams",
-			dataType: "object",
+			dataType: "function",
 		},
 		{
 			name: "defaultFilters",

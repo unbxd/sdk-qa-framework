@@ -24,6 +24,7 @@ const FormConfigWrapper = (props = {}) => {
 		moduleKey,
 		setFSCodeEditorData,
 		fsCodeEditorData,
+		codeTemplate,
 	} = props;
 
 	const viewCodeEditorRef = useRef();
@@ -52,7 +53,9 @@ const FormConfigWrapper = (props = {}) => {
 
 		case "object":
 		case "function":
-		case "array": //code
+		case "array": {
+			//code
+			// console.log("codeTemplate:", codeTemplate, moduleKey);
 			return (
 				<div className="config">
 					<Modal
@@ -112,15 +115,24 @@ const FormConfigWrapper = (props = {}) => {
 									);
 									viewCodeEditorRef.current.showModal();
 								}}
-							></div>
+							>
+								<div className="icon"></div>
+							</div>
 							<CodeMirror
 								name={name}
 								className="editor"
 								value={
 									formData[name]
 										? JSON.parse(JSON.stringify(formData[name], null, 4))
+										: codeTemplate.length > 0
+										? codeTemplate
 										: ""
 								}
+								// defaultValue={
+								// 	codeTemplate.length > 0
+								// 		? codeTemplate
+								// 		: JSON.parse(JSON.stringify(formData[name], null, 4))
+								// }
 								placeholder="Insert code here..."
 								height="200px"
 								width="100%"
@@ -131,6 +143,7 @@ const FormConfigWrapper = (props = {}) => {
 					</div>
 				</div>
 			);
+		}
 		case "boolean": {
 			return (
 				<div className="config">

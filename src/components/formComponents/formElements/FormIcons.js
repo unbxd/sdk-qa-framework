@@ -1,4 +1,5 @@
 import React from "react";
+import "../../../../public/styles/components/form/icons.scss";
 
 const FormIcons = (props) => {
 	const { formConfigs, showContent, selectedAcc } = props;
@@ -10,23 +11,8 @@ const FormIcons = (props) => {
 						className={selectedAcc == i ? "icon-selected" : "icon"}
 						key={i}
 						onClick={() => showContent(i)}
-						// style={
-						// 	selectedAcc == i
-						// 		? { border: "1px solid cornflowerblue" }
-						// 		: { borderRight: "#1px solid #ccc" }
-						// }
-						// style={
-						// 	selectedAcc == i
-						// 		? { backgroundColor: "#c0d7ff" }
-						// 		: { backgroundColor: "#fff" }
-						// }
 					>
-						<div
-							// className={
-							// 	selectedAcc == i ? "moduleLogo-selected" : "moduleLogo"
-							// }
-							className="moduleLogo"
-						>
+						<div className="moduleLogo">
 							<span
 								className={
 									formConfig.moduleKey
@@ -34,12 +20,6 @@ const FormIcons = (props) => {
 										: `${formConfig.moduleName}-icon`
 								}
 							></span>
-							{/* <i
-								className={formConfig.moduleIconClass}
-								style={
-									selectedAcc == i ? { color: "#4777ED" } : { color: "#000" }
-								}
-							></i> */}
 						</div>
 						<div className="moduleName">
 							{formConfig.moduleKey

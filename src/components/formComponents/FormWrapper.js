@@ -42,9 +42,12 @@ const FormWrapper = (props = {}) => {
 						const config = getConfig(moduleKey, key);
 						if (config !== undefined) {
 							let { dataType, name } = config;
-							let selectedVal = "";
+							let selectedVal = objData[name];
 							if (dataType === "string") {
-								selectedVal = objData[name].value;
+								if (objData[name].value === undefined)
+									selectedVal = objData[name];
+								else selectedVal = objData[name].value;
+								// console.log(objData[name].value);
 							} else if (dataType === "boolean") {
 								selectedVal = objData[name];
 							} else if (dataType === "number") {
@@ -84,20 +87,28 @@ const FormWrapper = (props = {}) => {
 		updateFormData({ [field]: code }, moduleKey);
 	};
 
-	const delayChange = debounce(function (element, code) {
+	const delayChange = (element, code) => {
+		// debounce(function (element, code) {
+		// console.log("element:", element.data);
 		if (code === undefined) {
 			onChange(element);
 		} else {
 			onCodeChange(element, code);
 		}
-	}, DEBOUNCE_DELAY);
+	};
+	// }, DEBOUNCE_DELAY);
 
 	return (
 		<Form onChange={delayChange}>
 			{config.map((conf, index) => {
 				let display = true;
+				let codeTemplate = "";
 				if (conf["displayIf"] && typeof conf["displayIf"] === "function") {
 					display = conf["displayIf"](formData);
+					if (conf["codeTemplate"]) {
+						// console.log(moduleKey, "has codeTemplate");
+						codeTemplate = conf["codeTemplate"](formData);
+					}
 				}
 				if (display) {
 					return (
@@ -112,6 +123,7 @@ const FormWrapper = (props = {}) => {
 							delayChange={delayChange}
 							// onChange={delayChange}
 							onCodeChange={delayChange}
+							codeTemplate={codeTemplate}
 						/>
 					);
 				}

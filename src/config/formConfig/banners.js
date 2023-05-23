@@ -14,23 +14,38 @@ const bannerConfig = {
 		{
 			name: "el",
 			dataType: "element",
+			displayIf: function (banner) {
+				return banner.enabled === true;
+			},
 		},
 		{
 			name: "template",
 			dataType: "function",
+			displayIf: function (banner) {
+				return banner.enabled === true;
+			},
 		},
 		{
 			name: "tagname",
 			dataType: "string",
+			displayIf: function (banner) {
+				return banner.enabled === true;
+			},
 		},
 		{
 			name: "htmlattributes",
 			dataType: "object",
+			displayIf: function (banner) {
+				return banner.enabled === true;
+			},
 		},
 		{
 			name: "openNewTab",
 			dataType: "boolean",
 			label: "Open In New Tab",
+			displayIf: function (banner) {
+				return banner.enabled === true;
+			},
 		},
 	],
 };

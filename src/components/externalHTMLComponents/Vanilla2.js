@@ -3,10 +3,19 @@ import React, { useEffect, useState } from "react";
 // import UnbxdSearch from  '@unbxd-ui/vanilla-search-library';
 import UnbxdSearch from "../../../../search-JS-library/src/index";
 // import UnbxdSearch from "../../../../../search-JS-library/src/index";
-import useDeepCompareEffect from "use-deep-compare-effect";
+// import useDeepCompareEffect from "use-deep-compare-effect";
+// import "../../../public/unbxdStyle.css";
+// import "../../../public/styles/components/vanilla2/unbxdStyles.scss";
 
-export default function Vanilla2(props) {
-	let { validatedConfig = {}, filename, reloadWarning } = props;
+const Vanilla2 = React.memo((props) => {
+	let {
+		validatedConfig = {},
+		filename,
+		reloadWarning,
+		// setErrorSet,
+		// errorSet,
+		displayError,
+	} = props;
 
 	// const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
 	// 	JSON.stringify(validatedConfig)
@@ -15,7 +24,7 @@ export default function Vanilla2(props) {
 	// link.href = jsonString;
 	// link.download = "validatedConfig.json";
 	// link.click();
-
+	// debugger;
 	useEffect(() => {
 		// window.unbxdSearch.resetAll();
 		// window.unbxdSearch = null;
@@ -27,8 +36,14 @@ export default function Vanilla2(props) {
 				};
 			}
 			console.log("validatedConfig:", validatedConfig);
+			debugger;
+
+			// let errors = new Set();
 
 			if (UnbxdSearch) {
+				if (location.href.includes("?")) {
+					history.pushState({}, null, location.href.split("?")[0]);
+				}
 				window.unbxdSearch = new UnbxdSearch({
 					hashMode: false,
 					updateUrls: true,
@@ -48,7 +63,11 @@ export default function Vanilla2(props) {
 						}
 					},
 					onError: function (err) {
+						// errors.add(err);
 						console.log(err);
+						// setErrorSet(error);
+						displayError(err);
+						return;
 					},
 					searchTrigger: "click",
 					...validatedConfig,
@@ -59,110 +78,8 @@ export default function Vanilla2(props) {
 					pageSize: validatedConfig.pagesize.pageSize,
 				});
 				console.log("Applied changes");
-
-				// if (reloadWarning) {
-				// 	window.addEventListener("beforeunload", (event) => {
-				// 		event.preventDefault();
-				// 		event.returnValue = "";
-				// 		return "";
-				// 	});
-				// }
-				// return () => window.removeEventListener("beforeunload", unloadCallback);
-				// window.onbeforeunload = function () {
-				// 	return "Data will be lost if you leave the page, are you sure?";
-				// };
-			}
-		} else {
-			if (UnbxdSearch) {
-				window.unbxdSearch = new UnbxdSearch({
-					siteKey: "demo-unbxd700181503576558",
-					apiKey: "fb853e3332f2645fac9d71dc63e09ec1",
-					hashMode: false,
-					updateUrls: true,
-					onEvent: function (instance, type, state) {
-						if (type === "AFTER_RENDER") {
-							if (
-								localStorage.getItem("unx_product_clicked") &&
-								document.getElementById(
-									localStorage.getItem("unx_product_clicked")
-								)
-							) {
-								document
-									.getElementById(localStorage.getItem("unx_product_clicked"))
-									.scrollIntoView();
-								localStorage.removeItem("unx_product_clicked");
-							}
-						}
-					},
-					// searchTrigger: "click",
-					// products: {
-					// 	productType: "SEARCH",
-					// },
-					searchBoxEl: document.getElementById("unbxdInput"),
-					searchTrigger: "click",
-					searchButtonEl: document.getElementById("searchBtn"),
-					products: {
-						el: document.getElementById("searchResultsWrapper"),
-						productType: "SEARCH",
-					},
-					spellCheck: {
-						enabled: true,
-						el: document.getElementById("didYouMeanWrapper"),
-					},
-					noResults: {
-						el: document.getElementById("noResultWrapper"),
-					},
-					facet: {
-						facetsEl: document.getElementById("facetsWrapper"),
-						selectedFacetsEl: document.getElementById("selectedFacetWrapper"),
-					},
-					pagination: {
-						el: document.querySelector(".unxPagination"),
-						type: "FIXED_PAGINATION",
-						pageLimit: 4,
-					},
-					breadcrumb: {
-						el: document.getElementById("breadcrumpContainer"),
-					},
-					pagesize: {
-						el: document.getElementById("changeNoOfProducts"),
-					},
-
-					sort: {
-						// enabled: false,
-						el: document.getElementById("sortWrapper"),
-						options: [
-							{
-								value: "sortPrice desc",
-								text: "Price High to Low",
-							},
-							{
-								value: "sortPrice asc",
-								text: " Price Low to High",
-							},
-						],
-					},
-					loader: {
-						el: document.getElementById("loaderEl"),
-					},
-					productView: {
-						el: document.getElementById("productViewTypeContainer"),
-						viewTypes: "GRID",
-					},
-					banner: {
-						el: document.getElementById("bannerContainer"),
-						count: 1,
-					},
-					swatches: {
-						enabled: true,
-						attributesMap: {
-							swatchList: "color",
-							swatchImgs: "unbxd_color_mapping",
-							swatchColors: "color",
-						},
-					},
-				});
 				window.unbxdSearch.getResults("*");
+				// window.unbxdSearch.setUrl(false);
 
 				// if (reloadWarning) {
 				// 	window.addEventListener("beforeunload", (event) => {
@@ -175,8 +92,116 @@ export default function Vanilla2(props) {
 				// window.onbeforeunload = function () {
 				// 	return "Data will be lost if you leave the page, are you sure?";
 				// };
+				// errors.forEach((error) => console.log("error:", error));
+				// setErrorSet(errors);
 			}
 		}
+		// else {
+		// 	if (UnbxdSearch) {
+		// 		window.unbxdSearch = new UnbxdSearch({
+		// 			siteKey: "demo-unbxd700181503576558",
+		// 			apiKey: "fb853e3332f2645fac9d71dc63e09ec1",
+		// 			hashMode: false,
+		// 			updateUrls: true,
+		// 			onEvent: function (instance, type, state) {
+		// 				if (type === "AFTER_RENDER") {
+		// 					if (
+		// 						localStorage.getItem("unx_product_clicked") &&
+		// 						document.getElementById(
+		// 							localStorage.getItem("unx_product_clicked")
+		// 						)
+		// 					) {
+		// 						document
+		// 							.getElementById(localStorage.getItem("unx_product_clicked"))
+		// 							.scrollIntoView();
+		// 						localStorage.removeItem("unx_product_clicked");
+		// 					}
+		// 				}
+		// 			},
+		// 			// searchTrigger: "click",
+		// 			// products: {
+		// 			// 	productType: "SEARCH",
+		// 			// },
+		// 			searchBoxEl: document.getElementById("unbxdInput"),
+		// 			searchTrigger: "click",
+		// 			searchButtonEl: document.getElementById("searchBtn"),
+		// 			products: {
+		// 				el: document.getElementById("searchResultsWrapper"),
+		// 				productType: "SEARCH",
+		// 			},
+		// 			spellCheck: {
+		// 				enabled: true,
+		// 				el: document.getElementById("didYouMeanWrapper"),
+		// 			},
+		// 			noResults: {
+		// 				el: document.getElementById("noResultWrapper"),
+		// 			},
+		// 			facet: {
+		// 				facetsEl: document.getElementById("facetsWrapper"),
+		// 				selectedFacetsEl: document.getElementById("selectedFacetWrapper"),
+		// 			},
+		// 			pagination: {
+		// 				el: document.querySelector(".unxPagination"),
+		// 				type: "FIXED_PAGINATION",
+		// 				pageLimit: 4,
+		// 			},
+		// 			breadcrumb: {
+		// 				el: document.getElementById("breadcrumpContainer"),
+		// 			},
+		// 			pagesize: {
+		// 				el: document.getElementById("changeNoOfProducts"),
+		// 			},
+
+		// 			sort: {
+		// 				// enabled: false,
+		// 				el: document.getElementById("sortWrapper"),
+		// 				options: [
+		// 					{
+		// 						value: "sortPrice desc",
+		// 						text: "Price High to Low",
+		// 					},
+		// 					{
+		// 						value: "sortPrice asc",
+		// 						text: " Price Low to High",
+		// 					},
+		// 				],
+		// 			},
+		// 			loader: {
+		// 				el: document.getElementById("loaderEl"),
+		// 			},
+		// 			productView: {
+		// 				el: document.getElementById("productViewTypeContainer"),
+		// 				viewTypes: "GRID",
+		// 			},
+		// 			banner: {
+		// 				el: document.getElementById("bannerContainer"),
+		// 				count: 1,
+		// 			},
+		// 			swatches: {
+		// 				enabled: true,
+		// 				attributesMap: {
+		// 					swatchList: "color",
+		// 					swatchImgs: "unbxd_color_mapping",
+		// 					swatchColors: "color",
+		// 				},
+		// 			},
+		// 		});
+		// 		window.unbxdSearch.getResults("*");
+		// 		// window.unbxdSearch.setUrl(false);
+
+		// 		// if (reloadWarning) {
+		// 		// 	window.addEventListener("beforeunload", (event) => {
+		// 		// 		event.preventDefault();
+		// 		// 		event.returnValue = "";
+		// 		// 		return "";
+		// 		// 	});
+		// 		// }
+		// 		// return () => window.removeEventListener("beforeunload", unloadCallback);
+		// 		// window.onbeforeunload = function () {
+		// 		// 	return "Data will be lost if you leave the page, are you sure?";
+		// 		// };
+		// 	}
+		// }
 	});
 	// const [htmlContent, setHtmlContent] = useState("");
 
@@ -204,8 +229,8 @@ export default function Vanilla2(props) {
 				"<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css'/>" +
 				"<!-- End dependency library stylesheets -->" +
 				"<!-- Custom stylesheet for Unbxd default theme, update this if you want to change the look & feel -->" +
-				"<link rel='stylesheet' href='https://libraries.unbxdapi.com/search-sdk/v2.0.5/vanillaSearch.min.css'/>" +
-				"<link rel='stylesheet' type='text/css' href='unbxdStyle.css' />" +
+				// "<link rel='stylesheet' href='https://libraries.unbxdapi.com/search-sdk/v2.0.5/vanillaSearch.min.css'/>" +
+				// "<link rel='stylesheet' type='text/css' href='unbxdStyle.css' />" +
 				"</head>" +
 				"  <body>" +
 				"    <div class='UNX-header'>" +
@@ -445,9 +470,9 @@ export default function Vanilla2(props) {
 				"<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.5.0/nouislider.min.js'></script>" +
 				"<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/scripts/choices.min.js'></script>" +
 				"<!-- Unbxd Search JS SDK -->" +
-				"<script type='text/javascript' src='https://libraries.unbxdapi.com/search-sdk/v2.0.20/vanillaSearch.min.js'></script>" +
+				// "<script type='text/javascript' src='https://libraries.unbxdapi.com/search-sdk/v2.0.20/vanillaSearch.min.js'></script>" +
 				"<!-- Unbxd Autosuggest SDK -->" +
-				"<script type='text/javascript' src='https://libraries.unbxdapi.com/unbxdAutosuggest_v1.1.js'></script>" +
+				// "<script type='text/javascript' src='https://libraries.unbxdapi.com/unbxdAutosuggest_v1.1.js'></script>" +
 				"<!-- Unbxd SDK trigger script for default template -->" +
 				// "<script type='text/javascript' src='./unbxdInit.js'></script>" +
 				"</html>",
@@ -460,4 +485,6 @@ export default function Vanilla2(props) {
 		</div>
 	);
 	// return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
-}
+});
+
+export default Vanilla2;

@@ -1,3 +1,5 @@
+import { TRUE } from "sass";
+
 const pageSizeConfig = {
 	moduleName: "Page Size",
 	moduleKey: "pagesize",
@@ -13,22 +15,37 @@ const pageSizeConfig = {
 		{
 			name: "el",
 			dataType: "element",
+			displayIf: function (pagesize) {
+				return pagesize.enabled === true;
+			},
 		},
 		{
 			name: "pageSize",
 			dataType: "number",
+			displayIf: function (pagesize) {
+				return pagesize.enabled === true;
+			},
 		},
 		{
 			name: "options",
 			dataType: "array",
+			displayIf: function (pagesize) {
+				return pagesize.enabled === true;
+			},
 		},
 		{
 			name: "pageSizeClass",
 			dataType: "string",
+			displayIf: function (pagesize) {
+				return pagesize.enabled === true;
+			},
 		},
 		{
 			name: "selectedPageSizeClass",
 			dataType: "string",
+			displayIf: function (pagesize) {
+				return pagesize.enabled === true;
+			},
 		},
 		{
 			name: "action",
@@ -45,18 +62,30 @@ const pageSizeConfig = {
 					value: "click",
 				},
 			],
+			displayIf: function (pagesize) {
+				return pagesize.enabled === true;
+			},
 		},
 		{
 			name: "template",
 			dataType: "function",
+			displayIf: function (pagesize) {
+				return pagesize.enabled === true;
+			},
 		},
 		{
 			name: "tagName",
 			dataType: "string",
+			displayIf: function (pagesize) {
+				return pagesize.enabled === true;
+			},
 		},
 		{
 			name: "htmlAttributes",
 			dataType: "object",
+			displayIf: function (pagesize) {
+				return pagesize.enabled === true;
+			},
 		},
 	],
 };

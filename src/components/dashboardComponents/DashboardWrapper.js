@@ -3,7 +3,11 @@ import DashboardHeader from "./DashboadHeader";
 import DashboardContent from "./DashboardContent";
 
 const DashboardWrapper = (props) => {
-	const { viewConfigOption = false, reloadWarning = true } = props;
+	const {
+		viewConfigOption = false,
+		reloadWarning = true,
+		displayError,
+	} = props;
 
 	return (
 		<div className="dashboardWrapper">
@@ -11,6 +15,7 @@ const DashboardWrapper = (props) => {
 				<DashboardHeader viewConfigOption={viewConfigOption} />
 			)}
 			<DashboardContent
+				displayError={displayError}
 				viewConfigOption={viewConfigOption}
 				reloadWarning={reloadWarning}
 			/>

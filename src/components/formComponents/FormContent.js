@@ -3,6 +3,8 @@ import FormWrapper from "./FormWrapper";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
+import "../../../public/styles/components/form/content.scss";
+
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 
@@ -16,6 +18,7 @@ import {
 	InlineModalActivator,
 	InlineModalBody,
 } from "unbxd-react-components";
+import EditorAce from "./formElements/EditorAce";
 
 const FormContent = (props = {}) => {
 	const {
@@ -25,17 +28,240 @@ const FormContent = (props = {}) => {
 		selectedAcc,
 		setSelectedAcc,
 		formConfigs,
+		// setErrorSet,
+		// errorSet,
+		displayError,
+		// retreivedConfig,
 	} = props;
 
 	// console.log("validatedConfig in content:", validatedConfig);
 
+	let validator = (formData) => {
+		JSON.stringify(
+			{ ...formData },
+			function (index, value) {
+				// console.log("value in validator:", formData);
+				// console.log("Value:", value);
+				let validatedData = {};
+				for (let moduleKey in value) {
+					let moduleConfig = getModuleConfigs(moduleKey);
+					let formConfig = formData[moduleKey];
+					// console.log(`${moduleKey}:`, moduleConfig);
+
+					if (!moduleConfig) {
+						// console.log(moduleKey, "has no config.");
+						if (formConfig !== undefined) {
+							if (formConfig !== undefined) {
+								if (formConfig.length) {
+									try {
+										let evaluatedVal = eval(formConfig);
+										validatedData[moduleKey] = evaluatedVal;
+									} catch (err) {
+										if (err.name === "SyntaxError") {
+											console.error(moduleKey, "producted this error. \n", err);
+											displayError(
+												`${moduleKey} produced an error.\n${err.name}: ${err.message}`
+											);
+											return;
+										} else {
+											validatedData[moduleKey] = formConfig;
+										}
+									}
+								}
+							}
+						}
+					} else {
+						// console.log(moduleKey, ":", moduleConfig);
+						// console.log(formConfig);
+						validatedData[moduleKey] = {};
+						for (let element in formConfig) {
+							if (formConfig[element] !== undefined) {
+								if (formConfig[element].toString().length) {
+									const dataType = getEleDataType(moduleKey, element);
+									switch (dataType) {
+										case "element":
+											// console.log("The element is of type(element).");
+											// console.log(moduleKey, element, formConfig[element]);
+											try {
+												validatedData[moduleKey][element] = eval(
+													formConfig[element]
+												);
+												// console.log(validatedData[moduleKey]);
+											} catch (err) {
+												console.error(
+													moduleKey,
+													">",
+													element,
+													"producted this error. \n",
+													err
+												);
+												// const error = new Set(errorSet).add(
+												// 	`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
+												// );
+												// setErrorSet(error);
+												displayError(
+													`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
+												);
+												return;
+											}
+											break;
+										case "function":
+											// console.log("The element is of type(function).");
+											try {
+												validatedData[moduleKey][element] = eval(
+													"(" + formConfig[element] + ")"
+												);
+											} catch (err) {
+												console.error(
+													moduleKey,
+													">",
+													element,
+													"producted this error. \n",
+													err
+												);
+												displayError(
+													`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
+												);
+												// const error = new Set(errorSet).add(
+												// 	`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
+												// );
+												// setErrorSet(error);
+												return;
+											}
+											break;
+										case "number":
+											// console.log("The element is of type(number).");
+											try {
+												validatedData[moduleKey][element] = parseInt(
+													formConfig[element]
+												);
+											} catch (err) {
+												console.error(
+													moduleKey,
+													">",
+													element,
+													"producted this error. \n",
+													err
+												);
+												displayError(
+													`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
+												);
+												// const error = new Set(errorSet).add(
+												// 	`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
+												// );
+												// setErrorSet(error);
+												return;
+											}
+											break;
+										case "object":
+											// console.log("The element is of type(object).");
+											try {
+												validatedData[moduleKey][element] = JSON.parse(
+													formConfig[element]
+												);
+											} catch (err) {
+												console.error(
+													moduleKey,
+													">",
+													element,
+													"producted this error. \n",
+													err
+												);
+												displayError(
+													`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
+												);
+												// const error = new Set(errorSet).add(
+												// 	`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
+												// );
+												// setErrorSet(error);
+												return;
+											}
+											break;
+										case "array":
+											// console.log("The element is of type(array).");
+											try {
+												validatedData[moduleKey][element] = eval(
+													formConfig[element]
+												);
+											} catch (err) {
+												console.error(
+													moduleKey,
+													">",
+													element,
+													"producted this error.\n",
+													err
+												);
+												displayError(
+													`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
+												);
+												// const error = new Set(errorSet).add(
+												// 	`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
+												// );
+												// setErrorSet(error);
+												return;
+											}
+											break;
+										case "boolean":
+											// console.log("The element is of type(boolean).");
+											try {
+												// console.log(moduleKey, element, formConfig[element]);
+												validatedData[moduleKey][element] = eval(
+													formConfig[element]
+												);
+											} catch (err) {
+												console.error(
+													moduleKey,
+													">",
+													element,
+													"producted this error. \n",
+													err
+												);
+												displayError(
+													`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
+												);
+												// const error = new Set(errorSet).add(
+												// 	`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
+												// );
+												// setErrorSet(error);
+												return;
+											}
+											// console.log(
+											// 	moduleKey,
+											// 	element,
+											// 	eval(formConfig[element]),
+											// 	validatedData
+											// );
+											break;
+										default:
+											// console.log("The element is of type(string).");
+											validatedData[moduleKey][element] = formConfig[element];
+											break;
+									}
+								}
+							}
+						}
+					}
+				}
+				if (Object.keys(validatedData).length > 0) {
+					// console.log("validatedData after validation:", validatedData);
+					setValidatedConfig(validatedData);
+					// localStorage.setItem("config", JSON.stringify(formData, null, 4));
+				}
+			},
+			4
+		);
+	};
+
 	let masterConfig = {};
 	// let validatedData = {};
-	const [formData, setFormData] = useState(defaultConfig);
-	const [jsonData, setJsonData] = useState(JSON.stringify(formData, null, 4));
+	const [formData, setFormData] = useState({});
+	// 	Object.keys(retreivedConfig).length > 0 ? retreivedConfig : defaultConfig
+	// );
+	const [jsonData, setJsonData] = useState();
 	const [fsCodeEditorData, setFSCodeEditorData] = useState(null);
 	const [publishedBuilderLink, setPublishedBuilderLink] = useState("");
 	const [publishedPreviewLink, setPublishedPreviewLink] = useState("");
+	const [codeChangeStatus, setCodeChangeStatus] = useState(false);
 
 	const confirmModalRef = useRef();
 	const viewJSONModalRef = useRef();
@@ -47,6 +273,10 @@ const FormContent = (props = {}) => {
 	const inputJSONFile = useRef(null);
 
 	const { siteKey, configKey } = useParams();
+
+	// if (Object.keys(retreivedConfig).length > 0) {
+	// 	validator(retreivedConfig);
+	// }
 
 	const updateMasterConfig = (formConfigs) => {
 		formConfigs.map((formConfig = {}, i) => {
@@ -60,6 +290,8 @@ const FormContent = (props = {}) => {
 	};
 	updateMasterConfig(formConfigs); // this should be inside a hooks
 	const updateFormData = (data = {}, moduleKey = null) => {
+		// console.log("updateFormData:", data, moduleKey);
+		setCodeChangeStatus(true);
 		if (moduleKey) {
 			setFormData({
 				...formData,
@@ -81,172 +313,21 @@ const FormContent = (props = {}) => {
 		}
 	};
 
-	let validator = (formData) => {
-		JSON.stringify(
-			{ ...formData },
-			function (index, value) {
-				// console.log("value in validator:", value);
-				let validatedData = {};
-				for (let moduleKey in value) {
-					let moduleConfig = getModuleConfigs(moduleKey);
-					let formConfig = formData[moduleKey];
-					// console.log(`${moduleKey}:`, moduleConfig);
-
-					if (!moduleConfig) {
-						// console.log(moduleKey, "has no config.");
-						if (formConfig !== undefined) {
-							// console.log(moduleKey, formConfig, typeof formConfig);
-							if (formConfig !== undefined) {
-								if (formConfig.length) {
-									try {
-										let evaluatedVal = eval(formConfig);
-										validatedData[moduleKey] = evaluatedVal;
-									} catch (err) {
-										validatedData[moduleKey] = formConfig;
-									}
-								}
-							}
-						}
-					} else {
-						// console.log(moduleKey, ":", moduleConfig);
-						// console.log(formConfig);
-						validatedData[moduleKey] = {};
-						for (let element in formConfig) {
-							if (formConfig[element] !== undefined) {
-								if (formConfig[element].toString().length) {
-									const dataType = getEleDataType(moduleKey, element);
-									switch (dataType) {
-										case "element":
-											// console.log("The element is of type(element).");
-											try {
-												validatedData[moduleKey][element] = eval(
-													formConfig[element]
-												);
-											} catch (err) {
-												console.error(
-													moduleKey,
-													">",
-													element,
-													"producted this error. \n",
-													err
-												);
-												return;
-											}
-											break;
-										case "function":
-											// console.log("The element is of type(function).");
-											try {
-												validatedData[moduleKey][element] = eval(
-													"(" + formConfig[element] + ")"
-												);
-											} catch (err) {
-												console.error(
-													moduleKey,
-													">",
-													element,
-													"producted this error. \n",
-													err
-												);
-												return;
-											}
-											break;
-										case "number":
-											// console.log("The element is of type(number).");
-											try {
-												validatedData[moduleKey][element] = parseInt(
-													formConfig[element]
-												);
-											} catch (err) {
-												console.error(
-													moduleKey,
-													">",
-													element,
-													"producted this error. \n",
-													err
-												);
-												return;
-											}
-											break;
-										case "object":
-											// console.log("The element is of type(object).");
-											try {
-												validatedData[moduleKey][element] = JSON.parse(
-													formConfig[element]
-												);
-											} catch (err) {
-												console.error(
-													moduleKey,
-													">",
-													element,
-													"producted this error. \n",
-													err
-												);
-												return;
-											}
-											break;
-										case "array":
-											// console.log("The element is of type(array).");
-											try {
-												validatedData[moduleKey][element] = eval(
-													formConfig[element]
-												);
-											} catch (err) {
-												console.error(
-													moduleKey,
-													">",
-													element,
-													"producted this error.\n",
-													err
-												);
-												return;
-											}
-											break;
-										case "boolean":
-											// console.log("The element is of type(boolean).");
-											try {
-												// console.log(moduleKey, element, formConfig[element]);
-												validatedData[moduleKey][element] = eval(
-													formConfig[element]
-												);
-											} catch (err) {
-												console.error(
-													moduleKey,
-													">",
-													element,
-													"producted this error. \n",
-													err
-												);
-												return;
-											}
-											// console.log(
-											// 	moduleKey,
-											// 	element,
-											// 	eval(formConfig[element]),
-											// 	validatedData
-											// );
-											break;
-										default:
-											// console.log("The element is of type(string).");
-											validatedData[moduleKey][element] = formConfig[element];
-											break;
-									}
-								}
-							}
-						}
-					}
-				}
-				// console.log("validatedData after validation:", validatedData);
-				if (Object.keys(validatedData).length > 0) {
-					setValidatedConfig(validatedData);
-				}
-			},
-			4
-		);
+	const prettyPrint = () => {
+		var json = JSON.stringify(obj, function (key, value) {
+			if (typeof value === "function") {
+				return value.toString();
+			} else {
+				return value;
+			}
+		});
 	};
 
 	useEffect(() => {
 		console.log("siteKey:", siteKey, "configKey:", configKey);
 		if (siteKey !== undefined && configKey !== undefined) {
+			console.log("retrieving configs");
+			// debugger;
 			axios
 				.get("http://localhost:5000/retrieve", {
 					params: { siteKey: siteKey, configKey: configKey },
@@ -254,12 +335,16 @@ const FormContent = (props = {}) => {
 				.then((response) => {
 					// handle success
 					if (response.data.status === "error") {
-						console.log("No saved configurations found.");
+						console.log(
+							"No saved configurations found. Applying default configurations."
+						);
 						return;
 					}
+
 					console.log("No error, continuing.");
-					console.log("config:", response.data.config);
+					// console.log("config:", response.data.config);
 					setFormData(response.data.config);
+					setJsonData(JSON.stringify(response.data.config, null, 4));
 					validator(response.data.config);
 				})
 				.catch((error) => {
@@ -269,7 +354,18 @@ const FormContent = (props = {}) => {
 					);
 					// console.log(error);
 				});
+		} else {
+			debugger;
+			setFormData(defaultConfig);
+			setJsonData(JSON.stringify(defaultConfig, null, 4));
+			validator(defaultConfig);
 		}
+		// } else {
+		// 	if (localStorage.getItem("config")) {
+		// 		console.log("config:", JSON.parse(localStorage.getItem("config")));
+		// 		setFormData(JSON.parse(localStorage.getItem("config")));
+		// 	}
+		// }
 	}, []);
 
 	let toggleConfig = () => {
@@ -311,6 +407,7 @@ const FormContent = (props = {}) => {
 				)
 				.then((res) => {
 					setPublishStatus(true);
+					setCodeChangeStatus(false);
 					setPublishedBuilderLink(
 						`http://localhost:3030/builder/${siteKey}/${configKey}`
 					);
@@ -351,6 +448,7 @@ const FormContent = (props = {}) => {
 				.then((res) => {
 					setPublishStatus(true);
 					console.log(res.data);
+					setCodeChangeStatus(false);
 					setPublishedBuilderLink(
 						`http://localhost:3030/builder/${siteKey}/${configKey}`
 					);
@@ -430,6 +528,15 @@ const FormContent = (props = {}) => {
 
 	return (
 		<div className="formContent">
+			{/* <EditorAce formData={formData} /> */}
+			{/* <div className="codeChangeStatus">
+				{codeChangeStatus === false && (
+					<div className="noCodeChange">No Changes!</div>
+				)}
+				{codeChangeStatus === true && (
+					<div className="yesCodeChange">Changes not saved!</div>
+				)}
+			</div> */}
 			<div className="hideConfigTab" onClick={() => hideConfigTab()}>
 				<div className="showArrowLeft">
 					<span></span>
@@ -455,7 +562,7 @@ const FormContent = (props = {}) => {
 									the RHS.
 								</li>
 								<li>
-									To publish the configurations, click on "More Options" >
+									To publish the configurations, click on "More Options" -
 									"Upload to CDN", and get two unique URLs - one to the Builder
 									site and one to the Preview site.
 								</li>
@@ -494,7 +601,7 @@ const FormContent = (props = {}) => {
 						</>
 					);
 				})}
-				<div
+				{/* <div
 					className="moreOptionsDropdown"
 					style={{ display: "none" }}
 					id="moreOptionsDropdown"
@@ -545,7 +652,7 @@ const FormContent = (props = {}) => {
 						<span></span>
 						Reset Config
 					</div>
-				</div>
+				</div> */}
 				<div className="btnSection">
 					{/* <CustomDrop appearance="block" options={[{"id": 1, "name"}]}/> */}
 					<InlineModal
@@ -645,8 +752,13 @@ const FormContent = (props = {}) => {
 						<div className="confirm-modal-body">
 							Are you sure you want to publish these configurations?
 							<div className="warning">
-								If a file with the same name exists, the content of this file
-								will be overwritten with these configurations.
+								<div className="iconWrapper">
+									<div className="icon"></div>
+								</div>
+								<div className="message">
+									If a file with the same name exists, the content of this file
+									will be overwritten with these configurations.
+								</div>
 							</div>
 						</div>
 						<div className="modal-footer">
@@ -805,6 +917,7 @@ const FormContent = (props = {}) => {
 				<div className="confirm-modal-body">
 					<div className="formjson" id="formjson">
 						<CodeMirror
+							// readOnly={true}
 							id="jsonCode"
 							className="jsonCode"
 							// value={JSON.stringify(jsonData, null, 4)}
@@ -814,6 +927,7 @@ const FormContent = (props = {}) => {
 							// 		: jsonData
 							// }
 							value={jsonData}
+							// value={JSON.stringify(formData, null, 4)}
 							// value={jsonData.replace(/\\t|\\n/gim, "")}
 							// value={jsonData.replace(/\\t|\\n/gim, "").replace(/\\"/gim, "'")}
 							placeholder="Insert code here..."

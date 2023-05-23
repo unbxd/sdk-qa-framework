@@ -14,10 +14,16 @@ const productViewConfig = {
 		{
 			name: "el",
 			dataType: "element",
+			displayIf: function (productView) {
+				return productView.enabled === true;
+			},
 		},
 		{
 			name: "template",
 			dataType: "function",
+			displayIf: function (productView) {
+				return productView.enabled === true;
+			},
 		},
 		{
 			name: "defaultViewType",
@@ -34,6 +40,9 @@ const productViewConfig = {
 					value: "LIST",
 				},
 			],
+			displayIf: function (productView) {
+				return productView.enabled === true;
+			},
 		},
 		{
 			name: "action",
@@ -50,22 +59,37 @@ const productViewConfig = {
 					value: "click",
 				},
 			],
+			displayIf: function (productView) {
+				return productView.enabled === true;
+			},
 		},
 		{
 			name: "viewTypeClass",
 			dataType: "string",
+			displayIf: function (productView) {
+				return productView.enabled === true;
+			},
 		},
 		{
 			name: "selectedViewTypeClass",
 			dataType: "string",
+			displayIf: function (productView) {
+				return productView.enabled === true;
+			},
 		},
 		{
 			name: "tagName",
 			dataType: "string",
+			displayIf: function (productView) {
+				return productView.enabled === true;
+			},
 		},
 		{
 			name: "htmlAttributes",
 			dataType: "object",
+			displayIf: function (productView) {
+				return productView.enabled === true;
+			},
 		},
 	],
 	usecases: [

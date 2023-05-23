@@ -84,18 +84,30 @@ const facetsConfig = {
 		{
 			name: "facetMultilevelName",
 			dataType: "string",
+			displayIf: function (facet) {
+				return facet.facetMultilevel === true;
+			},
 		},
 		{
 			name: "multiLevelFacetSelectorClass",
 			dataType: "string",
+			displayIf: function (facet) {
+				return facet.facetMultilevel === true;
+			},
 		},
 		{
 			name: "multiLevelFacetTemplate",
 			dataType: "function",
+			displayIf: function (facet) {
+				return facet.facetMultilevel === true;
+			},
 		},
 		{
 			name: "facetDepth",
 			dataType: "number",
+			displayIf: function (facet) {
+				return facet.facetMultilevel === true;
+			},
 		},
 		{
 			name: "clearFacetsSelectorClass",
@@ -117,10 +129,16 @@ const facetsConfig = {
 		{
 			name: "applyButtonText",
 			dataType: "string",
+			displayIf: function (facet) {
+				return facet.applyMultipleFilters === true;
+			},
 		},
 		{
 			name: "clearButtonText",
 			dataType: "string",
+			displayIf: function (facet) {
+				return facet.applyMultipleFilters === true;
+			},
 		},
 		{
 			name: "isCollapsible",
@@ -139,6 +157,9 @@ const facetsConfig = {
 		{
 			name: "searchPlaceHolder",
 			dataType: "string",
+			displayIf: function (facet) {
+				return facet.isSearchable === true;
+			},
 		},
 		{
 			name: "enableViewMore",
@@ -148,10 +169,16 @@ const facetsConfig = {
 		{
 			name: "viewMoreText",
 			dataType: "array",
+			displayIf: function (facet) {
+				return facet.enableViewMore === true;
+			},
 		},
 		{
 			name: "viewMoreLimit",
 			dataType: "number",
+			displayIf: function (facet) {
+				return facet.enableViewMore === true;
+			},
 		},
 		{
 			name: "tagName",

@@ -14,22 +14,37 @@ const breadcrumbsConfig = {
 		{
 			name: "el",
 			dataType: "element",
+			displayIf: function (breadcrumb) {
+				return breadcrumb.enabled === true;
+			},
 		},
 		{
 			name: "template",
 			dataType: "function",
+			displayIf: function (breadcrumb) {
+				return breadcrumb.enabled === true;
+			},
 		},
 		{
 			name: "selectorClass",
 			dataType: "string",
+			displayIf: function (breadcrumb) {
+				return breadcrumb.enabled === true;
+			},
 		},
 		{
 			name: "tagName",
 			dataType: "string",
+			displayIf: function (breadcrumb) {
+				return breadcrumb.enabled === true;
+			},
 		},
 		{
 			name: "htmlAttributes",
 			dataType: "object",
+			displayIf: function (breadcrumb) {
+				return breadcrumb.enabled === true;
+			},
 		},
 	],
 };

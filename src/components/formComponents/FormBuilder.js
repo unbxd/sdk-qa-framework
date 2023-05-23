@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import "../../../public/styles/components/form/builder.scss";
 import FormIcons from "../formComponents/formElements/FormIcons";
 import FormContent from "../formComponents/FormContent";
 
@@ -26,6 +27,10 @@ const FormBuilder = (props) => {
 		hideConfigTab,
 		viewConfigOption,
 		validatedConfig,
+		// setErrorSet,
+		// errorSet,
+		displayError,
+		// retreivedConfig,
 	} = props;
 	const [selectedAcc, setSelectedAcc] = useState(null);
 	const formConfigs = [
@@ -47,6 +52,8 @@ const FormBuilder = (props) => {
 		othersConfig,
 	];
 
+	// console.log("retreivedConfig:", retreivedConfig);
+
 	let showContent = (i) => {
 		if (selectedAcc == i) {
 			return setSelectedAcc(null);
@@ -54,10 +61,7 @@ const FormBuilder = (props) => {
 		setSelectedAcc(i);
 	};
 	return (
-		<div
-			className={viewConfigOption ? "formBuilder" : "formBuilder preview"}
-			// style={viewConfigTab ? { display: "flex" } : { display: "none" }}
-		>
+		<div className={viewConfigOption ? "formBuilder" : "formBuilder preview"}>
 			<FormIcons
 				formConfigs={formConfigs}
 				showContent={showContent}
@@ -70,6 +74,7 @@ const FormBuilder = (props) => {
 				setValidatedConfig={setValidatedConfig}
 				hideConfigTab={hideConfigTab}
 				validatedConfig={validatedConfig}
+				displayError={displayError}
 			/>
 		</div>
 	);
