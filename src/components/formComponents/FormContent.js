@@ -19,6 +19,8 @@ import {
 	InlineModalBody,
 } from "unbxd-react-components";
 import EditorAce from "./formElements/EditorAce";
+import CustomInput from "./formElements/CustomInput";
+import CustomCheck from "./formElements/CustomCheck";
 
 const FormContent = (props = {}) => {
 	const {
@@ -28,28 +30,21 @@ const FormContent = (props = {}) => {
 		selectedAcc,
 		setSelectedAcc,
 		formConfigs,
-		// setErrorSet,
-		// errorSet,
 		displayError,
-		// retreivedConfig,
+		displaySuccess,
+		displayInfo,
 	} = props;
-
-	// console.log("validatedConfig in content:", validatedConfig);
 
 	let validator = (formData) => {
 		JSON.stringify(
 			{ ...formData },
 			function (index, value) {
-				// console.log("value in validator:", formData);
-				// console.log("Value:", value);
 				let validatedData = {};
 				for (let moduleKey in value) {
 					let moduleConfig = getModuleConfigs(moduleKey);
 					let formConfig = formData[moduleKey];
-					// console.log(`${moduleKey}:`, moduleConfig);
 
 					if (!moduleConfig) {
-						// console.log(moduleKey, "has no config.");
 						if (formConfig !== undefined) {
 							if (formConfig !== undefined) {
 								if (formConfig.length) {
@@ -71,8 +66,6 @@ const FormContent = (props = {}) => {
 							}
 						}
 					} else {
-						// console.log(moduleKey, ":", moduleConfig);
-						// console.log(formConfig);
 						validatedData[moduleKey] = {};
 						for (let element in formConfig) {
 							if (formConfig[element] !== undefined) {
@@ -80,25 +73,11 @@ const FormContent = (props = {}) => {
 									const dataType = getEleDataType(moduleKey, element);
 									switch (dataType) {
 										case "element":
-											// console.log("The element is of type(element).");
-											// console.log(moduleKey, element, formConfig[element]);
 											try {
 												validatedData[moduleKey][element] = eval(
 													formConfig[element]
 												);
-												// console.log(validatedData[moduleKey]);
 											} catch (err) {
-												console.error(
-													moduleKey,
-													">",
-													element,
-													"producted this error. \n",
-													err
-												);
-												// const error = new Set(errorSet).add(
-												// 	`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
-												// );
-												// setErrorSet(error);
 												displayError(
 													`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
 												);
@@ -106,134 +85,66 @@ const FormContent = (props = {}) => {
 											}
 											break;
 										case "function":
-											// console.log("The element is of type(function).");
 											try {
 												validatedData[moduleKey][element] = eval(
 													"(" + formConfig[element] + ")"
 												);
 											} catch (err) {
-												console.error(
-													moduleKey,
-													">",
-													element,
-													"producted this error. \n",
-													err
-												);
 												displayError(
 													`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
 												);
-												// const error = new Set(errorSet).add(
-												// 	`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
-												// );
-												// setErrorSet(error);
 												return;
 											}
 											break;
 										case "number":
-											// console.log("The element is of type(number).");
 											try {
 												validatedData[moduleKey][element] = parseInt(
 													formConfig[element]
 												);
 											} catch (err) {
-												console.error(
-													moduleKey,
-													">",
-													element,
-													"producted this error. \n",
-													err
-												);
 												displayError(
 													`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
 												);
-												// const error = new Set(errorSet).add(
-												// 	`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
-												// );
-												// setErrorSet(error);
 												return;
 											}
 											break;
 										case "object":
-											// console.log("The element is of type(object).");
 											try {
 												validatedData[moduleKey][element] = JSON.parse(
 													formConfig[element]
 												);
 											} catch (err) {
-												console.error(
-													moduleKey,
-													">",
-													element,
-													"producted this error. \n",
-													err
-												);
 												displayError(
 													`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
 												);
-												// const error = new Set(errorSet).add(
-												// 	`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
-												// );
-												// setErrorSet(error);
 												return;
 											}
 											break;
 										case "array":
-											// console.log("The element is of type(array).");
 											try {
 												validatedData[moduleKey][element] = eval(
 													formConfig[element]
 												);
 											} catch (err) {
-												console.error(
-													moduleKey,
-													">",
-													element,
-													"producted this error.\n",
-													err
-												);
 												displayError(
 													`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
 												);
-												// const error = new Set(errorSet).add(
-												// 	`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
-												// );
-												// setErrorSet(error);
 												return;
 											}
 											break;
 										case "boolean":
-											// console.log("The element is of type(boolean).");
 											try {
-												// console.log(moduleKey, element, formConfig[element]);
 												validatedData[moduleKey][element] = eval(
 													formConfig[element]
 												);
 											} catch (err) {
-												console.error(
-													moduleKey,
-													">",
-													element,
-													"producted this error. \n",
-													err
-												);
 												displayError(
 													`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
 												);
-												// const error = new Set(errorSet).add(
-												// 	`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
-												// );
-												// setErrorSet(error);
 												return;
 											}
-											// console.log(
-											// 	moduleKey,
-											// 	element,
-											// 	eval(formConfig[element]),
-											// 	validatedData
-											// );
 											break;
 										default:
-											// console.log("The element is of type(string).");
 											validatedData[moduleKey][element] = formConfig[element];
 											break;
 									}
@@ -243,25 +154,31 @@ const FormContent = (props = {}) => {
 					}
 				}
 				if (Object.keys(validatedData).length > 0) {
-					// console.log("validatedData after validation:", validatedData);
 					setValidatedConfig(validatedData);
-					// localStorage.setItem("config", JSON.stringify(formData, null, 4));
+					localStorage.setItem(
+						configKey !== undefined && configKey.length > 0
+							? `config-${siteKey}-${configKey}`
+							: `config`,
+						JSON.stringify(formData, null, 4)
+					);
 				}
 			},
 			4
 		);
 	};
 
+	const { siteKey, configKey } = useParams();
+
 	let masterConfig = {};
-	// let validatedData = {};
 	const [formData, setFormData] = useState({});
-	// 	Object.keys(retreivedConfig).length > 0 ? retreivedConfig : defaultConfig
-	// );
 	const [jsonData, setJsonData] = useState();
 	const [fsCodeEditorData, setFSCodeEditorData] = useState(null);
 	const [publishedBuilderLink, setPublishedBuilderLink] = useState("");
 	const [publishedPreviewLink, setPublishedPreviewLink] = useState("");
-	const [codeChangeStatus, setCodeChangeStatus] = useState(false);
+	const [customFileNameBool, setCustomFileNameBool] = useState(false);
+	const [customFileName, setCustomFileName] = useState(
+		configKey !== undefined && configKey.length > 0 ? configKey : ""
+	);
 
 	const confirmModalRef = useRef();
 	const viewJSONModalRef = useRef();
@@ -271,12 +188,6 @@ const FormContent = (props = {}) => {
 	let [publishStatus, setPublishStatus] = useState(false);
 
 	const inputJSONFile = useRef(null);
-
-	const { siteKey, configKey } = useParams();
-
-	// if (Object.keys(retreivedConfig).length > 0) {
-	// 	validator(retreivedConfig);
-	// }
 
 	const updateMasterConfig = (formConfigs) => {
 		formConfigs.map((formConfig = {}, i) => {
@@ -290,8 +201,7 @@ const FormContent = (props = {}) => {
 	};
 	updateMasterConfig(formConfigs); // this should be inside a hooks
 	const updateFormData = (data = {}, moduleKey = null) => {
-		// console.log("updateFormData:", data, moduleKey);
-		setCodeChangeStatus(true);
+		// setCodeChangeStatus(true);
 		if (moduleKey) {
 			setFormData({
 				...formData,
@@ -313,16 +223,6 @@ const FormContent = (props = {}) => {
 		}
 	};
 
-	const prettyPrint = () => {
-		var json = JSON.stringify(obj, function (key, value) {
-			if (typeof value === "function") {
-				return value.toString();
-			} else {
-				return value;
-			}
-		});
-	};
-
 	useEffect(() => {
 		console.log("siteKey:", siteKey, "configKey:", configKey);
 		if (siteKey !== undefined && configKey !== undefined) {
@@ -338,43 +238,53 @@ const FormContent = (props = {}) => {
 						console.log(
 							"No saved configurations found. Applying default configurations."
 						);
+						setFormData(defaultConfig);
+						setJsonData(JSON.stringify(defaultConfig, null, 4));
+						validator(defaultConfig);
+						displayError(
+							`No saved configurations found. Applying default configurations.`
+						);
 						return;
 					}
 
 					console.log("No error, continuing.");
-					// console.log("config:", response.data.config);
 					setFormData(response.data.config);
 					setJsonData(JSON.stringify(response.data.config, null, 4));
 					validator(response.data.config);
+					displaySuccess("Retrieved and applied configurations.");
 				})
 				.catch((error) => {
 					// handle error
 					console.error(
 						"Could not retrieve the configurations as server is down."
 					);
-					// console.log(error);
+					console.log(error.message);
+					setFormData(defaultConfig);
+					setJsonData(JSON.stringify(defaultConfig, null, 4));
+					validator(defaultConfig);
+					displayError(
+						`${error.message}: Server is down. Could not retrieve configurations.`
+					);
 				});
 		} else {
-			debugger;
-			setFormData(defaultConfig);
-			setJsonData(JSON.stringify(defaultConfig, null, 4));
-			validator(defaultConfig);
+			// console.log(localStorage.getItem("config"));
+			if (localStorage.getItem("config") === null) {
+				setFormData(defaultConfig);
+				setJsonData(JSON.stringify(defaultConfig, null, 4));
+				validator(defaultConfig);
+				displayInfo("Default configurations have been applied.");
+			} else {
+				let config = localStorage.getItem("config");
+				setFormData(JSON.parse(config));
+				setJsonData(config);
+				validator(JSON.parse(config));
+				displaySuccess("Retrieved and applied saved changes.");
+			}
 		}
-		// } else {
-		// 	if (localStorage.getItem("config")) {
-		// 		console.log("config:", JSON.parse(localStorage.getItem("config")));
-		// 		setFormData(JSON.parse(localStorage.getItem("config")));
-		// 	}
-		// }
 	}, []);
-
-	let toggleConfig = () => {
-		viewJSONModalRef.current.showModal();
-	};
 
 	const handlePublishStatus = () => {
 		setPublishPopUp(false);
-		// setPublishStatus(true);
 		confirmModalRef.current.hideModal();
 		publishSuccessModalRef.current.showModal();
 	};
@@ -401,18 +311,23 @@ const FormContent = (props = {}) => {
 						data: "Hello backend defined",
 						config: formData,
 						siteKey: siteKey,
-						configKey: configKey,
+						configKey:
+							customFileNameBool === false ? configKey : customFileName,
 					}),
 					customConfig
 				)
 				.then((res) => {
 					setPublishStatus(true);
-					setCodeChangeStatus(false);
+					// setCodeChangeStatus(false);
 					setPublishedBuilderLink(
-						`http://localhost:3030/builder/${siteKey}/${configKey}`
+						`http://localhost:3030/builder/${siteKey}/${
+							customFileNameBool === false ? configKey : customFileName
+						}`
 					);
 					setPublishedPreviewLink(
-						`http://localhost:3030/preview/${siteKey}/${configKey}`
+						`http://localhost:3030/preview/${siteKey}/${
+							customFileNameBool === false ? configKey : customFileName
+						}`
 					);
 				})
 				.catch((err) => {
@@ -421,7 +336,8 @@ const FormContent = (props = {}) => {
 				});
 		} else {
 			let { siteKey } = formData;
-			let configKey = Date.now().toString();
+			let configKey = customFileName;
+			// let configKey = Date.now().toString();
 			const customConfig = {
 				headers: {
 					"Content-Type": "application/json",
@@ -448,7 +364,7 @@ const FormContent = (props = {}) => {
 				.then((res) => {
 					setPublishStatus(true);
 					console.log(res.data);
-					setCodeChangeStatus(false);
+					// setCodeChangeStatus(false);
 					setPublishedBuilderLink(
 						`http://localhost:3030/builder/${siteKey}/${configKey}`
 					);
@@ -466,7 +382,7 @@ const FormContent = (props = {}) => {
 
 	const copyJSON = () => {
 		navigator.clipboard.writeText(JSON.stringify(formData));
-		document.querySelector(".moreOptionsDropdown").style.display = "none";
+		// document.querySelector(".viewMoreDropdown").style.display = "none";
 		console.log("Copied JSON!");
 	};
 
@@ -484,7 +400,7 @@ const FormContent = (props = {}) => {
 	};
 
 	const downloadJSON = () => {
-		document.getElementById("moreOptionsDropdown").style.display = "none";
+		// document.getElementById("viewMoreDropdown").style.display = "none";
 		const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
 			JSON.stringify(formData)
 		)}`;
@@ -496,19 +412,10 @@ const FormContent = (props = {}) => {
 
 	const resetJSON = () => {
 		console.log("Configurations have been reset.");
-		document.getElementById("moreOptionsDropdown").style.display = "none";
+		// document.getElementById("viewMoreDropdown").style.display = "none";
 		setSelectedAcc(null);
 		setFormData(defaultConfig);
 	};
-
-	// const viewOptionsDropdown = () => {
-	// 	const moreOptionsDropdown = document.querySelector(".moreOptionsDropdown");
-	// 	if (moreOptionsDropdown.style.display == "none") {
-	// 		moreOptionsDropdown.style.display = "flex";
-	// 	} else {
-	// 		moreOptionsDropdown.style.display = "none";
-	// 	}
-	// };
 
 	const inputFileChange = (e) => {
 		const jsonFile = e.target.files[0];
@@ -529,14 +436,6 @@ const FormContent = (props = {}) => {
 	return (
 		<div className="formContent">
 			{/* <EditorAce formData={formData} /> */}
-			{/* <div className="codeChangeStatus">
-				{codeChangeStatus === false && (
-					<div className="noCodeChange">No Changes!</div>
-				)}
-				{codeChangeStatus === true && (
-					<div className="yesCodeChange">Changes not saved!</div>
-				)}
-			</div> */}
 			<div className="hideConfigTab" onClick={() => hideConfigTab()}>
 				<div className="showArrowLeft">
 					<span></span>
@@ -601,60 +500,7 @@ const FormContent = (props = {}) => {
 						</>
 					);
 				})}
-				{/* <div
-					className="moreOptionsDropdown"
-					style={{ display: "none" }}
-					id="moreOptionsDropdown"
-				>
-					<div
-						className="viewCode"
-						onClick={() => {
-							setSelectedAcc(null);
-							viewJSONModalRef.current.showModal();
-						}}
-					>
-						<span></span>
-						View Code
-					</div>
-					<div className="downloadJSON" onClick={() => downloadJSON()}>
-						<span></span>
-						Download Code
-					</div>
-					<div
-						className="uploadJSON"
-						onClick={() => inputJSONFile.current.click()}
-					>
-						<span></span>
-						Upload File
-					</div>
-					<input
-						type="file"
-						onChange={inputFileChange}
-						ref={inputJSONFile}
-						style={{ display: "none" }}
-					/>
-					<div
-						className="uploadToCDN"
-						onClick={() => {
-							document.getElementById("moreOptionsDropdown").style.display =
-								"none";
-							confirmModalRef.current.showModal();
-						}}
-					>
-						<span></span>
-						Upload to CDN
-					</div>
-					<div className="copyJSON" onClick={() => copyJSON()}>
-						<span></span>
-						Copy Code
-					</div>
-					<div className="resetJSON" onClick={() => resetJSON()}>
-						<span></span>
-						Reset Config
-					</div>
-				</div> */}
 				<div className="btnSection">
-					{/* <CustomDrop appearance="block" options={[{"id": 1, "name"}]}/> */}
 					<InlineModal
 						activatorAction="click"
 						className="viewMoreDropdown"
@@ -696,8 +542,8 @@ const FormContent = (props = {}) => {
 							<div
 								className="uploadToCDN"
 								onClick={() => {
-									document.getElementById("moreOptionsDropdown").style.display =
-										"none";
+									// document.getElementById("viewMoreDropdown").style.display =
+									// 	"none";
 									confirmModalRef.current.showModal();
 								}}
 							>
@@ -714,22 +560,12 @@ const FormContent = (props = {}) => {
 							</div>
 						</InlineModalBody>
 					</InlineModal>
-					{/* <button
-						id="viewMoreOption"
-						className="RCB-btn-secondary"
-						onClick={() => viewOptionsDropdown()}
-					>
-						{/* <div id="viewMoreOption" className="moreOptionsIcon"></div>
-						More Options
-					</button> */}
 					<button
 						id="applyBtn"
 						onClick={() => {
-							// newValidator();
 							validator(formData);
 						}}
 						className="RCB-btn-primary"
-						// disabled={true}
 					>
 						Apply Changes
 					</button>
@@ -742,9 +578,9 @@ const FormContent = (props = {}) => {
 				showClose={true}
 				className="confirmModal"
 				onClose={() => {
-					// console.log("confirmModalRef closed");
 					setPublishPopUp(false);
-					// confirmModalRef.current.hideModal();
+					setCustomFileNameBool(false);
+					// setCustomFileName(configKey.length > 0 ? configKey : "");
 				}}
 			>
 				{!publishPopUp && (
@@ -760,6 +596,51 @@ const FormContent = (props = {}) => {
 									will be overwritten with these configurations.
 								</div>
 							</div>
+							{siteKey !== undefined && configKey !== undefined ? (
+								<>
+									<CustomCheck
+										appearance="inline"
+										className="fileSaveName"
+										label="Save under different filename?"
+										name="fileSaveName"
+										onChange={(val) => {
+											setCustomFileNameBool(val);
+										}}
+									/>
+									<CustomInput
+										name="customFileName"
+										label="Enter the filename:"
+										className="customFileName"
+										defaultValue={
+											customFileNameBool === false ? `${configKey}` : ""
+										}
+										onChange={(val) => {
+											setCustomFileName(val);
+										}}
+										readOnly={customFileNameBool === false ? true : false}
+									/>
+								</>
+							) : (
+								<CustomInput
+									name="customFileName"
+									label="Enter the filename:"
+									onChange={(val) => {
+										setCustomFileName(val);
+									}}
+									defaultValue={customFileName}
+								/>
+							)}
+							<div className="confirmFileName">
+								<div>
+									The name of your file would be: <br />
+								</div>
+								<div>
+									<span className="icon"></span>
+									<span>
+										{formData.siteKey}/{customFileName}
+									</span>
+								</div>
+							</div>
 						</div>
 						<div className="modal-footer">
 							<Button
@@ -768,8 +649,8 @@ const FormContent = (props = {}) => {
 								onClick={() => {
 									setPublishPopUp(false);
 									setJsonData(JSON.stringify(formData, null, 4));
-									// setJsonData(formData);
 									confirmModalRef.current.hideModal();
+									setCustomFileName(configKey.length > 0 ? configKey : "");
 								}}
 							>
 								Cancel
@@ -778,7 +659,12 @@ const FormContent = (props = {}) => {
 								appearance="primary"
 								className="publish-configs"
 								onClick={() => {
-									handlePublish();
+									if (customFileName.length > 0) {
+										handlePublish();
+									} else {
+										displayError("Filename must have 1 or more characters.");
+										return;
+									}
 								}}
 							>
 								Publish
@@ -808,8 +694,6 @@ const FormContent = (props = {}) => {
 				showClose={true}
 				className="publishSuccess"
 				onClose={() => {
-					// console.log("publishSuccessModalRef closed");
-					// publishSuccessModalRef.current.hideModal();
 					setPublishStatus(false);
 				}}
 			>
@@ -824,7 +708,6 @@ const FormContent = (props = {}) => {
 										name="builder-cdn-link"
 										readOnly
 										label="Link to Builder site:"
-										// defaultValue="http://js-sdk.unbxd.com/builder/456787654334567"
 										defaultValue={publishedBuilderLink}
 									/>
 									<div
@@ -846,7 +729,6 @@ const FormContent = (props = {}) => {
 										id="preview-cdn-link"
 										name="preview-cdn-link"
 										readOnly
-										// defaultValue="http://js-sdk.unbxd.com/builder/456787654334567"
 										label="Link to Preview Site:"
 										defaultValue={publishedPreviewLink}
 									/>
@@ -909,27 +791,15 @@ const FormContent = (props = {}) => {
 				ref={viewJSONModalRef}
 				showClose={true}
 				className="configModal"
-				onClose={() => {
-					// console.log("viewJSONModalRef closed");
-					// viewJSONModalRef.current.hideModal();
-				}}
+				onClose={() => {}}
 			>
 				<div className="confirm-modal-body">
 					<div className="formjson" id="formjson">
 						<CodeMirror
-							// readOnly={true}
+							readOnly={true}
 							id="jsonCode"
 							className="jsonCode"
-							// value={JSON.stringify(jsonData, null, 4)}
-							// value={
-							// 	Object.keys(validatedConfig).length > 0
-							// 		? JSON.stringify(validatedConfig, null, 4)
-							// 		: jsonData
-							// }
 							value={jsonData}
-							// value={JSON.stringify(formData, null, 4)}
-							// value={jsonData.replace(/\\t|\\n/gim, "")}
-							// value={jsonData.replace(/\\t|\\n/gim, "").replace(/\\"/gim, "'")}
 							placeholder="Insert code here..."
 							height="100%"
 							width="100%"
@@ -942,7 +812,6 @@ const FormContent = (props = {}) => {
 									console.log("onCodeChange:", err);
 								}
 							}}
-							// readOnly={true}
 						/>
 					</div>
 				</div>

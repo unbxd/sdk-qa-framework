@@ -7,6 +7,8 @@ const DashboardWrapper = (props) => {
 		viewConfigOption = false,
 		reloadWarning = true,
 		displayError,
+		displaySuccess,
+		displayInfo,
 	} = props;
 
 	return (
@@ -16,6 +18,8 @@ const DashboardWrapper = (props) => {
 			)}
 			<DashboardContent
 				displayError={displayError}
+				displaySuccess={displaySuccess}
+				displayInfo={displayInfo}
 				viewConfigOption={viewConfigOption}
 				reloadWarning={reloadWarning}
 			/>

@@ -4,3 +4,4 @@ demo.*
 .env
 
 /src/inputJson/dummyMadrasLink2.json
+/public/dist

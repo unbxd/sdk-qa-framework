@@ -62,11 +62,9 @@ const Vanilla2 = React.memo((props) => {
 							}
 						}
 					},
-					onError: function (err) {
-						// errors.add(err);
-						console.log(err);
-						// setErrorSet(error);
-						displayError(err);
+					onError: function (module, err) {
+						console.log(err, module);
+						displayError(err, module);
 						return;
 					},
 					searchTrigger: "click",

@@ -27,10 +27,9 @@ const FormBuilder = (props) => {
 		hideConfigTab,
 		viewConfigOption,
 		validatedConfig,
-		// setErrorSet,
-		// errorSet,
 		displayError,
-		// retreivedConfig,
+		displaySuccess,
+		displayInfo,
 	} = props;
 	const [selectedAcc, setSelectedAcc] = useState(null);
 	const formConfigs = [
@@ -51,8 +50,6 @@ const FormBuilder = (props) => {
 		loaderConfig,
 		othersConfig,
 	];
-
-	// console.log("retreivedConfig:", retreivedConfig);
 
 	let showContent = (i) => {
 		if (selectedAcc == i) {
@@ -75,6 +72,8 @@ const FormBuilder = (props) => {
 				hideConfigTab={hideConfigTab}
 				validatedConfig={validatedConfig}
 				displayError={displayError}
+				displaySuccess={displaySuccess}
+				displayInfo={displayInfo}
 			/>
 		</div>
 	);

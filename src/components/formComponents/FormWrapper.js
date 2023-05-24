@@ -20,8 +20,6 @@ const FormWrapper = (props = {}) => {
 		fsCodeEditorData,
 	} = props;
 
-	// console.log("formData:", JSON.stringify(formData, null, 4));
-
 	const debounce = (callback, wait) => {
 		let timeoutId = null;
 		return (...args) => {
@@ -33,7 +31,6 @@ const FormWrapper = (props = {}) => {
 	};
 
 	const onChange = (obj = {}) => {
-		// console.log("data:", obj.data);
 		let objData = obj.data || {};
 		try {
 			for (let key in objData) {
@@ -75,28 +72,21 @@ const FormWrapper = (props = {}) => {
 
 		// handle obj.errors later on
 		if (objData) {
-			// console.log("objData:", objData);
 			updateFormData(objData, moduleKey);
 		}
-		// if (obj.data) {
-		// 	updateFormData(obj.data, moduleKey);
-		// }
 	};
 
 	const onCodeChange = (field, code) => {
 		updateFormData({ [field]: code }, moduleKey);
 	};
 
-	const delayChange = (element, code) => {
-		// debounce(function (element, code) {
-		// console.log("element:", element.data);
+	const delayChange = debounce(function (element, code) {
 		if (code === undefined) {
 			onChange(element);
 		} else {
 			onCodeChange(element, code);
 		}
-	};
-	// }, DEBOUNCE_DELAY);
+	}, DEBOUNCE_DELAY);
 
 	return (
 		<Form onChange={delayChange}>
@@ -106,7 +96,6 @@ const FormWrapper = (props = {}) => {
 				if (conf["displayIf"] && typeof conf["displayIf"] === "function") {
 					display = conf["displayIf"](formData);
 					if (conf["codeTemplate"]) {
-						// console.log(moduleKey, "has codeTemplate");
 						codeTemplate = conf["codeTemplate"](formData);
 					}
 				}
@@ -121,7 +110,6 @@ const FormWrapper = (props = {}) => {
 							docLink={docLink}
 							attrConfig={conf}
 							delayChange={delayChange}
-							// onChange={delayChange}
 							onCodeChange={delayChange}
 							codeTemplate={codeTemplate}
 						/>

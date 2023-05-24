@@ -19,13 +19,6 @@ const productViewConfig = {
 			},
 		},
 		{
-			name: "template",
-			dataType: "function",
-			displayIf: function (productView) {
-				return productView.enabled === true;
-			},
-		},
-		{
 			name: "defaultViewType",
 			dataType: "string",
 			options: [
@@ -40,6 +33,13 @@ const productViewConfig = {
 					value: "LIST",
 				},
 			],
+			displayIf: function (productView) {
+				return productView.enabled === true;
+			},
+		},
+		{
+			name: "template",
+			dataType: "function",
 			displayIf: function (productView) {
 				return productView.enabled === true;
 			},

@@ -1027,3 +1027,38 @@ form {
 		}
 	}
 }
+
+.customFileName {
+	margin: 0;
+}
+
+.confirmFileName {
+	margin: 15px 0 8px 0;
+	color: #415867;
+	font-size: 14px;
+	font-weight: 400;
+	display: block;
+
+	div {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+
+		.icon {
+			margin-left: 5px;
+			display: flex;
+			background-image: url("https://static.thenounproject.com/png/3842757-200.png");
+			background-size: 100% 100%;
+			width: 20px;
+			height: 20px;
+		}
+
+		span {
+			margin-left: 5px;
+		}
+	}
+
+	// span {
+	// 	margin: 5px 0 0 10px;
+	// }
+}

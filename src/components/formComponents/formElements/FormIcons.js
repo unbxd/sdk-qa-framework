@@ -26,7 +26,6 @@ const FormIcons = (props) => {
 								? `${formConfig.moduleKey}`
 								: `${formConfig.moduleName}`}
 						</div>
-						{/* <p className="moduleName">{formConfig.moduleName}</p> */}
 					</div>
 				);
 			})}

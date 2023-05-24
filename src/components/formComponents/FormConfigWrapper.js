@@ -54,8 +54,6 @@ const FormConfigWrapper = (props = {}) => {
 		case "object":
 		case "function":
 		case "array": {
-			//code
-			// console.log("codeTemplate:", codeTemplate, moduleKey);
 			return (
 				<div className="config">
 					<Modal
@@ -65,7 +63,6 @@ const FormConfigWrapper = (props = {}) => {
 						className="editorModal"
 						onClose={() => {
 							console.log("viewCodeEditorRef closed");
-							// viewCodeEditorRef.current.hideModal()
 						}}
 					>
 						<div className="confirm-modal-body">
@@ -128,11 +125,6 @@ const FormConfigWrapper = (props = {}) => {
 										? codeTemplate
 										: ""
 								}
-								// defaultValue={
-								// 	codeTemplate.length > 0
-								// 		? codeTemplate
-								// 		: JSON.parse(JSON.stringify(formData[name], null, 4))
-								// }
 								placeholder="Insert code here..."
 								height="200px"
 								width="100%"
