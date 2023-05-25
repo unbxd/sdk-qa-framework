@@ -79,7 +79,7 @@ const FormContent = (props = {}) => {
 												);
 											} catch (err) {
 												displayError(
-													`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
+													`${moduleKey} > ${element} produced the error: \n${err.name}: ${err.message}`
 												);
 												return;
 											}
@@ -91,7 +91,7 @@ const FormContent = (props = {}) => {
 												);
 											} catch (err) {
 												displayError(
-													`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
+													`${moduleKey} > ${element} produced the error: \n${err.name}: ${err.message}`
 												);
 												return;
 											}
@@ -103,7 +103,7 @@ const FormContent = (props = {}) => {
 												);
 											} catch (err) {
 												displayError(
-													`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
+													`${moduleKey} > ${element} produced the error: \n${err.name}: ${err.message}`
 												);
 												return;
 											}
@@ -115,7 +115,7 @@ const FormContent = (props = {}) => {
 												);
 											} catch (err) {
 												displayError(
-													`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
+													`${moduleKey} > ${element} produced the error: \n${err.name}: ${err.message}`
 												);
 												return;
 											}
@@ -127,7 +127,7 @@ const FormContent = (props = {}) => {
 												);
 											} catch (err) {
 												displayError(
-													`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
+													`${moduleKey} > ${element} produced the error: \n${err.name}: ${err.message}`
 												);
 												return;
 											}
@@ -139,7 +139,7 @@ const FormContent = (props = {}) => {
 												);
 											} catch (err) {
 												displayError(
-													`${moduleKey} > ${element} produced the error: ${err.name}: ${err.message}`
+													`${moduleKey} > ${element} produced the error: \n${err.name}: ${err.message}`
 												);
 												return;
 											}

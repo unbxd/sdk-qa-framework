@@ -57,6 +57,12 @@ module.exports = {
 					},
 				],
 			},
+			{
+				test: /\.(html)$/,
+				use: {
+					loader: "html-loader",
+				},
+			},
 			// {
 			// 	test: /\.(png|woff|woff2|eot|ttf|svg)$/, // to import images and fonts
 			// 	loader: "url-loader",
