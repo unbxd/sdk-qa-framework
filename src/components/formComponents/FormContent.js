@@ -10,6 +10,7 @@ import { javascript } from "@codemirror/lang-javascript";
 
 import { getEleDataType, getModuleConfigs } from "../../utils/configUtils";
 import defaultConfig from "../../inputJson/dummyMadrasLinkOld.json";
+import demoConfig from "../../../demo.json";
 import {
 	Button,
 	Modal,
@@ -52,7 +53,12 @@ const FormContent = (props = {}) => {
 										let evaluatedVal = eval(formConfig);
 										validatedData[moduleKey] = evaluatedVal;
 									} catch (err) {
-										if (err.name === "SyntaxError") {
+										// if (err.name === "SyntaxError") {
+										if (
+											moduleKey === "searchBoxEl" ||
+											moduleKey === "searchButtonEl"
+										) {
+											// console.log(formConfig);
 											console.error(moduleKey, "producted this error. \n", err);
 											displayError(
 												`${moduleKey} produced an error.\n${err.name}: ${err.message}`
@@ -161,6 +167,7 @@ const FormContent = (props = {}) => {
 							: `config`,
 						JSON.stringify(formData, null, 4)
 					);
+					displaySuccess("Configurations validated successfully. No errors.");
 				}
 			},
 			4
@@ -226,46 +233,60 @@ const FormContent = (props = {}) => {
 	useEffect(() => {
 		console.log("siteKey:", siteKey, "configKey:", configKey);
 		if (siteKey !== undefined && configKey !== undefined) {
-			console.log("retrieving configs");
+			// console.log("retrieving configs");
 			// debugger;
-			axios
-				.get("http://localhost:5000/retrieve", {
-					params: { siteKey: siteKey, configKey: configKey },
-				})
-				.then((response) => {
-					// handle success
-					if (response.data.status === "error") {
-						console.log(
-							"No saved configurations found. Applying default configurations."
+			if (localStorage.getItem(`config-${siteKey}-${configKey}`) !== null) {
+				// localStorage.setItem(
+				// 	configKey !== undefined && configKey.length > 0
+				// 		? `config-${siteKey}-${configKey}`
+				// 		: `config`,
+				// 	JSON.stringify(demoConfig, null, 4)
+				// );
+				let config = localStorage.getItem(`config-${siteKey}-${configKey}`);
+				setFormData(JSON.parse(config));
+				setJsonData(config);
+				validator(JSON.parse(config));
+				displaySuccess("Retrieved and applied configurations.");
+			} else {
+				axios
+					.get("http://localhost:5000/retrieve", {
+						params: { siteKey: siteKey, configKey: configKey },
+					})
+					.then((response) => {
+						// handle success
+						if (response.data.status === "error") {
+							// console.log(
+							// 	"No saved configurations found. Applying default configurations."
+							// );
+							setFormData(defaultConfig);
+							setJsonData(JSON.stringify(defaultConfig, null, 4));
+							validator(defaultConfig);
+							displayError(
+								`No saved configurations found. Applying default configurations.`
+							);
+							return;
+						}
+
+						// console.log("No error, continuing.");
+						setFormData(response.data.config);
+						setJsonData(JSON.stringify(response.data.config, null, 4));
+						validator(response.data.config);
+						displaySuccess("Retrieved and applied configurations.");
+					})
+					.catch((error) => {
+						// handle error
+						console.error(
+							"Could not retrieve the configurations as server is down."
 						);
+						// console.log(error.message);
 						setFormData(defaultConfig);
 						setJsonData(JSON.stringify(defaultConfig, null, 4));
 						validator(defaultConfig);
 						displayError(
-							`No saved configurations found. Applying default configurations.`
+							`${error.message}: Server is down. Could not retrieve configurations.`
 						);
-						return;
-					}
-
-					console.log("No error, continuing.");
-					setFormData(response.data.config);
-					setJsonData(JSON.stringify(response.data.config, null, 4));
-					validator(response.data.config);
-					displaySuccess("Retrieved and applied configurations.");
-				})
-				.catch((error) => {
-					// handle error
-					console.error(
-						"Could not retrieve the configurations as server is down."
-					);
-					console.log(error.message);
-					setFormData(defaultConfig);
-					setJsonData(JSON.stringify(defaultConfig, null, 4));
-					validator(defaultConfig);
-					displayError(
-						`${error.message}: Server is down. Could not retrieve configurations.`
-					);
-				});
+					});
+			}
 		} else {
 			// console.log(localStorage.getItem("config"));
 			if (localStorage.getItem("config") === null) {
@@ -302,7 +323,10 @@ const FormContent = (props = {}) => {
 			)}`;
 			const link = document.createElement("a");
 			link.href = jsonString;
-			link.download = "configurations.json";
+			link.download = `${formData.siteKey}${
+				configKey !== undefined && configKey.length > 0 ? `-${configKey}` : ""
+			}.json`;
+			// link.download = "configurations.json";
 			link.click();
 			axios
 				.post(
@@ -348,7 +372,10 @@ const FormContent = (props = {}) => {
 			)}`;
 			const link = document.createElement("a");
 			link.href = jsonString;
-			link.download = "configurations.json";
+			link.download = `${formData.siteKey}${
+				configKey !== undefined && configKey.length > 0 ? `-${configKey}` : ""
+			}.json`;
+			// link.download = "configurations.json";
 			link.click();
 			axios
 				.post(
@@ -363,7 +390,7 @@ const FormContent = (props = {}) => {
 				)
 				.then((res) => {
 					setPublishStatus(true);
-					console.log(res.data);
+					// console.log(res.data);
 					// setCodeChangeStatus(false);
 					setPublishedBuilderLink(
 						`http://localhost:3030/builder/${siteKey}/${configKey}`
@@ -406,12 +433,18 @@ const FormContent = (props = {}) => {
 		)}`;
 		const link = document.createElement("a");
 		link.href = jsonString;
-		link.download = "configurations.json";
+		link.download = `${formData.siteKey}${
+			configKey !== undefined && configKey.length > 0 ? `-${configKey}` : ""
+		}.json`;
+		// link.download = "configurations.json";
 		link.click();
 	};
 
 	const resetJSON = () => {
 		console.log("Configurations have been reset.");
+		displayInfo(
+			"Configurations have been reset. Default configurations have been applied."
+		);
 		// document.getElementById("viewMoreDropdown").style.display = "none";
 		setSelectedAcc(null);
 		setFormData(defaultConfig);
@@ -429,6 +462,8 @@ const FormContent = (props = {}) => {
 			);
 			setJsonData(window.atob(encodedData));
 			setFormData(JSON.parse(window.atob(encodedData)));
+			validator(JSON.parse(window.atob(encodedData)));
+			// console.log("encodedData:", JSON.parse(window.atob(encodedData)));
 			setSelectedAcc(null);
 		};
 	};
@@ -548,7 +583,7 @@ const FormContent = (props = {}) => {
 								}}
 							>
 								<span></span>
-								Upload to CDN
+								Create Demo Site
 							</div>
 							<div className="copyJSON" onClick={() => copyJSON()}>
 								<span></span>
@@ -573,7 +608,7 @@ const FormContent = (props = {}) => {
 			</div>
 
 			<Modal
-				title="Confirm"
+				title="Create Demo Site"
 				ref={confirmModalRef}
 				showClose={true}
 				className="confirmModal"
@@ -587,7 +622,7 @@ const FormContent = (props = {}) => {
 					<div>
 						<div className="confirm-modal-body">
 							Are you sure you want to publish these configurations?
-							<div className="warning">
+							{/* <div className="warning">
 								<div className="iconWrapper">
 									<div className="icon"></div>
 								</div>
@@ -595,7 +630,7 @@ const FormContent = (props = {}) => {
 									If a file with the same name exists, the content of this file
 									will be overwritten with these configurations.
 								</div>
-							</div>
+							</div> */}
 							{siteKey !== undefined && configKey !== undefined ? (
 								<>
 									<CustomCheck
@@ -604,21 +639,24 @@ const FormContent = (props = {}) => {
 										label="Save under different filename?"
 										name="fileSaveName"
 										onChange={(val) => {
+											// console.log("Bool:", val, typeof val);
 											setCustomFileNameBool(val);
 										}}
 									/>
-									<CustomInput
-										name="customFileName"
-										label="Enter the filename:"
-										className="customFileName"
-										defaultValue={
-											customFileNameBool === false ? `${configKey}` : ""
-										}
-										onChange={(val) => {
-											setCustomFileName(val);
-										}}
-										readOnly={customFileNameBool === false ? true : false}
-									/>
+									{customFileNameBool === true && (
+										<CustomInput
+											name="customFileName"
+											label="Enter the filename:"
+											className="customFileName"
+											defaultValue={
+												customFileNameBool === false ? `${configKey}` : ""
+											}
+											onChange={(val) => {
+												setCustomFileName(val);
+											}}
+											readOnly={customFileNameBool === false ? true : false}
+										/>
+									)}
 								</>
 							) : (
 								<CustomInput
@@ -632,15 +670,27 @@ const FormContent = (props = {}) => {
 							)}
 							<div className="confirmFileName">
 								<div>
-									The name of your file would be: <br />
+									The preview of your demo site would be at: <br />
 								</div>
 								<div>
 									<span className="icon"></span>
 									<span>
-										{formData.siteKey}/{customFileName}
+										http://localhost:3030/preview/{formData.siteKey}/
+										{customFileName}
 									</span>
 								</div>
 							</div>
+							{customFileNameBool === false && (
+								<div className="warning">
+									<div className="iconWrapper">
+										<div className="icon"></div>
+									</div>
+									<div className="message">
+										If a file with the same name exists, the content of this
+										file will be overwritten with these configurations.
+									</div>
+								</div>
+							)}
 						</div>
 						<div className="modal-footer">
 							<Button
@@ -650,7 +700,11 @@ const FormContent = (props = {}) => {
 									setPublishPopUp(false);
 									setJsonData(JSON.stringify(formData, null, 4));
 									confirmModalRef.current.hideModal();
-									setCustomFileName(configKey.length > 0 ? configKey : "");
+									setCustomFileName(
+										configKey !== undefined && configKey.length > 0
+											? configKey
+											: ""
+									);
 								}}
 							>
 								Cancel
@@ -667,7 +721,7 @@ const FormContent = (props = {}) => {
 									}
 								}}
 							>
-								Publish
+								Create Demo Site
 							</Button>
 						</div>
 					</div>
@@ -806,7 +860,7 @@ const FormContent = (props = {}) => {
 							extensions={[javascript({ json: true })]}
 							onChange={(code) => {
 								try {
-									console.log(typeof code, code);
+									// console.log(typeof code, code);
 									setJsonData(code);
 								} catch (err) {
 									console.log("onCodeChange:", err);

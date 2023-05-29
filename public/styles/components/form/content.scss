@@ -711,7 +711,7 @@ form {
 				padding: 10px;
 
 				.config {
-					padding: 10px 0;
+					padding: 15px 0;
 				}
 			}
 		}
@@ -727,11 +727,11 @@ form {
 				.doclink {
 					text-decoration: none;
 					position: absolute;
-					top: -22px;
+					top: -17px;
 					background-image: url("https://static.thenounproject.com/png/93986-200.png");
 					background-size: 100% 100%;
-					width: 20px;
-					height: 20px;
+					width: 12px;
+					height: 12px;
 					filter: invert(75%) sepia(10%) saturate(119%) hue-rotate(185deg)
 						brightness(83%) contrast(90%);
 				}
@@ -875,7 +875,7 @@ form {
 }
 
 .hideConfigTab {
-	z-index: 10000;
+	z-index: 4;
 	position: absolute;
 	top: 60px;
 	right: -31px;
@@ -1042,10 +1042,11 @@ form {
 	div {
 		display: flex;
 		flex-direction: row;
-		align-items: center;
+		// align-items: center;
 
 		.icon {
-			margin-left: 5px;
+			margin: 0 5px;
+			// margin-right: 5px;
 			display: flex;
 			background-image: url("https://static.thenounproject.com/png/3842757-200.png");
 			background-size: 100% 100%;
