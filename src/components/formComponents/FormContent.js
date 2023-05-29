@@ -22,6 +22,7 @@ import {
 import EditorAce from "./formElements/EditorAce";
 import CustomInput from "./formElements/CustomInput";
 import CustomCheck from "./formElements/CustomCheck";
+import CustomRadio from "./formElements/CustomRadio";
 
 const FormContent = (props = {}) => {
 	const {
@@ -182,7 +183,8 @@ const FormContent = (props = {}) => {
 	const [fsCodeEditorData, setFSCodeEditorData] = useState(null);
 	const [publishedBuilderLink, setPublishedBuilderLink] = useState("");
 	const [publishedPreviewLink, setPublishedPreviewLink] = useState("");
-	const [customFileNameBool, setCustomFileNameBool] = useState(false);
+	const [customFileNameBool, setCustomFileNameBool] = useState("NO");
+	// const [customFileNameBool, setCustomFileNameBool] = useState(false);
 	const [customFileName, setCustomFileName] = useState(
 		configKey !== undefined && configKey.length > 0 ? configKey : ""
 	);
@@ -246,7 +248,7 @@ const FormContent = (props = {}) => {
 				setFormData(JSON.parse(config));
 				setJsonData(config);
 				validator(JSON.parse(config));
-				displaySuccess("Retrieved and applied configurations.");
+				// displaySuccess("Retrieved and applied configurations.");
 			} else {
 				axios
 					.get("http://localhost:5000/retrieve", {
@@ -271,7 +273,7 @@ const FormContent = (props = {}) => {
 						setFormData(response.data.config);
 						setJsonData(JSON.stringify(response.data.config, null, 4));
 						validator(response.data.config);
-						displaySuccess("Retrieved and applied configurations.");
+						// displaySuccess("Retrieved and applied configurations.");
 					})
 					.catch((error) => {
 						// handle error
@@ -299,7 +301,7 @@ const FormContent = (props = {}) => {
 				setFormData(JSON.parse(config));
 				setJsonData(config);
 				validator(JSON.parse(config));
-				displaySuccess("Retrieved and applied saved changes.");
+				// displaySuccess("Retrieved and applied saved changes.");
 			}
 		}
 	}, []);
@@ -335,8 +337,7 @@ const FormContent = (props = {}) => {
 						data: "Hello backend defined",
 						config: formData,
 						siteKey: siteKey,
-						configKey:
-							customFileNameBool === false ? configKey : customFileName,
+						configKey: customFileNameBool === "NO" ? configKey : customFileName,
 					}),
 					customConfig
 				)
@@ -345,12 +346,12 @@ const FormContent = (props = {}) => {
 					// setCodeChangeStatus(false);
 					setPublishedBuilderLink(
 						`http://localhost:3030/builder/${siteKey}/${
-							customFileNameBool === false ? configKey : customFileName
+							customFileNameBool === "NO" ? configKey : customFileName
 						}`
 					);
 					setPublishedPreviewLink(
 						`http://localhost:3030/preview/${siteKey}/${
-							customFileNameBool === false ? configKey : customFileName
+							customFileNameBool === "NO" ? configKey : customFileName
 						}`
 					);
 				})
@@ -614,14 +615,18 @@ const FormContent = (props = {}) => {
 				className="confirmModal"
 				onClose={() => {
 					setPublishPopUp(false);
-					setCustomFileNameBool(false);
+					setCustomFileNameBool("NO");
+					setCustomFileName(
+						configKey !== undefined && configKey.length > 0 ? configKey : ""
+					);
+					// setCustomFileNameBool(false);
 					// setCustomFileName(configKey.length > 0 ? configKey : "");
 				}}
 			>
 				{!publishPopUp && (
 					<div>
 						<div className="confirm-modal-body">
-							Are you sure you want to publish these configurations?
+							Are you sure you want to create demo site?
 							{/* <div className="warning">
 								<div className="iconWrapper">
 									<div className="icon"></div>
@@ -633,7 +638,7 @@ const FormContent = (props = {}) => {
 							</div> */}
 							{siteKey !== undefined && configKey !== undefined ? (
 								<>
-									<CustomCheck
+									{/* <CustomCheck
 										appearance="inline"
 										className="fileSaveName"
 										label="Save under different filename?"
@@ -642,19 +647,43 @@ const FormContent = (props = {}) => {
 											// console.log("Bool:", val, typeof val);
 											setCustomFileNameBool(val);
 										}}
+									/> */}
+									<CustomRadio
+										appearance="block"
+										className="fileSaveName"
+										// label="Save configurations under new filename?"
+										name="fileSaveName"
+										options={[
+											{
+												id: "NO",
+												name: "Overwriting existing configurations.",
+											},
+											{
+												id: "YES",
+												name: "Create new demo site with these configurations.",
+											},
+										]}
+										value={customFileNameBool}
+										defaultValue={"NO"}
+										// checked={customFileName == "NO"}
+										onChange={(val) => {
+											setCustomFileNameBool(val);
+										}}
 									/>
-									{customFileNameBool === true && (
+									{customFileNameBool === "YES" && (
 										<CustomInput
 											name="customFileName"
 											label="Enter the filename:"
 											className="customFileName"
-											defaultValue={
-												customFileNameBool === false ? `${configKey}` : ""
-											}
+											defaultValue={configKey}
+											// defaultValue={
+											// 	customFileNameBool === "NO" ? `${configKey}` : ""
+											// }
 											onChange={(val) => {
+												console.log(val);
 												setCustomFileName(val);
 											}}
-											readOnly={customFileNameBool === false ? true : false}
+											readOnly={customFileNameBool === "NO" ? true : false}
 										/>
 									)}
 								</>
@@ -680,7 +709,7 @@ const FormContent = (props = {}) => {
 									</span>
 								</div>
 							</div>
-							{customFileNameBool === false && (
+							{customFileNameBool === "NO" && (
 								<div className="warning">
 									<div className="iconWrapper">
 										<div className="icon"></div>

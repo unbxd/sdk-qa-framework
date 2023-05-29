@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 // import UnbxdSearch from  '@unbxd-ui/vanilla-search-library';
 import UnbxdSearch from "../../../../search-JS-library/src/index";
 
-// import template from "./skJewellery.html";
+import template from "./Vanilla2.html";
 // import UnbxdSearch from "../../../../../search-JS-library/src/index";
 // import useDeepCompareEffect from "use-deep-compare-effect";
 // import "../../../public/unbxdStyle.css";
@@ -11,15 +11,25 @@ import UnbxdSearch from "../../../../search-JS-library/src/index";
 
 const Vanilla2 = React.memo((props) => {
 	let {
-		validatedConfig = {},
-		filename,
-		reloadWarning,
-		// setErrorSet,
-		// errorSet,
-		displayError,
-	} = props;
+			validatedConfig = {},
+			filename,
+			reloadWarning,
+			// setErrorSet,
+			// errorSet,
+			displayError,
+		} = props,
+		newTemplate = "";
 
-	// console.log("template:", template, typeof template);
+	console.log("template:", template, typeof template);
+
+	var scriptRegex = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
+		result,
+		indices = [];
+	// while ((result = scriptRegex.exec(template))) {
+	// 	indices.push(result.index);
+	// }
+	// console.log(indices.length);
+	newTemplate = template.replaceAll(scriptRegex, "");
 
 	// const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
 	// 	JSON.stringify(validatedConfig)
@@ -378,7 +388,6 @@ const Vanilla2 = React.memo((props) => {
 	return (
 		<div className="vanilla2">
 			{/* <div dangerouslySetInnerHTML={{ _html: template }}></div> */}
-			{console.log(typeof createMarkup())}
 			<div dangerouslySetInnerHTML={createMarkup()}></div>
 		</div>
 	);
