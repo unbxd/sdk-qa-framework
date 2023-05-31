@@ -30,7 +30,15 @@ const FormBuilder = (props) => {
 		displayError,
 		displaySuccess,
 		displayInfo,
+		validator,
+		configKey,
+		siteKey,
+		formData,
+		setFormData,
+		jsonData,
+		setJsonData,
 	} = props;
+
 	const [selectedAcc, setSelectedAcc] = useState(null);
 	const formConfigs = [
 		authConfig,
@@ -57,6 +65,9 @@ const FormBuilder = (props) => {
 		}
 		setSelectedAcc(i);
 	};
+
+	// console.log("Rendered formBuilder");
+
 	return (
 		<div className={viewConfigOption ? "formBuilder" : "formBuilder preview"}>
 			<FormIcons
@@ -74,6 +85,13 @@ const FormBuilder = (props) => {
 				displayError={displayError}
 				displaySuccess={displaySuccess}
 				displayInfo={displayInfo}
+				validator={validator}
+				siteKey={siteKey}
+				configKey={configKey}
+				formData={formData}
+				setFormData={setFormData}
+				jsonData={jsonData}
+				setJsonData={setJsonData}
 			/>
 		</div>
 	);

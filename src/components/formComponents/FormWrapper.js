@@ -84,6 +84,8 @@ const FormWrapper = (props = {}) => {
 		if (code === undefined) {
 			onChange(element);
 		} else {
+			// console.log("in delayChange:", element, code);
+
 			onCodeChange(element, code);
 		}
 	}, DEBOUNCE_DELAY);
@@ -97,6 +99,8 @@ const FormWrapper = (props = {}) => {
 					display = conf["displayIf"](formData);
 					if (conf["codeTemplate"]) {
 						codeTemplate = conf["codeTemplate"](formData);
+						// console.log("conf:", conf.name, codeTemplate);
+						// onCodeChange(conf.name, codeTemplate);
 					}
 				}
 				if (display) {

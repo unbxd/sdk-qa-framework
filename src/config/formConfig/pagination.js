@@ -121,6 +121,8 @@ const paginationConfig = {
 								} = pagination;
 								return '<div class="UNX-click-scroll"><button data-test-id="\${this.testIds.UNX_loadMore}" class="UNX-click-n-scroll \${pageClass}">Load More</button></div>'
 							}`;
+				} else if (pagination.type === "INFINITE_SCROLL") {
+					return "";
 				}
 			},
 		},

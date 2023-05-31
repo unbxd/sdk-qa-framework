@@ -54,6 +54,7 @@ const FormConfigWrapper = (props = {}) => {
 		case "object":
 		case "function":
 		case "array": {
+			// console.log("obj/func/arr:", name, formData[name], codeTemplate);
 			return (
 				<div className="config">
 					<Modal
@@ -107,9 +108,17 @@ const FormConfigWrapper = (props = {}) => {
 							<div
 								className="enableFullScreen"
 								onClick={() => {
+									// console.log("enableFullScreen:", formData[name]);
 									setFSCodeEditorData(
-										JSON.parse(JSON.stringify(formData[name], null, 4))
+										formData[name] !== undefined
+											? JSON.parse(JSON.stringify(formData[name], null, 4))
+											: codeTemplate.length > 0
+											? codeTemplate
+											: ""
 									);
+									// setFSCodeEditorData(
+									// 	JSON.parse(JSON.stringify(formData[name], null, 4))
+									// );
 									viewCodeEditorRef.current.showModal();
 								}}
 							>
@@ -119,7 +128,7 @@ const FormConfigWrapper = (props = {}) => {
 								name={name}
 								className="editor"
 								value={
-									formData[name]
+									formData[name] !== undefined
 										? JSON.parse(JSON.stringify(formData[name], null, 4))
 										: codeTemplate.length > 0
 										? codeTemplate

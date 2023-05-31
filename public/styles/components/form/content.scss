@@ -212,7 +212,7 @@ form {
 		border: 1px solid #c8d0db;
 		// padding: 0px 15px;
 		padding: 10px 15px;
-		width: 90%;
+		width: 93.5%;
 		z-index: 2;
 		// width: 100%;
 
@@ -673,8 +673,8 @@ form {
 				top: 0;
 				/* height: 100px; */
 				// padding: 10px 15px 10px 10px;
-				padding: 15px 0;
-				margin-left: 2.5%;
+				padding: 15px 2.5%;
+				// margin-left: 2.5%;
 				width: 95%;
 				background: #f7f7f9;
 				z-index: 3;
@@ -748,7 +748,8 @@ form {
 		// border-right: 1px solid #ccc;
 		background: #f7f7f9;
 		display: flex;
-		justify-content: center;
+		justify-content: flex-end;
+		// justify-content: center;
 		align-items: center;
 		z-index: 4;
 
@@ -869,7 +870,7 @@ form {
 			display: flex;
 			width: fit-content;
 			height: fit-content;
-			margin: 10px;
+			margin: 10px 20px;
 		}
 	}
 }
@@ -909,6 +910,21 @@ form {
 .confirmModal,
 .publishSuccess {
 	z-index: 10;
+
+	.RCB-modal-body {
+		width: 60%;
+		// height: 60%;
+
+		// .RCB-modal-content {
+		// 	div {
+		// 		height: 100%;
+
+		// 		.confirm-modal-body {
+		// 			height: 62%;
+		// 		}
+		// 	}
+		// }
+	}
 }
 
 .configModal {
@@ -917,9 +933,17 @@ form {
 		width: 90%;
 		height: 90%;
 
-		.modal-footer {
-			margin: 10px -30px;
+		.RCB-modal-content {
+			// height: 90%;
+
+			.confirm-modal-body {
+				height: 75%;
+			}
 		}
+
+		// .modal-footer {
+		// 	margin: 10px -30px;
+		// }
 	}
 }
 
@@ -976,7 +1000,7 @@ form {
 		justify-content: center;
 		width: 30px;
 		height: 30px;
-		margin-left: 310.5px;
+		margin-left: calc(100% - 32px);
 		margin-bottom: -32px;
 		z-index: 1;
 		background-color: #fff;
