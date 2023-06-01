@@ -36,10 +36,6 @@ const FormContent = (props = {}) => {
 		validator,
 		siteKey,
 		configKey,
-		// formData,
-		// setFormData,
-		// jsonData,
-		// setJsonData,
 	} = props;
 
 	let masterConfig = {};
@@ -55,9 +51,12 @@ const FormContent = (props = {}) => {
 		configKey !== undefined && configKey.length > 0 ? configKey : ""
 	);
 
+	// console.log("formData:", formData);
+
 	const confirmModalRef = useRef();
 	const viewJSONModalRef = useRef();
 	const publishSuccessModalRef = useRef();
+	const importCodeModalRef = useRef();
 
 	let [publishPopUp, setPublishPopUp] = useState(false);
 	let [publishStatus, setPublishStatus] = useState(false);
@@ -82,19 +81,19 @@ const FormContent = (props = {}) => {
 				...formData,
 				[moduleKey]: { ...formData[moduleKey], ...data },
 			});
-			setJsonData(
-				JSON.stringify(
-					{
-						...formData,
-						[moduleKey]: { ...formData[moduleKey], ...data },
-					},
-					null,
-					4
-				)
-			);
+			// setJsonData(
+			// 	JSON.stringify(
+			// 		{
+			// 			...formData,
+			// 			[moduleKey]: { ...formData[moduleKey], ...data },
+			// 		},
+			// 		null,
+			// 		4
+			// 	)
+			// );
 		} else {
 			setFormData({ ...formData, ...data });
-			setJsonData(JSON.stringify({ ...formData, ...data }, null, 4));
+			// setJsonData(JSON.stringify({ ...formData, ...data }, null, 4));
 		}
 	};
 
@@ -106,7 +105,7 @@ const FormContent = (props = {}) => {
 			if (localStorage.getItem(`config-${siteKey}-${configKey}`) !== null) {
 				let config = localStorage.getItem(`config-${siteKey}-${configKey}`);
 				setFormData(JSON.parse(config));
-				setJsonData(config);
+				// setJsonData(config);
 				// validator(JSON.parse(config));
 				// displaySuccess("Retrieved and applied configurations.");
 			} else {
@@ -121,7 +120,7 @@ const FormContent = (props = {}) => {
 							// 	"No saved configurations found. Applying default configurations."
 							// );
 							setFormData(defaultConfig);
-							setJsonData(JSON.stringify(defaultConfig, null, 4));
+							// setJsonData(JSON.stringify(defaultConfig, null, 4));
 							displayError(
 								`No saved configurations found. Applying default configurations.`
 							);
@@ -130,7 +129,7 @@ const FormContent = (props = {}) => {
 
 						// console.log("No error, continuing.");
 						setFormData(response.data.config);
-						setJsonData(JSON.stringify(response.data.config, null, 4));
+						// setJsonData(JSON.stringify(response.data.config, null, 4));
 						// displaySuccess("Retrieved and applied configurations.");
 					})
 					.catch((error) => {
@@ -140,7 +139,7 @@ const FormContent = (props = {}) => {
 						);
 						// console.log(error.message);
 						setFormData(defaultConfig);
-						setJsonData(JSON.stringify(defaultConfig, null, 4));
+						// setJsonData(JSON.stringify(defaultConfig, null, 4));
 						displayError(
 							`${error.message}: Server is down. Could not retrieve configurations.`
 						);
@@ -150,12 +149,12 @@ const FormContent = (props = {}) => {
 			// console.log(localStorage.getItem("config"));
 			if (localStorage.getItem("config") === null) {
 				setFormData(defaultConfig);
-				setJsonData(JSON.stringify(defaultConfig, null, 4));
+				// setJsonData(JSON.stringify(defaultConfig, null, 4));
 				// displayInfo("Default configurations have been applied.");
 			} else {
 				let config = localStorage.getItem("config");
 				setFormData(JSON.parse(config));
-				setJsonData(config);
+				// setJsonData(config);
 				// displaySuccess("Retrieved and applied saved changes.");
 			}
 		}
@@ -176,7 +175,7 @@ const FormContent = (props = {}) => {
 				},
 			};
 			const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
-				JSON.stringify(formData)
+				JSON.stringify(formData, null, 4)
 			)}`;
 			const link = document.createElement("a");
 			link.href = jsonString;
@@ -188,12 +187,17 @@ const FormContent = (props = {}) => {
 			axios
 				.post(
 					"http://localhost:5000/upload",
-					JSON.stringify({
-						data: "Hello backend defined",
-						config: formData,
-						siteKey: siteKey,
-						configKey: customFileNameBool === "NO" ? configKey : customFileName,
-					}),
+					JSON.stringify(
+						{
+							data: "Hello backend defined",
+							config: formData,
+							siteKey: siteKey,
+							configKey:
+								customFileNameBool === "NO" ? configKey : customFileName,
+						},
+						null,
+						4
+					),
 					customConfig
 				)
 				.then((res) => {
@@ -224,7 +228,7 @@ const FormContent = (props = {}) => {
 				},
 			};
 			const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
-				JSON.stringify(formData)
+				JSON.stringify(formData, null, 4)
 			)}`;
 			const link = document.createElement("a");
 			link.href = jsonString;
@@ -236,12 +240,16 @@ const FormContent = (props = {}) => {
 			axios
 				.post(
 					"http://localhost:5000/upload",
-					JSON.stringify({
-						data: "Hello backend undefined",
-						config: formData,
-						siteKey: siteKey,
-						configKey: configKey,
-					}),
+					JSON.stringify(
+						{
+							data: "Hello backend undefined",
+							config: formData,
+							siteKey: siteKey,
+							configKey: configKey,
+						},
+						null,
+						4
+					),
 					customConfig
 				)
 				.then((res) => {
@@ -264,7 +272,7 @@ const FormContent = (props = {}) => {
 	};
 
 	const copyJSON = () => {
-		navigator.clipboard.writeText(JSON.stringify(formData));
+		navigator.clipboard.writeText(JSON.stringify(formData, null, 4));
 		// document.querySelector(".viewMoreDropdown").style.display = "none";
 		console.log("Copied JSON!");
 	};
@@ -282,10 +290,78 @@ const FormContent = (props = {}) => {
 		console.log("Copied text:", inputEl.value);
 	};
 
+	const exportIndividualJSON = (code) => {
+		let configObjInner = "\t{\n";
+		for (let key of Object.keys(code)) {
+			// console.log(key, typeof code[key]);
+			if (typeof code[key] === "string") {
+				// console.log("string:", key);
+				try {
+					//element
+					const ele = eval(code[key]);
+					configObjInner += `\t\t${key}: ${code[key]}, \n`;
+					console.log("eval element:", key);
+				} catch (eleErr) {
+					try {
+						//function
+						const ele = eval("(" + code[key] + ")");
+						configObjInner += `\t\t${key}: ${code[key]}, \n`;
+						console.log("eval function:", key);
+					} catch (funcErr) {
+						configObjInner += `\t\t${key}: '${code[key]}', \n`;
+						console.log("not in eval:", key);
+					}
+				}
+			} else if (typeof code[key] === "number") {
+				configObjInner += `\t\t${key}: ${code[key].toString()}, \n`;
+			} else if (typeof code[key] === "boolean") {
+				configObjInner += `\t\t${key}: ${code[key].toString()}, \n`;
+			}
+		}
+		configObjInner += "\t}";
+		// console.log("configObjInner:", configObjInner);
+		return configObjInner;
+	};
+
+	const exportAllJSON = () => {
+		// console.log("in export:", formData);
+		let configObj = `{\n`;
+		for (let key of Object.keys(formData)) {
+			// console.log(key);
+			if (typeof formData[key] === "string") {
+				try {
+					//element
+					const ele = eval(formData[key]);
+					configObj += `\t${key}: ${formData[key]}, \n`;
+				} catch (eleErr) {
+					configObj += `\t${key}: '${formData[key]}', \n`;
+				}
+			} else if (typeof formData[key] === "object") {
+				configObj += `\t${key}: ${exportIndividualJSON(formData[key])}, \n`;
+				// exportIndividualJSON(formData[key]);
+			}
+		}
+		configObj += "}";
+		console.log("configObj:", configObj);
+
+		const exportString = `const config = ${configObj}`;
+
+		const jsonString = `data:text/javascript;chatset=utf-8,${encodeURIComponent(
+			exportString
+		)}`;
+		const link = document.createElement("a");
+		link.href = jsonString;
+		link.download = `${formData.siteKey}${
+			configKey !== undefined && configKey.length > 0 ? `-${configKey}` : ""
+		}.js`;
+		// link.download = "configurations.json";
+		link.click();
+	};
+
 	const downloadJSON = () => {
 		// document.getElementById("viewMoreDropdown").style.display = "none";
 		const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
-			JSON.stringify(formData)
+			JSON.stringify(formData, null, 4)
 		)}`;
 		const link = document.createElement("a");
 		link.href = jsonString;
@@ -304,6 +380,74 @@ const FormContent = (props = {}) => {
 		// document.getElementById("viewMoreDropdown").style.display = "none";
 		setSelectedAcc(null);
 		setFormData(defaultConfig);
+		validator(defaultConfig);
+	};
+
+	const evaluateIndividual = (config) => {
+		const configString = {};
+		for (let conf in config) {
+			// console.log(config[conf], typeof config[conf]);
+			if (typeof config[conf] === "function") {
+				configString[`${conf}`] = config[conf].toString();
+			} else if (typeof config[conf] === "boolean") {
+				configString[`${conf}`] = config[conf].toString();
+			} else if (typeof config[conf] === "number") {
+				configString[`${conf}`] = config[conf].toString();
+			} else if (typeof config[conf] === "object") {
+				console.log("config[conf]:", conf, config[conf], typeof config[conf]);
+				if (config[conf]) {
+					// if (config[conf].id !== undefined && config[conf].id.length > 0) {
+					// 	configString[
+					// 		`${conf}`
+					// 	] = `document.getElementById("${config[conf].id}")`;
+					// } else if (config[conf].className !== undefined) {
+					// 	// console.log("config[conf] className:", config[conf]);
+					// 	configString[`${conf}`] = `document.querySelector(".${config[
+					// 		conf
+					// 	].className.replaceAll(" ", ".")}")`;
+					// } else {
+					configString[`${conf}`] = JSON.stringify(config[conf]);
+					// }
+				}
+			}
+		}
+		// console.log(configString);
+		return configString;
+	};
+
+	const evaluateAll = (configs) => {
+		const stringifiedConfig = {};
+		for (let config in configs) {
+			console.log(config, ":", configs[config], typeof configs[config]);
+			if (typeof configs[config] === "string") {
+				stringifiedConfig[`${config}`] = configs[config];
+			} else if (typeof configs[config] === "object") {
+				stringifiedConfig[`${config}`] = evaluateIndividual(configs[config]);
+			}
+		}
+		// console.log(
+		// 	"stringifiedConfig:",
+		// 	JSON.stringify(stringifiedConfig, null, 4)
+		// );
+		return JSON.stringify(stringifiedConfig, null, 4);
+	};
+
+	const applyImportedCode = (code) => {
+		// console.log("code type:", typeof code);
+		try {
+			const parsedCode = JSON.parse(code);
+			setFormData(parsedCode);
+			validator(parsedCode);
+			setJsonData();
+			// console.log("parsedCode");
+		} catch (err) {
+			const validatedCode = eval(`(${code})`);
+			const parsedCode = evaluateAll(validatedCode);
+			setFormData(JSON.parse(parsedCode));
+			validator(JSON.parse(parsedCode));
+			setJsonData();
+			// console.log("validatedCode");
+		}
 	};
 
 	const inputFileChange = (e) => {
@@ -316,9 +460,11 @@ const FormContent = (props = {}) => {
 				"data:application/json;base64,",
 				""
 			);
+			// setJsonData(window.atob(encodedData));
+			// console.log("typeof atob:", typeof window.atob(encodedData));
 			setJsonData(window.atob(encodedData));
-			setFormData(JSON.parse(window.atob(encodedData)));
-			validator(JSON.parse(window.atob(encodedData)));
+			// setFormData(JSON.parse(window.atob(encodedData)));
+			// validator(JSON.parse(window.atob(encodedData)));
 			// console.log("encodedData:", JSON.parse(window.atob(encodedData)));
 			setSelectedAcc(null);
 		};
@@ -419,17 +565,13 @@ const FormContent = (props = {}) => {
 							</div>
 							<div
 								className="uploadJSON"
-								onClick={() => inputJSONFile.current.click()}
+								onClick={() => importCodeModalRef.current.showModal()}
+								// onClick={() => inputJSONFile.current.click()}
 							>
 								<span></span>
-								Upload File
+								Upload Code
 							</div>
-							<input
-								type="file"
-								onChange={inputFileChange}
-								ref={inputJSONFile}
-								style={{ display: "none" }}
-							/>
+
 							<div
 								className="uploadToCDN"
 								onClick={() => {
@@ -534,9 +676,10 @@ const FormContent = (props = {}) => {
 											// defaultValue={
 											// 	customFileNameBool === "NO" ? `${configKey}` : ""
 											// }
+											value={customFileName}
 											onChange={(val) => {
-												console.log(val);
-												setCustomFileName(val);
+												// console.log(val);
+												setCustomFileName(val.replaceAll(" ", "-"));
 											}}
 											readOnly={customFileNameBool === "NO" ? true : false}
 										/>
@@ -547,8 +690,9 @@ const FormContent = (props = {}) => {
 									name="customFileName"
 									label="Enter the filename:"
 									onChange={(val) => {
-										setCustomFileName(val);
+										setCustomFileName(val.replaceAll(" ", "-"));
 									}}
+									value={customFileName}
 									defaultValue={customFileName}
 								/>
 							)}
@@ -582,7 +726,7 @@ const FormContent = (props = {}) => {
 								className="cancel"
 								onClick={() => {
 									setPublishPopUp(false);
-									setJsonData(JSON.stringify(formData, null, 4));
+									// setJsonData(JSON.stringify(formData, null, 4));
 									confirmModalRef.current.hideModal();
 									setCustomFileName(
 										configKey !== undefined && configKey.length > 0
@@ -737,32 +881,21 @@ const FormContent = (props = {}) => {
 							readOnly={true}
 							id="jsonCode"
 							className="jsonCode"
-							value={jsonData}
+							value={JSON.stringify(formData, null, 4)}
 							placeholder="Insert code here..."
 							height="100%"
 							width="100%"
 							extensions={[javascript({ json: true })]}
-							onChange={(code) => {
-								try {
-									// console.log(typeof code, code);
-									setJsonData(code);
-								} catch (err) {
-									console.log("onCodeChange:", err);
-								}
-							}}
 						/>
 					</div>
 				</div>
 				<div className="modal-footer">
 					<Button
-						appearance="link"
-						className="cancel"
-						onClick={() => {
-							setJsonData(JSON.stringify(formData, null, 4));
-							viewJSONModalRef.current.hideModal();
-						}}
+						appearance="secondary"
+						className="export"
+						onClick={() => exportAllJSON()}
 					>
-						Cancel
+						<span></span>Export
 					</Button>
 					<Button
 						appearance="secondary"
@@ -782,15 +915,86 @@ const FormContent = (props = {}) => {
 						appearance="primary"
 						className="update-json"
 						onClick={() => {
-							try {
-								setSelectedAcc(null);
-								setFormData(JSON.parse(jsonData));
-								viewJSONModalRef.current.hideModal();
-							} catch (err) {
-								alert(
-									"Seems like the format of the input configurations is not correct."
-								);
-							}
+							viewJSONModalRef.current.hideModal();
+						}}
+					>
+						Close
+					</Button>
+				</div>
+			</Modal>
+			<Modal
+				title="Import Code"
+				ref={importCodeModalRef}
+				showClose={true}
+				className="importCode"
+				onClose={() => {
+					// setCustomFileNameBool(false);
+					// setCustomFileName(configKey.length > 0 ? configKey : "");
+					setJsonData();
+				}}
+			>
+				<div className="confirm-modal-body">
+					<div className="importFile">
+						<Button
+							appearance="primary"
+							onClick={() => {
+								inputJSONFile.current.click();
+							}}
+						>
+							Import a JSON file
+						</Button>
+						<input
+							type="file"
+							onChange={inputFileChange}
+							ref={inputJSONFile}
+							style={{ display: "none" }}
+						/>
+					</div>
+					OR
+					<div className="importCodeEditor">
+						<label className="RCB-form-el-label" htmlFor="importCodeMirror">
+							Enter Code here:
+						</label>
+						<CodeMirror
+							name="importCodeMirror"
+							id="importCodeMirror"
+							className="importCodeMirror"
+							value={jsonData}
+							placeholder="Insert code here..."
+							height="100%"
+							width="100%"
+							extensions={[javascript({ json: true })]}
+							onChange={(code) => setJsonData(code)}
+						/>
+					</div>
+				</div>
+				<div className="modal-footer">
+					<Button
+						appearance="link"
+						className="download"
+						onClick={() => {
+							importCodeModalRef.current.hideModal();
+							setJsonData();
+						}}
+					>
+						Cancel
+					</Button>
+					{/* <Button
+						appearance="secondary"
+						className="copy"
+						onClick={() => copyJSON()}
+					>
+						<span></span>Copy
+					</Button> */}
+					<Button
+						appearance="primary"
+						className="update-json"
+						onClick={() => {
+							// setFormData(JSON.parse(jsonData));
+							// validator(JSON.parse(jsonData));
+							// setJsonData();
+							applyImportedCode(jsonData);
+							importCodeModalRef.current.hideModal();
 						}}
 					>
 						Update

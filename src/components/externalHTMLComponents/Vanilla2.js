@@ -39,12 +39,12 @@ const Vanilla2 = (props) => {
 		// window.unbxdSearch.resetAll();
 		// window.unbxdSearch = null;
 		if (Object.keys(validatedConfig).length) {
-			if (validatedConfig.pagesize.pageSize !== undefined) {
-				validatedConfig = {
-					...validatedConfig,
-					pageSize: validatedConfig.pagesize.pageSize,
-				};
-			}
+			// if (validatedConfig.pagesize.pageSize !== undefined) {
+			// 	validatedConfig = {
+			// 		...validatedConfig,
+			// 		pageSize: validatedConfig.pagesize.pageSize,
+			// 	};
+			// }
 			console.log("validatedConfig:", validatedConfig);
 			// debugger;
 
@@ -83,7 +83,7 @@ const Vanilla2 = (props) => {
 					// 	el: document.getElementById("searchResultsWrapper"),
 					// 	productType: "SEARCH",
 					// },
-					pageSize: validatedConfig.pagesize.pageSize,
+					// pageSize: validatedConfig.pagesize.pageSize,
 				});
 				console.log("Applied changes");
 				window.unbxdSearch.getResults("*");

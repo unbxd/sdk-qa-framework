@@ -33,10 +33,6 @@ const FormBuilder = (props) => {
 		validator,
 		configKey,
 		siteKey,
-		formData,
-		setFormData,
-		jsonData,
-		setJsonData,
 	} = props;
 
 	const [selectedAcc, setSelectedAcc] = useState(null);
@@ -88,10 +84,6 @@ const FormBuilder = (props) => {
 				validator={validator}
 				siteKey={siteKey}
 				configKey={configKey}
-				formData={formData}
-				setFormData={setFormData}
-				jsonData={jsonData}
-				setJsonData={setJsonData}
 			/>
 		</div>
 	);

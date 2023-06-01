@@ -6,48 +6,45 @@ const cors = require("cors");
 const { config } = require("webpack");
 const app = express();
 
+require("aws-sdk/lib/maintenance_mode_message").suppress = true;
+
 app.use(cors());
 app.use(express.json());
 
 const port = process.env.PORT || 5000;
-
-// console.log(process.env.AWS_ACCESS_KEY_ID, process.env.AWS_SECRET_ACCESS_KEY);
 
 AWS.config.update({
 	accessKeyId: process.env.AWS_ACCESS_KEY_ID,
 	secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
 
-// console.log("aws config:", AWS.config);
-
-const readFromCDN = async (siteKey, configKey) => {
-	console.log("Reading from CDN");
-	AWS.config.setPromisesDependency();
-	const s3 = new AWS.S3();
-	const response = await s3
-		.listObjectsV2({
-			// Bucket: "unbxd-pim-ui",
-			Bucket: "unbxd/search-sdk",
-			Prefix: `qa-framework/${siteKey}`,
-		})
-		.promise();
-	console.log("List of files:", response);
-	if (response.includes(`/qa-framework/${siteKey}/${configKey}`)) {
-		const file = await s3
-			.getObject({
-				Bucket: "unbxd/search-sdk",
-				Key: `qa-framework/${siteKey}/${configKey}`,
-			})
-			.promise();
-		console.log("ContentType:", file.ContentType, "\nBody:", file.Body);
-	}
-};
+// const readFromCDN = async (siteKey, configKey) => {
+// 	console.log("Reading from CDN");
+// 	AWS.config.setPromisesDependency();
+// 	const s3 = new AWS.S3();
+// 	const response = await s3
+// 		.listObjectsV2({
+// 			// Bucket: "unbxd-pim-ui",
+// 			Bucket: "unbxd/search-sdk",
+// 			Prefix: `qa-framework/${siteKey}`,
+// 		})
+// 		.promise();
+// 	console.log("List of files:", response);
+// 	if (response.includes(`/qa-framework/${siteKey}/${configKey}`)) {
+// 		const file = await s3
+// 			.getObject({
+// 				Bucket: "unbxd/search-sdk",
+// 				Key: `qa-framework/${siteKey}/${configKey}`,
+// 			})
+// 			.promise();
+// 		console.log("ContentType:", file.ContentType, "\nBody:", file.Body);
+// 	}
+// };
 
 app.get("/retrieve", (req, res) => {
 	const { siteKey, configKey } = req.query;
 	if (siteKey !== undefined && configKey !== undefined) {
 		console.log("siteKey:", siteKey, "configKey:", configKey);
-		// readFromCDN(siteKey, configKey).catch((err) => console.log("Error:", err));
 		axios
 			.get(
 				`https://libraries.unbxdapi.com/search-sdk/qa-framework/${siteKey}/${configKey}.json`
@@ -70,30 +67,12 @@ app.get("/retrieve", (req, res) => {
 });
 
 const uploadToCDN = async (siteKey, configKey, config) => {
-	const buf = Buffer.from(JSON.stringify(config));
-	// var dir = "./tmp";
-	// if (!fs.existsSync(dir)) {
-	// 	fs.mkdirSync(dir);
-	// }
-	// fs.writeFile(
-	// 	"./tmp/custConfig.json",
-	// 	JSON.stringify(config, null, 4),
-	// 	(err) => {
-	// 		if (err) {
-	// 			console.log("Error:", err);
-	// 		} else {
-	// 			console.log("Write successful");
-	// 		}
-	// 	}
-	// );
-	// const fileContent = fs.readFileSync("./tmp/custConfig.json");
+	const buf = Buffer.from(JSON.stringify(config, null, 4));
 	console.log("Uploading to CDN...");
 	const s3 = new AWS.S3();
 	const params = {
 		Bucket: "unbxd/search-sdk",
-		// Bucket: "unbxd-pim-ui",
 		Key: `qa-framework/${siteKey}/${configKey}.json`,
-		// Key: `qa-framework/${siteKey}/${configKey}.json`,
 		Body: buf,
 		ContentEncoding: "base64",
 		ContentType: "application/json",
@@ -112,9 +91,6 @@ const uploadToCDN = async (siteKey, configKey, config) => {
 };
 app.post("/upload", (req, res) => {
 	const { config, siteKey, configKey } = req.body;
-
-	console.log(config);
-	// console.log(`*****\n/qa-framework/${siteKey}/${configKey}.json\n****`);
 	const uploadLink = uploadToCDN(siteKey, configKey, config);
 	// res.send({ message: "Upload Successful" });
 	res.send({ message: "Upload Successful", docLink: uploadLink });

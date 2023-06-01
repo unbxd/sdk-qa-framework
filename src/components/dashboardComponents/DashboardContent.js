@@ -17,8 +17,6 @@ const DashboardContent = (props) => {
 	} = props;
 
 	const [validatedConfig, setValidatedConfig] = useState({});
-	// const [formData, setFormData] = useState({});
-	// const [jsonData, setJsonData] = useState();
 
 	const { siteKey, configKey } = useParams();
 
@@ -86,6 +84,7 @@ const DashboardContent = (props) => {
 												displayError(
 													`${moduleKey} > ${element} produced the error: \n${err.name}: ${err.message}`
 												);
+												console.error(err);
 												return;
 											}
 											break;
@@ -233,7 +232,8 @@ const DashboardContent = (props) => {
 				// setFormData(defaultConfig);
 				// setJsonData(JSON.stringify(defaultConfig, null, 4));
 				validator(defaultConfig);
-				displayInfo("Default configurations have been applied.");
+				displaySuccess("Default configurations have been applied.");
+				// displayInfo("Default configurations have been applied.");
 			} else {
 				let config = localStorage.getItem("config");
 				// setFormData(JSON.parse(config));
@@ -258,10 +258,6 @@ const DashboardContent = (props) => {
 					validator={validator}
 					configKey={configKey}
 					siteKey={siteKey}
-					// formData={formData}
-					// setFormData={setFormData}
-					// jsonData={jsonData}
-					// setJsonData={setJsonData}
 				/>
 			)}
 			<div className={viewConfigOption ? "demoSite" : "demoSite preview"}>
