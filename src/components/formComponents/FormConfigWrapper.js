@@ -1,5 +1,13 @@
 import React, { useRef } from "react";
 import CodeMirror from "@uiw/react-codemirror";
+import { basicSetup } from "codemirror";
+import readOnlyRangesExtension from "codemirror-readonly-ranges";
+import {
+	preventModifyTargetRanges,
+	smartPaste,
+	smartDelete,
+} from "codemirror-readonly-ranges";
+import { EditorState } from "@codemirror/state";
 import { javascript } from "@codemirror/lang-javascript";
 
 import { getConfig } from "../../utils/configUtils";
@@ -55,6 +63,19 @@ const FormConfigWrapper = (props = {}) => {
 		case "function":
 		case "array": {
 			// console.log("obj/func/arr:", name, formData[name], codeTemplate);
+			// const getReadOnlyRanges = () => {
+			// 	return [
+			// 		{
+			// 			from: undefined, //same as: targetState.doc.line(0).from or 0
+			// 			to: EditorState.doc.line(3).to,
+			// 		},
+			// 		{
+			// 			from: EditorState.doc.line(EditorState.doc.lines).from,
+			// 			to: undefined, // same as: targetState.doc.line(targetState.doc.lines).to
+			// 		},
+			// 	];
+			// };
+
 			return (
 				<div className="config">
 					<Modal
@@ -74,7 +95,7 @@ const FormConfigWrapper = (props = {}) => {
 								placeholder="Insert code here..."
 								height="100%"
 								width="100%"
-								extensions={[javascript({ json: true })]}
+								extensions={[javascript({ jsx: true })]}
 								onChange={(code) => {
 									delayChange(name, code);
 								}}
@@ -89,7 +110,7 @@ const FormConfigWrapper = (props = {}) => {
 									viewCodeEditorRef.current.hideModal();
 								}}
 							>
-								Update
+								Close
 							</Button>
 						</div>
 					</Modal>
@@ -138,6 +159,12 @@ const FormConfigWrapper = (props = {}) => {
 								height="200px"
 								width="100%"
 								extensions={[javascript({ jsx: true })]}
+								// options={{
+								// 	mode: "javascript",
+								// 	lineNumbers: true,
+								// 	readOnly: true,
+								// }}
+								// readOnly={[1, 2]}
 								onChange={(code) => delayChange(name, code)}
 							/>
 						</div>

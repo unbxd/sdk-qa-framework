@@ -14,14 +14,23 @@ const swatchesConfig = {
 		{
 			name: "attributesMap",
 			dataType: "object",
+			displayIf: function (swatches) {
+				return swatches.enabled === true;
+			},
 		},
 		{
 			name: "swatchClass",
 			dataType: "string",
+			displayIf: function (swatches) {
+				return swatches.enabled === true;
+			},
 		},
 		{
 			name: "template",
 			dataType: "function",
+			displayIf: function (swatches) {
+				return swatches.enabled === true;
+			},
 		},
 	],
 };

@@ -13,18 +13,30 @@ const variantsConfig = {
 		{
 			name: "count",
 			dataType: "number",
+			displayIf: function (variants) {
+				return variants.enabled === true;
+			},
 		},
 		{
 			name: "groupBy",
 			dataType: "string",
+			displayIf: function (variants) {
+				return variants.enabled === true;
+			},
 		},
 		{
 			name: "attributes",
 			dataType: "array",
+			displayIf: function (variants) {
+				return variants.enabled === true;
+			},
 		},
 		{
 			name: "mapping",
 			dataType: "object",
+			displayIf: function (variants) {
+				return variants.enabled === true;
+			},
 		},
 	],
 };

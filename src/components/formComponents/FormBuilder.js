@@ -48,7 +48,7 @@ const FormBuilder = (props) => {
 		breadcrumbsConfig,
 		spellCheckConfig,
 		bannerConfig,
-		// variantsConfig,
+		variantsConfig,
 		swatchesConfig,
 		noResultsConfig,
 		loaderConfig,

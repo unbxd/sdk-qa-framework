@@ -81,19 +81,17 @@ const FormContent = (props = {}) => {
 				...formData,
 				[moduleKey]: { ...formData[moduleKey], ...data },
 			});
-			// setJsonData(
-			// 	JSON.stringify(
-			// 		{
-			// 			...formData,
-			// 			[moduleKey]: { ...formData[moduleKey], ...data },
-			// 		},
-			// 		null,
-			// 		4
-			// 	)
-			// );
+			console.log("if condition updateFormData");
+			setJsonData(
+				exportAllJS("import", {
+					...formData,
+					[moduleKey]: { ...formData[moduleKey], ...data },
+				})
+			);
 		} else {
+			console.log("else condition updateFormData");
 			setFormData({ ...formData, ...data });
-			// setJsonData(JSON.stringify({ ...formData, ...data }, null, 4));
+			setJsonData(exportAllJS("import", { ...formData, ...data }));
 		}
 	};
 
@@ -104,8 +102,9 @@ const FormContent = (props = {}) => {
 			// debugger;
 			if (localStorage.getItem(`config-${siteKey}-${configKey}`) !== null) {
 				let config = localStorage.getItem(`config-${siteKey}-${configKey}`);
+				console.log("useEffect localstorage defined");
 				setFormData(JSON.parse(config));
-				// setJsonData(config);
+				setJsonData(exportAllJS("import", JSON.parse(config)));
 				// validator(JSON.parse(config));
 				// displaySuccess("Retrieved and applied configurations.");
 			} else {
@@ -119,8 +118,9 @@ const FormContent = (props = {}) => {
 							// console.log(
 							// 	"No saved configurations found. Applying default configurations."
 							// );
+							console.log("useEffect axios error defined");
 							setFormData(defaultConfig);
-							// setJsonData(JSON.stringify(defaultConfig, null, 4));
+							setJsonData(exportAllJS("import", defaultConfig));
 							displayError(
 								`No saved configurations found. Applying default configurations.`
 							);
@@ -128,8 +128,9 @@ const FormContent = (props = {}) => {
 						}
 
 						// console.log("No error, continuing.");
+						console.log("useEffect axios noerror defined");
 						setFormData(response.data.config);
-						// setJsonData(JSON.stringify(response.data.config, null, 4));
+						setJsonData(exportAllJS("import", response.data.config));
 						// displaySuccess("Retrieved and applied configurations.");
 					})
 					.catch((error) => {
@@ -139,7 +140,7 @@ const FormContent = (props = {}) => {
 						);
 						// console.log(error.message);
 						setFormData(defaultConfig);
-						// setJsonData(JSON.stringify(defaultConfig, null, 4));
+						setJsonData(exportAllJS("import", defaultConfig));
 						displayError(
 							`${error.message}: Server is down. Could not retrieve configurations.`
 						);
@@ -148,13 +149,16 @@ const FormContent = (props = {}) => {
 		} else {
 			// console.log(localStorage.getItem("config"));
 			if (localStorage.getItem("config") === null) {
+				console.log("useEffect nolocalStorage undefined");
 				setFormData(defaultConfig);
-				// setJsonData(JSON.stringify(defaultConfig, null, 4));
+				setJsonData(exportAllJS("import", defaultConfig));
 				// displayInfo("Default configurations have been applied.");
 			} else {
 				let config = localStorage.getItem("config");
+				console.log("useEffect localStorage undefined");
 				setFormData(JSON.parse(config));
-				// setJsonData(config);
+				setJsonData(exportAllJS("import", JSON.parse(config)));
+				// (config);
 				// displaySuccess("Retrieved and applied saved changes.");
 			}
 		}
@@ -274,7 +278,9 @@ const FormContent = (props = {}) => {
 	const copyJSON = () => {
 		navigator.clipboard.writeText(JSON.stringify(formData, null, 4));
 		// document.querySelector(".viewMoreDropdown").style.display = "none";
-		console.log("Copied JSON!");
+		viewJSONModalRef.current.hideModal();
+		// console.log("Copied JSON!");
+		displaySuccess("Copied JSON!");
 	};
 
 	const copyPublishedLink = (inputID, copyIconID) => {
@@ -290,26 +296,35 @@ const FormContent = (props = {}) => {
 		console.log("Copied text:", inputEl.value);
 	};
 
-	const exportIndividualJSON = (code) => {
+	const exportIndividualJS = (code) => {
 		let configObjInner = "\t{\n";
 		for (let key of Object.keys(code)) {
 			// console.log(key, typeof code[key]);
 			if (typeof code[key] === "string") {
 				// console.log("string:", key);
 				try {
-					//element
-					const ele = eval(code[key]);
+					const ele = JSON.parse(code[key]);
+					// console.log("JSON.parse:", key);
 					configObjInner += `\t\t${key}: ${code[key]}, \n`;
-					console.log("eval element:", key);
-				} catch (eleErr) {
+				} catch (arrErr) {
 					try {
-						//function
-						const ele = eval("(" + code[key] + ")");
-						configObjInner += `\t\t${key}: ${code[key]}, \n`;
-						console.log("eval function:", key);
-					} catch (funcErr) {
-						configObjInner += `\t\t${key}: '${code[key]}', \n`;
-						console.log("not in eval:", key);
+						//element
+						const ele = eval(code[key]);
+						// console.log("eval:", key, code[key]);
+						configObjInner += `\t\t${key}: \`${code[key]}\`, \n`;
+						// console.log("eval element:", key);
+					} catch (eleErr) {
+						try {
+							//function
+							const ele = eval("(" + code[key] + ")");
+							// console.log("eval func:", key);
+							configObjInner += `\t\t${key}: ${code[key]}, \n`;
+							// console.log("eval function:", key);
+						} catch (funcErr) {
+							// console.log("not in eval:", key);
+							configObjInner += `\t\t${key}: \`${code[key]}\`, \n`;
+							// console.log("not in eval:", key);
+						}
 					}
 				}
 			} else if (typeof code[key] === "number") {
@@ -323,39 +338,66 @@ const FormContent = (props = {}) => {
 		return configObjInner;
 	};
 
-	const exportAllJSON = () => {
-		// console.log("in export:", formData);
-		let configObj = `{\n`;
-		for (let key of Object.keys(formData)) {
-			// console.log(key);
-			if (typeof formData[key] === "string") {
-				try {
-					//element
-					const ele = eval(formData[key]);
-					configObj += `\t${key}: ${formData[key]}, \n`;
-				} catch (eleErr) {
-					configObj += `\t${key}: '${formData[key]}', \n`;
+	const exportAllJS = (cond, code) => {
+		// console.log("in export:", cond, code);
+
+		// console.log("configObj:", configObj)
+
+		if (cond === "export") {
+			// console.log("configObj:", configObj);
+			let configObj = `{\n`;
+			for (let key of Object.keys(formData)) {
+				// console.log(key);
+				if (typeof formData[key] === "string") {
+					try {
+						//element
+						const ele = eval(formData[key]);
+						configObj += `\t${key}: \`${formData[key]}\`, \n`;
+					} catch (eleErr) {
+						configObj += `\t${key}: \`${formData[key]}\`, \n`;
+					}
+				} else if (typeof formData[key] === "object") {
+					// console.log(`***********\n${key}`);
+					configObj += `\t${key}: ${exportIndividualJS(formData[key])}, \n`;
+					// console.log(`\n***********`);
+					// exportIndividualJSON(formData[key]);
 				}
-			} else if (typeof formData[key] === "object") {
-				configObj += `\t${key}: ${exportIndividualJSON(formData[key])}, \n`;
-				// exportIndividualJSON(formData[key]);
 			}
+			configObj += "}";
+
+			const exportString = `const config = ${configObj}`;
+			const jsonString = `data:text/javascript;chatset=utf-8,${encodeURIComponent(
+				exportString
+			)}`;
+			const link = document.createElement("a");
+			link.href = jsonString;
+			link.download = `${formData.siteKey}${
+				configKey !== undefined && configKey.length > 0 ? `-${configKey}` : ""
+			}.js`;
+			// link.download = "configurations.json";
+			link.click();
+		} else {
+			// console.log("importing:", configObj, code);
+			// setJsonData(configObj);
+			let configObj = `{\n`;
+			for (let key of Object.keys(code)) {
+				// console.log(key);
+				if (typeof code[key] === "string") {
+					try {
+						//element
+						const ele = eval(code[key]);
+						configObj += `\t${key}: \`${code[key]}\`, \n`;
+					} catch (eleErr) {
+						configObj += `\t${key}: \`${code[key]}\`, \n`;
+					}
+				} else if (typeof code[key] === "object") {
+					configObj += `\t${key}: ${exportIndividualJS(code[key])}, \n`;
+					// exportIndividualJSON(formData[key]);
+				}
+			}
+			configObj += "}";
+			return configObj;
 		}
-		configObj += "}";
-		console.log("configObj:", configObj);
-
-		const exportString = `const config = ${configObj}`;
-
-		const jsonString = `data:text/javascript;chatset=utf-8,${encodeURIComponent(
-			exportString
-		)}`;
-		const link = document.createElement("a");
-		link.href = jsonString;
-		link.download = `${formData.siteKey}${
-			configKey !== undefined && configKey.length > 0 ? `-${configKey}` : ""
-		}.js`;
-		// link.download = "configurations.json";
-		link.click();
 	};
 
 	const downloadJSON = () => {
@@ -378,9 +420,15 @@ const FormContent = (props = {}) => {
 			"Configurations have been reset. Default configurations have been applied."
 		);
 		// document.getElementById("viewMoreDropdown").style.display = "none";
+		viewJSONModalRef.current.hideModal();
 		setSelectedAcc(null);
 		setFormData(defaultConfig);
+		setJsonData(exportAllJS("import", defaultConfig));
 		validator(defaultConfig);
+	};
+
+	const convertJsonToJs = (code) => {
+		console.log("code:", code);
 	};
 
 	const evaluateIndividual = (config) => {
@@ -409,6 +457,8 @@ const FormContent = (props = {}) => {
 					configString[`${conf}`] = JSON.stringify(config[conf]);
 					// }
 				}
+			} else if (typeof config[conf] === "string") {
+				configString[`${conf}`] = config[conf];
 			}
 		}
 		// console.log(configString);
@@ -433,19 +483,21 @@ const FormContent = (props = {}) => {
 	};
 
 	const applyImportedCode = (code) => {
-		// console.log("code type:", typeof code);
+		console.log("code type:", typeof code);
 		try {
 			const parsedCode = JSON.parse(code);
 			setFormData(parsedCode);
 			validator(parsedCode);
-			setJsonData();
+			// setJsonData();
+			setSelectedAcc(null);
 			// console.log("parsedCode");
 		} catch (err) {
 			const validatedCode = eval(`(${code})`);
 			const parsedCode = evaluateAll(validatedCode);
 			setFormData(JSON.parse(parsedCode));
 			validator(JSON.parse(parsedCode));
-			setJsonData();
+			// setJsonData();
+			setSelectedAcc(null);
 			// console.log("validatedCode");
 		}
 	};
@@ -456,18 +508,31 @@ const FormContent = (props = {}) => {
 		let fileReader = new FileReader();
 		fileReader.readAsDataURL(jsonFile);
 		fileReader.onload = (e) => {
-			encodedData = e.target.result.replace(
-				"data:application/json;base64,",
-				""
-			);
-			// setJsonData(window.atob(encodedData));
-			// console.log("typeof atob:", typeof window.atob(encodedData));
-			setJsonData(window.atob(encodedData));
-			// setFormData(JSON.parse(window.atob(encodedData)));
-			// validator(JSON.parse(window.atob(encodedData)));
-			// console.log("encodedData:", JSON.parse(window.atob(encodedData)));
-			setSelectedAcc(null);
+			try {
+				encodedData = e.target.result.replace(
+					"data:application/json;base64,",
+					""
+				);
+				// console.log("typeof atob:", typeof window.atob(encodedData));
+
+				// exportAllJS("import", window.atob(encodedData));
+				setJsonData(
+					exportAllJS("import", JSON.parse(window.atob(encodedData)))
+				);
+				// convertJsonToJs(window.atob(encodedData));
+				// setJsonData(window.atob(encodedData));
+				// setFormData(JSON.parse(window.atob(encodedData)));
+				// validator(JSON.parse(window.atob(encodedData)));
+				// console.log("encodedData:", JSON.parse(window.atob(encodedData)));
+				setSelectedAcc(null);
+			} catch (err) {
+				displayError("File Type does not seem to be in the form of .json");
+
+				e.target.value = "";
+				return;
+			}
 		};
+		e.target.value = "";
 	};
 
 	return (
@@ -559,18 +624,18 @@ const FormContent = (props = {}) => {
 								<span></span>
 								View Code
 							</div>
-							<div className="downloadJSON" onClick={() => downloadJSON()}>
+							{/* <div className="downloadJSON" onClick={() => downloadJSON()}>
 								<span></span>
-								Download Code
-							</div>
-							<div
+								Download Code as JSON
+							</div> */}
+							{/* <div
 								className="uploadJSON"
 								onClick={() => importCodeModalRef.current.showModal()}
 								// onClick={() => inputJSONFile.current.click()}
 							>
 								<span></span>
 								Upload Code
-							</div>
+							</div> */}
 
 							<div
 								className="uploadToCDN"
@@ -583,14 +648,14 @@ const FormContent = (props = {}) => {
 								<span></span>
 								Create Demo Site
 							</div>
-							<div className="copyJSON" onClick={() => copyJSON()}>
+							{/* <div className="copyJSON" onClick={() => copyJSON()}>
 								<span></span>
 								Copy Code
 							</div>
 							<div className="resetJSON" onClick={() => resetJSON()}>
 								<span></span>
 								Reset Config
-							</div>
+							</div> */}
 						</InlineModalBody>
 					</InlineModal>
 					<button
@@ -726,7 +791,6 @@ const FormContent = (props = {}) => {
 								className="cancel"
 								onClick={() => {
 									setPublishPopUp(false);
-									// setJsonData(JSON.stringify(formData, null, 4));
 									confirmModalRef.current.hideModal();
 									setCustomFileName(
 										configKey !== undefined && configKey.length > 0
@@ -876,16 +940,47 @@ const FormContent = (props = {}) => {
 				onClose={() => {}}
 			>
 				<div className="confirm-modal-body">
+					<div className="btnSection">
+						<Button
+							appearance="primary"
+							onClick={() => {
+								inputJSONFile.current.click();
+							}}
+						>
+							Import JSON file
+						</Button>
+						<input
+							type="file"
+							onChange={inputFileChange}
+							ref={inputJSONFile}
+							style={{ display: "none" }}
+						/>
+						<Button appearance="primary" onClick={() => exportAllJS("export")}>
+							Download as JS
+						</Button>
+						<Button appearance="primary" onClick={() => downloadJSON()}>
+							Download as JSON
+						</Button>
+						<Button appearance="primary" onClick={() => copyJSON()}>
+							Copy Code
+						</Button>
+						<Button appearance="primary" onClick={() => resetJSON()}>
+							Reset Code
+						</Button>
+					</div>
 					<div className="formjson" id="formjson">
 						<CodeMirror
-							readOnly={true}
+							// readOnly={true}
 							id="jsonCode"
 							className="jsonCode"
-							value={JSON.stringify(formData, null, 4)}
+							value={jsonData}
+							// value={exportAllJS("import", formData)}
+							// value={JSON.stringify(formData, null, 4)}
 							placeholder="Insert code here..."
 							height="100%"
 							width="100%"
 							extensions={[javascript({ json: true })]}
+							onChange={(code) => setJsonData(code)}
 						/>
 					</div>
 				</div>
@@ -893,16 +988,16 @@ const FormContent = (props = {}) => {
 					<Button
 						appearance="secondary"
 						className="export"
-						onClick={() => exportAllJSON()}
+						onClick={() => exportAllJS("export")}
 					>
-						<span></span>Export
+						<span></span>Export as JS
 					</Button>
 					<Button
 						appearance="secondary"
 						className="download"
 						onClick={() => downloadJSON()}
 					>
-						<span></span>Download
+						<span></span>Download as JSON
 					</Button>
 					<Button
 						appearance="secondary"
@@ -915,6 +1010,7 @@ const FormContent = (props = {}) => {
 						appearance="primary"
 						className="update-json"
 						onClick={() => {
+							applyImportedCode(jsonData);
 							viewJSONModalRef.current.hideModal();
 						}}
 					>
@@ -990,9 +1086,6 @@ const FormContent = (props = {}) => {
 						appearance="primary"
 						className="update-json"
 						onClick={() => {
-							// setFormData(JSON.parse(jsonData));
-							// validator(JSON.parse(jsonData));
-							// setJsonData();
 							applyImportedCode(jsonData);
 							importCodeModalRef.current.hideModal();
 						}}

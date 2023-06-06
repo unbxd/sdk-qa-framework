@@ -183,8 +183,8 @@ const DashboardContent = (props) => {
 			if (localStorage.getItem(`config-${siteKey}-${configKey}`) !== null) {
 				let config = localStorage.getItem(`config-${siteKey}-${configKey}`);
 				// setFormData(JSON.parse(config));
-				// setJsonData(config);
 				validator(JSON.parse(config));
+
 				// displaySuccess("Retrieved and applied configurations.");
 			} else {
 				axios
@@ -198,7 +198,6 @@ const DashboardContent = (props) => {
 							// 	"No saved configurations found. Applying default configurations."
 							// );
 							// setFormData(defaultConfig);
-							// setJsonData(JSON.stringify(defaultConfig, null, 4));
 							validator(defaultConfig);
 							displayError(
 								`No saved configurations found. Applying default configurations.`
@@ -208,7 +207,6 @@ const DashboardContent = (props) => {
 
 						// console.log("No error, continuing.");
 						// setFormData(response.data.config);
-						// setJsonData(JSON.stringify(response.data.config, null, 4));
 						validator(response.data.config);
 						// displaySuccess("Retrieved and applied configurations.");
 					})
@@ -219,7 +217,6 @@ const DashboardContent = (props) => {
 						);
 						// console.log(error.message);
 						// setFormData(defaultConfig);
-						// setJsonData(JSON.stringify(defaultConfig, null, 4));
 						validator(defaultConfig);
 						displayError(
 							`${error.message}: Server is down. Could not retrieve configurations.`
@@ -230,14 +227,12 @@ const DashboardContent = (props) => {
 			// console.log(localStorage.getItem("config"));
 			if (localStorage.getItem("config") === null) {
 				// setFormData(defaultConfig);
-				// setJsonData(JSON.stringify(defaultConfig, null, 4));
 				validator(defaultConfig);
 				displaySuccess("Default configurations have been applied.");
 				// displayInfo("Default configurations have been applied.");
 			} else {
 				let config = localStorage.getItem("config");
 				// setFormData(JSON.parse(config));
-				// setJsonData(config);
 				validator(JSON.parse(config));
 				// displaySuccess("Retrieved and applied saved changes.");
 			}
