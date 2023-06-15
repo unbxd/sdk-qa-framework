@@ -1,5 +1,3 @@
-import { TRUE } from "sass";
-
 const pageSizeConfig = {
 	moduleName: "Page Size",
 	moduleKey: "pagesize",

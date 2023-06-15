@@ -1,12 +1,13 @@
 const path = require("path");
 var BundleAnalyzerPlugin =
 	require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-	devtool: "source-map",
-	mode: "development",
+	devtool: false,
+	mode: "production",
 	entry: ["./src"],
 	// entry: ["./src", "./public/unbxdStyle.css"],
 	output: {
@@ -21,12 +22,24 @@ module.exports = {
 			generateStatsFile: true,
 			statsOptions: { source: false },
 		}),
+		new CopyPlugin({
+			patterns: [
+				{
+					from: path.resolve("./public/manifest.json"),
+					to: path.resolve("./public/dist"),
+				},
+				{
+					from: path.resolve("./public/netcore-unbxd-logo.png"),
+					to: path.resolve("./public/dist"),
+				},
+			],
+		}),
 		new HtmlWebpackPlugin({
 			template: "public/index.html", // to import index.html file inside index.js
 		}),
 	],
 	devServer: {
-		port: 3030, // you can change the port
+		port: 3031, // you can change the port
 		historyApiFallback: true,
 	},
 	optimization: {

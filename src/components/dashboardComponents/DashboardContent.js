@@ -6,6 +6,7 @@ import { getModuleConfigs, getEleDataType } from "../../utils/configUtils";
 
 import defaultConfig from "../../inputJson/defaultConfig.json";
 import { useParams } from "react-router-dom";
+import useDeepCompareEffect from "use-deep-compare-effect";
 
 const DashboardContent = (props) => {
 	const {
@@ -161,18 +162,26 @@ const DashboardContent = (props) => {
 	};
 
 	const hideConfigTab = () => {
+		document.querySelector(".dashboardWrapper").style.marginTop = "0";
+		document.querySelector(".demoSite").style.padding = "0px";
+		document.querySelector(".dashHead").style.display = "none";
 		document.querySelector(".hideConfigTab").style.display = "none";
 		document.querySelector(".viewConfigTab").style.display = "flex";
 		// document.querySelector(".formBuilder").style.width = "0%";
 		document.querySelector(".formBuilder").style.display = "none";
 		document.querySelector(".demoSite").style.width = "100%";
+		document.querySelector(".demoSite").style.height = "unset";
 	};
 	const showConfigTab = () => {
+		document.querySelector(".dashboardWrapper").style.marginTop = "50px";
+		document.querySelector(".demoSite").style.padding = "15px";
+		document.querySelector(".dashHead").style.display = "flex";
 		document.querySelector(".viewConfigTab").style.display = "none";
 		document.querySelector(".hideConfigTab").style.display = "flex";
 		// document.querySelector(".formBuilder").style.width = "30%";
 		document.querySelector(".formBuilder").style.display = "flex";
 		document.querySelector(".demoSite").style.width = "70%";
+		document.querySelector(".demoSite").style.height = "calc(100vh - 95px)";
 	};
 
 	useEffect(() => {
@@ -257,6 +266,7 @@ const DashboardContent = (props) => {
 			)}
 			<div className={viewConfigOption ? "demoSite" : "demoSite preview"}>
 				<Vanilla2
+					key="abcd"
 					validatedConfig={validatedConfig}
 					reloadWarning={reloadWarning}
 					displayError={displayError}

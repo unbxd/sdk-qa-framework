@@ -3,6 +3,8 @@ node_modules
 .DS_Store
 demo.*
 .env
+vanilla2-1
+vanilla2-2
 
 /src/inputJson/dummyMadrasLink2.json
 public/dist

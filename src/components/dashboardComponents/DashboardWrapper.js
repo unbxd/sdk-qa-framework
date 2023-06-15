@@ -21,7 +21,7 @@ const DashboardWrapper = (props) => {
 				displaySuccess={displaySuccess}
 				displayInfo={displayInfo}
 				viewConfigOption={viewConfigOption}
-				reloadWarning={reloadWarning}
+				// reloadWarning={reloadWarning}
 			/>
 		</div>
 	);
