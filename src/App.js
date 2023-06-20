@@ -1,7 +1,9 @@
 import React from "react";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+
 import "unbxd-react-components/components/theme.css";
 import "unbxd-react-components/components/core.css";
 import "../public/styles/components/general.scss";
@@ -11,28 +13,26 @@ import Lander from "./components/landerComponents/Lander";
 import LanderUseCases from "./components/landerComponents/LanderUseCases";
 
 const App = (props) => {
-	const displayError = (message, module) => {
-		if (module === undefined) {
-			toast.error(message, {
+	const displayMessage = (type, message, module) => {
+		if (type === "error") {
+			if (module === undefined) {
+				toast.error(message, {
+					position: "top-right",
+				});
+			} else {
+				toast.error(`${module}: ${message}`, {
+					position: "top-right",
+				});
+			}
+		} else if (type === "success") {
+			toast.success(message, {
 				position: "top-right",
 			});
-		} else {
-			toast.error(`${module}: ${message}`, {
+		} else if (type === "info") {
+			toast.warning(message, {
 				position: "top-right",
 			});
 		}
-	};
-
-	const displaySuccess = (message) => {
-		toast.success(message, {
-			position: "top-right",
-		});
-	};
-
-	const displayInfo = (message) => {
-		toast.warning(message, {
-			position: "top-right",
-		});
 	};
 
 	return (
@@ -45,9 +45,7 @@ const App = (props) => {
 					path="builder/:siteKey?/:configKey?"
 					element={
 						<DashboardWrapper
-							displayError={displayError}
-							displaySuccess={displaySuccess}
-							displayInfo={displayInfo}
+							displayMessage={displayMessage}
 							viewConfigOption={true}
 							reloadWarning={true}
 						/>
@@ -57,8 +55,7 @@ const App = (props) => {
 					path="preview/:siteKey?/:configKey?"
 					element={
 						<DashboardWrapper
-							displayError={displayError}
-							displaySuccess={displaySuccess}
+							displayMessage={displayMessage}
 							viewConfigOption={false}
 							reloadWarning={false}
 						/>

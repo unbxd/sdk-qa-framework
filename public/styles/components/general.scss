@@ -158,7 +158,6 @@ body {
 		padding: 20px 30px;
 		background-color: $modal-body-bg;
 		height: 100%;
-		// position: relative;
 	}
 }
 
@@ -187,42 +186,10 @@ body {
 		width: 100%;
 		padding: 10px;
 		margin-top: 10px;
-		border: 1px solid red;
-		border-radius: 10px;
 		margin-left: -10px;
 		font-size: 14px;
+		color: #999;
 		text-align: justify;
-		background-color: #fff3f6;
-		// background-color: rgba(250, 111, 111, 0.862);
-		// color: #fff;
-
-		.iconWrapper {
-			width: 25px;
-			height: 25px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			margin-left: 5px;
-			border: 1px solid #de4e72;
-			border-radius: 100%;
-			background-color: #ffd9d9;
-
-			.icon {
-				background-image: url("https://static.thenounproject.com/png/228845-200.png");
-				background-size: 100% 100%;
-				width: 15px;
-				height: 15px;
-				filter: invert(42%) sepia(45%) saturate(1987%) hue-rotate(316deg)
-					brightness(94%) contrast(87%);
-			}
-		}
-
-		.message {
-			margin: 0 5px 0 15px;
-			width: 90%;
-			color: #da3861;
-			font-size: 15px;
-		}
 	}
 
 	.fsCodeEditor {
@@ -312,37 +279,16 @@ body {
 	}
 }
 
-// .upload {
-// 	display: flex;
-// 	width: fit-content;
-// 	justify-content: center;
-// 	align-items: center;
-// }
-
-// .copy {
-// 	display: flex;
-// 	width: fit-content;
-// 	justify-content: center;
-// 	align-items: center;
-// }
-
 .editorModal {
 	z-index: 10;
 	.RCB-modal-body {
 		width: 90%;
 		height: 90%;
-
 		.RCB-modal-content {
-			// height: 90%;
-
 			.confirm-modal-body {
 				height: 75%;
 			}
 		}
-
-		// .modal-footer {
-		// 	margin: 10px -30px;
-		// }
 	}
 }
 

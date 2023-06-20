@@ -27,9 +27,7 @@ const FormBuilder = (props) => {
 		hideConfigTab,
 		viewConfigOption,
 		validatedConfig,
-		displayError,
-		displaySuccess,
-		displayInfo,
+		displayMessage,
 		validator,
 		configKey,
 		siteKey,
@@ -62,8 +60,6 @@ const FormBuilder = (props) => {
 		setSelectedAcc(i);
 	};
 
-	// console.log("Rendered formBuilder");
-
 	return (
 		<div className={viewConfigOption ? "formBuilder" : "formBuilder preview"}>
 			<FormIcons
@@ -78,9 +74,7 @@ const FormBuilder = (props) => {
 				setValidatedConfig={setValidatedConfig}
 				hideConfigTab={hideConfigTab}
 				validatedConfig={validatedConfig}
-				displayError={displayError}
-				displaySuccess={displaySuccess}
-				displayInfo={displayInfo}
+				displayMessage={displayMessage}
 				validator={validator}
 				siteKey={siteKey}
 				configKey={configKey}

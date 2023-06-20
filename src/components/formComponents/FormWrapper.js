@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form } from "unbxd-react-components";
 import FormConfigWrapper from "./FormConfigWrapper";
 import { getConfig } from "../../utils/configUtils";
@@ -44,7 +44,6 @@ const FormWrapper = (props = {}) => {
 								if (objData[name].value === undefined)
 									selectedVal = objData[name];
 								else selectedVal = objData[name].value;
-								// console.log(objData[name].value);
 							} else if (dataType === "boolean") {
 								selectedVal = objData[name];
 							} else if (dataType === "number") {
@@ -84,8 +83,6 @@ const FormWrapper = (props = {}) => {
 		if (code === undefined) {
 			onChange(element);
 		} else {
-			// console.log("in delayChange:", element, code);
-
 			onCodeChange(element, code);
 		}
 	}, DEBOUNCE_DELAY);
@@ -99,8 +96,6 @@ const FormWrapper = (props = {}) => {
 					display = conf["displayIf"](formData);
 					if (conf["codeTemplate"]) {
 						codeTemplate = conf["codeTemplate"](formData);
-						// console.log("conf:", conf.name, codeTemplate);
-						// onCodeChange(conf.name, codeTemplate);
 					}
 				}
 				if (display) {

@@ -50,8 +50,6 @@ const masterData = {
 	[loaderConfig["moduleKey"]]: loaderConfig,
 };
 
-// console.log("masterData:", masterData);
-
 export const getAllConfigs = () => {
 	let allConfigs = {};
 	for (let key in masterData) {
@@ -69,15 +67,9 @@ export const getAllConfigsList = () => {
 	}
 	return allConfigs;
 };
-// getAllConfigsList();
 
 export const getModuleConfigs = (moduleKey) => {
 	try {
-		// console.log(
-		// 	`getModuleConfigs:`,
-		// 	moduleKey,
-		// 	masterData[moduleKey]["config"]
-		// );
 		return masterData[moduleKey]["config"];
 	} catch (err) {
 		return;
@@ -88,15 +80,6 @@ export const getEleDataType = (moduleName, eleName) => {
 	const moduleConfigs = getModuleConfigs(moduleName);
 	for (let key of moduleConfigs) {
 		if (key.name === eleName) {
-			// if (moduleName == "facet") {
-			// 	console.log(
-			// 		"getDataType:",
-			// 		moduleName,
-			// 		eleName,
-			// 		key.name,
-			// 		key.dataType
-			// 	);
-			// }
 			return key.dataType;
 		}
 	}
@@ -122,21 +105,11 @@ export const getUseCases = () => {
 	for (let key of Object.keys(masterData)) {
 		if (masterData[key]["usecases"] != undefined) {
 			usecases[key] = masterData[key]["usecases"];
-			// let usecase = masterData[key]["usecases"];
-			// usecases.push({ ["key"]: key, ["usecases"]: { ...usecase } });
 		}
 	}
 	console.log("Usecases:", usecases);
 	return usecases;
 };
-
-// getAllConfigs();
-// getModuleConfigs("SearchBox");
-// getEleDataType("Auth", "siteKey");
-// getModuleDesc("Auth");
-// getModuleLink("Auth");
-// getModuleKey("Pagination");
-// getUseCases();
 
 export const getConfig = (moduleKey, key) => {
 	if (key) {
@@ -145,5 +118,3 @@ export const getConfig = (moduleKey, key) => {
 	}
 	return masterConfig[moduleKey];
 };
-
-// export { getConfig, getAllConfigs, getUseCases };

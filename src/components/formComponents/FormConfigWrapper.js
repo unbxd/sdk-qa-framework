@@ -1,20 +1,12 @@
 import React, { useRef } from "react";
 import CodeMirror from "@uiw/react-codemirror";
-import { basicSetup } from "codemirror";
-import readOnlyRangesExtension from "codemirror-readonly-ranges";
-import {
-	preventModifyTargetRanges,
-	smartPaste,
-	smartDelete,
-} from "codemirror-readonly-ranges";
-import { EditorState } from "@codemirror/state";
 import { javascript } from "@codemirror/lang-javascript";
+import { Modal, Button } from "unbxd-react-components";
 
 import { getConfig } from "../../utils/configUtils";
 import CustomDrop from "./formElements/CustomDrop";
 import CustomInput from "./formElements/CustomInput";
 import CustomCheck from "./formElements/CustomCheck";
-import { Modal, Button } from "unbxd-react-components";
 
 const FormConfigWrapper = (props = {}) => {
 	const {
@@ -62,20 +54,6 @@ const FormConfigWrapper = (props = {}) => {
 		case "object":
 		case "function":
 		case "array": {
-			// console.log("obj/func/arr:", name, formData[name], codeTemplate);
-			// const getReadOnlyRanges = () => {
-			// 	return [
-			// 		{
-			// 			from: undefined, //same as: targetState.doc.line(0).from or 0
-			// 			to: EditorState.doc.line(3).to,
-			// 		},
-			// 		{
-			// 			from: EditorState.doc.line(EditorState.doc.lines).from,
-			// 			to: undefined, // same as: targetState.doc.line(targetState.doc.lines).to
-			// 		},
-			// 	];
-			// };
-
 			return (
 				<div className="config">
 					<Modal
@@ -129,7 +107,6 @@ const FormConfigWrapper = (props = {}) => {
 							<div
 								className="enableFullScreen"
 								onClick={() => {
-									// console.log("enableFullScreen:", formData[name]);
 									setFSCodeEditorData(
 										formData[name] !== undefined
 											? JSON.parse(JSON.stringify(formData[name], null, 4))
@@ -137,9 +114,6 @@ const FormConfigWrapper = (props = {}) => {
 											? codeTemplate
 											: ""
 									);
-									// setFSCodeEditorData(
-									// 	JSON.parse(JSON.stringify(formData[name], null, 4))
-									// );
 									viewCodeEditorRef.current.showModal();
 								}}
 							>
@@ -159,12 +133,6 @@ const FormConfigWrapper = (props = {}) => {
 								height="200px"
 								width="100%"
 								extensions={[javascript({ jsx: true })]}
-								// options={{
-								// 	mode: "javascript",
-								// 	lineNumbers: true,
-								// 	readOnly: true,
-								// }}
-								// readOnly={[1, 2]}
 								onChange={(code) => delayChange(name, code)}
 							/>
 						</div>

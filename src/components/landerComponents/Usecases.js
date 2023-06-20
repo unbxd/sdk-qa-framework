@@ -13,24 +13,17 @@ const Usecases = ({ usecases = [], title = "" }) => {
 		"#FF0080",
 	];
 
-	let count = 0;
-
 	return (
 		<div className="option">
 			<h2>{title}</h2>
 			<div className="configOptions">
 				{usecases.map((usecase, key) => {
 					return (
-						// <a key={key} href={`/builder/${usecase["key"]}`}>
 						<div key={key}>
 							<div
 								className="configOption"
 								style={{
 									backgroundColor: "#fff",
-									// backgroundColor: `${colors[count++]}`,
-									// backgroundColor: `${
-									// 	colors[Math.floor(Math.random() * colors.length)]
-									// }`,
 								}}
 							>
 								<div className="optionHeader">
@@ -40,7 +33,6 @@ const Usecases = ({ usecases = [], title = "" }) => {
 								<div className="optionDesc">
 									<p>{usecase["desc"]}</p>
 									<div className="buttonSection">
-										{/* <a href={`/builder/${usecase["key"]}`}> */}
 										<a href="/builder">
 											<Button appearance="secondary" size="small">
 												Builder
@@ -55,7 +47,6 @@ const Usecases = ({ usecases = [], title = "" }) => {
 								</div>
 							</div>
 						</div>
-						//</a>
 					);
 				})}
 			</div>

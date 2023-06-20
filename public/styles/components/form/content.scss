@@ -1,10 +1,7 @@
 @import "./variables.scss";
-// @import "./formIcons/icons.scss";
 
 .sprite {
 	background-image: url("https://ssdevconsole-nam.unbxd.io/ss/images/sprite.svg");
-	// display: inline-block;
-	// vertical-align: middle;
 }
 
 .radio-icon {
@@ -105,9 +102,6 @@
 
 @mixin plus-black {
 	background-image: url("https://static.thenounproject.com/png/230269-200.png");
-	// background-position: -115px -21px;
-	// width: 703px;
-	// height: 705px;
 }
 
 @mixin infiniteScroll-icon {
@@ -147,7 +141,6 @@
 
 .down-arrow-dark {
 	@extend .sprite;
-	// background-position: -24px -173px;
 	background-position: -121px -122px;
 	width: 10px;
 	height: 8px;
@@ -210,11 +203,9 @@ form {
 		font-size: 14px;
 		border-radius: 4px;
 		border: 1px solid #c8d0db;
-		// padding: 0px 15px;
 		padding: 10px 15px;
 		width: 90%;
 		z-index: 2;
-		// width: 100%;
 
 		&[type="checkbox"] {
 			width: auto;
@@ -562,7 +553,13 @@ form {
 	width: calc(100% - 60px);
 	margin-left: 60px;
 	display: flex;
-	// max-width: 341px; this has to be removed later on
+
+	.uploadToCDN {
+		position: absolute;
+		top: -45px;
+		right: calc(-82vw + 170px);
+		z-index: 7;
+	}
 
 	.aceEditor {
 		display: flex;
@@ -582,7 +579,6 @@ form {
 		top: -36px;
 		left: 275px;
 		background-color: #fff;
-		// border: 1px solid black;
 		.noCodeChange {
 			color: green;
 		}
@@ -668,13 +664,9 @@ form {
 			.header {
 				display: flex;
 				flex-direction: column;
-				// align-items: center;
 				position: sticky;
 				top: 0;
-				/* height: 100px; */
-				// padding: 10px 15px 10px 10px;
 				padding: 15px 2.5%;
-				// margin-left: 2.5%;
 				width: 95%;
 				background: #f7f7f9;
 				z-index: 3;
@@ -743,128 +735,12 @@ form {
 		position: absolute;
 		bottom: 0;
 		width: 100%;
-		// max-width: 402px;
 		border-top: 1px solid #ccc;
-		// border-right: 1px solid #ccc;
 		background: #f7f7f9;
 		display: flex;
-		justify-content: flex-end;
-		// justify-content: center;
+		justify-content: space-evenly;
 		align-items: center;
 		z-index: 4;
-
-		.moreOptionsIcon {
-			background-image: url("https://static.thenounproject.com/png/2854151-200.png");
-			background-size: 100% 100%;
-			width: 20px;
-			height: 20px;
-
-			&:hover {
-				cursor: pointer;
-			}
-		}
-
-		.viewMoreDropdown {
-			.RCB-inline-modal-btn {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				font-size: 13px;
-				color: #61697d;
-				background-color: #ffffff;
-				padding: 9px 15px;
-				border-radius: 6px;
-				border: 1px solid #a1b3c0;
-				margin: 10px;
-
-				div {
-					text-align: center;
-				}
-			}
-			.RCB-inline-modal-body {
-				bottom: 50px;
-				width: 200px;
-				border: 1px solid #ccc;
-				display: flex;
-				flex-direction: column;
-
-				div {
-					cursor: pointer;
-					display: flex;
-					align-items: center;
-
-					color: #273251;
-					font-weight: 500;
-					font-size: 14px;
-					padding: 10px;
-
-					&:hover {
-						background-color: #f7f9fb;
-					}
-				}
-				.viewCode {
-					span {
-						background-image: url("https://static.thenounproject.com/png/1020859-200.png");
-						width: 20px;
-						height: 20px;
-						background-size: 100% 100%;
-						margin-right: 10px;
-					}
-				}
-
-				.downloadJSON {
-					span {
-						background-image: url("https://static.thenounproject.com/png/294431-200.png");
-						width: 20px;
-						height: 20px;
-						background-size: 100% 100%;
-						margin-right: 10px;
-					}
-				}
-
-				.uploadJSON {
-					span {
-						background-image: url("https://static.thenounproject.com/png/1057582-200.png");
-						width: 20px;
-						height: 20px;
-						background-size: 100% 100%;
-						margin-right: 10px;
-					}
-				}
-
-				.uploadToCDN {
-					span {
-						background-image: url("https://static.thenounproject.com/png/23675-200.png");
-						width: 20px;
-						height: 20px;
-						background-size: 100% 100%;
-						margin-right: 10px;
-					}
-				}
-
-				.copyJSON {
-					span {
-						background-image: url("https://static.thenounproject.com/png/1346024-200.png");
-						width: 20px;
-						height: 20px;
-						background-size: 100% 100%;
-						margin-right: 10px;
-					}
-				}
-
-				.resetJSON {
-					color: red;
-					span {
-						background-image: url("https://icon-library.com/images/reset-icon-png/reset-icon-png-15.jpg");
-						width: 15px;
-						height: 15px;
-						margin-left: 5px;
-						background-size: 100% 100%;
-						margin-right: 10px;
-					}
-				}
-			}
-		}
 
 		button {
 			display: flex;
@@ -910,20 +786,8 @@ form {
 .confirmModal,
 .publishSuccess {
 	z-index: 10;
-
 	.RCB-modal-body {
 		width: 60%;
-		// height: 60%;
-
-		// .RCB-modal-content {
-		// 	div {
-		// 		height: 100%;
-
-		// 		.confirm-modal-body {
-		// 			height: 62%;
-		// 		}
-		// 	}
-		// }
 	}
 }
 
@@ -934,10 +798,7 @@ form {
 		height: 90%;
 
 		.RCB-modal-content {
-			// height: 90%;
-
 			.confirm-modal-body {
-				height: 75%;
 				display: flex;
 				flex-direction: column;
 				align-items: center;
@@ -951,10 +812,6 @@ form {
 				}
 			}
 		}
-
-		// .modal-footer {
-		// 	margin: 10px -30px;
-		// }
 	}
 }
 
@@ -966,9 +823,6 @@ form {
 		height: 90%;
 
 		.RCB-modal-content {
-			// height: 90%;
-			// justify-content: center;
-
 			.confirm-modal-body {
 				display: flex;
 				flex-direction: column;
@@ -997,10 +851,6 @@ form {
 				}
 			}
 		}
-
-		// .modal-footer {
-		// 	margin: 10px -30px;
-		// }
 	}
 }
 
@@ -1106,14 +956,12 @@ form {
 	.editor {
 		border: 1px solid #c8d0db;
 		border-radius: 4px;
-		// margin-top: -20px;
 
 		.cm-editor {
 			border-radius: 4px;
 
 			&.cm-focused {
 				outline: 1px solid #6b8ee5;
-				// border: 1px solid #6b8ee5;
 			}
 		}
 
@@ -1129,7 +977,7 @@ form {
 
 .confirmFileName {
 	margin: 15px 0 8px 0;
-	color: #415867;
+	color: #999;
 	font-size: 14px;
 	font-weight: 400;
 	display: block;
@@ -1137,26 +985,22 @@ form {
 	div {
 		display: flex;
 		flex-direction: row;
-		// align-items: center;
 
 		.icon {
 			margin: 0 5px;
-			// margin-right: 5px;
 			display: flex;
 			background-image: url("https://static.thenounproject.com/png/3842757-200.png");
 			background-size: 100% 100%;
 			width: 20px;
 			height: 20px;
+			filter: invert(59%) sepia(10%) saturate(7%) hue-rotate(42deg)
+				brightness(102%) contrast(87%);
 		}
 
 		span {
 			margin-left: 5px;
 		}
 	}
-
-	// span {
-	// 	margin: 5px 0 0 10px;
-	// }
 }
 
 .fileSaveName {

@@ -1,6 +1,3 @@
-// @import '~bootstrap/scss/bootstrap';
-// @import "../vanilla2/unbxdStyles.scss";
-
 .UNX-header__search {
 	width: 40%;
 	padding: 15px 0;
@@ -237,7 +234,6 @@
 	}
 }
 
-// Loader begins
 .overlay {
 	left: 0;
 	top: 0;
@@ -281,9 +277,6 @@
 	}
 }
 
-//Loader ends
-
-//slider starts
 .rc-slider-mark {
 	top: 14px;
 }
@@ -297,8 +290,6 @@
 	left: 97% !important;
 	width: 40px;
 }
-
-//slider ends
 
 .UNX-dropdown-container {
 	color: #5d7483;

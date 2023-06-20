@@ -11,22 +11,15 @@
 	position: fixed;
 	margin-top: -50px;
 	z-index: 6;
-	// padding: 0 10px;
-	// display: flex;
-	// align-items: center;
-	// justify-content: space-between;
 
 	.desc {
 		display: flex;
 		align-items: center;
-		// justify-content: space-between;
 		margin-left: 5px;
 
 		.logoWrapper {
 			display: flex;
 			width: fit-content;
-			// padding-right: 16px;
-			// border-right: 1px solid #ccc;
 
 			.logo {
 				background-image: url("https://netcorecloud.com/wp-content/uploads/2023/01/favicon-256x256-1.png");
@@ -50,24 +43,25 @@
 		justify-content: flex-end;
 		align-items: center;
 		width: 40%;
-		margin-right: 20px;
+		margin-right: 170px;
 
 		.version {
-			color: #61697d;
-			background-color: #fff;
-			border: 1px solid rgba(9, 13, 15, 0.14);
-			padding: 5px 10px;
-			border-radius: 20px;
-			font-size: 12px;
-
-			&:hover {
-				color: #61697d;
+			margin: 0 20px;
+			.RCB-form-el-label {
+				display: none;
+			}
+			.RCB-inline-modal-btn {
+				padding: 9px 3px;
+				.RCB-dd-label {
+					width: 70px;
+				}
 			}
 		}
 
 		a {
 			margin-left: 20px;
 			text-decoration: none;
+			font-size: 14px;
 			font-weight: 400;
 			color: cornflowerblue;
 

@@ -31,9 +31,16 @@
 			rel="stylesheet"
 			href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"
 		/>
+		<script
+			type="text/javascript"
+			src="https://libraries.unbxdapi.com/search-sdk/v2.0.38/vanillaSearch.min.js"
+		></script>
 		<!-- End dependency library stylesheets -->
 		<!-- Custom stylesheet for Unbxd default theme, update this if you want to change the look & feel -->
-		<!-- <link rel='stylesheet' href='https://libraries.unbxdapi.com/search-sdk/v2.0.5/vanillaSearch.min.css' /> -->
+		<!-- <link
+			rel="stylesheet"
+			href="https://libraries.unbxdapi.com/search-sdk/v2.0.38/vanillaSearch.min.css"
+		/> -->
 		<!-- <link rel='stylesheet' type='text/css' href='unbxdStyle.css' /> -->
 	</head>
 
@@ -215,20 +222,10 @@
 	<!-- Unbxd SDK dependency libraries: jQuery, jQuery UI & Handlebars -->
 
 	<script type="text/javascript">
-		// function viewAllFacets() {
-		// 	const facetWrapper = document.getElementById("UNX-outer-facet-wrapper");
-		// 	facetWrapper.style.display = "block";
-		// 	console.log("Clicked on view filters");
-		// }
-		// function closeFilters() {
-		// 	document.querySelector(".UNX-outer-facet-wrapper").style.display = "none";
-		// }
-
 		function viewAllFacets() {
 			const facetWrapper = document.getElementById("UNX-outer-facet-wrapper");
 			facetWrapper.classList.add("UNX-outer-facet-wrapper-popup");
 			facetWrapper.classList.remove("UNX-outer-facet-wrapper");
-			// facetWrapper.style.display = "block";
 			console.log("Clicked on view filters");
 		}
 		function closeFilters() {

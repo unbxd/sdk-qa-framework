@@ -1,7 +1,7 @@
 *,
 body {
-	font-family: "Nunito Sans", "Barlow", "Helvetica Neue", "Helvetica",
-		"Roboto", "sans-serif";
+	font-family: "Nunito Sans", "Barlow", "Helvetica Neue", "Helvetica", "Roboto",
+		"sans-serif";
 }
 
 .UNX-hidden {
@@ -1267,8 +1267,6 @@ input[id^="likeBtn"]:checked ~ .UNX-favourite {
 	.UNX-result-wrapper {
 		grid-template-columns: 30%% 30%% 30%;
 		grid-column-gap: 3%;
-		// grid-template-columns: 24% 24% 24% 24%;
-		// grid-column-gap: 1%;
 	}
 }
 
@@ -1276,8 +1274,6 @@ input[id^="likeBtn"]:checked ~ .UNX-favourite {
 	.UNX-result-wrapper {
 		grid-template-columns: 30% 30% 30%;
 		grid-column-gap: 3%;
-		// grid-template-columns: 24% 24% 24% 24%;
-		// grid-column-gap: 1%;
 	}
 }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import DashboardHeader from "./DashboadHeader";
 import DashboardContent from "./DashboardContent";
 
@@ -6,22 +6,23 @@ const DashboardWrapper = (props) => {
 	const {
 		viewConfigOption = false,
 		reloadWarning = true,
-		displayError,
-		displaySuccess,
-		displayInfo,
+		displayMessage,
 	} = props;
+
+	const [sdkversion, setSdkVersion] = useState();
 
 	return (
 		<div className="dashboardWrapper">
 			{viewConfigOption && (
-				<DashboardHeader viewConfigOption={viewConfigOption} />
+				<DashboardHeader
+					viewConfigOption={viewConfigOption}
+					setSdkVersion={setSdkVersion}
+				/>
 			)}
 			<DashboardContent
-				displayError={displayError}
-				displaySuccess={displaySuccess}
-				displayInfo={displayInfo}
+				displayMessage={displayMessage}
 				viewConfigOption={viewConfigOption}
-				// reloadWarning={reloadWarning}
+				reloadWarning={reloadWarning}
 			/>
 		</div>
 	);

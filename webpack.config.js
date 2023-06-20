@@ -3,11 +3,17 @@ var BundleAnalyzerPlugin =
 	require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
 	devtool: "source-map",
 	mode: "development",
 	entry: ["./src"],
+	performance: {
+		// hints: false,
+		maxEntrypointSize: 5120000,
+		maxAssetSize: 5120000,
+	},
 	// entry: ["./src", "./public/unbxdStyle.css"],
 	output: {
 		path: path.join(__dirname, "/public/dist"), // the bundle output path
@@ -30,7 +36,9 @@ module.exports = {
 		historyApiFallback: true,
 	},
 	optimization: {
-		minimize: false,
+		minimizer: [new TerserPlugin({})],
+		usedExports: true,
+		minimize: true,
 	},
 	module: {
 		rules: [
