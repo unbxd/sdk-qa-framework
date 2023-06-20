@@ -1324,15 +1324,15 @@ input[id^="likeBtn"]:checked ~ .UNX-favourite {
 	padding: 0;
 }
 
-/* .UNX-pre-loader {
+.UNX-pre-loader {
 	position: absolute;
-	width: 100%;
+	/* width: 100%;
 	top: 0;
 	left: 0;
 	right: 0;
-	height: 100px;
+	height: 100px; */
 	z-index: -1;
-} */
+}
 
 .UNX-grid-card .UNX-product-number,
 .UNX-list-card .UNX-product-number {

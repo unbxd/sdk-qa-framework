@@ -1,15 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Button, Modal, Input } from "unbxd-react-components";
+import { Button } from "unbxd-react-components";
 import axios from "axios";
-import CodeMirror from "@uiw/react-codemirror";
-import { javascript } from "@codemirror/lang-javascript";
 
 import "../../../public/styles/components/form/content.scss";
 
 import FormWrapper from "./FormWrapper";
 import defaultConfig from "../../inputJson/defaultConfig.json";
-import CustomInput from "./formElements/CustomInput";
-import CustomRadio from "./formElements/CustomRadio";
 import CreateDemoSite from "./Modal/CreateDemoSite";
 import PublishStatus from "./Modal/PublishStatus";
 import ViewCode from "./Modal/ViewCode";
@@ -41,7 +37,6 @@ const FormContent = (props = {}) => {
 	const confirmModalRef = useRef();
 	const viewJSONModalRef = useRef();
 	const publishSuccessModalRef = useRef();
-	const importCodeModalRef = useRef();
 	const inputJSONFile = useRef(null);
 
 	const updateFormData = (data = {}, moduleKey = null) => {
@@ -412,7 +407,7 @@ const FormContent = (props = {}) => {
 				onClick={() => {
 					confirmModalRef.current.showModal();
 				}}
-				appearance="link"
+				appearance="primary"
 			>
 				<span></span>
 				Create Demo Site

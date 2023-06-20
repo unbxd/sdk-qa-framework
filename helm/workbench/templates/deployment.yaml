@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "sdk-qa-framework.fullname" . }}
+  name: {{ include "workbench.fullname" . }}
   labels:
-    {{- include "sdk-qa-framework.labels" . | nindent 4 }}
+    {{- include "workbench.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "sdk-qa-framework.selectorLabels" . | nindent 6 }}
+      {{- include "workbench.selectorLabels" . | nindent 6 }}
   template:
     metadata:
     {{- with .Values.podAnnotations }}
@@ -16,7 +16,7 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       labels:
-        {{- include "sdk-qa-framework.selectorLabels" . | nindent 8 }}
+        {{- include "workbench.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -34,9 +34,10 @@ spec:
             - containerPort: 3000
               protocol: TCP
           livenessProbe:
-            tcpSocket:
+            httpGet:
+              path: /ui/healthcheck
               port: 3000
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
-            {{- include "sdk-qa-framework.envVars" . | trim | nindent 12 }}
+            {{- include "workbench.envVars" . | trim | nindent 12 }}

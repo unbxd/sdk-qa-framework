@@ -9,14 +9,14 @@ const DashboardWrapper = (props) => {
 		displayMessage,
 	} = props;
 
-	const [sdkversion, setSdkVersion] = useState();
+	// const [sdkversion, setSdkVersion] = useState();
 
 	return (
 		<div className="dashboardWrapper">
 			{viewConfigOption && (
 				<DashboardHeader
 					viewConfigOption={viewConfigOption}
-					setSdkVersion={setSdkVersion}
+					// setSdkVersion={setSdkVersion}
 				/>
 			)}
 			<DashboardContent

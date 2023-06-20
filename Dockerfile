@@ -12,7 +12,7 @@ ENV ASSETS_AWS_SECRET_KEY ${ASSETS_AWS_SECRET_KEY}
 
 # Create the folder & provide permissions
 RUN mkdir -p ${BASEDIR}
-RUN chown -R nobody:nogroup ${BASEDIR}
+# RUN chown -R nobody:nogroup ${BASEDIR}
 
 # Copy the current directory contents into the container at BASEDIR
 ADD . ${BASEDIR}
@@ -30,4 +30,5 @@ RUN NODE_ENV=production npm run build
 EXPOSE 3000
 
 # Run the server when the container launches
-CMD ["sh", "-c", "NODE_ENV=production npm start"]
+CMD ["sh", "-c", "npm run start"]
+# CMD ["sh", "-c", "npx nodemon server.js"]

@@ -4,7 +4,7 @@ import "../../../public/styles/components/dashboard/header.scss";
 import CustomDrop from "../formComponents/formElements/CustomDrop";
 
 const DashboardHeader = (props) => {
-	const { setSdkVersion } = props;
+	// const { setSdkVersion } = props;
 
 	return (
 		<div className="dashHead">
@@ -18,7 +18,7 @@ const DashboardHeader = (props) => {
 				<a href="https://unbxd.github.io/search-JS-library/" target="_blank">
 					View Documentation
 				</a>
-				<CustomDrop
+				{/* <CustomDrop
 					appearance="block"
 					halign="left"
 					className="version"
@@ -38,7 +38,7 @@ const DashboardHeader = (props) => {
 						},
 					]}
 					onChange={(id) => setSdkVersion(id.name)}
-				/>
+				/> */}
 			</div>
 		</div>
 	);

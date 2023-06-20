@@ -1,9 +1,7 @@
 const express = require("express");
 const AWS = require("aws-sdk");
-const fs = require("fs");
 const axios = require("axios");
 const cors = require("cors");
-const { config } = require("webpack");
 const app = express();
 
 require("aws-sdk/lib/maintenance_mode_message").suppress = true;
@@ -11,6 +9,7 @@ require("aws-sdk/lib/maintenance_mode_message").suppress = true;
 app.use(cors());
 app.use(express.json());
 
+console.log(process.env);
 const port = process.env.PORT || 5000;
 
 AWS.config.update({
@@ -94,6 +93,10 @@ app.post("/upload", (req, res) => {
 	const uploadLink = uploadToCDN(siteKey, configKey, config);
 	// res.send({ message: "Upload Successful" });
 	res.send({ message: "Upload Successful", docLink: uploadLink });
+});
+
+app.get("/help", (req, res) => {
+	res.send("Hit confirmed!");
 });
 
 // boto3 for upload

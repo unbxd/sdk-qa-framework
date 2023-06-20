@@ -9,7 +9,11 @@ module.exports = {
 	devtool: false,
 	mode: "production",
 	entry: ["./src"],
-	// entry: ["./src", "./public/unbxdStyle.css"],
+	watch: false,
+	performance: {
+		maxEntrypointSize: 5120000,
+		maxAssetSize: 5120000,
+	},
 	output: {
 		path: path.join(__dirname, "/public/dist"), // the bundle output path
 		filename: "bundle.js", // the name of the bundle
@@ -17,11 +21,11 @@ module.exports = {
 	},
 	plugins: [
 		new MiniCssExtractPlugin({ filename: `[name].css` }),
-		new BundleAnalyzerPlugin({
-			analyzerMode: "server",
-			generateStatsFile: true,
-			statsOptions: { source: false },
-		}),
+		// new BundleAnalyzerPlugin({
+		// 	analyzerMode: "server",
+		// 	generateStatsFile: true,
+		// 	statsOptions: { source: false },
+		// }),
 		new CopyPlugin({
 			patterns: [
 				{
@@ -39,7 +43,7 @@ module.exports = {
 		}),
 	],
 	devServer: {
-		port: 3031, // you can change the port
+		port: 3030, // you can change the port
 		historyApiFallback: true,
 	},
 	optimization: {
@@ -88,12 +92,12 @@ module.exports = {
 		alias: {
 			react: path.resolve("./node_modules/react"),
 		},
-		fallback: {
-			url: require.resolve("url/"),
-			fs: false,
-			http: false,
-			crypto: false,
-		},
+		// fallback: {
+		// 	url: require.resolve("url/"),
+		// 	fs: false,
+		// 	http: false,
+		// 	crypto: false,
+		// },
 	},
 	experiments: {
 		topLevelAwait: true,

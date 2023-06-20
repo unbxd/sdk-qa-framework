@@ -22,11 +22,11 @@ module.exports = {
 	},
 	plugins: [
 		new MiniCssExtractPlugin({ filename: `[name].css` }),
-		new BundleAnalyzerPlugin({
-			analyzerMode: "server",
-			generateStatsFile: true,
-			statsOptions: { source: false },
-		}),
+		// new BundleAnalyzerPlugin({
+		// 	analyzerMode: "server",
+		// 	generateStatsFile: true,
+		// 	statsOptions: { source: false },
+		// }),
 		new HtmlWebpackPlugin({
 			template: "public/index.html", // to import index.html file inside index.js
 		}),
@@ -73,9 +73,9 @@ module.exports = {
 				},
 			},
 			// {
-			// 	test: /\.(png|woff|woff2|eot|ttf|svg)$/, // to import images and fonts
-			// 	loader: "url-loader",
-			// 	options: { limit: false },
+			//  test: /\.(png|woff|woff2|eot|ttf|svg)$/, // to import images and fonts
+			//  loader: "url-loader",
+			//  options: { limit: false },
 			// },
 		],
 	},
