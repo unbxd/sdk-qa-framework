@@ -77,13 +77,13 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
-    - name: Configure Google Credentials
-      uses: google-github-actions/setup-gcloud@v0
-      id: setup-gcloud
-      with:
-        service_account_key: ${{ secrets.GCR_SERVICE_KEY }}
-        project_id: ${{ secrets.GCP_PROJECT_ID }}
-        export_default_credentials: true
+    # - name: Configure Google Credentials
+    #   uses: google-github-actions/setup-gcloud@v0
+    #   id: setup-gcloud
+    #   with:
+    #     service_account_key: ${{ secrets.GCR_SERVICE_KEY }}
+    #     project_id: ${{ secrets.GCP_PROJECT_ID }}
+    #     export_default_credentials: true
 
     - name: Install Dependencies
       id: install-dependencies-from-requirements
@@ -111,20 +111,20 @@ jobs:
       run: |
         scripts/ci.sh
 
-    - name: Push Docker image To GCR
-      id: push-docker-image-gcr
-      env:
-        TAG: ${{ github.event.release.tag_name }}
-        BUILD_TAG: ${{ steps.extract_tag.outputs.BUILD_TAG }}
-      run: |
-        cd $GITHUB_WORKSPACE
-        gcloud auth configure-docker -q
-        docker tag workbench:latest $GCR_URL/$GCR_PROJECT_ID/$SERVICE_NAME:$BUILD_TAG
-        docker push $GCR_URL/$GCR_PROJECT_ID/$SERVICE_NAME:$BUILD_TAG
-        if [ ! -z "$TAG" ]; then
-            docker tag workbench:latest $GCR_URL/$GCR_PROJECT_ID/$SERVICE_NAME:latest
-            docker push $GCR_URL/$GCR_PROJECT_ID/$SERVICE_NAME:latest
-        fi
+    # - name: Push Docker image To GCR
+    #   id: push-docker-image-gcr
+    #   env:
+    #     TAG: ${{ github.event.release.tag_name }}
+    #     BUILD_TAG: ${{ steps.extract_tag.outputs.BUILD_TAG }}
+    #   run: |
+    #     cd $GITHUB_WORKSPACE
+    #     gcloud auth configure-docker -q
+    #     docker tag workbench:latest $GCR_URL/$GCR_PROJECT_ID/$SERVICE_NAME:$BUILD_TAG
+    #     docker push $GCR_URL/$GCR_PROJECT_ID/$SERVICE_NAME:$BUILD_TAG
+    #     if [ ! -z "$TAG" ]; then
+    #         docker tag workbench:latest $GCR_URL/$GCR_PROJECT_ID/$SERVICE_NAME:latest
+    #         docker push $GCR_URL/$GCR_PROJECT_ID/$SERVICE_NAME:latest
+    #     fi
 
     - name: Slack Notification
       uses: rtCamp/action-slack-notify@v2
