@@ -1,0 +1,6 @@
+{
+	"loader": {
+		"el": "document.getElementById(\"loaderEl\")",
+		"template": "function () { return `<div class=\"UNX-loader\">Loading search results....</div>` }"
+	}
+}

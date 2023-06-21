@@ -1,0 +1,107 @@
+@import "../variables";
+$base-font-color: $color-font-base;
+$pageheader-font-color: $color-font-base;
+$link-font-color: $color-font-link;
+$success-font-color: #2cb291;
+$error-font-color: #C13535;
+$thin-line-color: $color-border-tabs;
+$dashed-line-color: #A9B9C9;
+
+/* form styles */
+$form-label-color: #415867;
+$form-placeholder-color: #ACACAC;
+$form-dd-plaholder-color: #7F97A7;
+
+/* button styles */
+$primary-btn-bg: $color-background-button-primary-base;
+$primary-btn-hover-bg: $color-background-button-primary-hover;
+$secondary-btn-bg: $color-background-button-secondary-base;
+$secondary-btn-color: $color-font-secondary;
+
+/* header styles */
+$site-switcher-bg: #F9FBFF;
+$site-switcher-color: $color-font-button-secondary;
+$header-bg-color: #F7F9FB;
+$header-font-color: #415867;
+$header-selected-bg: #FFF;
+$header-selected-color: $color-background-button-primary-active;
+$preview-btn-bg: #FFFFFF;
+$preview-btn-color: $color-font-link;
+$user-logo-bg: #F2F5F8;
+$user-logo-color: #3A4C59;
+$header-dd-color: #5D7483;
+
+/* horizontal navbar styles */
+$horiz-nav-color: $color-font-secondary;
+$level1-nav-selected-bg: $color-background-button-primary-base;
+$level1-nav-selected-color: #FFFFFF;
+
+/* vertical navbar styles */
+$vertical-nav-body-bg: #FFF;
+$vertical-nav-border: $color-border-tabs ;
+$vertical-nav-selected-bg: #FFF;
+$vertical-nav-color: $color-font-secondary;
+$vertical-nav-selected-color: $color-background-button-primary-base;
+
+$vertical-step-line-default : #dadada;
+
+/* modal styles */
+$modal-header-bg: #FFF;
+$modal-body-bg: #F7F9FB;
+
+/* App z-index levels
+
+page level modal : 50
+manage / profile dropdown : 40
+sticky header section : 30
+inline modals in body section : 20
+*/
+
+$pageModal-zIndex: 50;
+$headerDD-zIndex: 40;
+$stickyHeader-zIndex: 30;
+$bodyInlineModal-zIndex: 20;
+
+/* Login styles */
+$login-heading-color: #415867;
+$login-subheading-color: #289EAB;
+$login-message-color: #5D7483;
+$tnc-text-color: #8399AE;
+$unbxd-tnc-color: #289EAB;
+
+/* Feature Docs Component */
+$doc-title-color: #314857;
+$doc-subtitle-color: #415867;
+$doc-body-color: #5D7483;
+$doc-footer-bg: #F2F5F8;
+
+/* Steps widget styles */
+$step-header-color: #7F97A7;
+$step-selected-color: #314857;
+
+/* line icon text component styles */
+$round-color: #7F97A7;
+$line-color: $color-border-tabs;
+$disc-color: #5D7483;
+
+/* dataCenter style */
+$light-sky-blue: #67B8DC;
+$light-purpule: #6794DD;
+$dark-purpulr: #6771DC;
+
+/* integration landing page styles */
+$integration-page-bg: #F7F9FB;
+$integration-title-color: #314857;
+$integration-card-bg: #FFF;
+$integration-card-title-bg: #F2F5F8;
+$integration-card-title-color: #1D2E44;
+$integration-color: #5D7483;
+$integration-card-link: $color-font-link;
+
+/* yellow tag style */
+$color-yellow-border-tag: rgba(220, 137, 0, .16);
+$color-yellow-text-tag: #c58c2d;
+$color-yellow-background-tag: #fffaf2;
+
+/*misc colors */
+$color-light-blue: #C1CFF4;

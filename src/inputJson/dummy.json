@@ -1,0 +1,149 @@
+{
+	"loader": {
+		"el": "document.getElementById(\"loaderEl\")",
+		"template": "function () {\n\treturn `<div class=\"UNX-loader\"><lord-icon src=\"https://cdn.lordicon.com/ulhdumaq.json\" trigger=\"loop\"\tstyle=\"width:250px;height:250px\"></lord-icon>Loading search results....</div>`;\n}"
+	},
+	"siteKey": "demo-unbxd700181503576558",
+	"apiKey": "fb853e3332f2645fac9d71dc63e09ec1",
+	"searchBoxEl": "document.getElementById(\"unbxdInput\")",
+	"searchButtonEl": "document.getElementById(\"searchBtn\")",
+	"unbxdAnalytics": "false",
+	"products": {
+		"productType": "SEARCH",
+		"el": "document.getElementById(\"searchResultsWrapper\")",
+		"gridCount": 1,
+		"productItemClass": "product-item",
+		"defaultImage": "https://libraries.unbxdapi.com/sdk-assets/defaultImage.svg",
+		"tagName": "DIV",
+		"template": "function template(\n\t\t\tproduct,\n\t\t\tidx,\n\t\t\tswatchUI,\n\t\t\tproductViewType,\n\t\t\tproducts\n\t\t) {\n\t\t\tconst { productItemClass } = products;\n\t\t\tvar title = product.title;\n\t\t\tvar price = product.price;\n\t\t\tvar brand = product.brand;\n\t\t\tvar unxBadge = product.unxBadge;\n\t\t\tvar imageUrl = product.imageUrl;\n\t\t\tvar uniqueId = product.uniqueId;\n\t\t\tvar variant_SKU = product.variant_SKU;\n\t\t\tvar unxProductUrl = product.productUrl;\n\t\t\tvar unxBadges = \"\";\n\t\t\tif (unxBadge === \"New\" || unxBadge === \"Outlet\" || unxBadge === \"Sale\") {\n\t\t\t\tunxBadges =\n\t\t\t\t\t'<span class=\"UNX-badges grid-product__tag grid-product__tag--custom\">' +\n\t\t\t\t\tunxBadge +\n\t\t\t\t\t\"</span>\";\n\t\t\t}\n\t\t\treturn [\n\t\t\t\t'<div class=\"product-card\"><a href=\"/product/the-origami-bundle-of-3-black-gray-olive\" class=\"product-card-outer\"><div class=\"product-card__image\"><img class=\" lazyloaded\" data-src=\"https://tangs-uat-cdn.ascentismedia.com/ProductImages/81a99eaf-8ef3-4611-8dcc-f4fc7752f845/1/240x240/the-origami-bundle-of-3-black-gray-olive.jpg\" alt=\"SabrinaGoh The Origami Bundle of 3 | Black, Gray, Olive Regular\" src=\"https://tangs-uat-cdn.ascentismedia.com/ProductImages/81a99eaf-8ef3-4611-8dcc-f4fc7752f845/1/240x240/the-origami-bundle-of-3-black-gray-olive.jpg\"><svg class=\"like-icon\" viewBox=\"0 0 16.02 13.99\" height=\"16px\" width=\"16px\"><path class=\"heart-inner\" fill=\"none\" d=\"M14.56,1.75a3.31,3.31,0,0,0-4.47.34L8.78,3.47,7.43,2.09A3.32,3.32,0,0,0,3,1.75a3.5,3.5,0,0,0-.25,5L8.78,13l6-6.25A3.48,3.48,0,0,0,14.56,1.75Z\" transform=\"translate(-0.75 -0.01) scale(1.02)\" style=\"transform-origin: center center;\"></path><path class=\"heart-outer\" fill=\"rgba(64, 64, 64, .9)\" d=\"M15.21,1a4.27,4.27,0,0,0-5.84.44L8.78,2l-.63-.62A4.3,4.3,0,0,0,2.31,1,4.49,4.49,0,0,0,2,7.47l6.06,6.25a1,1,0,0,0,.69.28,1,1,0,0,0,.71-.28l6.07-6.25A4.49,4.49,0,0,0,15.21,1Zm-.4,5.81L8.78,13,2.71,6.78a3.5,3.5,0,0,1,.25-5,3.32,3.32,0,0,1,4.47.34L8.78,3.47l1.31-1.38a3.31,3.31,0,0,1,4.47-.34A3.48,3.48,0,0,1,14.81,6.78Z\" transform=\"translate(-0.75 -0.01)\"></path></svg></div><div class=\"status\"><span>Exclusive</span></div><div class=\"product-card__content\"><div class=\"info\"><div class=\"info__title\" aria-hidden=\"true\">SABRINAGOH</div><div class=\"info__content\">The Origami Bundle of 3 | Black, Gray, Olive</div></div><div class=\"pricing\"><div class=\"price --orange\"><span>S$29.90</span></div><div class=\"price --discount\"><span>S$59.90</span></div></div></div></a></div>'\n\t\t\t].join(\"\");\n\t\t}",
+		"productAttributes": "[\n\t\t\t\"uniqueId\",\n\t\t\t\"variant_SKU\",\n\t\t\t\"imageUrl\",\n\t\t\t\"brand\",\n\t\t\t\"variant_SKU\",\n\t\t\t\"title\",\n\t\t\t\"price\",\n\t\t\t\"productUrl\",\n\t\t\t\"category2\",\n\t\t]",
+		"attributesMap": "{\n\t\"brand\": \"brand\",\n\t\"unxPrice\": \"price\",\n\t\"unxTitle\": \"title\",\n    \"unxBadge\": \"category2\",\n\t\"unxProductUrl\": \"productUrl\",\n\t\"unxCollections\": [ \"categoryPath1\", \"categoryPath2\", \"categoryPath1_fq\", \"categoryPath2_fq\", \"categoryPath\", \"category2\"]\n}",
+		"onProductClick": "function (product, e) {\n\tlocalStorage.setItem(\"unx_product_clicked\", product.uniqueId);\n\twindow.location.href = \"https://www.google.com\";\n}",
+		"htmlAttributes": "{\n    \"class\": \"UNX-search-results-block UNX-result-wrapper\"\n}"
+	},
+	"facet": {
+		"facetsEl": "document.getElementById(\"facetsWrapper\")",
+		"facetMultiSelect": "true",
+		"facetClass": "UNX-facets-block",
+		"facetAction": "click",
+		"selectedFacetClass": "UNX-selected-facet-btn",
+		"selectedFacetsEl": "document.getElementById(\"selectedFacetWrapper\")",
+		"clearAllText": "Clear All Fliters",
+		"facetMultilevel": "true",
+		"facetMultilevelName": "Category",
+		"multiLevelFacetSelectorClass": "UNX-multilevel-facet",
+		"facetDepth": "4",
+		"clearFacetsSelectorClass": "UNX-clear-facet",
+		"removeFacetsSelectorClass": "UNX-remove-facet",
+		"applyMultipleFilters": "false",
+		"applyButtonText": "Apply Filters",
+		"clearButtonText": "Clear",
+		"isCollapsible": "true",
+		"defaultOpen": "ALL",
+		"isSearchable": "true",
+		"searchPlaceHolder": "Search Filter...",
+		"enableViewMore": "false",
+		"viewMoreLimit": "3",
+		"tagName": "DIV",
+		"facetTemplate": "function (facetObj, children, isExpanded,facetSearchTxt, facet) {\n    const {\n        displayName,\n        facetName,\n        multiLevelField,\n        facetType,\n        values\n    } = facetObj;\n    const {\n        facetClass,\n        applyMultipleFilters,\n        isCollapsible,\n        isSearchable,\n        searchPlaceHolder,\n        textFacetWrapper,\n        enableViewMore,\n        viewMoreText,\n        viewMoreLimit,\n\n        applyButtonText,\n        clearButtonText,\n\n    } = facet;\n    const {\n        actionBtnClass,\n        actionChangeClass\n    } = this.options;\n    const {\n        openBtn,\n        closeBtn\n    } = this.cssList;\n    let viewMoreUi = ``;\n    let viewMoreCss=``;\n    const selected = this.getSelectedFacets()[facetName];\n    const isFtr = (selected && selected.length >0)?true:false;\n    if(enableViewMore && facetType===\"text\" && values.length > viewMoreLimit ) {\n        viewMoreCss=\"UNX-view-more\";\n        viewMoreUi = `<div class=\"UNX-view-more-row \"><button class=\"${actionBtnClass}\" data-facet-name=\"${facetName}\" data-action=\"viewMore\" data-id=\"${viewMoreText[0]}\">${viewMoreText[0]}</button></div>`;\n    }\n    let clearUI = ``;\n    let applyBtn = ``;\n    if(isFtr){\n        clearUI = `<button class=\"UNX-facet-clear ${facetClass} \"data-facet-action=\"deleteFacet\" data-facet-name=\"${facetName}\">${clearButtonText}</button>`;\n    }\n    if(applyMultipleFilters && isFtr) {\n        applyBtn = `<button class=\"UNX-facet-primary ${facetClass} \"data-facet-action=\"applyFacets\" >${applyButtonText}</button>`\n    }\n    let collapsibleUI = ``;\n    let searchInput = ``;\n    if(isCollapsible){\n        if(isExpanded) {\n            collapsibleUI = `<div class=\"UNX-facet-header ${actionBtnClass} UNX-facet-open\"  data-facet-name=\"${facetName}\" data-facet-action=\"facetClose\"> <h3>${displayName}</h3> </div>`;\n        } else {\n            collapsibleUI = `<div class=\"UNX-facet-header ${actionBtnClass} UNX-facet-close\"  data-facet-name=\"${facetName}\" data-facet-action=\"facetOpen\"> <h3>${displayName}</h3></div>`;\n        }\n    }\n    if(isSearchable && facetSearchTxt !== null) {\n        searchInput =`<div class=\"UNX-searchable-facets\"><label class=\"UNX-hidden\" for=\"${facetName}_searchBox\">${searchPlaceHolder}</label><input  id=\"${facetName}_searchBox\" name=\"${facetName}_searchBox\" data-test-id=\"${this.testIds.UNX_searchFacets}\" class=\"UNX-facet-search ${actionChangeClass}\" value=\"${facetSearchTxt}\"  data-facet-name=\"${facetName}\" data-facet-action=\"searchFacets\" type=\"text\" placeholder=\"${searchPlaceHolder}\"/></div>`\n    }\n    return [`<div class=\"UNX-text-facet-wrap\">`,\n                collapsibleUI,\n                `<div class=\"UNX-facets-all\">`,\n                    searchInput,\n                    `<div class=\"UNX-facets ${textFacetWrapper} ${viewMoreCss}\">${children}</div>`,\n                    viewMoreUi,\n                    `<div class=\"UNX-facet-footer\">${applyBtn} ${clearUI}</div>`,\n                `</div>`,\n           `</div>`].join('');\n}",
+		"facetItemTemplate": "function (facet , value,facetSearchTxt) {\n    const {\n        facetName,\n        isSelected\n    } = facet;\n    const  {\n        name,\n        count,\n        dataId\n    } = value;\n    let {\n        facetClass,\n        selectedFacetClass\n    } = this.options.facet;\n    const {\n        UNX_uFilter\n    } = this.testIds;\n    if(facetSearchTxt && facetSearchTxt.length > 0) {\n        if(name.toUpperCase().indexOf(facetSearchTxt.toUpperCase()) < 0 ){\n            facetClass +=' UNX-search-hidden'\n        }\n    }\n    let action =  \"changeFacet\";\n    if(isSelected) {\n        facetClass += ` ${selectedFacetClass}`\n        action = \"deleteFacetValue\";\n    }\n    return [`<button data-test-id=\"${UNX_uFilter}\" data-facet-name=\"${facetName}\" data-facet-action=\"${action}\" class=\"UNX-change-facet ${facetClass}\" data-id=\"${dataId}\">`,\n                `<span class=\"UNX-facet-text\">${name}</span> <span class=\"UNX-facet-count\">(${count})</span>`,\n            `</button>`].join('');\n}",
+		"selectedFacetTemplate": "function (selections, facet,selectedFacetsConfig) {\n    const {\n        clearAllText,\n        clearFacetsSelectorClass\n    } = facet;\n    const selectedFClass = (this.selectedFacetClass)?this.selectedFacetClass:selectedFacetsConfig.selectedFacetClass;\n    if(selections.length > 0) {\n        return [`<div class=\"UNX-facets-selections\">`,\n            `<h5 class=\"UNX-selected-facet-header\">Selected Filters</h5>`,\n            `<div class=\"UNX-selected-facets-inner\">${selections}</div>`,\n            `<button class=\"${clearFacetsSelectorClass} ${selectedFClass}\" data-facet-action=\"clearAllFacets\">${clearAllText}</button>`,\n       `</div>`].join('');\n    } else {\n        return ``;\n    }\n}",
+		"selectedFacetItemTemplate": "function  (selectedFacet,selectedFacetItem,facetConfig,selectedFacetsConfig){\n    const {\n        facetName,\n        facetType\n    } = selectedFacet;\n    const  {\n        name,\n        count,\n        dataId\n    } = selectedFacetItem;\n    const {\n        facetClass,\n        selectedFacetClass,\n        removeFacetsSelectorClass\n    } = this.options.facet;\n    const {\n        UNX_uFilter\n    } = this.testIds;\n    let action = \"deleteSelectedFacetValue\"\n    if(facetType === \"range\") {\n        action = \"deleteSelectedRange\"\n    }\n    const css = ` ${facetClass} ${selectedFacetClass} `;\n    return [`<div class=\"UNX-selected-facets-wrap\">`,\n                `<button data-test-id=\"${UNX_uFilter}\" class=\"UNX-selected-facet-btn UNX-change-facet ${css}\" data-facet-name=\"${facetName}\" data-facet-action=\"${action}\" data-id=\"${dataId}\">`,\n                    `<span class=\"UNX-facet-text\">${name}</span> <span class=\"UNX-facet-count\">(${count})</span>`,\n                `</button>`,\n                `<button class=\"UNX-delete-facet ${removeFacetsSelectorClass} ${css}\" data-id=\"${dataId}\" data-facet-action=\"${action}\" data-facet-name=\"${facetName}\">x</button></div>`\n            ].join('');\n}",
+		"selectedFacetConfig": "{\n  \"facet\": \"some facet\"\n}",
+		"rangeTemplate": "function (range, selectedRange, facet) {\n\tconst { facetName, values } = range;\n\tlet valueUI = ``;\n\tconst {\n\t\tfacetClass,\n\t\tselectedFacetClass,\n\t\tapplyMultipleFilters,\n\t\tapplyButtonText,\n\t\tclearButtonText,\n\t} = facet;\n\tconst selected = selectedRange.length > 0 ? true : false;\n\tvalues.forEach((item) => {\n\t\tconst { from, end } = item;\n\t\tconst isSelected = this.isSelectedRange(facetName, item);\n\t\tconst btnCss = isSelected\n\t\t\t? `UNX-selected-facet-btn ${facetClass} ${selectedFacetClass}`\n\t\t\t: `${facetClass}`;\n\t\tvalueUI += [\n\t\t\t`<button class=\"${btnCss} UNX-range-facet UNX-change-facet\" data-action=\"setRange\" data-facet-name=\"${facetName}\" data-start=\"${from.dataId}\" data-end=\"${end.dataId}\" >`,\n\t\t\t`<span class=\"UNX-facet-text\">${from.name}  -  ${end.name}</span>`,\n\t\t\t`<span class=\"UNX-facet-count\">(${from.count})</span>`,\n\t\t\t`</button>`,\n\t\t].join(\"\");\n\t});\n\tlet clearBtn = ``;\n\tlet applyBtn = ``;\n\tif (selected) {\n\t\tif (applyMultipleFilters) {\n\t\t\tapplyBtn = `<button class=\"UNX-default-btn ${facetClass} UNX-facet-primary\" data-action=\"applyRange\"> ${applyButtonText}</button>`;\n\t\t}\n\t\tclearBtn = `<button class=\"UNX-default-btn UNX-facet-clear  ${facetClass}\" data-action=\"clearRangeFacets\">${clearButtonText}</button>`;\n\t}\n\treturn [\n\t\t`<div class=\"UNX-range-wrapper\">`,\n\t\tvalueUI,\n\t\t`<div class=\"UNX-price-action-row\">`,\n\t\tapplyBtn,\n\t\tclearBtn,\n\t\t`<div>`,\n\t\t`</div>`,\n\t].join(\"\");\n}",
+		"rangeWidgetConfig": "{\n\t\t\t\"minLabel\": \"\",\n\t\t\t\"maxLabel\": \"\",\n\t\t\t\"prefix\": \"$\"\n}",
+		"multiLevelFacetTemplate": "function (facet, selectedCategories, facetSearchTxt, facetConfig) {\n\tlet ui = \"\";\n\tlet { multiLevelFacetSelectorClass, facetClass } = facetConfig;\n\tconst { UNX_facetLevel } = this.testIds;\n\tif (selectedCategories) {\n\t\tselectedCategories.forEach((item) => {\n\t\t\tconst { level, filterField, value } = item;\n\t\t\tlet lTid = `data-test-id=\"${UNX_facetLevel}${level}\"`;\n\t\t\tconst levelCss = `${multiLevelFacetSelectorClass}  UNX-category-level-${level}`;\n\t\t\tui += [\n\t\t\t\t`<button ${lTid} data-parent=\"${filterField}\" data-level=\"${level}\" data-name=\"${value}\"`,\n\t\t\t\t`class=\" ${levelCss} UNX-selected-crumb ${facetClass}\" data-action = \"clearCategoryFilter\">`,\n\t\t\t\t`<span class=\"UNX-category-icon\"></span><label class=\"UNX-facet-text\">${decodeURIComponent(\n\t\t\t\t\tvalue\n\t\t\t\t)}</label>`,\n\t\t\t\t`</button>`,\n\t\t\t].join(\"\");\n\t\t});\n\t}\n\tconst { level, displayName, values, filterField } = facet;\n\tlet { multiLevelField } = facet;\n\tif (!multiLevelField) {\n\t\tmultiLevelField = filterField;\n\t}\n\tlet lTid = `data-test-id=\"${UNX_facetLevel}${level}\"`;\n\tlet levelCss = `UNX-category-level-${level}`;\n\tconst valueUI = values.map((item) => {\n\t\tconst { name, count, dataId } = item;\n\t\tif (facetSearchTxt && facetSearchTxt.length > 0) {\n\t\t\tif (name.toUpperCase().indexOf(facetSearchTxt.toUpperCase()) < 0) {\n\t\t\t\tfacetClass += \" UNX-search-hidden\";\n\t\t\t}\n\t\t}\n\t\treturn [\n\t\t\t`<button ${lTid} data-parent=\"${multiLevelField}\" data-level=\"${level}\"`,\n\t\t\t`class=\"${multiLevelFacetSelectorClass} ${levelCss} ${facetClass}\" data-name=\"${dataId}\" data-action = \"setCategoryFilter\">`,\n\t\t\t`<label class=\"UNX-facet-text\">${name}</label><label class=\"UNX-facet-count\">(${count})</label></button>`,\n\t\t].join(\"\");\n\t});\n\tui += `<div class=\"UNX-category-values\">${valueUI.join(\"\")}</div>`;\n\tif (ui !== \"\") {\n\t\treturn [`<div class=\"UNX-multi-facet-wrap\">`, `${ui}</div>`].join(\"\");\n\t} else {\n\t\treturn \"\";\n\t}\n}",
+		"onFacetLoad": "function (t) {}",
+		"viewMoreText": "[\"show all\", \"show less\"]",
+		"htmlAttributes": "{\n  \"class\": \"UNX-facets-results-block\"\n}"
+	},
+	"pagination": {
+		"enabled": "true",
+		"el": "document.querySelector(\".unxPagination\")",
+		"type": "INFINITE_SCROLL",
+		"pageLimit": "4",
+		"tagName": "DIV",
+		"pageClass": "UNX-page-items",
+		"selectedPageClass": "UNX-selected-page-item",
+		"infiniteScrollTriggerEl": "document.getElementById('searchResultsWrapper')",
+		"heightDiffToTriggerNextPage": "100",
+		"action": "click",
+		"onPaginate": "function (paginationInfo) { }",
+		"htmlAttributes": "{\n  \"class\": \"UNX-pagination-size-block\"\n}",
+		"template": "function (paginationData, pagination = this.options.pagination) {\n\tif (!paginationData) {\n\t\treturn ``;\n\t}\n\tconst {\n\t\tcurrentPage,\n\t\tisNext,\n\t\tisPrev,\n\t\tnoOfPages,\n\t\tproductsLn,\n\t\tnumberOfProducts,\n\t\trows,\n\t} = paginationData;\n\tconst { pageClass, selectedPageClass, pageLimit } = pagination;\n\tconst { UNX_pageNumber } = this.testIds;\n\tif (numberOfProducts <= productsLn) {\n\t\treturn ``;\n\t}\n\tlet nextBtn = `<button class=\"UNX-next-btn UNX-page-next ${pageClass}\" data-page-action=\"next\">></button>`;\n\tlet prevBtn = `<button class=\"UNX-prev-btn UNX-page-prev ${pageClass}\" data-page-action=\"prev\"><</button>`;\n\tlet pageNumbers = ``;\n\tlet pages = noOfPages < pageLimit ? noOfPages : pageLimit;\n\tlet startPoint = 1;\n\tlet r = Math.ceil(pageLimit / 2);\n\tlet point = currentPage - r;\n\tif (point > 0) {\n\t\tstartPoint = point;\n\t\tpages = currentPage + r;\n\t}\n\tconst ls = currentPage + r;\n\tif (ls >= noOfPages) {\n\t\tconst diff = ls - noOfPages;\n\t\tstartPoint = startPoint - diff;\n\t\tif (startPoint <= 0) {\n\t\t\tstartPoint = 1;\n\t\t}\n\t\tpages = noOfPages;\n\t}\n\n\tfor (let i = startPoint; i <= pages; i++) {\n\t\tconst tId = `${UNX_pageNumber}${i}`;\n\t\tconst pageClassSelected = i === currentPage ? selectedPageClass : \"\";\n\t\tpageNumbers += `<button data-test-id=\"${tId}\" data-page-action=\"paginate\" data-page-no=\"${\n\t\t\t(i - 1) * rows\n\t\t}\" class=\"UNX-page-button ${pageClass} ${pageClassSelected}\">${i}</button>`;\n\t}\n\tif (!isNext) {\n\t\tnextBtn = `<button disabled class=\"UNX-next-btn UNX-page-next\">></button>`;\n\t}\n\tif (!isPrev) {\n\t\tprevBtn = `<button disabled class=\"UNX-prev-btn UNX-page-prev\"><</button>`;\n\t}\n\treturn [\n\t\t`<div class=\"UNX-pagination-block\">`,\n\t\tprevBtn,\n\t\t`<div class=\"UNX-page-no-block\">${pageNumbers}</div>`,\n\t\tnextBtn,\n\t\t`</div>`,\n\t].join(\"\");\n}"
+	},
+	"pagesize": {
+		"enabled": "true",
+		"el": "document.getElementById(\"changeNoOfProducts\")",
+		"pageSize": "12",
+		"pageSizeClass": "UNX-pagesize",
+		"selectedPageSizeClass": "UNX-selected-pagesize",
+		"action": "change",
+		"tagName": "DIV",
+		"options": "[8, 12, 16, 20, 24, 30]",
+		"template": "function (selected, pagesize) {\n\tconst { UNX_pagesize } = this.testIds;\n\tlet ui = `<label class=\"UNX-hidden\" for=\"unxPageSize\">Sort By</label><select id=\"unxPageSize\" name=\"unxPageSize\" class=\"UNX-select-pagesize ${pagesize.pageSizeClass}\">`;\n\tpagesize.options.forEach((opt, i) => {\n\t\tconst tId = `data-test-id=\"${UNX_pagesize}${i + 1}\"`;\n\t\tif (selected == opt) {\n\t\t\tui += `<option selected ${tId} class=\"${pagesize.selectedPageSizeClass}\" id=\"${opt}\">${opt}</option>`;\n\t\t} else {\n\t\t\tui += `<option ${tId} id=\"${opt}\">${opt}</option>`;\n\t\t}\n\t});\n\tui += `</select>`;\n\treturn `<div class=\"UNX-pagesize-block\">${ui}</div>`;\n}",
+		"htmlAttributes": "{\n  \"class\": \"UNX-page-size-block\"\n}"
+	},
+	"sort": {
+		"enabled": "true",
+		"el": "document.getElementById(\"sortWrapper\")",
+		"sortClass": "UNX-sort-item",
+		"selectedSortClass": "UNX-selected-sort",
+		"action": "change",
+		"tagName": "DIV",
+		"options": "[\n  {\n    \"value\": \"sortPrice asc\", \n    \"text\": \"Price Low to High\"\n  },\n  {\n    \"value\": \"sortPrice desc\", \n    \"text\": \"Price High to Low\"\n  } \n]",
+		"template": "function (selectedSort, sortConfig) {\n\tlet optionsUI = \"\";\n\tconst { options, sortClass, selectedSortClass } = sortConfig;\n\tconst { UNX_unbxdSorter } = this.testIds;\n\toptions.forEach((item) => {\n\t\tconst { value, text } = item;\n\t\tif (value == selectedSort) {\n\t\t\toptionsUI += `<option value=\"${value}\" class=\"${selectedSortClass}\" selected>${text}</option>`;\n\t\t} else {\n\t\t\toptionsUI += `<option value=\"${value}\">${text}</option>`;\n\t\t}\n\t});\n\treturn [\n\t\t`<div class=\"UNX-sort-block\">`,\n\t\t`<span class=\"UNX-sort-header\">Sort By</span>`,\n\t\t`<label class=\"UNX-hidden\" for=\"unxSortSelect\">Sort By</label>`,\n\t\t`<select data-test-id=\"${UNX_unbxdSorter}\" name=\"unxSortSelect\" data-action=\"changeSort\" id=\"unxSortSelect\" class=\"${sortClass}\">`,\n\t\t`<option value=\"\">Relevancy</option>`,\n\t\toptionsUI,\n\t\t`</select>`,\n\t\t`</div>`,\n\t].join(\"\");\n}",
+		"htmlAttributes": "{\n  \"class\": \"UNX-sort-block-lb\"\n}"
+	},
+	"productView": {
+		"enabled": "true",
+		"el": "document.getElementById(\"productViewTypeContainer\")",
+		"defaultViewType": "GRID",
+		"action": "click",
+		"viewTypeClass": "UNX-product-view",
+		"selectedViewTypeClass": "UNX-selected-product-view",
+		"tagName": "DIV",
+		"template": "function (selectedViewType, productViewType) {\n\tconst isDisabled = this.getSearchResults() ? false : true;\n\tconst { selectedViewTypeClass, viewTypeClass } = productViewType;\n\tconst { UNX_gridBtn, UNX_listBtn } = this.testIds;\n\tlet listBtnCss = `UNX-list-btn ${viewTypeClass}`;\n\tlet gridBtnCss = `UNX-grid-btn ${viewTypeClass}`;\n\tconst gTAttr = `data-test-id=${UNX_gridBtn}`;\n\tconst lTAttr = `data-test-id=${UNX_listBtn}`;\n\tif (selectedViewType === \"LIST\") {\n\t\tlistBtnCss += ` ${selectedViewTypeClass}`;\n\t}\n\tif (selectedViewType === \"GRID\") {\n\t\tgridBtnCss += ` ${selectedViewTypeClass}`;\n\t}\n\tlet listBtn = `<button id=\"listBtn\" class=\"${listBtnCss}\" ${lTAttr} data-view-action=\"LIST\" >List</button>`;\n\tlet gridBtn = `<button ${gTAttr} id=\"gridBtn\" class=\"${gridBtnCss}\" data-view-action=\"GRID\" >Grid</button>`;\n\tif (isDisabled) {\n\t\tlistBtn = `<button ${lTAttr} id=\"listBtn\" disabled class=\"${listBtnCss} disabled-btn\" data-view-action=\"LIST\" >List</button>`;\n\t\tgridBtn = `<button ${gTAttr} id=\"gridBtn\" disabled class=\"${gridBtnCss}  disabled-btn\"data-view-action=\"GRID\" >Grid</button>`;\n\t}\n\treturn `${listBtn} ${gridBtn}`;\n}",
+		"htmlAttributes": "{\n  \"class\": \"product-view-container\"\n}"
+	},
+	"breadcrumb": {
+		"enabled": "true",
+		"el": "document.getElementById(\"breadcrumpContainer\")",
+		"selectorClass": "UNX-bread-crumb",
+		"tagName": "DIV",
+		"template": "function(breadcrumbs, breadcrumb){\n    let ui = ``;\n    const {\n        selectorClass\n    } = breadcrumb;\n    breadcrumbs.forEach((item ,id )=> {\n        const {\n            level,\n            filterField,\n            value\n        } = item;\n        const css = `${selectorClass} UNX-bread-crumb-item`;\n        if(id > 0) {\n            ui += `<span class=\"UNX-slash\"> / </span>`;\n        }\n        ui += [`<button data-parent=\"${filterField}\" data-level=\"${level}\" class=\"${css}\" data-name=\"${value}\" data-action = \"clearCategoryFilter\">`,\n        `${decodeURIComponent(value)}</button>`].join('')\n    })\n    return `<div class=\"bread-crumb-main\">${ui}</div>`\n}",
+		"htmlAttributes": "{\n  \"class\": \"UNX-breadcrumbs-block\"\n}"
+	},
+	"spellCheck": {
+		"enabled": "true",
+		"el": "document.getElementById(\"didYouMeanWrapper\")",
+		"selectorClass": "UNX-suggestion",
+		"tagName": "DIV",
+		"template": "function(query,suggestion,pages) {\n    const {\n        start,\n        productsLn,\n        numberOfProducts\n    } = pages;\n    const {\n        selectorClass,\n        enabled\n    } = this.options.spellCheck;\n    const {\n        productType\n    } = this.options;\n    let newQuery = query;\n    if(productType !==\"SEARCH\" ) {\n        const catId = this.getCategoryId() || \"\";\n        const cId = decodeURIComponent(catId).split(\">\");\n        newQuery = cId[cId.length-1] || cId[0] ;\n    }\n    const {\n        UNX_spellCheck\n    } = this.testIds\n    const noUi = (suggestion) ? `<p class=\"UNX-no-result\"> Your search \"<strong>${suggestion}</strong>\" did not match any products. Did you mean <button data-test-id=\"${UNX_spellCheck}\" data-action=\"getSuggestion\" class=\"${selectorClass}\">${query}</button>? <lord-icon src=\"https://cdn.lordicon.com/dzllstvg.json\" trigger=\"loop\" style=\"width:50px;height:50px\"></lord-icon></p>` :``;\n    let qUi = ``;\n    let countUi = ``;\n    if(numberOfProducts > 0) {\n        countUi = `<span class=\"UNX-result-info\">  -  ${start+1} to ${productsLn+start} of ${numberOfProducts} products</span>`;\n    }\n    if(pages && newQuery){\n        if(!enabled) {\n            newQuery = suggestion || query\n        }\n        qUi = `<p class=\"UNX-suggestion-p\">Showing results for <strong>${newQuery}</strong> ${countUi}</p>`;\n    }\n    return  [`<div class=\"UNX-spellcheck-block\">`,\n            noUi,\n            qUi,\n        `</div>`].join('');\n}",
+		"htmlAttributes": "{\n  \"class\": \"UNX-spellcheck-wrapper\"\n}"
+	},
+	"banner": {
+		"enabled": "true",
+		"el": "document.getElementById(\"bannerContainer\")",
+		"tagname": "DIV",
+		"template": "function(banners, bannerOpts) {\n    const {\n        openNewTab\n    } = bannerOpts\n    const bannerUI = banners.map((item) => {\n        const {\n            imageUrl,\n            landingUrl,\n            bannerHtml\n        } = item;\n        if(bannerHtml) {\n            return bannerHtml;\n        }\n        let hrefStr = ``;\n        if(landingUrl) {\n            hrefStr +=`href=${landingUrl}`\n        }\n        if(openNewTab) {\n            hrefStr +=`  target=\"_blank\"`;\n        }\n\n        return `<a class=\"UNX-banner-wrap\" ${hrefStr} ><img style=\"max-width:100%\" src=\"${imageUrl}\"/></a>`\n    }).join('');\n    return `${bannerUI}`\n}",
+		"htmlattributes": "{\n  \"class\": \"UNX-banner-block\"\n}"
+	},
+	"variants": {
+		"enabled": "false",
+		"count": "1",
+		"groupBy": "price",
+		"attributes": "[\"value1\", \"value2\"]",
+		"mapping": "{\"value1\": \"1\",\n\"value2\": \"2\"}"
+	},
+	"swatches": {
+		"attributesMap": "{\n  \"swatchList\": \"color\", \n  \"swatchImgs\": \"unbxd_color_mapping\", \n  \"swatchColors\": \"color\"\n}",
+		"enabled": "false",
+		"swatchClass": "UNX-swatch-btn",
+		"template": "function(swatchData, swatches,product) {\n    const {\n        swatchImgs = []\n    } = swatchData;\n    let btnUI = ``;\n    let btnList = ``;\n    let imgsUI = ``;\n    const {\n        swatchClass\n    } = swatches;\n    const {\n        UNX_swatchClrBtn\n    } = this.testIds;\n    const {\n        unxTitle\n    } = product;\n    if(swatchImgs.length > 1) {\n        swatchImgs.forEach((item,id) => {\n            const sid = this.generateRid(\"unx_swatch_\");\n            const sCss = (id === 0) ? '':' UNX-swatch-hidden';\n            const bCss = (id === 0) ? ' UNX-selected-swatch':'';\n            const data = item.split(\"::\");\n            if(data){\n                btnUI+= [`<button value=\"swatch color ${data[0]}\" data-test-id=\"${UNX_swatchClrBtn}${id}\" data-swatch-id=\"${sid}\" data-action=\"changeSwatch\" class=\"${swatchClass} ${sid} ${bCss}\" style=\"background-color:${data[0]}\"> swatch color ${data[0]} </button>`].join('');\n                imgsUI+=`<div id=\"${sid}\" class=\"UNX-img-wrapper ${sCss}\"><img alt=\"${unxTitle} for the ${data[0]}\" class=\"UNX-img-block\" src=\"${data[1]}\"/></div>`\n            }\n        });\n        btnList = `<div class=\"UNX-swatch-color-list\">${btnUI}</div>`;\n    }\n    return {\n        btnList:btnList,\n        imgList:imgsUI,\n    };\n}"
+	},
+	"noResults": {
+		"template": "function (query) {\n\treturn '<div class=\"UNX-no-results\"> Did not get results for '.concat(\n\t\tquery,\n\t\t'<lord-icon src=\"https://cdn.lordicon.com/tyounuzx.json\" trigger=\"loop\" style=\"width:50px;height:50px\"></lord-icon></div>'\n\t);\n}",
+		"el": "document.getElementById(\"noResultWrapper\")"
+	}
+}
