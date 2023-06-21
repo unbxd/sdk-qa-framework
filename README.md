@@ -1,3 +1,3 @@
-# sdk-qa-framework
+# Workbench
 
-Vanilla JS SDK QA and builder framework
+Vanilla JS SDK Preview and builder framework
