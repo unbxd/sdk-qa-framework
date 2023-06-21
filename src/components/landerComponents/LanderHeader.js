@@ -19,7 +19,7 @@ const LanderHeader = () => {
 				<a href="/">Home</a>
 				<a href="/usecases">Use Cases</a>
 				<a href="/builder">Builder</a>
-				<a href="/qa">Preview</a>
+				<a href="/preview">Preview</a>
 				<a href="https://unbxd.github.io/search-JS-library/" target="_blank">
 					Documentation
 				</a>

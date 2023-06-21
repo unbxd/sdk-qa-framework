@@ -13,24 +13,26 @@ import variantsConfig from "../config/formConfig/variants";
 import swatchesConfig from "../config/formConfig/swatches";
 import noResultsConfig from "../config/formConfig/noResults";
 import loaderConfig from "../config/formConfig/loader";
+import othersConfig from "../config/formConfig/others";
 
-const masterConfig = {
-	[authConfig["moduleKey"]]: authConfig["config"],
-	[searchBoxConfig["moduleKey"]]: searchBoxConfig["config"],
-	[productsConfig["moduleKey"]]: productsConfig["config"],
-	[facetsConfig["moduleKey"]]: facetsConfig["config"],
-	[paginationConfig["moduleKey"]]: paginationConfig["config"],
-	[pageSizeConfig["moduleKey"]]: pageSizeConfig["config"],
-	[sortingConfig["moduleKey"]]: sortingConfig["config"],
-	[productViewConfig["moduleKey"]]: productViewConfig["config"],
-	[breadcrumbsConfig["moduleKey"]]: breadcrumbsConfig["config"],
-	[spellCheckConfig["moduleKey"]]: spellCheckConfig["config"],
-	[bannerConfig["moduleKey"]]: bannerConfig["config"],
-	[variantsConfig["moduleKey"]]: variantsConfig["config"],
-	[swatchesConfig["moduleKey"]]: swatchesConfig["config"],
-	[noResultsConfig["moduleKey"]]: noResultsConfig["config"],
-	[loaderConfig["moduleKey"]]: loaderConfig["config"],
-};
+const allConfigs = [
+	authConfig,
+	searchBoxConfig,
+	productsConfig,
+	facetsConfig,
+	paginationConfig,
+	pageSizeConfig,
+	sortingConfig,
+	productViewConfig,
+	breadcrumbsConfig,
+	spellCheckConfig,
+	bannerConfig,
+	variantsConfig,
+	swatchesConfig,
+	noResultsConfig,
+	loaderConfig,
+	othersConfig,
+];
 
 const masterData = {
 	[authConfig["moduleName"]]: authConfig,
@@ -113,8 +115,12 @@ export const getUseCases = () => {
 
 export const getConfig = (moduleKey, key) => {
 	if (key) {
-		const moduleConfig = masterConfig[moduleKey];
+		const moduleConfig = masterData[moduleKey]["config"];
 		return moduleConfig.find((c) => c.name === key);
 	}
-	return masterConfig[moduleKey];
+	return masterData[moduleKey]["config"];
+};
+
+export const getNativeConfigs = () => {
+	return allConfigs;
 };

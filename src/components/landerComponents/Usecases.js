@@ -38,7 +38,7 @@ const Usecases = ({ usecases = [], title = "" }) => {
 												Builder
 											</Button>
 										</a>
-										<a href="/qa">
+										<a href="/preview">
 											<Button appearance="secondary" size="small">
 												Preview
 											</Button>

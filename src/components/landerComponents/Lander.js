@@ -56,7 +56,7 @@ const Lander = () => {
 							</p>
 						</div>
 					</a>
-					<a href="/qa">
+					<a href="/preview">
 						<div className="route">
 							<div className="qaLogo"></div>
 							<h3>Preview</h3>

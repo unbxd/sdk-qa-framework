@@ -241,6 +241,7 @@ const DashboardContent = (props) => {
 					key="abcd"
 					validatedConfig={validatedConfig}
 					reloadWarning={reloadWarning}
+					displayMessage={displayMessage}
 				/>
 				{viewConfigOption && (
 					<div

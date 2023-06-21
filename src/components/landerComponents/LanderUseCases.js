@@ -78,7 +78,7 @@ const LanderUseCases = () => {
 													Builder
 												</Button>
 											</a>
-											<a href="/qa">
+											<a href="/preview">
 												<Button appearance="secondary" size="small">
 													Preview
 												</Button>

@@ -7,7 +7,7 @@ import "../../../public/unbxdStyle.css";
 import "../../../public/styles/components/vanilla2/vanilla2.scss";
 
 const Vanilla2 = (props) => {
-	let { validatedConfig = {}, displayError } = props;
+	let { validatedConfig = {}, displayMessage } = props;
 
 	const divRef = useRef();
 
@@ -38,7 +38,7 @@ const Vanilla2 = (props) => {
 						}
 					},
 					onError: function (module, err) {
-						displayError(err, module);
+						displayMessage("error", err, module);
 						return;
 					},
 					searchTrigger: "click",

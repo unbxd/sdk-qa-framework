@@ -954,11 +954,11 @@ input[id^="likeBtn"]:checked ~ .UNX-favourite {
 .UNX-product-list {
 	display: block;
 	width: calc(100% - 262px);
-	height: 1000px;
+	/* height: 1000px; */
 	margin-left: 0;
 	padding-left: 24px;
 	/* background: #f7f9fb; */
-	overflow: scroll;
+	/* overflow: scroll; */
 }
 
 .UNX-result-wrapper.UNX-no-results-wrap {

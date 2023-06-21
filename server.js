@@ -9,7 +9,6 @@ require("aws-sdk/lib/maintenance_mode_message").suppress = true;
 app.use(cors());
 app.use(express.json());
 
-console.log(process.env);
 const port = process.env.PORT || 5000;
 
 AWS.config.update({
@@ -91,26 +90,11 @@ const uploadToCDN = async (siteKey, configKey, config) => {
 app.post("/upload", (req, res) => {
 	const { config, siteKey, configKey } = req.body;
 	const uploadLink = uploadToCDN(siteKey, configKey, config);
-	// res.send({ message: "Upload Successful" });
 	res.send({ message: "Upload Successful", docLink: uploadLink });
 });
 
-app.get("/help", (req, res) => {
+app.get("/test", (req, res) => {
 	res.send("Hit confirmed!");
 });
-
-// boto3 for upload
-
-// app.get("/upload/:id", (req, res) => {
-// 	const id = req.params.id;
-
-// 	axios
-// 		.get(
-// 			"https://libraries.unbxdapi.com/search-sdk/qa-framework/demo-unbxd700181503576558-09ec1.json"
-// 		)
-// 		.then((response) => {
-// 			res.send(response.data);
-// 		});
-// });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
