@@ -1,2 +1,3 @@
 # sdk-qa-framework
-Vanilla JS SDK QA and builder framework 
+
+Vanilla JS SDK QA and builder framework

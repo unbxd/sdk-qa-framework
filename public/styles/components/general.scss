@@ -1,0 +1,299 @@
+@import "./form/builder.scss";
+
+body {
+	margin: 0;
+	font-family: "Poppins", "Nunito Sans", system-ui, -apple-system,
+		blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, sans-serif;
+	background: #eaeaea;
+}
+
+.defaultRoutes {
+	width: 70%;
+	margin-top: 200px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.defaultRoute {
+	text-decoration: none;
+	color: black;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 10px;
+	width: 300px;
+	height: 300px;
+	border: 1px solid black;
+	border-radius: 5px;
+
+	&:hover {
+		background-color: cornflowerblue;
+		color: #fff;
+		border: none;
+	}
+
+	span {
+		display: flex;
+		text-align: center;
+		align-items: center;
+		justify-content: center;
+	}
+}
+
+.demoSite {
+	position: relative;
+	height: calc(100vh - 95px);
+	overflow: scroll;
+	display: inline-block;
+	background-color: #eaeaea;
+	padding: 15px;
+	width: 70%;
+
+	&.preview {
+		position: absolute;
+		padding: 0;
+		margin: -50px 0 0 0;
+		height: 100%;
+		width: 100%;
+	}
+
+	.vanilla2 {
+		background-color: #fff;
+		box-shadow: 0px 0px 4px 0px #ccc;
+	}
+}
+
+.viewConfigTab {
+	position: absolute;
+	top: 60px;
+	left: 0;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	margin: 0 10px 0 0;
+	background-color: rgb(255, 255, 255);
+	width: 30px;
+	height: 50px;
+	border-radius: 0 35px 35px 0;
+	border: 1px solid #ccc;
+	box-shadow: 1px 0px 4px 0px #ccc;
+	border-left: none;
+	z-index: 4;
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	.showArrowRight {
+		@include arrow-blue-right;
+	}
+}
+
+.formMaster {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	width: 100%;
+}
+
+.formjson {
+	display: flex;
+	margin: 0 auto;
+	width: 100%;
+	height: 98%;
+	overflow: scroll;
+	border: 1px solid #ccc;
+
+	.jsonCode {
+		font-size: 14px;
+		width: 100%;
+	}
+}
+
+.accordianDrop {
+	margin-right: 0;
+	height: 20px;
+}
+
+.down {
+	@include arrow-down-blue;
+}
+
+.up {
+	@include arrow-down-blue;
+	transform: rotate(180deg);
+}
+
+.radioNotSelected {
+	@include radio-not-selected;
+}
+
+.radioSelected {
+	@include radio-selected;
+}
+
+.dashboardWrapper {
+	display: flex;
+	margin-top: 50px;
+}
+
+.RCB {
+	&-modal-body {
+		padding: 0;
+		width: 40%;
+		border-radius: 8px;
+		overflow: hidden;
+	}
+
+	&-modal-header {
+		padding: 20px 30px;
+		background-color: $modal-header-bg;
+		box-shadow: 0 2px 4px 0 rgba(9, 13, 15, 0.14);
+		margin-bottom: 0;
+		position: relative;
+	}
+
+	&-modal-content {
+		padding: 20px 30px;
+		background-color: $modal-body-bg;
+		height: 100%;
+	}
+}
+
+.modal-footer {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 13px 24px;
+	margin: 20px -30px -20px -30px;
+	border: 1px solid #d2dde4;
+	border-radius: 0 0 10px 10px;
+	background-color: #f7f9fb;
+	box-shadow: 0 -2px 4px 0 rgba(9, 13, 15, 0.14);
+	text-align: right;
+}
+
+.confirm-modal-body {
+	display: block;
+	width: 100%;
+	height: 75%;
+
+	.warning {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		width: 100%;
+		padding: 10px;
+		margin-top: 10px;
+		margin-left: -10px;
+		font-size: 14px;
+		color: #999;
+		text-align: justify;
+	}
+
+	.fsCodeEditor {
+		border: 1px solid #ccc;
+		height: 100%;
+	}
+
+	.loading {
+		display: flex;
+		justify-content: center;
+		img {
+			width: 100%;
+			height: 80px;
+		}
+	}
+
+	.info {
+		width: 100%;
+		padding: 10px;
+		margin-top: 10px;
+		border: 1px solid cornflowerblue;
+		border-radius: 10px;
+		margin-left: -10px;
+		font-size: 14px;
+		text-align: justify;
+		background-color: rgba(100, 149, 237, 0.9);
+		color: #fff;
+	}
+
+	.links {
+		display: block;
+		margin: 10px 0;
+
+		.builder,
+		.preview {
+			padding: 10px 0;
+			height: 50px;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+
+			Input {
+				display: flex;
+				width: 80%;
+			}
+			.copyIcon {
+				display: flex;
+				background-image: url("https://static.thenounproject.com/png/2012819-200.png");
+				background-size: 100% 100%;
+				margin-left: -60px;
+				width: 40px;
+				height: 40px;
+				margin-top: 20px;
+
+				&:hover {
+					cursor: pointer;
+				}
+			}
+
+			.openNewTab {
+				background-image: url("https://static.thenounproject.com/png/1598671-200.png");
+				background-size: 100% 100%;
+				width: 20px;
+				height: 20px;
+				margin-left: 5px;
+				margin-top: 20px;
+			}
+		}
+	}
+}
+
+.modal-title {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+	h3 {
+		margin: 0;
+	}
+
+	.cancel {
+		@include cross-blue;
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+}
+
+.editorModal {
+	z-index: 10;
+	.RCB-modal-body {
+		width: 90%;
+		height: 90%;
+		.RCB-modal-content {
+			.confirm-modal-body {
+				height: 75%;
+			}
+		}
+	}
+}
+
+.Toastify__toast-container.Toastify__toast-container--top-right {
+	/* margin-top: 40px; */
+	top: 55px;
+	right: 10px;
+}
