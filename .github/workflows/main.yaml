@@ -50,6 +50,7 @@ jobs:
             tag="PR_${GITHUB_ACTOR}_${GITHUB_HEAD_REF}";
         fi
         echo ::set-output name=BUILD_TAG::$(echo $tag)
+        
     - name: Configure AWS credentials
       id: configure-aws
       uses: aws-actions/configure-aws-credentials@v1
