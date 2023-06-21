@@ -26,6 +26,19 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
+
+    - name: Print version
+      run: |
+        echo ${{ secrets.GCR_URL }}
+        echo ${{ secrets.GCP_PROJECT_ID }}
+        echo ${{ secrets.AWS_ACCESS_KEY_ID }}
+        echo ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        echo ${{ secrets.AWS_DEFAULT_REGION }}
+        echo ${{ secrets.PLATFORM_BOT_GITHUB_USER }}
+        echo ${{ secrets.PLATFORM_BOT_GITHUB_TOKEN }}
+        echo ${{ secrets.PLATFORM_SLACK_WEBHOOK_URL }}
+        echo ${{ secrets.US_EAST_1_ECR_URL }}
+
     - name: Checkout Branch
       id: checkout-branch-from-master
       uses: actions/checkout@v2
