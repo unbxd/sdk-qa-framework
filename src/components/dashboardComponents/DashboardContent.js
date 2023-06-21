@@ -149,10 +149,10 @@ const DashboardContent = (props) => {
 							: `config`,
 						JSON.stringify(formData, null, 4)
 					);
-					displayMessage(
-						"success",
-						"Configurations validated successfully. No errors."
-					);
+					// displayMessage(
+					// 	"success",
+					// 	"Configurations validated successfully. No errors."
+					// );
 				}
 			},
 			4

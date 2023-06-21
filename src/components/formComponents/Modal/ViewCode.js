@@ -56,6 +56,15 @@ const ViewCode = (props) => {
 						Reset Code
 					</Button>
 				</div>
+				<div className="info">
+					<ul>
+						Note:
+						<li>
+							The file that has to be imported must be a JSON file. An error
+							will be raised otherwise.
+						</li>
+					</ul>
+				</div>
 				<div className="formjson" id="formjson">
 					<CodeMirror
 						id="jsonCode"

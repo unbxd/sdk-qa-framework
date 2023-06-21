@@ -1,0 +1,125 @@
+name: workbench
+
+on: 
+  # Trigger the workflow on pull request and release
+  pull_request:
+  release:
+    types: [published, edited]
+
+env:
+  SERVICE_NAME: "workbench"
+  GCR_URL: ${{ secrets.GCR_URL }}
+  GCR_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION}}
+  GIT_HUB_USER: ${{ secrets.PLATFORM_BOT_GITHUB_USER }}
+  GIT_HUB_TOKEN: ${{ secrets.PLATFORM_BOT_GITHUB_TOKEN }}
+  SLACK_WEBHOOK_URL: ${{ secrets.PLATFORM_SLACK_WEBHOOK_URL }}
+  ECR_URL: ${{ secrets.US_EAST_1_ECR_URL }}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Checkout Branch
+      id: checkout-branch-from-master
+      uses: actions/checkout@v2
+    # - name: Set up Python 3.8 Environment
+    #   id: setup-python3-environment
+    #   uses: actions/setup-python@v1
+    #   with:
+    #     python-version: 3.8
+    - name: Extract Tag
+      id: extract_tag
+      env:
+        TAG: ${{ github.event.release.tag_name }}
+      run: |
+        TAG=${{ github.event.release.tag_name }}
+        tag="PR_${GITHUB_ACTOR}_${GITHUB_HEAD_REF}"
+        if [ -z "$GITHUB_HEAD_REF" ]; then
+            tag=latest
+            if [ -n "$TAG" ]; then
+                tag=$TAG
+            fi
+        else
+            tag="PR_${GITHUB_ACTOR}_${GITHUB_HEAD_REF}";
+        fi
+        echo ::set-output name=BUILD_TAG::$(echo $tag)
+    - name: Configure AWS credentials
+      id: configure-aws
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_DEFAULT_REGION}}
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Configure Google Credentials
+      uses: google-github-actions/setup-gcloud@v0
+      id: setup-gcloud
+      with:
+        service_account_key: ${{ secrets.GCR_SERVICE_KEY }}
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        export_default_credentials: true
+
+    - name: Install Dependencies
+      id: install-dependencies-from-requirements
+      run: |
+        sudo apt-get update
+        sudo apt-get install --no-install-recommends -y python-is-python3 python3-pip
+        sudo apt-get clean
+        sudo apt-get install python-setuptools
+        sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+        sudo pip install awscli
+        export PATH=$PATH:$HOME/.local/bin
+        # Login to ECR
+        eval $(aws ecr --no-include-email get-login --region us-east-1)
+
+    - name: Build Docker Image
+      id: build-docker-image
+      run: |
+        cd $GITHUB_WORKSPACE
+        docker build -t workbench:latest .
+
+    - name: Push Build to ECR
+      id: push-docker-image-aws
+      env:
+          TAG: ${{ github.event.release.tag_name }}
+      run: |
+        scripts/ci.sh
+
+    - name: Push Docker image To GCR
+      id: push-docker-image-gcr
+      env:
+        TAG: ${{ github.event.release.tag_name }}
+        BUILD_TAG: ${{ steps.extract_tag.outputs.BUILD_TAG }}
+      run: |
+        cd $GITHUB_WORKSPACE
+        gcloud auth configure-docker -q
+        docker tag workbench:latest $GCR_URL/$GCR_PROJECT_ID/$SERVICE_NAME:$BUILD_TAG
+        docker push $GCR_URL/$GCR_PROJECT_ID/$SERVICE_NAME:$BUILD_TAG
+        if [ ! -z "$TAG" ]; then
+            docker tag workbench:latest $GCR_URL/$GCR_PROJECT_ID/$SERVICE_NAME:latest
+            docker push $GCR_URL/$GCR_PROJECT_ID/$SERVICE_NAME:latest
+        fi
+
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2
+      if: always()
+      env:
+        SLACK_WEBHOOK: ${{ secrets.PLATFORM_SLACK_WEBHOOK_URL }}
+        SLACK_USERNAME: "Workbench Builder" 
+        SLACK_MSG_AUTHOR: ${{ github.actor }} 
+        SLACK_CHANNEL: '#ss-builds'
+        SLACK_COLOR: ${{ job.status }}
+        SLACK_ICON: https://github.com/rtCamp.png?size=48
+        SLACK_TITLE: Image
+        SLACK_MESSAGE: ${{ env.build_tag }}
