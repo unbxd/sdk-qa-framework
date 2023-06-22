@@ -21,7 +21,6 @@ if [ -z "$SERVICE_NAME" ]; then
     echo >&2 "Service Name not set. Aborting"; exit 1;
 fi
 echo "SERVICE_NAME: $SERVICE_NAME"
-echo "aws-region: ${{ env.AWS_DEFAULT_REGION }}"
 
 
 ECR_URL="012629307706.dkr.ecr.REGION.amazonaws.com"
