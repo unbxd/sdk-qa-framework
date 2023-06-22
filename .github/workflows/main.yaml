@@ -18,6 +18,8 @@ env:
   GIT_HUB_TOKEN: ${{ secrets.PLATFORM_BOT_GITHUB_TOKEN }}
   SLACK_WEBHOOK_URL: ${{ secrets.PLATFORM_SLACK_WEBHOOK_URL }}
   ECR_URL: ${{ secrets.US_EAST_1_ECR_URL }}
+  ASSETS_AWS_KEY_ID: ${{ASSETS_AWS_KEY_ID}}
+  ASSETS_AWS_SECRET_KEY: ${{ASSETS_AWS_SECRET_KEY}}
 
 defaults:
   run:
@@ -102,7 +104,7 @@ jobs:
       id: build-docker-image
       run: |
         cd $GITHUB_WORKSPACE
-        docker build -t workbench:latest .
+        docker build -t workbench --build-arg ASSETS_AWS_KEY_ID="$ASSETS_AWS_KEY_ID" --build-arg ASSETS_AWS_SECRET_KEY="$ASSETS_AWS_SECRET_KEY" .
 
     - name: Push Build to ECR
       id: push-docker-image-aws
