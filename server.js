@@ -9,7 +9,7 @@ require("aws-sdk/lib/maintenance_mode_message").suppress = true;
 app.use(cors());
 app.use(express.json());
 
-const port = process.env.PORT || 5000;
+const port = 5000;
 
 AWS.config.update({
 	accessKeyId: process.env.ASSETS_AWS_KEY_ID,
