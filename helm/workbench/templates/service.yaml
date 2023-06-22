@@ -11,7 +11,7 @@ spec:
   ports:
     - port: {{ .Values.service.port }}
       targetPort: 3030
-      name: "https"
+      name: "http"
       protocol: TCP
   selector:
     {{- include "workbench.selectorLabels" . | nindent 4 }}
