@@ -41,7 +41,7 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
             {{- include "workbench.envVars" . | trim | nindent 12 }}
-      containers:
+        
         - name: {{ .Chart.Name }}
           command: ["sh", "-c", "npx nodemon server.js"]
           securityContext:
