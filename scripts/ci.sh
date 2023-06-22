@@ -4,7 +4,6 @@ latest="latest"
 
 if [ -z "$REGIONS" ]; then
     REGIONS[0]='us-east-1'
-    REGIONS[1]='us-west-1'
 fi
 
 
